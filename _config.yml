@@ -1,0 +1,17 @@
+title: すくライブラリ
+description: descriptionなんも考えてない
+email: 0214sh7@gmail.com
+baseurl: "/library"
+url: "https://github.com/0214sh7"
+twitter_username: 0214sh7
+github_username:  0214sh7
+
+
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+permalink: /:categories/:short_year-:month-:day/:title

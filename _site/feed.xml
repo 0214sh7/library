@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-16T22:52:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">オイラーのφ関数</title><link href="http://localhost:4000/posts/totient" rel="alternate" type="text/html" title="オイラーのφ関数" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://localhost:4000/posts/euler-totient</id><content type="html" xml:base="http://localhost:4000/posts/totient">&lt;p&gt;φはトーシェントと読むらしい&lt;/p&gt;
+
+&lt;p&gt;φ(n)とは、1からnまでの整数で、nと互いに素であるものの個数
+これは、pをnの相違な素因数の集合として
+n*Π(1-1/p_k)
+と計算することができる&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/Euler's%20totient%20function.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;単体&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数Nを与えると、φ(N)を計算し整数で返す&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(sqrt(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int totient(int N){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    if(N&amp;lt;0){
+        return 0;
+    }
+    int R = N;
+    for(int i=2;i*i&amp;lt;=N;i++){
+        if(N%i==0){
+            R -= R/i;
+            while(N%i==0){
+                N/=i;
+            }
+        }
+    }
+    if(N&amp;gt;1){
+        R -= R/N;
+    }
+    return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;列挙&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数Nを与えると、0~Nまでのφ(i)を計算し,要素数がN+1のvectorで返す&lt;/li&gt;
+  &lt;li&gt;ここで、φ(0)=0としている&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(NloglogN)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; totient_array(int N){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&amp;lt;int&amp;gt; R(N+1);
+    for(int i=0;i&amp;lt;=N;i++){
+        R[i]=i;
+    }
+    for(int i=2;i&amp;lt;=N;i++){
+        if(R[i]!=i)continue;
+        for(int j=i;j&amp;lt;=N;j+=i){
+            R[j]-=(R[j]/i);
+        }
+    }
+    return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">φはトーシェントと読むらしい</summary></entry><entry><title type="html">フェニック木</title><link href="http://localhost:4000/posts/fenwicktree" rel="alternate" type="text/html" title="フェニック木" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/posts/fenwick-tree</id><content type="html" xml:base="http://localhost:4000/posts/fenwicktree">&lt;p&gt;BIT(Binary Indexed Tree)とも&lt;/p&gt;
+
+&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数Nを与えると、要素がN個のフェニック木を構成し、すべての要素を0で初期化する&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(N)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;add&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a番目(0-indexed)の要素にwを加算する&lt;/li&gt;
+  &lt;li&gt;計算量はinitのNを用いて、Ο(log(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;sum&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;[0,a)の範囲内にある要素の和をlong longで返す&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(log(a))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;inversion&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;転　倒　数って知ってる？&lt;/li&gt;
+  &lt;li&gt;数列Vを与えるとVの転倒数を計算し、long longで返す&lt;/li&gt;
+  &lt;li&gt;計算量はN=V.sizeとし、Ο(Nlog(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Fenwick_tree{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;long long&amp;gt; BIT;
+    
+    public:
+    
+    void add(int a,long long w){
+        for(int x=a;x&amp;lt;BIT.size();x|=(x+1)){
+            BIT[x]+=w;
+        }
+    }
+    
+    void init(int n){
+        BIT.clear();
+        for(int i=0;i&amp;lt;n;i++){
+            BIT.push_back(0);
+        }
+    }
+    
+    long long sum(int a){
+        long long r=0;
+        for(int x=a-1;x&amp;gt;=0;x=(x&amp;amp;(x+1))-1){
+            r+=BIT[x];
+        }
+        return r;
+    }
+    
+    long long inversion(std::vector&amp;lt;long long&amp;gt; V){
+        long long r=0;
+        init(V.size());
+        for(int i=0;i&amp;lt;V.size();i++){
+            add(V[i],1);
+            r+=i-sum(V[i]);
+        }
+        return r;
+    }
+};
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">BIT(Binary Indexed Tree)とも</summary></entry><entry><title type="html">UnionFind</title><link href="http://localhost:4000/posts/unionfind" rel="alternate" type="text/html" title="UnionFind" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/posts/unionfind</id><content type="html" xml:base="http://localhost:4000/posts/unionfind">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数Nを与えると、頂点をN個生成し全てを独立にした上で全てのランクを0にする&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(N)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;root&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点kのその時点での根を求める&lt;/li&gt;
+  &lt;li&gt;と同時に経路圧縮する&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(α(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;α(x)はアッカーマン関数A(x,x)の逆関数&lt;/p&gt;
+
+&lt;p&gt;same&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点pと頂点qがその時点で同じ集合に属しているか(=根が同一か)を調べ、同じならtrue、違うならfalseを返す&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(α(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;unite&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点pと頂点qが属してる集合を合併する&lt;/li&gt;
+  &lt;li&gt;すでに同じ集合に属している場合は無視する&lt;/li&gt;
+  &lt;li&gt;pの属する集合のランクがqのものと同じか大きいときp側が根に、そうでないときq側が根になる&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(α(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/union%20find.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class unionfind{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; UF,rank;
+    public:
+    
+    void init(int N){
+        UF.clear();
+        rank.clear();
+        for(int i=0;i&amp;lt;N;i++){
+            UF.push_back(i);
+            rank.push_back(0);
+        }
+    }
+    
+    int root(int k){
+        if(UF[k]==k){
+            return k;
+        }else{
+            UF[k]=root(UF[k]);
+            return UF[k];
+        }
+    }
+    
+    bool same(int p,int q){
+        return root(p)==root(q);
+    }
+    
+    void unite(int P,int Q){
+        int p=root(P);
+        int q=root(Q);
+        if(p==q)return;
+        if(rank[p]&amp;lt;rank[q])std::swap(p,q);
+        UF[q]=p;
+        if(rank[p]==rank[q])rank[p]++;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数Nを与えると、頂点をN個生成し全てを独立にした上で全てのランクを0にする 計算量はΟ(N)</summary></entry><entry><title type="html">セグメント木</title><link href="http://localhost:4000/posts/segmenttree" rel="alternate" type="text/html" title="セグメント木" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/posts/segment-tree</id><content type="html" xml:base="http://localhost:4000/posts/segmenttree">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数Nを与えると、要素がN個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(N)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;calc&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;セグ木に乗せる演算を書く&lt;/li&gt;
+  &lt;li&gt;場合によって使いたい演算を書き換える&lt;/li&gt;
+  &lt;li&gt;演算はモノイドである必要がある&lt;/li&gt;
+  &lt;li&gt;long long×long long→long longにしか対応してない　は？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;update&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;k番目(0-indexed)の要素をaで更新し、それが影響するノードを全て更新する&lt;/li&gt;
+  &lt;li&gt;計算量はinitのNを用いて、Ο(logN)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;query&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;[a,b)の範囲内にある要素をcalcで計算した結果をlong longで返す&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(log(b-a))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/segment%20tree.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class segmenttree{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    int n;
+    long long identity = 0;//単位元
+    std::vector&amp;lt;long long&amp;gt; dat;
+    public:
+    
+    void init(int N){
+        n=1;
+        while(n&amp;lt;N)n*=2;
+        dat.clear();
+        for(int i=0;i&amp;lt;2*n-1;++i){
+            dat.push_back(identity);
+        }
+    }
+    
+    long long calc();
+    
+    void update(int k,long long a){
+        k+=n-1;
+        dat[k]=a;
+        while(k&amp;gt;0){
+            k=(k-1)/2;
+            dat[k]=calc(dat[2*k+1],dat[2*k+2]);
+        }
+    }
+    
+    long long query(long long a,long long b){
+        a+=n;
+        b+=n;
+        long long R=0;
+        while(a &amp;lt; b){
+            if(a % 2 == 1){
+                R = calc(R, dat[a - 1]);
+                a += 1;
+            }
+            a /= 2;
+            if(b % 2 == 1){
+                b -= 1;
+                R = calc(R, dat[b - 1]);
+            }
+            b /= 2;
+        }
+        return R;
+    }
+    
+    long long calc(long long a,long long b){
+        //your monoid here
+        return a+b;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数Nを与えると、要素がN個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する 計算量はΟ(N)</summary></entry><entry><title type="html">ポテンシャル付きUnionFind</title><link href="http://localhost:4000/posts/pot-unionfind" rel="alternate" type="text/html" title="ポテンシャル付きUnionFind" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/posts/pot-unionfind</id><content type="html" xml:base="http://localhost:4000/posts/pot-unionfind">&lt;p&gt;重み付きUnionFindって言ったほうがいいのかな？正直わからない&lt;/p&gt;
+
+&lt;p&gt;大体の機能は&lt;a href=&quot;./unionfind&quot;&gt;UnionFind&lt;/a&gt;と同じで違う点は&lt;/p&gt;
+
+&lt;p&gt;potential&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点kのその時点でのポテンシャルを求める&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(α(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;unite&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;集合を合併する際に、(Qのポテンシャル)-(Pのポテンシャル)=dになるように指定する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;diff&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(Qのポテンシャル)-(Pのポテンシャル)を返す&lt;/li&gt;
+  &lt;li&gt;計算量はΟ(α(N))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class potentialized_unionfind{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; UF,rank,pot;
+    public:
+    
+    void init(int N){
+        UF.clear();
+        rank.clear();
+        for(int i=0;i&amp;lt;N;i++){
+            UF.push_back(i);
+            rank.push_back(0);
+            pot.push_back(0);
+        }
+    }
+    
+    int root(int k){
+        if(UF[k]==k){
+            return k;
+        }else{
+            int r = root(UF[k]);
+            pot[k] += pot[UF[k]];
+            UF[k] = r;
+            return UF[k];
+        }
+    }
+    
+    int potential(int k){
+        root(k);
+        return pot[k];
+    }
+    
+    bool same(int p,int q){
+        return root(p)==root(q);
+    }
+    
+    bool unite(int P,int Q,int d){
+        //pot(Q)-pot(P)=dを満たす
+        d+=potential(P);
+        d-=potential(Q);
+        int p=root(P), q=root(Q);
+        if(p==q)return false;
+        if(rank[p]&amp;lt;rank[q]){
+            std::swap(p,q);
+            d = -d;
+        }
+        UF[q]=p;
+        if(rank[p]==rank[q])rank[p]++;
+        pot[q]=d;
+        
+        return true;
+    }
+    
+    int diff(int P,int Q){
+        return potential(Q)-potential(P);
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/posts/Kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/posts/Kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
+
+&lt;p&gt;すると、コストの和が最小になるような全域木を一つ構成し、その木を構成する辺をvectorとして返す&lt;/p&gt;
+
+&lt;p&gt;辺がつなぐ2頂点が連結かどうかをUnionFindを用いて判定している&lt;/p&gt;
+
+&lt;p&gt;計算量はΟ(ElogE)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/Kruskal.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Kruskal{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    int V=0,E=0;
+    typedef std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt; P;
+    std::vector&amp;lt;int&amp;gt; UF,rank;
+    std::vector&amp;lt;std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt;&amp;gt; es;
+    
+    bool comp(P F,P G){
+        return F.second&amp;lt;G.second;
+    }
+    
+    int root(int k){
+        if(UF[k]==k){
+            return k;
+        }else{
+            UF[k]=root(UF[k]);
+            return UF[k];
+        }
+    }
+    
+    bool same(int p,int q){
+        return root(p)==root(q);
+    }
+    
+    void unite(int P,int Q){
+        int p=root(P);
+        int q=root(Q);
+        if(p==q)return;
+        if(rank[p]&amp;lt;rank[q])std::swap(p,q);
+        UF[q]=p;
+        if(rank[p]==rank[q])rank[p]++;
+    }
+    
+    public:
+    
+    
+    std::vector&amp;lt;P&amp;gt; solve(std::vector&amp;lt;P&amp;gt; edge){
+        //頂点数を決定する
+        V=0;
+        for(int i=0;i&amp;lt;edge.size();i++){
+            V=std::max(V,edge[i].first.first+1);
+            V=std::max(V,edge[i].first.second+1);
+        }
+        //辺数をもとめる　
+        E=edge.size();
+        //unionfindを初期化する
+        UF.clear();
+        rank.clear();
+        for(int i=0;i&amp;lt;V;i++){
+            UF.push_back(i);
+            rank.push_back(0);
+        }
+        //辺をソートして代入しておく
+        std::sort(edge.begin(),edge.end(),[&amp;amp;](P x, P y){return comp(x, y);});
+        es=edge;
+        
+        std::vector&amp;lt;P&amp;gt; R;
+        for(int i=0;i&amp;lt;E;i++){
+            if(!same(es[i].first.first,es[i].first.second)){
+                unite(es[i].first.first,es[i].first.second);
+                R.push_back(es[i]);
+            }
+        }
+        return R;
+    }
+    
+    //solve:{ {int,int},longlong}のvectorを渡すことで最小全域木を返す
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/posts/lis</id><content type="html" xml:base="http://localhost:4000/posts/lis">&lt;p&gt;数列Aを与えると、Aの最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
+
+&lt;p&gt;計算量はN=A.sizeとして、Ο(NlogN)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    int N=A.size();
+    std::vector&amp;lt;long long&amp;gt; D;
+    for(int i=0;i&amp;lt;N;i++){
+        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
+        if(pos==D.size()){
+            D.push_back(A[i]);
+        }else{
+            D[pos]=A[i];
+        }
+    }
+    return D.size();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列Aを与えると、Aの最長増加部分列の長さを求め、long longで返す</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/posts/compress</id><content type="html" xml:base="http://localhost:4000/posts/compress">&lt;p&gt;数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
+
+&lt;p&gt;計算量はN=D.sizeとして、Ο(NlogN)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::map&amp;lt;int,int&amp;gt; G;
+    std::vector&amp;lt;int&amp;gt; E,r;
+    int s=D.size();
+    for(int i=0;i&amp;lt;s;i++){
+        E.push_back(D[i]);
+    }
+    sort(E.begin(),E.end());
+    int t=0;
+    for(int i=0;i&amp;lt;s;i++){
+        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
+            t++;
+        }
+        G[E[i]]=t;
+    }
+    for(int i=0;i&amp;lt;s;i++){
+        r.push_back(G[D[i]]);
+    }
+    return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">数論変換</title><link href="http://localhost:4000/posts/ntt" rel="alternate" type="text/html" title="数論変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/posts/ntt</id><content type="html" xml:base="http://localhost:4000/posts/ntt">&lt;p&gt;整数環FFTとも&lt;br /&gt;
+基本的には&lt;a href=&quot;./fft&quot;&gt;FFT&lt;/a&gt;と同じだが、あちらが実数を使って計算するのに対しこちらは有理数を素数で割った余りを使って計算する&lt;br /&gt;
+誤差がないというメリットがあるが、MOD素数より大きい整数を扱えないというデメリットがある&lt;br /&gt;
+ここで用いる素数は、P-1が素因数に2を多く含むようなPであることが望ましい(例えばNTTでよく使われる998244353は119*2^23+1である)&lt;br /&gt;
+計算量はN=max(|A|,|B|)として、Ο(NlogNlogMOD)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/number%20theoretic%20transform.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class number_theoretic_transform{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    
+    const long long MOD = 998244353;
+    const long long k = 119;
+    const long long n = 23;
+    const long long pri_root = 3;
+    //MOD=k*2^n+1
+    
+    long long BE(long long b,long long e){
+        long long r=1;
+        while(e){
+            if(e&amp;amp;1){
+                r=(r*b)%MOD;
+            }
+            b=(b*b)%MOD;
+            e &amp;gt;&amp;gt;=1;
+        }
+        return r;
+    }
+    
+    vector&amp;lt;long long&amp;gt; DFT(vector&amp;lt;long long&amp;gt; A){
+        int N=A.size();
+        if(N==1)return A;
+        vector&amp;lt;long long&amp;gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
+        for(int i=0;i&amp;lt;N;i++){
+            if(i%2==0){
+                A0[i/2]=A[i];
+            }else{
+                A1[i/2]=A[i];
+            }
+        }
+        iA0=DFT(A0);
+        iA1=DFT(A1);
+        
+        long long omega=BE(pri_root,k*(1&amp;lt;&amp;lt;n)/N);
+        long long ith_zeta = 1;
+        for(int i=0;i&amp;lt;N;i++){
+            iA[i]=(iA0[i%(N/2)]+ ith_zeta*iA1[i%(N/2)])%MOD;
+            ith_zeta = (ith_zeta*omega)%MOD;
+        }
+        return iA;
+    }
+     
+    vector&amp;lt;long long&amp;gt; iDFT(vector&amp;lt;long long&amp;gt; iA){
+        int N=iA.size();
+        long long N_inverse = BE(N,MOD-2);
+        vector&amp;lt;long long&amp;gt; A,dA,rA;
+        dA=DFT(iA);
+        for(int i=0;i&amp;lt;N;i++){
+            rA.push_back(dA[(N-i)%N]);
+            A.push_back((rA[i]*N_inverse)%MOD);
+        }
+        return A;
+    }
+    
+    
+    public:
+    
+    vector&amp;lt;long long&amp;gt; convolution(vector&amp;lt;long long&amp;gt; A,vector&amp;lt;long long&amp;gt; B){
+        int deg = A.size() + B.size() -1;
+        long long N=1;
+        while(N&amp;lt;deg){N&amp;lt;&amp;lt;=1;}
+        A.resize(N);B.resize(N);
+        for(int i=0;i&amp;lt;A.size();i++){
+            A[i]%=MOD;
+        }
+        for(int i=0;i&amp;lt;B.size();i++){
+            B[i]%=MOD;
+        }
+        vector&amp;lt;long long&amp;gt; C(N),iC(N),iA,iB;
+        iA=DFT(A);iB=DFT(B);
+        for(int i=0;i&amp;lt;N;i++){
+            iC[i]=(iA[i]*iB[i])%MOD;
+        }
+        C=iDFT(iC);
+        C.resize(deg);
+        return C;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">整数環FFTとも 基本的にはFFTと同じだが、あちらが実数を使って計算するのに対しこちらは有理数を素数で割った余りを使って計算する 誤差がないというメリットがあるが、MOD素数より大きい整数を扱えないというデメリットがある ここで用いる素数は、P-1が素因数に2を多く含むようなPであることが望ましい(例えばNTTでよく使われる998244353は119*2^23+1である) 計算量はN=max(|A|,|B|)として、Ο(NlogNlogMOD)</summary></entry><entry><title type="html">高速フーリエ変換</title><link href="http://localhost:4000/posts/fft" rel="alternate" type="text/html" title="高速フーリエ変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/posts/fft</id><content type="html" xml:base="http://localhost:4000/posts/fft">&lt;p&gt;クラスで実装されているが、実行するときはconvolutionを呼び出せばいい&lt;br /&gt;
+多項式に見立てたvectorを2つ与えると、それらに対し高速フーリエ変換を行い一つの多項式にし、vectorとして返す&lt;br /&gt;
+{1,2,3}*{1,3,5}={1,5,14,19,15}といった調子&lt;br /&gt;
+実装上doubleを経由しているので誤差死が怖い&lt;br /&gt;
+計算量はN=max(|A|,|B|)として、Ο(NlogN)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/fast%20Fourier%20transform.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class fast_Fourier_transform{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    const double PI=3.14159265358979; 
+    
+    std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; DFT(std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A){
+        int N=A.size();
+        if(N==1)return A;
+        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
+        for(int i=0;i&amp;lt;N;i++){
+            if(i%2==0){
+                A0[i/2]=A[i];
+            }else{
+                A1[i/2]=A[i];
+            }
+        }
+        iA0=DFT(A0);
+        iA1=DFT(A1);
+        
+        for(int i=0;i&amp;lt;N;i++){
+            std::complex&amp;lt;double&amp;gt; ith_zeta = std::complex&amp;lt;double&amp;gt;(cos(2*PI*i/N),sin(2*PI*i/N));
+            iA[i]=(iA0[i%(N/2)]+ ith_zeta*iA1[i%(N/2)]);
+        }
+        return iA;
+    }
+    
+    std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; iDFT(std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; iA){
+        int N=iA.size();
+        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A,dA,rA;
+        dA=DFT(iA);
+        for(int i=0;i&amp;lt;N;i++){
+            rA.push_back(dA[(N-i)%N]);
+            A.push_back(rA[i]/std::complex&amp;lt;double&amp;gt;(N,0));
+        }
+        return A;
+    }
+    
+    public:
+    std::vector&amp;lt;long long&amp;gt; convolution(std::vector&amp;lt;long long&amp;gt; A,std::vector&amp;lt;long long&amp;gt; B){
+        int deg = A.size() + B.size() -1;
+        long long N=1;
+        while(N&amp;lt;deg){N&amp;lt;&amp;lt;=1;}
+        A.resize(N);B.resize(N);
+        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; dC(N),iC(N),dA,iA,dB,iB;
+        std::vector&amp;lt;long long&amp;gt; C(N);
+        for(int i=0;i&amp;lt;A.size();i++){
+            dA.push_back(A[i]);
+        }
+        for(int i=0;i&amp;lt;B.size();i++){
+            dB.push_back(B[i]);
+        }
+        iA=DFT(dA);iB=DFT(dB);
+        for(int i=0;i&amp;lt;N;i++){
+            iC[i]=iA[i]*iB[i];
+        }
+        dC=iDFT(iC);
+        for(int i=0;i&amp;lt;dC.size();i++){
+            C[i]=(0.1+dC[i].real());
+        }
+        return C;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">クラスで実装されているが、実行するときはconvolutionを呼び出せばいい 多項式に見立てたvectorを2つ与えると、それらに対し高速フーリエ変換を行い一つの多項式にし、vectorとして返す {1,2,3}*{1,3,5}={1,5,14,19,15}といった調子 実装上doubleを経由しているので誤差死が怖い 計算量はN=max(|A|,|B|)として、Ο(NlogN)</summary></entry></feed>
