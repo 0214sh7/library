@@ -5,13 +5,11 @@ writer: 0214sh7
 layout: library
 ---
 
-{% katexmm %}
+$$\varphi$$はトーシェントと読むらしい
 
-$\varphi$はトーシェントと読むらしい
+$$\varphi(n)$$とは、$$1$$から$$n$$までの整数で、$$n$$と互いに素であるものの個数
 
-$\varphi(n)$とは、$1$から$n$までの整数で、$n$と互いに素であるものの個数
-
-これは、$n$が相違な素因数$p_1,p_2,...,p_d$を含むとして
+これは、$$n$$が相違な素因数$$p_1,p_2,...,p_d$$を含むとして
 
 $$\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})$$
 
@@ -21,8 +19,8 @@ $$\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})$$
 
 
 単体
-- 整数$N$を与えると、$\varphi(N)$を計算し整数で返す
-- 計算量は$\Omicron(\sqrt{N})$
+- 整数$$N$$を与えると、$$\varphi(N)$$を計算し整数で返す
+- 計算量は$$O(\sqrt{N})$$
 
 ~~~
 int totient(int N){
@@ -51,9 +49,9 @@ int totient(int N){
 
 
 列挙
-- 整数$N$を与えると、$0$から$N$までの$\varphi(i)$を計算し,要素数が$N+1$のvectorで返す
-- ここで、$\varphi(0)=0$としている
-- 計算量は$\Omicron(NloglogN)$
+- 整数$$N$$を与えると、$$0$$から$$N$$までの$$\varphi(i)$$を計算し,要素数が$$N+1$$のvectorで返す
+- ここで、$$\varphi(0)=0$$としている
+- 計算量は$$O(NloglogN)$$
 
 ~~~
 std::vector<int> totient_array(int N){
@@ -74,4 +72,3 @@ std::vector<int> totient_array(int N){
     return R;
 }
 ~~~
-{% endkatexmm %}
