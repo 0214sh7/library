@@ -2,22 +2,27 @@
 title: "オイラーのφ関数"
 permalink: /posts/totient
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
-φはトーシェントと読むらしい
+{% katexmm %}
 
-φ(n)とは、1からnまでの整数で、nと互いに素であるものの個数
-これは、pをnの相違な素因数の集合として
-n*Π(1-1/p_k)
+$\varphi$はトーシェントと読むらしい
+
+$\varphi(n)$とは、$1$から$n$までの整数で、$n$と互いに素であるものの個数
+
+これは、$n$が相違な素因数$p_1,p_2,...,p_d$を含むとして
+
+$$\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})$$
+
 と計算することができる
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/Euler's%20totient%20function.cpp)
 
 
 単体
-- 整数Nを与えると、φ(N)を計算し整数で返す
-- 計算量はΟ(sqrt(N))
+- 整数$N$を与えると、$\varphi(N)$を計算し整数で返す
+- 計算量は$\Omicron(\sqrt{N})$
 
 ~~~
 int totient(int N){
@@ -46,9 +51,9 @@ int totient(int N){
 
 
 列挙
-- 整数Nを与えると、0~Nまでのφ(i)を計算し,要素数がN+1のvectorで返す
-- ここで、φ(0)=0としている
-- 計算量はΟ(NloglogN)
+- 整数$N$を与えると、$0$から$N$までの$\varphi(i)$を計算し,要素数が$N+1$のvectorで返す
+- ここで、$\varphi(0)=0$としている
+- 計算量は$\Omicron(NloglogN)$
 
 ~~~
 std::vector<int> totient_array(int N){
@@ -69,3 +74,4 @@ std::vector<int> totient_array(int N){
     return R;
 }
 ~~~
+{% endkatexmm %}
