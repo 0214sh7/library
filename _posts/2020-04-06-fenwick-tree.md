@@ -2,28 +2,28 @@
 title: "フェニック木"
 permalink: /posts/fenwicktree
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
 BIT(Binary Indexed Tree)とも
 
 init
-- 整数Nを与えると、要素がN個のフェニック木を構成し、すべての要素を0で初期化する
-- 計算量はΟ(N)
+- 整数$$N$$を与えると、要素が$$N$$個のフェニック木を構成し、すべての要素を$$0$$で初期化する
+- 計算量は$$Ο(N)$$
 
 add
-- a番目(0-indexed)の要素にwを加算する
-- 計算量はinitのNを用いて、Ο(log(N))
+- $$a$$番目(0-indexed)の要素に$$w$$を加算する
+- 計算量はinitの$$N$$を用いて、$$Ο(log(N))$$
 
 
 sum
-- [0,a)の範囲内にある要素の和をlong longで返す
-- 計算量はΟ(log(a))
+- $$[0,a)$$の範囲内にある要素の和をlong longで返す
+- 計算量は$$Ο(log(a))$$
 
 inversion
 - 転　倒　数って知ってる？
-- 数列Vを与えるとVの転倒数を計算し、long longで返す
-- 計算量はN=V.sizeとし、Ο(Nlog(N))
+- 数列$$V$$を与えると$$V$$の転倒数を計算し、long longで返す
+- 計算量は$$Ο(\vert V \vert log \vert V \vert)$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp)
 

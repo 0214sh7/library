@@ -2,14 +2,14 @@
 title: "二部グラフ判定"
 permalink: /posts/bipartite
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
 無向グラフを、辺の始点と終点を表現したpair<int,int>のvectorとして与える。<br>
-すると、sizeがmax(点の番号)+1のvectorが返ってくる。すべての要素は0または1である。<br>
-これは、与えられたグラフを二部グラフとして表現するときi番目の要素は0と1どちらに属するかを表している。<br>
-また二部グラフでないとき全ての要素は0である。<br>
-計算量はΟ(V)
+すると、sizeが$$max(点の番号)+1$$のvectorが返ってくる。すべての要素は$$0$$または$$1$$である。<br>
+これは、与えられたグラフを二部グラフとして表現するとき$$i$$番目の要素は$$0$$と$$1$$どちらに属するかを表している。<br>
+また二部グラフでないとき全ての要素は$$0$$である。<br>
+計算量は$$Ο(V)$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/bipartite%20graph.cpp)
 

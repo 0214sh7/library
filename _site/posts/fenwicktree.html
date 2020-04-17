@@ -45,31 +45,40 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>フェニック木</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
     <p>BIT(Binary Indexed Tree)とも</p>
 
 <p>init</p>
 <ul>
-  <li>整数Nを与えると、要素がN個のフェニック木を構成し、すべての要素を0で初期化する</li>
-  <li>計算量はΟ(N)</li>
+  <li>整数<script type="math/tex">N</script>を与えると、要素が<script type="math/tex">N</script>個のフェニック木を構成し、すべての要素を<script type="math/tex">0</script>で初期化する</li>
+  <li>計算量は<script type="math/tex">Ο(N)</script></li>
 </ul>
 
 <p>add</p>
 <ul>
-  <li>a番目(0-indexed)の要素にwを加算する</li>
-  <li>計算量はinitのNを用いて、Ο(log(N))</li>
+  <li><script type="math/tex">a</script>番目(0-indexed)の要素に<script type="math/tex">w</script>を加算する</li>
+  <li>計算量はinitの<script type="math/tex">N</script>を用いて、<script type="math/tex">Ο(log(N))</script></li>
 </ul>
 
 <p>sum</p>
 <ul>
-  <li>[0,a)の範囲内にある要素の和をlong longで返す</li>
-  <li>計算量はΟ(log(a))</li>
+  <li><script type="math/tex">[0,a)</script>の範囲内にある要素の和をlong longで返す</li>
+  <li>計算量は<script type="math/tex">Ο(log(a))</script></li>
 </ul>
 
 <p>inversion</p>
 <ul>
   <li>転　倒　数って知ってる？</li>
-  <li>数列Vを与えるとVの転倒数を計算し、long longで返す</li>
-  <li>計算量はN=V.sizeとし、Ο(Nlog(N))</li>
+  <li>数列<script type="math/tex">V</script>を与えると<script type="math/tex">V</script>の転倒数を計算し、long longで返す</li>
+  <li>計算量は<script type="math/tex">Ο(\vert V \vert log \vert V \vert)</script></li>
 </ul>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp">github</a></p>
@@ -118,6 +127,8 @@
 
 </code></pre></div></div>
 
+  </body>
+</html>
   </div><a class="u-url" href="/library/posts/fenwicktree" hidden></a>
 </article>
 
