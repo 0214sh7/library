@@ -45,13 +45,22 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>クラスカル法</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
     <p>無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。</p>
 
 <p>すると、コストの和が最小になるような全域木を一つ構成し、その木を構成する辺をvectorとして返す</p>
 
-<p>辺がつなぐ2頂点が連結かどうかをUnionFindを用いて判定している</p>
+<p>辺がつなぐ<script type="math/tex">2</script>頂点が連結かどうかを<a href="./unionfind">UnionFind</a>を用いて判定している</p>
 
-<p>計算量はΟ(ElogE)</p>
+<p>計算量は<script type="math/tex">Ο(ElogE)</script></p>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/Kruskal.cpp">github</a></p>
 
@@ -129,6 +138,8 @@
 };
 </code></pre></div></div>
 
+  </body>
+</html>
   </div><a class="u-url" href="/library/posts/kruskal" hidden></a>
 </article>
 

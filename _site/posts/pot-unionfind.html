@@ -45,25 +45,34 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>ポテンシャル付きUnionFind</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
     <p>重み付きUnionFindって言ったほうがいいのかな？正直わからない</p>
 
 <p>大体の機能は<a href="./unionfind">UnionFind</a>と同じで違う点は</p>
 
 <p>potential</p>
 <ul>
-  <li>頂点kのその時点でのポテンシャルを求める</li>
-  <li>計算量はΟ(α(N))</li>
+  <li>頂点<script type="math/tex">k</script>のその時点でのポテンシャルを求める</li>
+  <li>計算量は<script type="math/tex">Ο(\alpha (N))</script></li>
 </ul>
 
 <p>unite</p>
 <ul>
-  <li>集合を合併する際に、(Qのポテンシャル)-(Pのポテンシャル)=dになるように指定する</li>
+  <li>集合を合併する際に、<script type="math/tex">(Qのポテンシャル)-(Pのポテンシャル)=d</script>になるように指定する</li>
 </ul>
 
 <p>diff</p>
 <ul>
-  <li>(Qのポテンシャル)-(Pのポテンシャル)を返す</li>
-  <li>計算量はΟ(α(N))</li>
+  <li><script type="math/tex">(Qのポテンシャル)-(Pのポテンシャル)</script>を返す</li>
+  <li>計算量は<script type="math/tex">Ο(\alpha (N))</script></li>
 </ul>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp">github</a></p>
@@ -131,6 +140,8 @@
 };
 </code></pre></div></div>
 
+  </body>
+</html>
   </div><a class="u-url" href="/library/posts/pot-unionfind" hidden></a>
 </article>
 

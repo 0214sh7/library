@@ -2,20 +2,20 @@
 title: "ベルマンフォード法"
 permalink: /posts/bellmanford
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
 init
 - 無向グラフを、辺の始点と終点とコストを表現したpair<pair<int,int>,long long>のvectorとして与える。
 - すると、グラフをsolve()が扱えるようになる
-- 多始点などで何回も回す場合、initの実行は1回でよい
-- 計算量はΟ(max(E,V))
+- 多始点などで何回も回す場合、initの実行は$$1$$回でよい
+- 計算量は$$Ο(max(E,V))$$
 
 solve
-- initでできたグラフに対し、与えられたsを始点としてベルマンフォード法を実行する
-- 得られた最小コストを要素数がVのvectorとして返す
+- initでできたグラフに対し、与えられた$$s$$を始点としてベルマンフォード法を実行する
+- 得られた最小コストを要素数が$$V$$のvectorとして返す
 - vectorの要素はpair<long long,bool>である　firstは最小コストを表しており、secondがtrueの場合最小コストが存在せずfirstの値は適当
-- 計算量はΟ(VE)
+- 計算量は$$Ο(VE)$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/BellmanFord.cpp)
 

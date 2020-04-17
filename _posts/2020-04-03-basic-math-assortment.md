@@ -2,7 +2,7 @@
 title: "数学詰め合わせパック"
 permalink: /posts/basic-math
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
 優柔不断なあなたに
@@ -23,7 +23,7 @@ https://github.com/0214sh7/library/
 
 小数点以下切り上げ
 - よくある天井関数
-- 計算量はΟ(1)
+- 計算量は$$Ο(1)$$
 ~~~
 //小数点以下切り上げ
 long long roundup(long long a,long long b){
@@ -32,9 +32,9 @@ long long roundup(long long a,long long b){
 ~~~
 
 階乗
-- 与えられたxに対しx!を計算する
-- MODも与えるとそれで割った余りをとる
-- 計算量はΟ(x)
+- 与えられた$$x$$に対し$$x!$$を計算する
+- $$MOD$$も与えるとそれで割った余りをとる
+- 計算量は$$Ο(x)$$
 ~~~
 //階乗
 long long fact(long long x,long long MOD=INT_MAX){
@@ -48,7 +48,7 @@ long long fact(long long x,long long MOD=INT_MAX){
 
 最大公約数
 - ２つの引数のGCDを求める
-- 計算量はO(log(max(a,b)))
+- 計算量は$$O(log(max(a,b)))$$
 ~~~
 //最大公約数
 long long gcd(long long a,long long b){
@@ -71,7 +71,7 @@ long long gcd(long long a,long long b){
 
 最小公倍数
 - ２つの引数のLCMを求める
-- 計算量はO(log(max(a,b)))
+- 計算量は$$O(log(max(a,b)))$$
 ~~~
 //最小公倍数
 long long lcm(long long a,long long b){
@@ -97,8 +97,8 @@ long long lcm(long long a,long long b){
 ~~~
 
 素数判定
-- 与えられたxに対し、xが素数ならtrueを、そうでないならfalseを返す
-- 計算量はO(sqrt(x))
+- 与えられた$$x$$に対し、$$x$$が素数ならtrueを、そうでないならfalseを返す
+- 計算量は$$O(\sqrt{x})$$
 ~~~
 //素数判定
 bool prime(long long X){
@@ -113,8 +113,8 @@ bool prime(long long X){
 ~~~
 
 素数列挙
-- 与えられたNに対し、N以下の素数を列挙し、小さい順にvectorとして返す
-- 計算量はO(NloglogN)
+- 与えられた$$N$$に対し、$$N$$以下の素数を列挙し、小さい順にvectorとして返す
+- 計算量は$$O(NloglogN)$$
 ~~~
 //素数列挙
 std::vector<long long> primearray(long long N){
@@ -144,8 +144,8 @@ std::vector<long long> primearray(long long N){
 ~~~
 
 素因数分解
-- 与えられたNに対し、Nを素因数分解し、小さい順にvectorとして返す
-- 計算量はΟ(sqrt(N))
+- 与えられた$$N$$に対し、$$N$$を素因数分解し、小さい順にvectorとして返す
+- 計算量は$$Ο(\sqrt{N})$$
 ~~~
 //素因数分解
 std::vector<long long> prime_factorization(long long N){
@@ -165,9 +165,9 @@ std::vector<long long> prime_factorization(long long N){
 ~~~
 
 累乗(繰り返し二乗法)
-- 与えられたb,eに対し、bのe乗を返す
-- MODも与えるとそれで割った余りをとる
-- 計算量はΟ(log(e))
+- 与えられた$$b,e$$に対し、$$b^e$$を返す
+- $$MOD$$も与えるとそれで割った余りをとる
+- 計算量は$$Ο(log(e))$$
 ~~~
 //累乗(繰り返し二乗法)
 long long power(long long b,long long e,long long MOD=INT_MAX){
@@ -184,9 +184,9 @@ long long power(long long b,long long e,long long MOD=INT_MAX){
 ~~~
 
 逆元(素数MOD)
-- 与えられたb,MODに対し、MODを法とした整数環上での逆元(bx=1を満たすx)を返す
+- 与えられた$$b,MOD$$に対し、$$MOD$$を法とした整数環上での逆元($$bx=1$$を満たす$$x$$)を返す
 - MODが素数でない場合の動作は未確認
-- 計算量はΟ(log(MOD))
+- 計算量は$$Ο(log(MOD))$$
 ~~~
 //逆元(素数MOD)
 long long inverse(long long b,long long MOD){

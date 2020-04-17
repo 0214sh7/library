@@ -2,7 +2,7 @@
 title: "ポテンシャル付きUnionFind"
 permalink: /posts/pot-unionfind
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
 重み付きUnionFindって言ったほうがいいのかな？正直わからない
@@ -10,15 +10,15 @@ layout: post
 大体の機能は[UnionFind](./unionfind)と同じで違う点は
 
 potential
-- 頂点kのその時点でのポテンシャルを求める
-- 計算量はΟ(α(N))
+- 頂点$$k$$のその時点でのポテンシャルを求める
+- 計算量は$$Ο(\alpha (N))$$
 
 unite
-- 集合を合併する際に、(Qのポテンシャル)-(Pのポテンシャル)=dになるように指定する
+- 集合を合併する際に、$$(Qのポテンシャル)-(Pのポテンシャル)=d$$になるように指定する
 
 diff
-- (Qのポテンシャル)-(Pのポテンシャル)を返す
-- 計算量はΟ(α(N))
+- $$(Qのポテンシャル)-(Pのポテンシャル)$$を返す
+- 計算量は$$Ο(\alpha (N))$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp)
 

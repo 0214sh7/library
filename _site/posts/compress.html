@@ -7,15 +7,15 @@
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="座標圧縮" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える" />
-<meta property="og:description" content="数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える" />
+<meta name="description" content="数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える" />
+<meta property="og:description" content="数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える" />
 <link rel="canonical" href="http://localhost:4000/library/posts/compress" />
 <meta property="og:url" content="http://localhost:4000/library/posts/compress" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-05T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/compress","headline":"座標圧縮","dateModified":"2020-04-05T00:00:00+09:00","datePublished":"2020-04-05T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/compress"},"description":"数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/compress","headline":"座標圧縮","dateModified":"2020-04-05T00:00:00+09:00","datePublished":"2020-04-05T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/compress"},"description":"数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -45,9 +45,18 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>数列Dを与えると、数列の全ての2つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</p>
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>座標圧縮</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>数列<script type="math/tex">D</script>を与えると、数列の全ての<script type="math/tex">2</script>つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</p>
 
-<p>計算量はN=D.sizeとして、Ο(NlogN)</p>
+<p>計算量は<script type="math/tex">Ο(\vert D \vert log \vert D \vert )</script></p>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp">github</a></p>
 
@@ -77,6 +86,8 @@
 }
 </code></pre></div></div>
 
+  </body>
+</html>
   </div><a class="u-url" href="/library/posts/compress" hidden></a>
 </article>
 

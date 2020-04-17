@@ -2,12 +2,14 @@
 title: "セグメント木"
 permalink: /posts/segmenttree
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
+単にセグ木と言えばこれを指す、最も単純なセグ木
+
 init
-- 整数Nを与えると、要素がN個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する
-- 計算量はΟ(N)
+- 整数$$N$$を与えると、要素が$$N$$個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する
+- 計算量は$$Ο(N)$$
 
 calc
 - セグ木に乗せる演算を書く
@@ -16,12 +18,12 @@ calc
 - long long×long long→long longにしか対応してない　は？
 
 update
-- k番目(0-indexed)の要素をaで更新し、それが影響するノードを全て更新する
-- 計算量はinitのNを用いて、Ο(logN)
+- $$k$$番目(0-indexed)の要素を$$a$$で更新し、それが影響するノードを全て更新する
+- 計算量はinitの$$N$$を用いて、$$Ο(logN)$$
 
 query
-- [a,b)の範囲内にある要素をcalcで計算した結果をlong longで返す
-- 計算量はΟ(log(b-a))
+- $$[a,b)$$の範囲内にある要素をcalcで計算した結果をlong longで返す
+- 計算量は$$Ο(log(b-a))$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/segment%20tree.cpp)
 

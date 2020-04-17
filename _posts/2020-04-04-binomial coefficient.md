@@ -2,13 +2,16 @@
 title: "二項係数"
 permalink: /posts/binomial-coefficient
 writer: 0214sh7
-layout: post
+layout: library
 ---
 
-整数Nを与えると、sizeがN+1のvectorが返ってくる。<br>
-vectorのi番目(0-indexed)の要素は、nCiをMODの値で割った余りを表している。<br>
-MODが素数でないときの動作は未確認<br>
-計算量はΟ(Nlog(MOD))<br>
+整数$$N$$を与えると、sizeが$$N+1$$のvectorが返ってくる。
+
+vectorの$$i$$番目(0-indexed)の要素は、$$\frac{n!}{i!(n-i)!}$$を$$MOD$$の値で割った余りを表している。
+
+$$MOD$$が素数でないときの動作は未確認
+
+計算量は$$Ο(Nlog(MOD))$$
 
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/binomial%20coefficient.cpp)
