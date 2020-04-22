@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-04-17T20:57:09+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">オイラーのφ関数</title><link href="http://localhost:4000/library/posts/totient" rel="alternate" type="text/html" title="オイラーのφ関数" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/euler-totient</id><content type="html" xml:base="http://localhost:4000/library/posts/totient">&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\varphi&lt;/script&gt;はトーシェントと読むらしい&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-04-22T19:54:03+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">凸包</title><link href="http://localhost:4000/library/posts/convexhull" rel="alternate" type="text/html" title="凸包" /><published>2020-04-22T00:00:00+09:00</published><updated>2020-04-22T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/convex-hull</id><content type="html" xml:base="http://localhost:4000/library/posts/convexhull">&lt;p&gt;アルゴリズムはAndrewのmonotone chainという名前らしい&lt;/p&gt;
+
+&lt;p&gt;二次元上の点集合をvector&amp;lt;pair&amp;lt;long long,long long»で与える&lt;/p&gt;
+
+&lt;p&gt;するとその点集合の凸包を求め、x座標が最も小さい点のうちy座標が最も小さい点から始めて反時計回りに並べてvector&amp;lt;pair&amp;lt;long long,long long»で返す&lt;/p&gt;
+
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\vert P \vert log \vert P \vert)&lt;/script&gt;(ソートがネックになっており、ソートがなければ&lt;script type=&quot;math/tex&quot;&gt;O(\vert P \vert)&lt;/script&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/convex%20hull.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; convex_hull(std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; P){
+    if(P.size()&amp;lt;=2){
+        return P;
+    }
+    std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; H,L,R;
+    sort(P.begin(),P.end());
+    
+    //下半分
+    for(int i=0;i&amp;lt;P.size();i++){
+        int j=L.size();
+        while(j&amp;gt;=2 &amp;amp;&amp;amp; (L[j-1].first-L[j-2].first)*(P[i].second-L[j-2].second)&amp;lt;=(L[j-1].second-L[j-2].second)*(P[i].first-L[j-2].first)){
+            L.pop_back();
+            j--;
+        }
+        L.push_back(P[i]);
+    }
+    
+    //上半分
+    for(int i=P.size()-1;i&amp;gt;=0;i--){
+        int j=H.size();
+        while(j&amp;gt;=2 &amp;amp;&amp;amp; (H[j-1].first-H[j-2].first)*(P[i].second-H[j-2].second)&amp;lt;=(H[j-1].second-H[j-2].second)*(P[i].first-H[j-2].first)){
+            H.pop_back();
+            j--;
+        }
+        H.push_back(P[i]);
+    }
+    
+    
+    R=L;
+    for(int i=1;i&amp;lt;H.size()-1;i++){
+        R.push_back(H[i]);
+    }
+    
+    return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">アルゴリズムはAndrewのmonotone chainという名前らしい</summary></entry><entry><title type="html">オイラーのφ関数</title><link href="http://localhost:4000/library/posts/totient" rel="alternate" type="text/html" title="オイラーのφ関数" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/euler-totient</id><content type="html" xml:base="http://localhost:4000/library/posts/totient">&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\varphi&lt;/script&gt;はトーシェントと読むらしい&lt;/p&gt;
 
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\varphi(n)&lt;/script&gt;とは、&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;から&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;までの整数で、&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;と互いに素であるものの個数&lt;/p&gt;
 
@@ -379,7 +424,60 @@
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/library/posts/kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/library/posts/kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
+
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    int N=A.size();
+    std::vector&amp;lt;long long&amp;gt; D;
+    for(int i=0;i&amp;lt;N;i++){
+        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
+        if(pos==D.size()){
+            D.push_back(A[i]);
+        }else{
+            D[pos]=A[i];
+        }
+    }
+    return D.size();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、の最長増加部分列の長さを求め、long longで返す</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
+
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::map&amp;lt;int,int&amp;gt; G;
+    std::vector&amp;lt;int&amp;gt; E,r;
+    int s=D.size();
+    for(int i=0;i&amp;lt;s;i++){
+        E.push_back(D[i]);
+    }
+    sort(E.begin(),E.end());
+    int t=0;
+    for(int i=0;i&amp;lt;s;i++){
+        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
+            t++;
+        }
+        G[E[i]]=t;
+    }
+    for(int i=0;i&amp;lt;s;i++){
+        r.push_back(G[D[i]]);
+    }
+    return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/library/posts/kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/library/posts/kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
 
 &lt;p&gt;すると、コストの和が最小になるような全域木を一つ構成し、その木を構成する辺をvectorとして返す&lt;/p&gt;
 
@@ -461,60 +559,7 @@
     
     //solve:{ {int,int},longlong}のvectorを渡すことで最小全域木を返す
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    int N=A.size();
-    std::vector&amp;lt;long long&amp;gt; D;
-    for(int i=0;i&amp;lt;N;i++){
-        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
-        if(pos==D.size()){
-            D.push_back(A[i]);
-        }else{
-            D[pos]=A[i];
-        }
-    }
-    return D.size();
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、の最長増加部分列の長さを求め、long longで返す</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::map&amp;lt;int,int&amp;gt; G;
-    std::vector&amp;lt;int&amp;gt; E,r;
-    int s=D.size();
-    for(int i=0;i&amp;lt;s;i++){
-        E.push_back(D[i]);
-    }
-    sort(E.begin(),E.end());
-    int t=0;
-    for(int i=0;i&amp;lt;s;i++){
-        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
-            t++;
-        }
-        G[E[i]]=t;
-    }
-    for(int i=0;i&amp;lt;s;i++){
-        r.push_back(G[D[i]]);
-    }
-    return r;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">数論変換</title><link href="http://localhost:4000/library/posts/ntt" rel="alternate" type="text/html" title="数論変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/ntt</id><content type="html" xml:base="http://localhost:4000/library/posts/ntt">&lt;p&gt;整数環FFTとも&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">数論変換</title><link href="http://localhost:4000/library/posts/ntt" rel="alternate" type="text/html" title="数論変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/ntt</id><content type="html" xml:base="http://localhost:4000/library/posts/ntt">&lt;p&gt;整数環FFTとも&lt;/p&gt;
 
 &lt;p&gt;基本的には&lt;a href=&quot;./fft&quot;&gt;FFT&lt;/a&gt;と同じだが、あちらが実数を使って計算するのに対しこちらは有理数を素数で割った余りを使って計算する&lt;/p&gt;
 
@@ -611,82 +656,4 @@
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">整数環FFTとも</summary></entry><entry><title type="html">高速フーリエ変換</title><link href="http://localhost:4000/library/posts/fft" rel="alternate" type="text/html" title="高速フーリエ変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/fft</id><content type="html" xml:base="http://localhost:4000/library/posts/fft">&lt;p&gt;クラスで実装されているが、実行するときはconvolutionを呼び出せばいい&lt;/p&gt;
-
-&lt;p&gt;多項式に見立てたvectorを&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つ与えると、それらに対し高速フーリエ変換を行い一つの多項式にし、vectorとして返す&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\{1,2,3\}*\{1,3,5\}=\{1,5,14,19,15\}&lt;/script&gt;といった調子&lt;/p&gt;
-
-&lt;p&gt;実装上doubleを経由しているので誤差死が怖い&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;N=max(\vert A \vert,\vert B\vert)&lt;/script&gt;として、&lt;script type=&quot;math/tex&quot;&gt;Ο(NlogN)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/fast%20Fourier%20transform.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class fast_Fourier_transform{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    const double PI=3.14159265358979; 
-    
-    std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; DFT(std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A){
-        int N=A.size();
-        if(N==1)return A;
-        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
-        for(int i=0;i&amp;lt;N;i++){
-            if(i%2==0){
-                A0[i/2]=A[i];
-            }else{
-                A1[i/2]=A[i];
-            }
-        }
-        iA0=DFT(A0);
-        iA1=DFT(A1);
-        
-        for(int i=0;i&amp;lt;N;i++){
-            std::complex&amp;lt;double&amp;gt; ith_zeta = std::complex&amp;lt;double&amp;gt;(cos(2*PI*i/N),sin(2*PI*i/N));
-            iA[i]=(iA0[i%(N/2)]+ ith_zeta*iA1[i%(N/2)]);
-        }
-        return iA;
-    }
-    
-    std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; iDFT(std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; iA){
-        int N=iA.size();
-        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; A,dA,rA;
-        dA=DFT(iA);
-        for(int i=0;i&amp;lt;N;i++){
-            rA.push_back(dA[(N-i)%N]);
-            A.push_back(rA[i]/std::complex&amp;lt;double&amp;gt;(N,0));
-        }
-        return A;
-    }
-    
-    public:
-    std::vector&amp;lt;long long&amp;gt; convolution(std::vector&amp;lt;long long&amp;gt; A,std::vector&amp;lt;long long&amp;gt; B){
-        int deg = A.size() + B.size() -1;
-        long long N=1;
-        while(N&amp;lt;deg){N&amp;lt;&amp;lt;=1;}
-        A.resize(N);B.resize(N);
-        std::vector&amp;lt;std::complex&amp;lt;double&amp;gt;&amp;gt; dC(N),iC(N),dA,iA,dB,iB;
-        std::vector&amp;lt;long long&amp;gt; C(N);
-        for(int i=0;i&amp;lt;A.size();i++){
-            dA.push_back(A[i]);
-        }
-        for(int i=0;i&amp;lt;B.size();i++){
-            dB.push_back(B[i]);
-        }
-        iA=DFT(dA);iB=DFT(dB);
-        for(int i=0;i&amp;lt;N;i++){
-            iC[i]=iA[i]*iB[i];
-        }
-        dC=iDFT(iC);
-        for(int i=0;i&amp;lt;dC.size();i++){
-            C[i]=(0.1+dC[i].real());
-        }
-        return C;
-    }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">クラスで実装されているが、実行するときはconvolutionを呼び出せばいい</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">整数環FFTとも</summary></entry></feed>
