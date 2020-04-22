@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-04-22T19:54:03+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">凸包</title><link href="http://localhost:4000/library/posts/convexhull" rel="alternate" type="text/html" title="凸包" /><published>2020-04-22T00:00:00+09:00</published><updated>2020-04-22T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/convex-hull</id><content type="html" xml:base="http://localhost:4000/library/posts/convexhull">&lt;p&gt;アルゴリズムはAndrewのmonotone chainという名前らしい&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-04-23T00:55:15+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">スライド最小値</title><link href="http://localhost:4000/library/posts/slideminimum" rel="alternate" type="text/html" title="スライド最小値" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/slide-minimum</id><content type="html" xml:base="http://localhost:4000/library/posts/slideminimum">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;と整数&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;を与えると、以下の数式を満たす要素数が&lt;script type=&quot;math/tex&quot;&gt;\vert A \vert -K+1&lt;/script&gt;の数列&lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;を構成し、返す&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})&lt;/script&gt;
+
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\vert A \vert)&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/slide%20minimum.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;long long&amp;gt; slide_minimum(std::vector&amp;lt;long long&amp;gt; A,int K){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&amp;lt;long long&amp;gt; R;
+    int N = A.size();
+    std::deque&amp;lt;int&amp;gt; D;
+    for(int i=0;i&amp;lt;N;i++){
+        while(!D.empty() &amp;amp;&amp;amp; A[D.back()]&amp;gt;=A[i]){D.pop_back();}
+        D.push_back(i);
+        if(i-K+1&amp;gt;=0){
+            R.push_back(A[D.front()]);
+            if(D.front()==i-K+1){
+                D.pop_front();
+            }
+        }
+    }
+    return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す</summary></entry><entry><title type="html">凸包</title><link href="http://localhost:4000/library/posts/convexhull" rel="alternate" type="text/html" title="凸包" /><published>2020-04-22T00:00:00+09:00</published><updated>2020-04-22T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/convex-hull</id><content type="html" xml:base="http://localhost:4000/library/posts/convexhull">&lt;p&gt;アルゴリズムはAndrewのmonotone chainという名前らしい&lt;/p&gt;
 
 &lt;p&gt;二次元上の点集合をvector&amp;lt;pair&amp;lt;long long,long long»で与える&lt;/p&gt;
 
@@ -9,6 +37,10 @@
 &lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/convex%20hull.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; convex_hull(std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; P){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
     if(P.size()&amp;lt;=2){
         return P;
     }
@@ -424,60 +456,7 @@
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    int N=A.size();
-    std::vector&amp;lt;long long&amp;gt; D;
-    for(int i=0;i&amp;lt;N;i++){
-        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
-        if(pos==D.size()){
-            D.push_back(A[i]);
-        }else{
-            D[pos]=A[i];
-        }
-    }
-    return D.size();
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、の最長増加部分列の長さを求め、long longで返す</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::map&amp;lt;int,int&amp;gt; G;
-    std::vector&amp;lt;int&amp;gt; E,r;
-    int s=D.size();
-    for(int i=0;i&amp;lt;s;i++){
-        E.push_back(D[i]);
-    }
-    sort(E.begin(),E.end());
-    int t=0;
-    for(int i=0;i&amp;lt;s;i++){
-        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
-            t++;
-        }
-        G[E[i]]=t;
-    }
-    for(int i=0;i&amp;lt;s;i++){
-        r.push_back(G[D[i]]);
-    }
-    return r;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/library/posts/kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/library/posts/kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/library/posts/kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/library/posts/kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
 
 &lt;p&gt;すると、コストの和が最小になるような全域木を一つ構成し、その木を構成する辺をvectorとして返す&lt;/p&gt;
 
@@ -559,101 +538,57 @@
     
     //solve:{ {int,int},longlong}のvectorを渡すことで最小全域木を返す
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">数論変換</title><link href="http://localhost:4000/library/posts/ntt" rel="alternate" type="text/html" title="数論変換" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/ntt</id><content type="html" xml:base="http://localhost:4000/library/posts/ntt">&lt;p&gt;整数環FFTとも&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
 
-&lt;p&gt;基本的には&lt;a href=&quot;./fft&quot;&gt;FFT&lt;/a&gt;と同じだが、あちらが実数を使って計算するのに対しこちらは有理数を素数で割った余りを使って計算する&lt;/p&gt;
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
 
-&lt;p&gt;誤差がないというメリットがあるが、&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;素数より大きい整数を扱えないというデメリットがある&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;ここで用いる素数は、&lt;script type=&quot;math/tex&quot;&gt;P-1&lt;/script&gt;が素因数に&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;を多く含むような&lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt;であることが望ましい(例えばNTTでよく使われる&lt;script type=&quot;math/tex&quot;&gt;998244353&lt;/script&gt;は&lt;script type=&quot;math/tex&quot;&gt;119 \cdot 2^{23}+1&lt;/script&gt;である)&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;N=max(\vert A \vert,\vert B \vert)&lt;/script&gt;として、&lt;script type=&quot;math/tex&quot;&gt;Ο(NlogNlogMOD)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/number%20theoretic%20transform.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class number_theoretic_transform{
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
     /*
     Copyright (c) 2020 0214sh7
     https://github.com/0214sh7/library/
     */
-    private:
-    
-    const long long MOD = 998244353;
-    const long long k = 119;
-    const long long n = 23;
-    const long long pri_root = 3;
-    //MOD=k*2^n+1
-    
-    long long BE(long long b,long long e){
-        long long r=1;
-        while(e){
-            if(e&amp;amp;1){
-                r=(r*b)%MOD;
-            }
-            b=(b*b)%MOD;
-            e &amp;gt;&amp;gt;=1;
-        }
-        return r;
+    std::map&amp;lt;int,int&amp;gt; G;
+    std::vector&amp;lt;int&amp;gt; E,r;
+    int s=D.size();
+    for(int i=0;i&amp;lt;s;i++){
+        E.push_back(D[i]);
     }
-    
-    vector&amp;lt;long long&amp;gt; DFT(vector&amp;lt;long long&amp;gt; A){
-        int N=A.size();
-        if(N==1)return A;
-        vector&amp;lt;long long&amp;gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
-        for(int i=0;i&amp;lt;N;i++){
-            if(i%2==0){
-                A0[i/2]=A[i];
-            }else{
-                A1[i/2]=A[i];
-            }
+    sort(E.begin(),E.end());
+    int t=0;
+    for(int i=0;i&amp;lt;s;i++){
+        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
+            t++;
         }
-        iA0=DFT(A0);
-        iA1=DFT(A1);
-        
-        long long omega=BE(pri_root,k*(1&amp;lt;&amp;lt;n)/N);
-        long long ith_zeta = 1;
-        for(int i=0;i&amp;lt;N;i++){
-            iA[i]=(iA0[i%(N/2)]+ ith_zeta*iA1[i%(N/2)])%MOD;
-            ith_zeta = (ith_zeta*omega)%MOD;
-        }
-        return iA;
+        G[E[i]]=t;
     }
-     
-    vector&amp;lt;long long&amp;gt; iDFT(vector&amp;lt;long long&amp;gt; iA){
-        int N=iA.size();
-        long long N_inverse = BE(N,MOD-2);
-        vector&amp;lt;long long&amp;gt; A,dA,rA;
-        dA=DFT(iA);
-        for(int i=0;i&amp;lt;N;i++){
-            rA.push_back(dA[(N-i)%N]);
-            A.push_back((rA[i]*N_inverse)%MOD);
-        }
-        return A;
+    for(int i=0;i&amp;lt;s;i++){
+        r.push_back(G[D[i]]);
     }
-    
-    
-    public:
-    
-    vector&amp;lt;long long&amp;gt; convolution(vector&amp;lt;long long&amp;gt; A,vector&amp;lt;long long&amp;gt; B){
-        int deg = A.size() + B.size() -1;
-        long long N=1;
-        while(N&amp;lt;deg){N&amp;lt;&amp;lt;=1;}
-        A.resize(N);B.resize(N);
-        for(int i=0;i&amp;lt;A.size();i++){
-            A[i]%=MOD;
+    return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
+
+&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    int N=A.size();
+    std::vector&amp;lt;long long&amp;gt; D;
+    for(int i=0;i&amp;lt;N;i++){
+        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
+        if(pos==D.size()){
+            D.push_back(A[i]);
+        }else{
+            D[pos]=A[i];
         }
-        for(int i=0;i&amp;lt;B.size();i++){
-            B[i]%=MOD;
-        }
-        vector&amp;lt;long long&amp;gt; C(N),iC(N),iA,iB;
-        iA=DFT(A);iB=DFT(B);
-        for(int i=0;i&amp;lt;N;i++){
-            iC[i]=(iA[i]*iB[i])%MOD;
-        }
-        C=iDFT(iC);
-        C.resize(deg);
-        return C;
     }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">整数環FFTとも</summary></entry></feed>
+    return D.size();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、の最長増加部分列の長さを求め、long longで返す</summary></entry></feed>
