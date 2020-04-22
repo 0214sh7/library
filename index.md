@@ -16,8 +16,9 @@ layout: page
 - [ダイクストラ法](./posts/dijkstra)
 - [ベルマンフォード法](./posts/bellmanford)
 - [クラスカル法](./posts/kruskal)
-- [二部グラフ判定](./posts/bipartite)
+- [スライド最小値](./posts/slideminimum)
 - [座標圧縮](./posts/compress)
+- [二部グラフ判定](./posts/bipartite)
 - [最長増加部分列](./posts/lis)
 
 <h2>データ構造</h2>

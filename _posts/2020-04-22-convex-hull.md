@@ -17,6 +17,10 @@ layout: library
 
 ~~~
 std::vector<std::pair<long long,long long>> convex_hull(std::vector<std::pair<long long,long long>> P){
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
     if(P.size()<=2){
         return P;
     }

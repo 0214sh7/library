@@ -3,19 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>凸包 | すくライブラリ</title>
+<title>スライド最小値 | すくライブラリ</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="凸包" />
+<meta property="og:title" content="スライド最小値" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="アルゴリズムはAndrewのmonotone chainという名前らしい" />
-<meta property="og:description" content="アルゴリズムはAndrewのmonotone chainという名前らしい" />
-<link rel="canonical" href="http://localhost:4000/library/posts/convexhull" />
-<meta property="og:url" content="http://localhost:4000/library/posts/convexhull" />
+<meta name="description" content="数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す" />
+<meta property="og:description" content="数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す" />
+<link rel="canonical" href="http://localhost:4000/library/posts/slideminimum" />
+<meta property="og:url" content="http://localhost:4000/library/posts/slideminimum" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-22T00:00:00+09:00" />
+<meta property="article:published_time" content="2020-04-23T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/convexhull","headline":"凸包","dateModified":"2020-04-22T00:00:00+09:00","datePublished":"2020-04-22T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/convexhull"},"description":"アルゴリズムはAndrewのmonotone chainという名前らしい","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/slideminimum","headline":"スライド最小値","dateModified":"2020-04-23T00:00:00+09:00","datePublished":"2020-04-23T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/slideminimum"},"description":"数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -38,9 +38,9 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">凸包</h1>
+    <h1 class="post-title p-name" itemprop="name headline">スライド最小値</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-22T00:00:00+09:00" itemprop="datePublished">Apr 22, 2020
+      <time class="dt-published" datetime="2020-04-23T00:00:00+09:00" itemprop="datePublished">Apr 23, 2020
       </time></p>
   </header>
 
@@ -49,65 +49,44 @@
 <html lang='ja'>
   <head>
     <meta charset="utf-8">
-    <title>凸包</title>
+    <title>スライド最小値</title>
     <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </head>
   
   <body>
-    <p>アルゴリズムはAndrewのmonotone chainという名前らしい</p>
+    <p>数列<script type="math/tex">A</script>と整数<script type="math/tex">K</script>を与えると、以下の数式を満たす要素数が<script type="math/tex">\vert A \vert -K+1</script>の数列<script type="math/tex">R</script>を構成し、返す</p>
 
-<p>二次元上の点集合をvector&lt;pair&lt;long long,long long»で与える</p>
+<script type="math/tex; mode=display">R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})</script>
 
-<p>するとその点集合の凸包を求め、x座標が最も小さい点のうちy座標が最も小さい点から始めて反時計回りに並べてvector&lt;pair&lt;long long,long long»で返す</p>
+<p>計算量は<script type="math/tex">O(\vert A \vert)</script></p>
 
-<p>計算量は<script type="math/tex">O(\vert P \vert log \vert P \vert)</script>(ソートがネックになっており、ソートがなければ<script type="math/tex">O(\vert P \vert)</script>)</p>
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/slide%20minimum.cpp">github</a></p>
 
-<p><a href="https://github.com/0214sh7/procon-library/blob/master/math/convex%20hull.cpp">github</a></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::pair&lt;long long,long long&gt;&gt; convex_hull(std::vector&lt;std::pair&lt;long long,long long&gt;&gt; P){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; slide_minimum(std::vector&lt;long long&gt; A,int K){
     /*
     Copyright (c) 2020 0214sh7
     https://github.com/0214sh7/library/
     */
-    if(P.size()&lt;=2){
-        return P;
-    }
-    std::vector&lt;std::pair&lt;long long,long long&gt;&gt; H,L,R;
-    sort(P.begin(),P.end());
-    
-    //下半分
-    for(int i=0;i&lt;P.size();i++){
-        int j=L.size();
-        while(j&gt;=2 &amp;&amp; (L[j-1].first-L[j-2].first)*(P[i].second-L[j-2].second)&lt;=(L[j-1].second-L[j-2].second)*(P[i].first-L[j-2].first)){
-            L.pop_back();
-            j--;
+    std::vector&lt;long long&gt; R;
+    int N = A.size();
+    std::deque&lt;int&gt; D;
+    for(int i=0;i&lt;N;i++){
+        while(!D.empty() &amp;&amp; A[D.back()]&gt;=A[i]){D.pop_back();}
+        D.push_back(i);
+        if(i-K+1&gt;=0){
+            R.push_back(A[D.front()]);
+            if(D.front()==i-K+1){
+                D.pop_front();
+            }
         }
-        L.push_back(P[i]);
     }
-    
-    //上半分
-    for(int i=P.size()-1;i&gt;=0;i--){
-        int j=H.size();
-        while(j&gt;=2 &amp;&amp; (H[j-1].first-H[j-2].first)*(P[i].second-H[j-2].second)&lt;=(H[j-1].second-H[j-2].second)*(P[i].first-H[j-2].first)){
-            H.pop_back();
-            j--;
-        }
-        H.push_back(P[i]);
-    }
-    
-    
-    R=L;
-    for(int i=1;i&lt;H.size()-1;i++){
-        R.push_back(H[i]);
-    }
-    
     return R;
 }
 </code></pre></div></div>
 
   </body>
 </html>
-  </div><a class="u-url" href="/library/posts/convexhull" hidden></a>
+  </div><a class="u-url" href="/library/posts/slideminimum" hidden></a>
 </article>
 
       </div>
