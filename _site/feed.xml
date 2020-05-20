@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-04-23T00:55:15+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">スライド最小値</title><link href="http://localhost:4000/library/posts/slideminimum" rel="alternate" type="text/html" title="スライド最小値" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/slide-minimum</id><content type="html" xml:base="http://localhost:4000/library/posts/slideminimum">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;と整数&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;を与えると、以下の数式を満たす要素数が&lt;script type=&quot;math/tex&quot;&gt;\vert A \vert -K+1&lt;/script&gt;の数列&lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;を構成し、返す&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-05-20T22:45:56+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、クラスを&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;で初期化する&lt;/li&gt;
+  &lt;li&gt;このとき、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持され、かつindexの最大値が最小になるように&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の各要素にindexという非負整数が割り振られる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;N=\vert A \vert&lt;/script&gt;とし、&lt;script type=&quot;math/tex&quot;&gt;Ο(NlogN)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;size&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initで与えられた数列の中に含まれる値の種類数を返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;index&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;値を与えると、その値に対応するindexを返す&lt;/li&gt;
+  &lt;li&gt;もし数列に存在しない値が与えられたら、数列に存在する値の中で、与えられた値より小さい最大の値についてのindexを返す(つまり、小さい値に寄せる)&lt;/li&gt;
+  &lt;li&gt;もし列のいかなる値よりも小さければ&lt;script type=&quot;math/tex&quot;&gt;-1&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;計算量はinitの&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を用いて、&lt;script type=&quot;math/tex&quot;&gt;Ο(logN)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;value&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;indexを与えると値を返す&lt;/li&gt;
+  &lt;li&gt;範囲外なら&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class compress{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; E;
+    
+    public:
+    void init(std::vector&amp;lt;long long&amp;gt; A){
+        E.clear();
+        sort(A.begin(),A.end());
+        for(int i=0;i&amp;lt;A.size();i++){
+            if(i==0 || A[i]!=A[i-1]){
+                E.push_back(A[i]);
+            }
+        }
+    }
+    
+    int size(){
+        return (int)E.size();
+    }
+    
+    int value(int x){
+        if(0&amp;lt;=x &amp;amp;&amp;amp; x&amp;lt;(int)E.size()){
+            return E[x];
+        }else{
+            return 0;
+        }
+    }
+    
+    int index(int X){
+        return (upper_bound(E.begin(),E.end(),X))-E.begin()-1;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 数列を与えると、クラスをで初期化する このとき、の全てのつの要素について大小関係が維持され、かつindexの最大値が最小になるようにの各要素にindexという非負整数が割り振られる 計算量はとし、</summary></entry><entry><title type="html">スライド最小値</title><link href="http://localhost:4000/library/posts/slideminimum" rel="alternate" type="text/html" title="スライド最小値" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/slide-minimum</id><content type="html" xml:base="http://localhost:4000/library/posts/slideminimum">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;と整数&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;を与えると、以下の数式を満たす要素数が&lt;script type=&quot;math/tex&quot;&gt;\vert A \vert -K+1&lt;/script&gt;の数列&lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;を構成し、返す&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})&lt;/script&gt;
 
@@ -456,89 +522,7 @@
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">クラスカル法</title><link href="http://localhost:4000/library/posts/kruskal" rel="alternate" type="text/html" title="クラスカル法" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/Kruskal</id><content type="html" xml:base="http://localhost:4000/library/posts/kruskal">&lt;p&gt;無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/p&gt;
-
-&lt;p&gt;すると、コストの和が最小になるような全域木を一つ構成し、その木を構成する辺をvectorとして返す&lt;/p&gt;
-
-&lt;p&gt;辺がつなぐ&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;頂点が連結かどうかを&lt;a href=&quot;./unionfind&quot;&gt;UnionFind&lt;/a&gt;を用いて判定している&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(ElogE)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/Kruskal.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Kruskal{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    int V=0,E=0;
-    typedef std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt; P;
-    std::vector&amp;lt;int&amp;gt; UF,rank;
-    std::vector&amp;lt;std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt;&amp;gt; es;
-    
-    bool comp(P F,P G){
-        return F.second&amp;lt;G.second;
-    }
-    
-    int root(int k){
-        if(UF[k]==k){
-            return k;
-        }else{
-            UF[k]=root(UF[k]);
-            return UF[k];
-        }
-    }
-    
-    bool same(int p,int q){
-        return root(p)==root(q);
-    }
-    
-    void unite(int P,int Q){
-        int p=root(P);
-        int q=root(Q);
-        if(p==q)return;
-        if(rank[p]&amp;lt;rank[q])std::swap(p,q);
-        UF[q]=p;
-        if(rank[p]==rank[q])rank[p]++;
-    }
-    
-    public:
-    
-    
-    std::vector&amp;lt;P&amp;gt; solve(std::vector&amp;lt;P&amp;gt; edge){
-        //頂点数を決定する
-        V=0;
-        for(int i=0;i&amp;lt;edge.size();i++){
-            V=std::max(V,edge[i].first.first+1);
-            V=std::max(V,edge[i].first.second+1);
-        }
-        //辺数をもとめる　
-        E=edge.size();
-        //unionfindを初期化する
-        UF.clear();
-        rank.clear();
-        for(int i=0;i&amp;lt;V;i++){
-            UF.push_back(i);
-            rank.push_back(0);
-        }
-        //辺をソートして代入しておく
-        std::sort(edge.begin(),edge.end(),[&amp;amp;](P x, P y){return comp(x, y);});
-        es=edge;
-        
-        std::vector&amp;lt;P&amp;gt; R;
-        for(int i=0;i&amp;lt;E;i++){
-            if(!same(es[i].first.first,es[i].first.second)){
-                unite(es[i].first.first,es[i].first.second);
-                R.push_back(es[i]);
-            }
-        }
-        return R;
-    }
-    
-    //solve:{ {int,int},longlong}のvectorを渡すことで最小全域木を返す
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
 
 &lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
 
