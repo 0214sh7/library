@@ -1,4 +1,214 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-05-20T22:45:56+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-06-01T01:20:24+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">数学詰め合わせパック</title><link href="http://localhost:4000/library/posts/basic-math" rel="alternate" type="text/html" title="数学詰め合わせパック" /><published>2020-06-01T00:00:00+09:00</published><updated>2020-06-01T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/basic-math-assortment</id><content type="html" xml:base="http://localhost:4000/library/posts/basic-math">&lt;p&gt;優柔不断なあなたに&lt;/p&gt;
+
+&lt;p&gt;というのは建前で、それぞれ独立して扱うほどではないが重要なものを一箇所に集めた&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/basic%20math%20assortment.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;注記:ページ内のコードを使用する際は、以下の表記を同時に添付してください。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+Copyright (c) 2020 0214sh7
+https://github.com/0214sh7/library/
+*/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;小数点以下切り上げ&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;よくある天井関数&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//小数点以下切り上げ
+long long roundup(long long a,long long b){
+  return (a+b-1)/b;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;階乗&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;に対し&lt;script type=&quot;math/tex&quot;&gt;x!&lt;/script&gt;を計算する&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;も与えるとそれで割った余りをとる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(x)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//階乗
+long long fact(long long x,long long MOD=INT_MAX){
+  long long k=1;
+  for(int i=1;i&amp;lt;=x;i++){
+      k=(k*i)%MOD;
+  }
+  return k;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最大公約数&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;２つの引数のGCDを求める&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(log(max(a,b)))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//最大公約数
+long long gcd(long long a,long long b){
+  a=std::abs(a);
+  b=std::abs(b);
+  if(a&amp;gt;b)std::swap(a,b);
+  if(a==0){
+      return b;
+  }
+    
+  long long r=a%b;
+  while(r){
+      a=b;
+      b=r;
+      r=a%b;
+  }
+  return b;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最小公倍数&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;２つの引数のLCMを求める&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(log(max(a,b)))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//最小公倍数
+long long lcm(long long a,long long b){
+  if(std::abs(a)&amp;gt;std::abs(b))std::swap(a,b);
+  if(a==0){
+      return b;
+  }
+    
+  long long s=a,t=b;
+  a=std::abs(a);
+  b=std::abs(b);
+  if(a&amp;gt;b)std::swap(a,b);
+    
+  long long r=a%b;
+  while(r){
+      a=b;
+      b=r;
+      r=a%b;
+  }
+    
+  return s / b * t;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素数判定&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;が素数ならtrueを、そうでないならfalseを返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\sqrt{x})&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素数判定
+bool prime(long long X){
+  if(X&amp;lt;2)return false;
+  for(long long i=2;i*i&amp;lt;=X;i++){
+      if(X%i==0){
+          return false;
+      }
+  }
+  return true;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素数列挙&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;以下の素数を列挙し、小さい順にvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(NloglogN)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素数列挙
+std::vector&amp;lt;long long&amp;gt; primearray(long long N){
+  std::vector&amp;lt;long long&amp;gt; R;
+  std::vector&amp;lt;bool&amp;gt; prime;
+  for(int i=0;i&amp;lt;=N;i++){
+      prime.push_back(true);
+  }
+  if(N&amp;lt;2){
+      return R;
+  }
+  prime[0]=false;
+  prime[1]=false;
+  for(long long i=2;i*i&amp;lt;=N;i++){
+      if(!prime[i])continue;
+      for(int j=2*i;j&amp;lt;=N;j+=i){
+          prime[j]=false;
+      }
+  }
+  for(long long i=0;i&amp;lt;prime.size();i++){
+      if(prime[i]){
+          R.push_back(i);
+      }
+  }
+  return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素因数分解&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を素因数分解し、小さい順にvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\sqrt{N})&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素因数分解
+std::vector&amp;lt;long long&amp;gt; prime_factorization(long long N){
+  std::vector&amp;lt;long long&amp;gt; R;
+  if(N&amp;lt;2)return R;
+  for(long long i=2;i*i&amp;lt;=N;i++){
+      while(N%i==0){
+          R.push_back(i);
+          N/=i;
+      }
+  }
+  if(N!=1){
+        R.push_back(N);
+  }
+  return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;累乗(繰り返し二乗法)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;b,e&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;b^e&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;も与えるとそれで割った余りをとる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(e))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//累乗(繰り返し二乗法)
+long long power(long long b,long long e,long long MOD=INT_MAX){
+  long long r=1;
+  while(e){
+      if(e&amp;amp;1){
+          r=(r*b)%MOD;
+      }
+      b=(b*b)%MOD;
+      e &amp;gt;&amp;gt;=1;
+  }
+  return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;逆元(素数MOD)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;b,MOD&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;を法とした整数環上での逆元(&lt;script type=&quot;math/tex&quot;&gt;bx=1&lt;/script&gt;を満たす&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;)を返す&lt;/li&gt;
+  &lt;li&gt;MODが素数でない場合の動作は未確認&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(MOD))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//逆元(素数MOD)
+long long inverse(long long b,long long MOD){
+  long long r=1,e=MOD-2;
+  while(e){
+      if(e&amp;amp;1){
+          r=(r*b)%MOD;
+      }
+      b=(b*b)%MOD;
+      e &amp;gt;&amp;gt;=1;
+  }
+  return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">優柔不断なあなたに</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、クラスを&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;で初期化する&lt;/li&gt;
   &lt;li&gt;このとき、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持され、かつindexの最大値が最小になるように&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の各要素にindexという非負整数が割り振られる&lt;/li&gt;
@@ -522,37 +732,7 @@
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;を与えると、数列の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert D \vert log \vert D \vert )&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; compress(std::vector&amp;lt;int&amp;gt; D){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::map&amp;lt;int,int&amp;gt; G;
-    std::vector&amp;lt;int&amp;gt; E,r;
-    int s=D.size();
-    for(int i=0;i&amp;lt;s;i++){
-        E.push_back(D[i]);
-    }
-    sort(E.begin(),E.end());
-    int t=0;
-    for(int i=0;i&amp;lt;s;i++){
-        if(i!=0 &amp;amp;&amp;amp; E[i]!=E[i-1]){
-            t++;
-        }
-        G[E[i]]=t;
-    }
-    for(int i=0;i&amp;lt;s;i++){
-        r.push_back(G[D[i]]);
-    }
-    return r;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、数列の全てのつの要素について大小関係が維持される・かつ要素の最大値が最小になるように要素を非負整数に置き換える</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
 
 &lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
 
