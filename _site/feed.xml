@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2020-06-01T01:20:24+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">数学詰め合わせパック</title><link href="http://localhost:4000/library/posts/basic-math" rel="alternate" type="text/html" title="数学詰め合わせパック" /><published>2020-06-01T00:00:00+09:00</published><updated>2020-06-01T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/basic-math-assortment</id><content type="html" xml:base="http://localhost:4000/library/posts/basic-math">&lt;p&gt;優柔不断なあなたに&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-02-12T21:53:24+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">ダイクストラ法</title><link href="http://localhost:4000/library/posts/dijkstra" rel="alternate" type="text/html" title="ダイクストラ法" /><published>2021-02-12T00:00:00+09:00</published><updated>2021-02-12T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dijkstra</id><content type="html" xml:base="http://localhost:4000/library/posts/dijkstra">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;無向グラフを、頂点数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/li&gt;
+  &lt;li&gt;すると、グラフをsolve()が扱えるようになる&lt;/li&gt;
+  &lt;li&gt;多始点などで何回も回す場合、initの実行は&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;回でよい&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert E \vert)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;solve&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initでできたグラフに対し、与えられた&lt;script type=&quot;math/tex&quot;&gt;s&lt;/script&gt;を始点としてダイクストラ法を実行する&lt;/li&gt;
+  &lt;li&gt;得られた最小コストを要素数が&lt;script type=&quot;math/tex&quot;&gt;V&lt;/script&gt;のvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο((E+V)logV)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/Dijkstra.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+class Dijkstra{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    typedef std::pair&amp;lt;long long,int&amp;gt; P;
+    std::vector&amp;lt;std::vector&amp;lt;P&amp;gt;&amp;gt; G;
+    int V;
+    long long INF = (1LL&amp;lt;&amp;lt;61);
+    std::priority_queue&amp;lt;P,std::vector&amp;lt;P&amp;gt;,std::greater&amp;lt;P&amp;gt;&amp;gt; que;
+    
+    public:
+    void init(int N,std::vector&amp;lt;std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt;&amp;gt; edge){
+        //頂点数を決定する
+        V=N;
+        
+        //辺集合を扱いやすい形式に変換する
+        G.resize(V);
+        for(int i=0;i&amp;lt;edge.size();i++){
+            int from=edge[i].first.first,to=edge[i].first.second;
+            long long cost=edge[i].second;
+            G[from].push_back({cost,to});
+        }
+    }
+    
+    std::vector&amp;lt;long long&amp;gt; solve(int s){
+        std::vector&amp;lt;long long&amp;gt; d;
+        //INFで初期化する
+        for(int i=0;i&amp;lt;V;i++){
+            d.push_back(INF);
+        }
+        d[s]=0;
+        que.push({0,s});
+        //queは{cost,to}をコストが小さい順に出す
+        while(!que.empty()){
+            P p = que.top();
+            que.pop();
+            int v=p.second;
+            if(d[v]&amp;lt;p.first)continue;
+            for(int i=0;i&amp;lt;G[v].size();i++){
+                P e = G[v][i];
+                if(d[e.second]&amp;gt;d[v]+e.first){
+                    d[e.second] = d[v]+e.first;
+                    que.push({d[e.second],e.second});
+                }
+            }
+        }
+        return d;
+    }
+    
+    //init:頂点数Nと辺{ {int,int},longlong}のvectorを渡すことで有向グラフを構築する
+    //solve:始点を渡すとinitで構築したグラフでダイクストラをし、コストのvectorを返す
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 無向グラフを、頂点数と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は</summary></entry><entry><title type="html">数学詰め合わせパック</title><link href="http://localhost:4000/library/posts/basic-math" rel="alternate" type="text/html" title="数学詰め合わせパック" /><published>2020-06-01T00:00:00+09:00</published><updated>2020-06-01T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/basic-math-assortment</id><content type="html" xml:base="http://localhost:4000/library/posts/basic-math">&lt;p&gt;優柔不断なあなたに&lt;/p&gt;
 
 &lt;p&gt;というのは建前で、それぞれ独立して扱うほどではないが重要なものを一箇所に集めた&lt;/p&gt;
 
@@ -732,27 +804,4 @@ long long inverse(long long b,long long MOD){
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry><entry><title type="html">最長増加部分列</title><link href="http://localhost:4000/library/posts/lis" rel="alternate" type="text/html" title="最長増加部分列" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/lis</id><content type="html" xml:base="http://localhost:4000/library/posts/lis">&lt;p&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の最長増加部分列の長さを求め、long longで返す&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert A \vert log \vert A \vert)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/longest%20increasing%20subsequence.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long LIS(std::vector&amp;lt;long long&amp;gt; A){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    int N=A.size();
-    std::vector&amp;lt;long long&amp;gt; D;
-    for(int i=0;i&amp;lt;N;i++){
-        int pos=distance(D.begin(),lower_bound(D.begin(), D.end(),A[i]));
-        if(pos==D.size()){
-            D.push_back(A[i]);
-        }else{
-            D[pos]=A[i];
-        }
-    }
-    return D.size();
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列を与えると、の最長増加部分列の長さを求め、long longで返す</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry></feed>
