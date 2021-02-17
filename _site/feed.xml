@@ -1,4 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-02-12T21:53:24+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionなんも考えてない</subtitle><entry><title type="html">ダイクストラ法</title><link href="http://localhost:4000/library/posts/dijkstra" rel="alternate" type="text/html" title="ダイクストラ法" /><published>2021-02-12T00:00:00+09:00</published><updated>2021-02-12T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dijkstra</id><content type="html" xml:base="http://localhost:4000/library/posts/dijkstra">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-02-18T01:10:14+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">二項係数</title><link href="http://localhost:4000/library/posts/binomial-coefficient" rel="alternate" type="text/html" title="二項係数" /><published>2021-02-18T00:00:00+09:00</published><updated>2021-02-18T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/binomial%20coefficient</id><content type="html" xml:base="http://localhost:4000/library/posts/binomial-coefficient">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;extension&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initで用意した範囲で足りない場合、整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると不足分を追加で前計算する&lt;/li&gt;
+  &lt;li&gt;計算量は実行前のサイズを&lt;script type=&quot;math/tex&quot;&gt;s&lt;/script&gt;として、&lt;script type=&quot;math/tex&quot;&gt;Ο(N-s+log(MOD))&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;comb&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;n,r&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;\frac{n!}{r!(n-r)!}&lt;/script&gt;を&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;で割った余りを返す&lt;/li&gt;
+  &lt;li&gt;もしこれを計算するための前計算が不足している場合、ちょうど補完するようにextensionが実行される&lt;/li&gt;
+  &lt;li&gt;このため、計算量を気にしなければinitは呼ばなくても良い&lt;/li&gt;
+  &lt;li&gt;また最初にinitに十分な値を与えていればextensionは呼ばれない&lt;/li&gt;
+  &lt;li&gt;計算量はextensionのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/binomial%20coefficient.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class binomial_coefficient{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    const long long MOD = 998244353;
+    int sze = 0;
+    std::vector&amp;lt;long long&amp;gt; fact;
+    std::vector&amp;lt;long long&amp;gt; factinv;
+    
+    long long Gfinv(long long b){
+        long long r=1;
+        long long e=MOD-2;
+        while(e){
+            if(e&amp;amp;1){
+                r=(r*b)%MOD;
+            }
+                b=(b*b)%MOD;
+                e &amp;gt;&amp;gt;=1;
+        }
+        return r;
+    }
+    
+    public:
+    
+    void init(int N){
+        if(N&amp;lt;0){
+            return ;
+        }
+        sze = N+1;
+        fact.resize(N+1);
+        factinv.resize(N+1);
+        
+        fact[0]=1;
+        for(long long i=1;i&amp;lt;=N;i++){
+            fact[i]=(fact[i-1]*i)%MOD;
+        }
+        factinv[N] = Gfinv(fact[N]);
+        for(long long i=N-1;i&amp;gt;=0;i--){
+            factinv[i]=(factinv[i+1]*(i+1))%MOD;
+        }
+    }
+    
+    void extension(int N){
+        if(sze&amp;gt;N &amp;amp;&amp;amp; sze!=0){
+            return ;
+        }
+        
+        fact.resize(N+1);
+        factinv.resize(N+1);
+        
+        fact[sze]=(sze==0)?1:(fact[sze-1]*sze)%MOD;
+        
+        for(long long i=sze+1;i&amp;lt;=N;i++){
+            fact[i]=(fact[i-1]*i)%MOD;
+        }
+        factinv[N] = Gfinv(fact[N]);
+        for(long long i=N-1;i&amp;gt;=sze;i--){
+            factinv[i]=(factinv[i+1]*(i+1))%MOD;
+        }
+        sze = N+1;
+    }
+    
+    long long comb(long long n,long long r){
+        if(n&amp;lt;0 || r&amp;lt;0 || n&amp;lt;r){
+            return 0;
+        }
+        
+        if(n&amp;gt;=sze){
+            extension(n);
+        }
+        
+        long long R = fact[n];
+        R = (R*factinv[r])%MOD;
+        R = (R*factinv[n-r])%MOD;
+        return R;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する 計算量は</summary></entry><entry><title type="html">ダイクストラ法</title><link href="http://localhost:4000/library/posts/dijkstra" rel="alternate" type="text/html" title="ダイクストラ法" /><published>2021-02-12T00:00:00+09:00</published><updated>2021-02-12T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dijkstra</id><content type="html" xml:base="http://localhost:4000/library/posts/dijkstra">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;無向グラフを、頂点数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/li&gt;
   &lt;li&gt;すると、グラフをsolve()が扱えるようになる&lt;/li&gt;
@@ -720,88 +822,4 @@ long long inverse(long long b,long long MOD){
     }
     
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">単にセグ木と言えばこれを指す、最も単純なセグ木</summary></entry><entry><title type="html">ポテンシャル付きUnionFind</title><link href="http://localhost:4000/library/posts/pot-unionfind" rel="alternate" type="text/html" title="ポテンシャル付きUnionFind" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/pot-unionfind</id><content type="html" xml:base="http://localhost:4000/library/posts/pot-unionfind">&lt;p&gt;重み付きUnionFindって言ったほうがいいのかな？正直わからない&lt;/p&gt;
-
-&lt;p&gt;大体の機能は&lt;a href=&quot;./unionfind&quot;&gt;UnionFind&lt;/a&gt;と同じで違う点は&lt;/p&gt;
-
-&lt;p&gt;potential&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;頂点&lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt;のその時点でのポテンシャルを求める&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\alpha (N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;unite&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;集合を合併する際に、&lt;script type=&quot;math/tex&quot;&gt;(Qのポテンシャル)-(Pのポテンシャル)=d&lt;/script&gt;になるように指定する&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;diff&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;(Qのポテンシャル)-(Pのポテンシャル)&lt;/script&gt;を返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\alpha (N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class potentialized_unionfind{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    std::vector&amp;lt;int&amp;gt; UF,rank,pot;
-    public:
-    
-    void init(int N){
-        UF.clear();
-        rank.clear();
-        for(int i=0;i&amp;lt;N;i++){
-            UF.push_back(i);
-            rank.push_back(0);
-            pot.push_back(0);
-        }
-    }
-    
-    int root(int k){
-        if(UF[k]==k){
-            return k;
-        }else{
-            int r = root(UF[k]);
-            pot[k] += pot[UF[k]];
-            UF[k] = r;
-            return UF[k];
-        }
-    }
-    
-    int potential(int k){
-        root(k);
-        return pot[k];
-    }
-    
-    bool same(int p,int q){
-        return root(p)==root(q);
-    }
-    
-    bool unite(int P,int Q,int d){
-        //pot(Q)-pot(P)=dを満たす
-        d+=potential(P);
-        d-=potential(Q);
-        int p=root(P), q=root(Q);
-        if(p==q)return false;
-        if(rank[p]&amp;lt;rank[q]){
-            std::swap(p,q);
-            d = -d;
-        }
-        UF[q]=p;
-        if(rank[p]==rank[q])rank[p]++;
-        pot[q]=d;
-        
-        return true;
-    }
-    
-    int diff(int P,int Q){
-        return potential(Q)-potential(P);
-    }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">重み付きUnionFindって言ったほうがいいのかな？正直わからない</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">単にセグ木と言えばこれを指す、最も単純なセグ木</summary></entry></feed>
