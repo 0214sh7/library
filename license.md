@@ -13,7 +13,7 @@ Copyright (c) 2020 0214sh7
 
 または省略表記として、以下の文書をライブラリのコピーに含むことで代替とすることができます。
 ```
-Copyright (c) 2020 0214sh7
+Copyright (c) 2021 0214sh7
 https://github.com/0214sh7/library/
 ```
 
