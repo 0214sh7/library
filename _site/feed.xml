@@ -1,4 +1,329 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-02-18T01:10:14+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">二項係数</title><link href="http://localhost:4000/library/posts/binomial-coefficient" rel="alternate" type="text/html" title="二項係数" /><published>2021-02-18T00:00:00+09:00</published><updated>2021-02-18T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/binomial%20coefficient</id><content type="html" xml:base="http://localhost:4000/library/posts/binomial-coefficient">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-03-25T03:10:03+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">素因数分解(線形篩)</title><link href="http://localhost:4000/library/posts/sieve" rel="alternate" type="text/html" title="素因数分解(線形篩)" /><published>2021-03-24T00:00:00+09:00</published><updated>2021-03-24T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/sieve</id><content type="html" xml:base="http://localhost:4000/library/posts/sieve">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、前計算として&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;以下の合成数&lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt;について&lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt;の自明でない(&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;でも&lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt;でもない)約数の1つを求める&lt;/li&gt;
+  &lt;li&gt;それと同時に、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;以下の素数のリストも求める&lt;/li&gt;
+  &lt;li&gt;以降の関数に&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;より大きい値を与えると補完のためにinitが呼ばれる。これは最初にinitに十分大きい値を与えることで回避できる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;linear_sieve&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;コンストラクタ。initを呼ぶ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;primearray&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;以下の素数を昇順に並べたvectorを返す&lt;/li&gt;
+  &lt;li&gt;もし前計算が足りない場合、ちょうど補完するようにinitが実行される&lt;/li&gt;
+  &lt;li&gt;計算量はinitのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(N/log(N))&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;divisor&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、前計算した&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;の自明でない約数の1つを返す&lt;/li&gt;
+  &lt;li&gt;もし&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;が素数なら&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を、&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;なら&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;を、正でないなら&lt;script type=&quot;math/tex&quot;&gt;-1&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;もし前計算が足りない場合、ちょうど補完するようにinitが実行される&lt;/li&gt;
+  &lt;li&gt;計算量はinitのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;factorization&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt;を素因数分解し、結果を&lt;strong&gt;大きい順に&lt;/strong&gt;並べ、vectorとして返す&lt;/li&gt;
+  &lt;li&gt;もし前計算が足りない場合、ちょうど補完するようにinitが実行される&lt;/li&gt;
+  &lt;li&gt;計算量はinitのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(log(N))&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;exp_enum&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N,M,mod&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;0^M,1^M,...,N^M&lt;/script&gt;をそれぞれ&lt;script type=&quot;math/tex&quot;&gt;mod&lt;/script&gt;で割ったあまりを計算し、vectorとして返す&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;N,M&lt;/script&gt;が負である場合、空のvectorを返す&lt;/li&gt;
+  &lt;li&gt;もし前計算が足りない場合、ちょうど補完するようにinitが実行される&lt;/li&gt;
+  &lt;li&gt;計算量はinitのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(N + N \frac{log(M)}{log(N)})&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class linear_sieve{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    
+    private:
+    long long S=0;
+    std::vector&amp;lt;long long&amp;gt; divisor_,prime;
+    
+    public:
+    void init(long long N){
+        S=N;
+        prime.clear();
+        divisor_.resize(N+1);
+        for(long long i=0;i&amp;lt;N+1;i++){
+            divisor_[i]=0;
+        }
+        
+        if(N&amp;gt;=1){
+            divisor_[1]=1;
+        }
+        
+        
+        for(long long i=2;i&amp;lt;=N;i++){
+            if(divisor_[i]==0){
+                divisor_[i]=i;
+                prime.push_back(i);
+            }
+            for(long long j=0;j&amp;lt;=prime.size() &amp;amp;&amp;amp; prime[j]&amp;lt;=divisor_[i] &amp;amp;&amp;amp; i*prime[j]&amp;lt;=N ;j++){
+                divisor_[prime[j]*i]=prime[j];
+            }
+        }
+    }
+    
+    linear_sieve(long long N){
+        init(N);
+    }
+    
+    std::vector&amp;lt;long long&amp;gt; primearray(long long X){
+        std::vector&amp;lt;long long&amp;gt; R;
+        if(X&amp;lt;=1)return R;
+        if(S&amp;lt;X)init(X);
+        for(long long i=0;i&amp;lt;prime.size();i++){
+            if(prime[i]&amp;lt;=X){
+                R.push_back(prime[i]);
+            }
+        }
+        return R;
+    }
+    
+    long long divisor(long long X){
+        if(X&amp;lt;=0)return -1;
+        if(S&amp;lt;X)init(X);
+        return divisor_[X];
+    }
+    
+    std::vector&amp;lt;long long&amp;gt; factorization(long long X){
+        std::vector&amp;lt;long long&amp;gt; R;
+        if(X&amp;lt;=1)return R;
+        if(S&amp;lt;X)init(X);
+        R = factorization(X/divisor_[X]);
+        R.push_back(divisor_[X]);
+        return R;
+    }
+    
+    std::vector&amp;lt;long long&amp;gt; exp_enum(long long N,long long M,long long mod=LLONG_MAX){
+        std::vector&amp;lt;long long&amp;gt; R;
+        if(N&amp;lt;0 || M&amp;lt;0)return R;
+        if(S&amp;lt;N)init(N);
+        
+        for(long long i=0;i&amp;lt;=N;i++){
+            R.push_back(-1);
+        }
+        R[0]=0;
+        if(N&amp;gt;=1)R[1]=1;
+        
+        for(long long i=0;i&amp;lt;prime.size();i++){
+            if(prime[i]&amp;gt;N)continue;
+            long long r=1,b=prime[i],e=M;
+            while(e){
+                if(e&amp;amp;1){
+                    r=(r*b)%mod;
+                }
+                b=(b*b)%mod;
+                e &amp;gt;&amp;gt;=1;
+            }
+            R[prime[i]]=r;
+        }
+        
+        for(long long i=0;i&amp;lt;=N;i++){
+            if(R[i]!=-1)continue;
+            R[i] = (R[i/divisor_[i]]*R[divisor_[i]])%mod;
+        }
+        return R;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+class linear_sieve{/*省略*/};
+
+int main(void){
+    
+    linear_sieve sieve(1000);
+    
+    std::cout &amp;lt;&amp;lt; &quot;100以下の素数のリスト&quot; &amp;lt;&amp;lt; std::endl;
+    std::vector&amp;lt;long long&amp;gt; P = sieve.primearray(100);
+    for(int i=0;i&amp;lt;P.size();i++){
+        std::cout &amp;lt;&amp;lt; P[i] &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl &amp;lt;&amp;lt; std::endl;
+    
+    std::cout &amp;lt;&amp;lt; &quot;1~10の約数の一つ&quot; &amp;lt;&amp;lt; std::endl;
+    for(int i=1;i&amp;lt;=10;i++){
+        std::cout &amp;lt;&amp;lt; sieve.divisor(i) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl &amp;lt;&amp;lt; std::endl;
+    
+    std::cout &amp;lt;&amp;lt; &quot;4,12,57,97,210の素因数分解&quot; &amp;lt;&amp;lt; std::endl;
+    std::vector&amp;lt;long long&amp;gt; number={4,12,57,97,210};
+    for(int j=0;j&amp;lt;5;j++){
+        std::vector&amp;lt;long long&amp;gt; F = sieve.factorization(number[j]);
+        for(int i=0;i&amp;lt;F.size();i++){
+            std::cout &amp;lt;&amp;lt; F[i] &amp;lt;&amp;lt; &quot; &quot;;
+        }std::cout &amp;lt;&amp;lt; std::endl;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+    std::cout &amp;lt;&amp;lt; &quot;0~10について、i^3&quot; &amp;lt;&amp;lt; std::endl;
+    std::vector&amp;lt;long long&amp;gt; E = sieve.exp_enum(10,3);
+    for(int i=0;i&amp;lt;E.size();i++){
+        std::cout &amp;lt;&amp;lt; E[i] &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;100以下の素数のリスト
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
+
+1~10の約数の一つ
+1 2 3 2 5 2 7 2 3 2 
+
+4,12,57,97,210の素因数分解
+2 2 
+3 2 2 
+19 3 
+97 
+7 5 3 2 
+
+0~10について、i^3
+0 1 8 27 64 125 216 343 512 729 1000 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/24&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;素因数分解(線形篩)を追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">init 整数を与えると、前計算として以下の合成数についての自明でない(でもでもない)約数の1つを求める それと同時に、以下の素数のリストも求める 以降の関数により大きい値を与えると補完のためにinitが呼ばれる。これは最初にinitに十分大きい値を与えることで回避できる 計算量は</summary></entry><entry><title type="html">二項係数</title><link href="http://localhost:4000/library/posts/binomial-coefficient" rel="alternate" type="text/html" title="二項係数" /><published>2021-02-18T00:00:00+09:00</published><updated>2021-02-18T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/binomial%20coefficient</id><content type="html" xml:base="http://localhost:4000/library/posts/binomial-coefficient">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;extension&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initで用意した範囲で足りない場合、整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると不足分を追加で前計算する&lt;/li&gt;
+  &lt;li&gt;計算量は実行前のサイズを&lt;script type=&quot;math/tex&quot;&gt;s&lt;/script&gt;として、&lt;script type=&quot;math/tex&quot;&gt;Ο(N-s+log(MOD))&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;comb&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;n,r&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;\frac{n!}{r!(n-r)!}&lt;/script&gt;を&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;で割った余りを返す&lt;/li&gt;
+  &lt;li&gt;もしこれを計算するための前計算が不足している場合、ちょうど補完するようにextensionが実行される&lt;/li&gt;
+  &lt;li&gt;このため、計算量を気にしなければinitは呼ばなくても良い&lt;/li&gt;
+  &lt;li&gt;また最初にinitに十分な値を与えていればextensionは呼ばれない&lt;/li&gt;
+  &lt;li&gt;計算量はextensionのもの+&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/binomial%20coefficient.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class binomial_coefficient{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    const long long MOD = 998244353;
+    int sze = 0;
+    std::vector&amp;lt;long long&amp;gt; fact;
+    std::vector&amp;lt;long long&amp;gt; factinv;
+    
+    long long Gfinv(long long b){
+        long long r=1;
+        long long e=MOD-2;
+        while(e){
+            if(e&amp;amp;1){
+                r=(r*b)%MOD;
+            }
+                b=(b*b)%MOD;
+                e &amp;gt;&amp;gt;=1;
+        }
+        return r;
+    }
+    
+    public:
+    
+    void init(int N){
+        if(N&amp;lt;0){
+            return ;
+        }
+        sze = N+1;
+        fact.resize(N+1);
+        factinv.resize(N+1);
+        
+        fact[0]=1;
+        for(long long i=1;i&amp;lt;=N;i++){
+            fact[i]=(fact[i-1]*i)%MOD;
+        }
+        factinv[N] = Gfinv(fact[N]);
+        for(long long i=N-1;i&amp;gt;=0;i--){
+            factinv[i]=(factinv[i+1]*(i+1))%MOD;
+        }
+    }
+    
+    void extension(int N){
+        if(sze&amp;gt;N &amp;amp;&amp;amp; sze!=0){
+            return ;
+        }
+        
+        fact.resize(N+1);
+        factinv.resize(N+1);
+        
+        fact[sze]=(sze==0)?1:(fact[sze-1]*sze)%MOD;
+        
+        for(long long i=sze+1;i&amp;lt;=N;i++){
+            fact[i]=(fact[i-1]*i)%MOD;
+        }
+        factinv[N] = Gfinv(fact[N]);
+        for(long long i=N-1;i&amp;gt;=sze;i--){
+            factinv[i]=(factinv[i+1]*(i+1))%MOD;
+        }
+        sze = N+1;
+    }
+    
+    long long comb(long long n,long long r){
+        if(n&amp;lt;0 || r&amp;lt;0 || n&amp;lt;r){
+            return 0;
+        }
+        
+        if(n&amp;gt;=sze){
+            extension(n);
+        }
+        
+        long long R = fact[n];
+        R = (R*factinv[r])%MOD;
+        R = (R*factinv[n-r])%MOD;
+        return R;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する 計算量は</summary></entry><entry><title type="html">二項係数</title><link href="http://localhost:4000/library/posts/binomial-coefficient" rel="alternate" type="text/html" title="二項係数" /><published>2021-02-18T00:00:00+09:00</published><updated>2021-02-18T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/binomial%20coefficient</id><content type="html" xml:base="http://localhost:4000/library/posts/binomial-coefficient">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する&lt;/li&gt;
   &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
@@ -101,6 +426,78 @@
     }
 };
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数を与えると、combを実行するのに必要な数値(階乗とその逆元)を前計算する 計算量は</summary></entry><entry><title type="html">ダイクストラ法</title><link href="http://localhost:4000/library/posts/dijkstra" rel="alternate" type="text/html" title="ダイクストラ法" /><published>2021-02-12T00:00:00+09:00</published><updated>2021-02-12T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dijkstra</id><content type="html" xml:base="http://localhost:4000/library/posts/dijkstra">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;無向グラフを、頂点数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/li&gt;
+  &lt;li&gt;すると、グラフをsolve()が扱えるようになる&lt;/li&gt;
+  &lt;li&gt;多始点などで何回も回す場合、initの実行は&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;回でよい&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert E \vert)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;solve&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initでできたグラフに対し、与えられた&lt;script type=&quot;math/tex&quot;&gt;s&lt;/script&gt;を始点としてダイクストラ法を実行する&lt;/li&gt;
+  &lt;li&gt;得られた最小コストを要素数が&lt;script type=&quot;math/tex&quot;&gt;V&lt;/script&gt;のvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο((E+V)logV)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/Dijkstra.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+class Dijkstra{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    typedef std::pair&amp;lt;long long,int&amp;gt; P;
+    std::vector&amp;lt;std::vector&amp;lt;P&amp;gt;&amp;gt; G;
+    int V;
+    long long INF = (1LL&amp;lt;&amp;lt;61);
+    std::priority_queue&amp;lt;P,std::vector&amp;lt;P&amp;gt;,std::greater&amp;lt;P&amp;gt;&amp;gt; que;
+    
+    public:
+    void init(int N,std::vector&amp;lt;std::pair&amp;lt;std::pair&amp;lt;int,int&amp;gt;,long long&amp;gt;&amp;gt; edge){
+        //頂点数を決定する
+        V=N;
+        
+        //辺集合を扱いやすい形式に変換する
+        G.resize(V);
+        for(int i=0;i&amp;lt;edge.size();i++){
+            int from=edge[i].first.first,to=edge[i].first.second;
+            long long cost=edge[i].second;
+            G[from].push_back({cost,to});
+        }
+    }
+    
+    std::vector&amp;lt;long long&amp;gt; solve(int s){
+        std::vector&amp;lt;long long&amp;gt; d;
+        //INFで初期化する
+        for(int i=0;i&amp;lt;V;i++){
+            d.push_back(INF);
+        }
+        d[s]=0;
+        que.push({0,s});
+        //queは{cost,to}をコストが小さい順に出す
+        while(!que.empty()){
+            P p = que.top();
+            que.pop();
+            int v=p.second;
+            if(d[v]&amp;lt;p.first)continue;
+            for(int i=0;i&amp;lt;G[v].size();i++){
+                P e = G[v][i];
+                if(d[e.second]&amp;gt;d[v]+e.first){
+                    d[e.second] = d[v]+e.first;
+                    que.push({d[e.second],e.second});
+                }
+            }
+        }
+        return d;
+    }
+    
+    //init:頂点数Nと辺{ {int,int},longlong}のvectorを渡すことで有向グラフを構築する
+    //solve:始点を渡すとinitで構築したグラフでダイクストラをし、コストのvectorを返す
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 無向グラフを、頂点数と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は</summary></entry><entry><title type="html">ダイクストラ法</title><link href="http://localhost:4000/library/posts/dijkstra" rel="alternate" type="text/html" title="ダイクストラ法" /><published>2021-02-12T00:00:00+09:00</published><updated>2021-02-12T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dijkstra</id><content type="html" xml:base="http://localhost:4000/library/posts/dijkstra">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;無向グラフを、頂点数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;と、辺の始点と終点とコストを表現したpair&amp;lt;pair&amp;lt;int,int&amp;gt;,long long&amp;gt;のvectorとして与える。&lt;/li&gt;
   &lt;li&gt;すると、グラフをsolve()が扱えるようになる&lt;/li&gt;
@@ -382,7 +779,283 @@ long long inverse(long long b,long long MOD){
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">優柔不断なあなたに</summary></entry><entry><title type="html">数学詰め合わせパック</title><link href="http://localhost:4000/library/posts/basic-math" rel="alternate" type="text/html" title="数学詰め合わせパック" /><published>2020-06-01T00:00:00+09:00</published><updated>2020-06-01T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/basic-math-assortment</id><content type="html" xml:base="http://localhost:4000/library/posts/basic-math">&lt;p&gt;優柔不断なあなたに&lt;/p&gt;
+
+&lt;p&gt;というのは建前で、それぞれ独立して扱うほどではないが重要なものを一箇所に集めた&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/basic%20math%20assortment.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;注記:ページ内のコードを使用する際は、以下の表記を同時に添付してください。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+Copyright (c) 2020 0214sh7
+https://github.com/0214sh7/library/
+*/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;小数点以下切り上げ&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;よくある天井関数&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//小数点以下切り上げ
+long long roundup(long long a,long long b){
+  return (a+b-1)/b;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;階乗&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;に対し&lt;script type=&quot;math/tex&quot;&gt;x!&lt;/script&gt;を計算する&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;も与えるとそれで割った余りをとる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(x)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//階乗
+long long fact(long long x,long long MOD=INT_MAX){
+  long long k=1;
+  for(int i=1;i&amp;lt;=x;i++){
+      k=(k*i)%MOD;
+  }
+  return k;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最大公約数&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;２つの引数のGCDを求める&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(log(max(a,b)))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//最大公約数
+long long gcd(long long a,long long b){
+  a=std::abs(a);
+  b=std::abs(b);
+  if(a&amp;gt;b)std::swap(a,b);
+  if(a==0){
+      return b;
+  }
+    
+  long long r=a%b;
+  while(r){
+      a=b;
+      b=r;
+      r=a%b;
+  }
+  return b;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最小公倍数&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;２つの引数のLCMを求める&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(log(max(a,b)))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//最小公倍数
+long long lcm(long long a,long long b){
+  if(std::abs(a)&amp;gt;std::abs(b))std::swap(a,b);
+  if(a==0){
+      return b;
+  }
+    
+  long long s=a,t=b;
+  a=std::abs(a);
+  b=std::abs(b);
+  if(a&amp;gt;b)std::swap(a,b);
+    
+  long long r=a%b;
+  while(r){
+      a=b;
+      b=r;
+      r=a%b;
+  }
+    
+  return s / b * t;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素数判定&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;が素数ならtrueを、そうでないならfalseを返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\sqrt{x})&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素数判定
+bool prime(long long X){
+  if(X&amp;lt;2)return false;
+  for(long long i=2;i*i&amp;lt;=X;i++){
+      if(X%i==0){
+          return false;
+      }
+  }
+  return true;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素数列挙&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;以下の素数を列挙し、小さい順にvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(NloglogN)&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素数列挙
+std::vector&amp;lt;long long&amp;gt; primearray(long long N){
+  std::vector&amp;lt;long long&amp;gt; R;
+  std::vector&amp;lt;bool&amp;gt; prime;
+  for(int i=0;i&amp;lt;=N;i++){
+      prime.push_back(true);
+  }
+  if(N&amp;lt;2){
+      return R;
+  }
+  prime[0]=false;
+  prime[1]=false;
+  for(long long i=2;i*i&amp;lt;=N;i++){
+      if(!prime[i])continue;
+      for(int j=2*i;j&amp;lt;=N;j+=i){
+          prime[j]=false;
+      }
+  }
+  for(long long i=0;i&amp;lt;prime.size();i++){
+      if(prime[i]){
+          R.push_back(i);
+      }
+  }
+  return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;素因数分解&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を素因数分解し、小さい順にvectorとして返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\sqrt{N})&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//素因数分解
+std::vector&amp;lt;long long&amp;gt; prime_factorization(long long N){
+  std::vector&amp;lt;long long&amp;gt; R;
+  if(N&amp;lt;2)return R;
+  for(long long i=2;i*i&amp;lt;=N;i++){
+      while(N%i==0){
+          R.push_back(i);
+          N/=i;
+      }
+  }
+  if(N!=1){
+        R.push_back(N);
+  }
+  return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;累乗(繰り返し二乗法)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;b,e&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;b^e&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;も与えるとそれで割った余りをとる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(e))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//累乗(繰り返し二乗法)
+long long power(long long b,long long e,long long MOD=INT_MAX){
+  long long r=1;
+  while(e){
+      if(e&amp;amp;1){
+          r=(r*b)%MOD;
+      }
+      b=(b*b)%MOD;
+      e &amp;gt;&amp;gt;=1;
+  }
+  return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;逆元(素数MOD)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;与えられた&lt;script type=&quot;math/tex&quot;&gt;b,MOD&lt;/script&gt;に対し、&lt;script type=&quot;math/tex&quot;&gt;MOD&lt;/script&gt;を法とした整数環上での逆元(&lt;script type=&quot;math/tex&quot;&gt;bx=1&lt;/script&gt;を満たす&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;)を返す&lt;/li&gt;
+  &lt;li&gt;MODが素数でない場合の動作は未確認&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(MOD))&lt;/script&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//逆元(素数MOD)
+long long inverse(long long b,long long MOD){
+  long long r=1,e=MOD-2;
+  while(e){
+      if(e&amp;amp;1){
+          r=(r*b)%MOD;
+      }
+      b=(b*b)%MOD;
+      e &amp;gt;&amp;gt;=1;
+  }
+  return r;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><summary type="html">優柔不断なあなたに</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、クラスを&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;で初期化する&lt;/li&gt;
+  &lt;li&gt;このとき、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持され、かつindexの最大値が最小になるように&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の各要素にindexという非負整数が割り振られる&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;N=\vert A \vert&lt;/script&gt;とし、&lt;script type=&quot;math/tex&quot;&gt;Ο(NlogN)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;size&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;initで与えられた数列の中に含まれる値の種類数を返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;index&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;値を与えると、その値に対応するindexを返す&lt;/li&gt;
+  &lt;li&gt;もし数列に存在しない値が与えられたら、数列に存在する値の中で、与えられた値より小さい最大の値についてのindexを返す(つまり、小さい値に寄せる)&lt;/li&gt;
+  &lt;li&gt;もし列のいかなる値よりも小さければ&lt;script type=&quot;math/tex&quot;&gt;-1&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;計算量はinitの&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を用いて、&lt;script type=&quot;math/tex&quot;&gt;Ο(logN)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;value&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;indexを与えると値を返す&lt;/li&gt;
+  &lt;li&gt;範囲外なら&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;を返す&lt;/li&gt;
+  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(1)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class compress{
+    /*
+    Copyright (c) 2020 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; E;
+    
+    public:
+    void init(std::vector&amp;lt;long long&amp;gt; A){
+        E.clear();
+        sort(A.begin(),A.end());
+        for(int i=0;i&amp;lt;A.size();i++){
+            if(i==0 || A[i]!=A[i-1]){
+                E.push_back(A[i]);
+            }
+        }
+    }
+    
+    int size(){
+        return (int)E.size();
+    }
+    
+    int value(int x){
+        if(0&amp;lt;=x &amp;amp;&amp;amp; x&amp;lt;(int)E.size()){
+            return E[x];
+        }else{
+            return 0;
+        }
+    }
+    
+    int index(int X){
+        return (upper_bound(E.begin(),E.end(),X))-E.begin()-1;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 数列を与えると、クラスをで初期化する このとき、の全てのつの要素について大小関係が維持され、かつindexの最大値が最小になるようにの各要素にindexという非負整数が割り振られる 計算量はとし、</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;数列&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;を与えると、クラスを&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;で初期化する&lt;/li&gt;
   &lt;li&gt;このとき、&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の全ての&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;つの要素について大小関係が維持され、かつindexの最大値が最小になるように&lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;の各要素にindexという非負整数が割り振られる&lt;/li&gt;
@@ -476,350 +1149,4 @@ long long inverse(long long b,long long MOD){
     }
     return R;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す</summary></entry><entry><title type="html">凸包</title><link href="http://localhost:4000/library/posts/convexhull" rel="alternate" type="text/html" title="凸包" /><published>2020-04-22T00:00:00+09:00</published><updated>2020-04-22T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/convex-hull</id><content type="html" xml:base="http://localhost:4000/library/posts/convexhull">&lt;p&gt;アルゴリズムはAndrewのmonotone chainという名前らしい&lt;/p&gt;
-
-&lt;p&gt;二次元上の点集合をvector&amp;lt;pair&amp;lt;long long,long long»で与える&lt;/p&gt;
-
-&lt;p&gt;するとその点集合の凸包を求め、x座標が最も小さい点のうちy座標が最も小さい点から始めて反時計回りに並べてvector&amp;lt;pair&amp;lt;long long,long long»で返す&lt;/p&gt;
-
-&lt;p&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\vert P \vert log \vert P \vert)&lt;/script&gt;(ソートがネックになっており、ソートがなければ&lt;script type=&quot;math/tex&quot;&gt;O(\vert P \vert)&lt;/script&gt;)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/convex%20hull.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; convex_hull(std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; P){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(P.size()&amp;lt;=2){
-        return P;
-    }
-    std::vector&amp;lt;std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; H,L,R;
-    sort(P.begin(),P.end());
-    
-    //下半分
-    for(int i=0;i&amp;lt;P.size();i++){
-        int j=L.size();
-        while(j&amp;gt;=2 &amp;amp;&amp;amp; (L[j-1].first-L[j-2].first)*(P[i].second-L[j-2].second)&amp;lt;=(L[j-1].second-L[j-2].second)*(P[i].first-L[j-2].first)){
-            L.pop_back();
-            j--;
-        }
-        L.push_back(P[i]);
-    }
-    
-    //上半分
-    for(int i=P.size()-1;i&amp;gt;=0;i--){
-        int j=H.size();
-        while(j&amp;gt;=2 &amp;amp;&amp;amp; (H[j-1].first-H[j-2].first)*(P[i].second-H[j-2].second)&amp;lt;=(H[j-1].second-H[j-2].second)*(P[i].first-H[j-2].first)){
-            H.pop_back();
-            j--;
-        }
-        H.push_back(P[i]);
-    }
-    
-    
-    R=L;
-    for(int i=1;i&amp;lt;H.size()-1;i++){
-        R.push_back(H[i]);
-    }
-    
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">アルゴリズムはAndrewのmonotone chainという名前らしい</summary></entry><entry><title type="html">オイラーのφ関数</title><link href="http://localhost:4000/library/posts/totient" rel="alternate" type="text/html" title="オイラーのφ関数" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/euler-totient</id><content type="html" xml:base="http://localhost:4000/library/posts/totient">&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\varphi&lt;/script&gt;はトーシェントと読むらしい&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\varphi(n)&lt;/script&gt;とは、&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;から&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;までの整数で、&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;と互いに素であるものの個数&lt;/p&gt;
-
-&lt;p&gt;これは、&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;が相違な素因数&lt;script type=&quot;math/tex&quot;&gt;p_1,p_2,...,p_d&lt;/script&gt;を含むとして&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})&lt;/script&gt;
-
-&lt;p&gt;と計算することができる&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/Euler's%20totient%20function.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;単体&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;\varphi(N)&lt;/script&gt;を計算し整数で返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(\sqrt{N})&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int totient(int N){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(N&amp;lt;0){
-        return 0;
-    }
-    int R = N;
-    for(int i=2;i*i&amp;lt;=N;i++){
-        if(N%i==0){
-            R -= R/i;
-            while(N%i==0){
-                N/=i;
-            }
-        }
-    }
-    if(N&amp;gt;1){
-        R -= R/N;
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;列挙&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;から&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;までの&lt;script type=&quot;math/tex&quot;&gt;\varphi(i)&lt;/script&gt;を計算し,要素数が&lt;script type=&quot;math/tex&quot;&gt;N+1&lt;/script&gt;のvectorで返す&lt;/li&gt;
-  &lt;li&gt;ここで、&lt;script type=&quot;math/tex&quot;&gt;\varphi(0)=0&lt;/script&gt;としている&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;O(NloglogN)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; totient_array(int N){
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;int&amp;gt; R(N+1);
-    for(int i=0;i&amp;lt;=N;i++){
-        R[i]=i;
-    }
-    for(int i=2;i&amp;lt;=N;i++){
-        if(R[i]!=i)continue;
-        for(int j=i;j&amp;lt;=N;j+=i){
-            R[j]-=(R[j]/i);
-        }
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">はトーシェントと読むらしい</summary></entry><entry><title type="html">フェニック木</title><link href="http://localhost:4000/library/posts/fenwicktree" rel="alternate" type="text/html" title="フェニック木" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/fenwick-tree</id><content type="html" xml:base="http://localhost:4000/library/posts/fenwicktree">&lt;p&gt;BIT(Binary Indexed Tree)とも&lt;/p&gt;
-
-&lt;p&gt;init&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、要素が&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;個のフェニック木を構成し、すべての要素を&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;で初期化する&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;add&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;番目(0-indexed)の要素に&lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt;を加算する&lt;/li&gt;
-  &lt;li&gt;計算量はinitの&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を用いて、&lt;script type=&quot;math/tex&quot;&gt;Ο(log(N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;sum&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;[0,a)&lt;/script&gt;の範囲内にある要素の和をlong longで返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(a))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;inversion&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;転　倒　数って知ってる？&lt;/li&gt;
-  &lt;li&gt;数列&lt;script type=&quot;math/tex&quot;&gt;V&lt;/script&gt;を与えると&lt;script type=&quot;math/tex&quot;&gt;V&lt;/script&gt;の転倒数を計算し、long longで返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\vert V \vert log \vert V \vert)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Fenwick_tree{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    std::vector&amp;lt;long long&amp;gt; BIT;
-    
-    public:
-    
-    void add(int a,long long w){
-        for(int x=a;x&amp;lt;BIT.size();x|=(x+1)){
-            BIT[x]+=w;
-        }
-    }
-    
-    void init(int n){
-        BIT.clear();
-        for(int i=0;i&amp;lt;n;i++){
-            BIT.push_back(0);
-        }
-    }
-    
-    long long sum(int a){
-        long long r=0;
-        for(int x=a-1;x&amp;gt;=0;x=(x&amp;amp;(x+1))-1){
-            r+=BIT[x];
-        }
-        return r;
-    }
-    
-    long long inversion(std::vector&amp;lt;long long&amp;gt; V){
-        long long r=0;
-        init(V.size());
-        for(int i=0;i&amp;lt;V.size();i++){
-            add(V[i],1);
-            r+=i-sum(V[i]);
-        }
-        return r;
-    }
-};
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">BIT(Binary Indexed Tree)とも</summary></entry><entry><title type="html">UnionFind</title><link href="http://localhost:4000/library/posts/unionfind" rel="alternate" type="text/html" title="UnionFind" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/unionfind</id><content type="html" xml:base="http://localhost:4000/library/posts/unionfind">&lt;p&gt;init&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、頂点を&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;個生成し全てを独立にした上で全てのランクを&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;にする&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;root&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;頂点&lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt;のその時点での根を求める&lt;/li&gt;
-  &lt;li&gt;と同時に経路圧縮する&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\alpha (N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;α(x)&lt;/script&gt;はアッカーマン関数&lt;script type=&quot;math/tex&quot;&gt;Ack(x,x)&lt;/script&gt;の逆関数&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;Ack(4,4)=2^{2^{2^{65536}}}-3&lt;/script&gt;から伺えるように、&lt;script type=&quot;math/tex&quot;&gt;\alpha (x)&lt;/script&gt;は実用上定数(&lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt;)倍と見なせるほどに収束が遅い&lt;/p&gt;
-
-&lt;p&gt;same&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;頂点pと頂点qがその時点で同じ集合に属しているか(=根が同一か)を調べ、同じならtrue、違うならfalseを返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\alpha (N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;unite&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;頂点pと頂点qが属してる集合を合併する&lt;/li&gt;
-  &lt;li&gt;すでに同じ集合に属している場合は無視する&lt;/li&gt;
-  &lt;li&gt;pの属する集合のランクがqのものと同じか大きいときp側が根に、そうでないときq側が根になる&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(\alpha (N))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/union%20find.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class unionfind{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    std::vector&amp;lt;int&amp;gt; UF,rank;
-    public:
-    
-    void init(int N){
-        UF.clear();
-        rank.clear();
-        for(int i=0;i&amp;lt;N;i++){
-            UF.push_back(i);
-            rank.push_back(0);
-        }
-    }
-    
-    int root(int k){
-        if(UF[k]==k){
-            return k;
-        }else{
-            UF[k]=root(UF[k]);
-            return UF[k];
-        }
-    }
-    
-    bool same(int p,int q){
-        return root(p)==root(q);
-    }
-    
-    void unite(int P,int Q){
-        int p=root(P);
-        int q=root(Q);
-        if(p==q)return;
-        if(rank[p]&amp;lt;rank[q])std::swap(p,q);
-        UF[q]=p;
-        if(rank[p]==rank[q])rank[p]++;
-    }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">init 整数を与えると、頂点を個生成し全てを独立にした上で全てのランクをにする 計算量は</summary></entry><entry><title type="html">セグメント木</title><link href="http://localhost:4000/library/posts/segmenttree" rel="alternate" type="text/html" title="セグメント木" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/segment-tree</id><content type="html" xml:base="http://localhost:4000/library/posts/segmenttree">&lt;p&gt;単にセグ木と言えばこれを指す、最も単純なセグ木&lt;/p&gt;
-
-&lt;p&gt;init&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;整数&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を与えると、要素が&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(N)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;calc&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;セグ木に乗せる演算を書く&lt;/li&gt;
-  &lt;li&gt;場合によって使いたい演算を書き換える&lt;/li&gt;
-  &lt;li&gt;演算はモノイドである必要がある&lt;/li&gt;
-  &lt;li&gt;long long×long long→long longにしか対応してない　は？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;update&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt;番目(0-indexed)の要素を&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;で更新し、それが影響するノードを全て更新する&lt;/li&gt;
-  &lt;li&gt;計算量はinitの&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;を用いて、&lt;script type=&quot;math/tex&quot;&gt;Ο(logN)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;query&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;[a,b)&lt;/script&gt;の範囲内にある要素をcalcで計算した結果をlong longで返す&lt;/li&gt;
-  &lt;li&gt;計算量は&lt;script type=&quot;math/tex&quot;&gt;Ο(log(b-a))&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/segment%20tree.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class segmenttree{
-    /*
-    Copyright (c) 2020 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    int n;
-    long long identity = 0;//単位元
-    std::vector&amp;lt;long long&amp;gt; dat;
-    public:
-    
-    void init(int N){
-        n=1;
-        while(n&amp;lt;N)n*=2;
-        dat.clear();
-        for(int i=0;i&amp;lt;2*n-1;++i){
-            dat.push_back(identity);
-        }
-    }
-    
-    long long calc();
-    
-    void update(int k,long long a){
-        k+=n-1;
-        dat[k]=a;
-        while(k&amp;gt;0){
-            k=(k-1)/2;
-            dat[k]=calc(dat[2*k+1],dat[2*k+2]);
-        }
-    }
-    
-    long long query(long long a,long long b){
-        a+=n;
-        b+=n;
-        long long R=0;
-        while(a &amp;lt; b){
-            if(a % 2 == 1){
-                R = calc(R, dat[a - 1]);
-                a += 1;
-            }
-            a /= 2;
-            if(b % 2 == 1){
-                b -= 1;
-                R = calc(R, dat[b - 1]);
-            }
-            b /= 2;
-        }
-        return R;
-    }
-    
-    long long calc(long long a,long long b){
-        //your monoid here
-        return a+b;
-    }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">単にセグ木と言えばこれを指す、最も単純なセグ木</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す</summary></entry></feed>
