@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/basic-math" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-06-01T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2020-06-01T00:00:00+09:00","datePublished":"2020-06-01T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数学詰め合わせパック</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-06-01T00:00:00+09:00" itemprop="datePublished">Jun 1, 2020
+      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
       </time></p>
   </header>
 
@@ -67,17 +67,29 @@ https://github.com/0214sh7/library/
 */
 </code></pre></div></div>
 
-<p>小数点以下切り上げ</p>
-<ul>
-  <li>よくある天井関数</li>
-  <li>計算量は<script type="math/tex">Ο(1)</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//小数点以下切り上げ
+<p>小数点以下切り上げ(天井関数)</p>
+
+<details>
+<summary>クリックで開く</summary><div>
+
+---
+<br />
+小数点以下切り上げ
+- よくある天井関数
+- 計算量は$$Ο(1)$$
+
+```
+//小数点以下切り上げ
 long long roundup(long long a,long long b){
-  return (a+b-1)/b;
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    return (a+b-1)/b;
 }
-</code></pre></div>    </div>
-  </li>
-</ul>
+```
+---
+</div></details>
 
 <p>階乗</p>
 <ul>

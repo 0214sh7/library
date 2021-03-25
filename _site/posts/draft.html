@@ -3,19 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>凸包 | すくライブラリ</title>
+<title>draft | すくライブラリ</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="凸包" />
+<meta property="og:title" content="draft" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="アルゴリズムはAndrewのmonotone chainという名前らしい" />
-<meta property="og:description" content="アルゴリズムはAndrewのmonotone chainという名前らしい" />
-<link rel="canonical" href="http://localhost:4000/library/posts/convexhull" />
-<meta property="og:url" content="http://localhost:4000/library/posts/convexhull" />
+<meta name="description" content="よく見つけましたね　これは下書きです" />
+<meta property="og:description" content="よく見つけましたね　これは下書きです" />
+<link rel="canonical" href="http://localhost:4000/library/posts/draft" />
+<meta property="og:url" content="http://localhost:4000/library/posts/draft" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/convexhull"},"url":"http://localhost:4000/library/posts/convexhull","headline":"凸包","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"アルゴリズムはAndrewのmonotone chainという名前らしい","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/draft"},"url":"http://localhost:4000/library/posts/draft","headline":"draft","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"よく見つけましたね　これは下書きです","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -38,7 +38,7 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">凸包</h1>
+    <h1 class="post-title p-name" itemprop="name headline">draft</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
       </time></p>
@@ -49,60 +49,43 @@
 <html lang='ja'>
   <head>
     <meta charset="utf-8">
-    <title>凸包</title>
+    <title>draft</title>
     <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </head>
   
   <body>
-    <p>アルゴリズムはAndrewのmonotone chainという名前らしい</p>
+    <p>よく見つけましたね　これは下書きです</p>
 
-<p>二次元上の点集合をvector&lt;pair&lt;long long,long long»で与える</p>
+<p>init</p>
+<ul>
+  <li>あ</li>
+  <li>計算量は<script type="math/tex">Ο(N)</script></li>
+</ul>
 
-<p>するとその点集合の凸包を求め、x座標が最も小さい点のうちy座標が最も小さい点から始めて反時計回りに並べてvector&lt;pair&lt;long long,long long»で返す</p>
+<p>draft</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
 
-<p>計算量は<script type="math/tex">O(\vert P \vert log \vert P \vert)</script>(ソートがネックになっており、ソートがなければ<script type="math/tex">O(\vert P \vert)</script>)</p>
+<details><summary>あえ～</summary><div>
 
-<p><a href="https://github.com/0214sh7/procon-library/blob/master/math/convex%20hull.cpp">github</a></p>
+---
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::pair&lt;long long,long long&gt;&gt; convex_hull(std::vector&lt;std::pair&lt;long long,long long&gt;&gt; P){
+おえ～
+計算量は$$Ο(1)$$です
+
+---
+
+</div></details>
+
+<p><a href="">github</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class draft{
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
-    if(P.size()&lt;=2){
-        return P;
-    }
-    std::vector&lt;std::pair&lt;long long,long long&gt;&gt; H,L,R;
-    sort(P.begin(),P.end());
-    
-    //下半分
-    for(int i=0;i&lt;P.size();i++){
-        int j=L.size();
-        while(j&gt;=2 &amp;&amp; (L[j-1].first-L[j-2].first)*(P[i].second-L[j-2].second)&lt;=(L[j-1].second-L[j-2].second)*(P[i].first-L[j-2].first)){
-            L.pop_back();
-            j--;
-        }
-        L.push_back(P[i]);
-    }
-    
-    //上半分
-    for(int i=P.size()-1;i&gt;=0;i--){
-        int j=H.size();
-        while(j&gt;=2 &amp;&amp; (H[j-1].first-H[j-2].first)*(P[i].second-H[j-2].second)&lt;=(H[j-1].second-H[j-2].second)*(P[i].first-H[j-2].first)){
-            H.pop_back();
-            j--;
-        }
-        H.push_back(P[i]);
-    }
-    
-    
-    R=L;
-    for(int i=1;i&lt;H.size()-1;i++){
-        R.push_back(H[i]);
-    }
-    
-    return R;
-}
+};
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
@@ -111,30 +94,17 @@
 <h3 id="実行コード">実行コード</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-std::vector&lt;std::pair&lt;long long,long long&gt;&gt; convex_hull(std::vector&lt;std::pair&lt;long long,long long&gt;&gt; P){/*省略*/}
+class draft{/*省略*/};
 
 int main(void){
     
-    std::vector&lt;std::pair&lt;long long,long long&gt;&gt; P,Q;
-    P.push_back({0,0});
-    P.push_back({2,0});
-    P.push_back({1,1});
-    P.push_back({0,2});
-    P.push_back({2,2});
-    
-    Q = convex_hull(P);
-    for(int i=0;i&lt;Q.size();i++){
-        std::cout &lt;&lt; Q[i].first &lt;&lt; " " &lt;&lt; Q[i].second &lt;&lt; std::endl;
-    }
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
     return 0;
 }
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 0
-2 0
-2 2
-0 2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>
@@ -150,18 +120,22 @@ int main(void){
   <tbody>
     <tr>
       <td style="text-align: center">2021/03/25</td>
-      <td style="text-align: left">使用例を追加</td>
+      <td style="text-align: left">使用例、コンストラクタを追加</td>
     </tr>
     <tr>
-      <td style="text-align: center">2020/04/22</td>
-      <td style="text-align: left">凸包を追加</td>
+      <td style="text-align: center">2021/02/18</td>
+      <td style="text-align: left">変更</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/04</td>
+      <td style="text-align: left">draftを追加</td>
     </tr>
   </tbody>
 </table>
 
   </body>
 </html>
-  </div><a class="u-url" href="/library/posts/convexhull" hidden></a>
+  </div><a class="u-url" href="/library/posts/draft" hidden></a>
 </article>
 
       </div>

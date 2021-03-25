@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/kruskal" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-05T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/kruskal"},"url":"http://localhost:4000/library/posts/kruskal","headline":"クラスカル法","dateModified":"2020-04-05T00:00:00+09:00","datePublished":"2020-04-05T00:00:00+09:00","description":"無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/kruskal"},"url":"http://localhost:4000/library/posts/kruskal","headline":"クラスカル法","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">クラスカル法</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-05T00:00:00+09:00" itemprop="datePublished">Apr 5, 2020
+      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
       </time></p>
   </header>
 
@@ -66,7 +66,7 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Kruskal{
     /*
-    Copyright (c) 2020 0214sh7
+    Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
     private:
@@ -103,7 +103,6 @@
     
     public:
     
-    
     std::vector&lt;P&gt; solve(std::vector&lt;P&gt; edge){
         //頂点数を決定する
         V=0;
@@ -134,9 +133,72 @@
         return R;
     }
     
-    //solve:{ {int,int},longlong}のvectorを渡すことで最小全域木を返す
 };
 </code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class Kruskal{/*省略*/};
+
+int main(void){
+    
+    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; E;
+    int N = 5;
+    E.push_back({ {0,1},1});
+    E.push_back({ {1,2},2});
+    E.push_back({ {2,3},4});
+    E.push_back({ {2,4},8});
+    E.push_back({ {3,4},10000});
+    
+    Kruskal kruskal;
+    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; K = kruskal.solve(E);
+    
+    for(int i=0;i&lt;K.size();i++){
+        std::cout &lt;&lt; K[i].first.first &lt;&lt; " " &lt;&lt; K[i].first.second;
+        std::cout &lt;&lt; "  " &lt;&lt; K[i].second &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1  1
+1 2  2
+2 3  4
+2 4  8
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/25</td>
+      <td style="text-align: left">使用例を追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/03/25</td>
+      <td style="text-align: left">コメントを削除</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/05</td>
+      <td style="text-align: left">クラスカル法を追加</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>

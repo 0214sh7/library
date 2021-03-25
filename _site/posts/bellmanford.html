@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/bellmanford" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-04T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bellmanford"},"url":"http://localhost:4000/library/posts/bellmanford","headline":"ベルマンフォード法","dateModified":"2020-04-04T00:00:00+09:00","datePublished":"2020-04-04T00:00:00+09:00","description":"init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bellmanford"},"url":"http://localhost:4000/library/posts/bellmanford","headline":"ベルマンフォード法","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">ベルマンフォード法</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-04T00:00:00+09:00" itemprop="datePublished">Apr 4, 2020
+      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
       </time></p>
   </header>
 
@@ -62,6 +62,11 @@
   <li>計算量は<script type="math/tex">Ο(max(E,V))</script></li>
 </ul>
 
+<p>BellmanFord</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
+
 <p>solve</p>
 <ul>
   <li>initでできたグラフに対し、与えられた<script type="math/tex">s</script>を始点としてベルマンフォード法を実行する</li>
@@ -72,10 +77,9 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/BellmanFord.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-class BellmanFord{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class BellmanFord{
     /*
-    Copyright (c) 2020 0214sh7
+    Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
     private:
@@ -85,18 +89,18 @@ class BellmanFord{
     std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; es;
     
     public:
-    void init(std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
+    void init(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
         //辺数をもとめる　
         E=edge.size();
         //頂点数を決定する
-        V=0;
-        for(int i=0;i&lt;edge.size();i++){
-            V=std::max(V,edge[i].first.first+1);
-            V=std::max(V,edge[i].first.second+1);
-        }
+        V=N;
         es=edge;
     }
     
+    BellmanFord(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
+        init(N,edge);
+    }
+
     std::vector&lt;std::pair&lt;long long,bool&gt;&gt; solve(int s){
         std::vector&lt;std::pair&lt;long long,bool&gt;&gt; d;
         //INFで初期化する
@@ -121,10 +125,84 @@ class BellmanFord{
         return d;
     }
     
-    //init:{ {int,int},longlong}のvectorを渡すことで有向グラフを構築する
-    //solve:始点を渡すとinitで構築したグラフでベルマンフォードをし、コストのvectorを返す
 };
 </code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class BellmanFord{/*省略*/};
+
+int main(void){
+    
+    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; E;
+    int N = 5;
+    E.push_back({ {0,1},1});
+    E.push_back({ {1,2},2});
+    E.push_back({ {2,3},4});
+    E.push_back({ {2,4},8});
+    E.push_back({ {3,4},10000});
+    
+    BellmanFord bellmanford(N,E);
+    std::vector&lt;std::pair&lt;long long,bool&gt;&gt; B = bellmanford.solve(0);
+    
+    for(int i=0;i&lt;N;i++){
+        if(B[i].second==true){
+            std::cout &lt;&lt; "-INF" &lt;&lt; " ";
+        }else{
+            std::cout &lt;&lt; B[i].first &lt;&lt; " ";
+        }
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    std::vector&lt;std::pair&lt;long long,bool&gt;&gt; C = bellmanford.solve(1);
+    
+    for(int i=0;i&lt;N;i++){
+        if(C[i].second==true){
+            std::cout &lt;&lt; "-INF" &lt;&lt; " ";
+        }else{
+            std::cout &lt;&lt; C[i].first &lt;&lt; " ";
+        }
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 3 7 11 
+2305843009213693952 0 2 6 10 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/25</td>
+      <td style="text-align: left">使用例、コンストラクタを追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/03/25</td>
+      <td style="text-align: left">バグを修正/コメントを削除</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/04</td>
+      <td style="text-align: left">ベルマンフォード法を追加</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>

@@ -7,9 +7,9 @@ layout: page
 <h2>数学</h2>
 - [数学詰め合わせパック](./posts/basic-math)
 - [二項係数](./posts/binomial-coefficient)
+- [素因数分解(線形篩)](./posts/sieve)
 - [凸包](./posts/convexhull)
 - [オイラーのφ関数](./posts/totient)
-- [素因数分解(線形篩)](./posts/sieve)
 - [高速フーリエ変換(FFT)](./posts/fft)
 - [数論変換(NTT)](./posts/ntt)
 
