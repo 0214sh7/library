@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/bipartite" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bipartite"},"url":"http://localhost:4000/library/posts/bipartite","headline":"二部グラフ判定","dateModified":"2020-04-02T00:00:00+09:00","datePublished":"2020-04-02T00:00:00+09:00","description":"無向グラフを、辺の始点と終点を表現したpair&lt;int,int&gt;のvectorとして与える。 すると、sizeがのvectorが返ってくる。すべての要素はまたはである。 これは、与えられたグラフを二部グラフとして表現するとき番目の要素はとどちらに属するかを表している。 また二部グラフでないとき全ての要素はである。 計算量は","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bipartite"},"url":"http://localhost:4000/library/posts/bipartite","headline":"二部グラフ判定","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"無向グラフを、辺の始点と終点を表現したpair&lt;int,int&gt;のvectorとして与える。 すると、sizeがのvectorが返ってくる。すべての要素はまたはである。 これは、与えられたグラフを二部グラフとして表現するとき番目の要素はとどちらに属するかを表している。 また二部グラフでないとき全ての要素はである。 計算量は","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a></div>
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">二部グラフ判定</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-02T00:00:00+09:00" itemprop="datePublished">Apr 2, 2020
+      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
       </time></p>
   </header>
 
@@ -58,13 +58,13 @@
 すると、sizeが<script type="math/tex">max(点の番号)+1</script>のvectorが返ってくる。すべての要素は<script type="math/tex">0</script>または<script type="math/tex">1</script>である。<br />
 これは、与えられたグラフを二部グラフとして表現するとき<script type="math/tex">i</script>番目の要素は<script type="math/tex">0</script>と<script type="math/tex">1</script>どちらに属するかを表している。<br />
 また二部グラフでないとき全ての要素は<script type="math/tex">0</script>である。<br />
-計算量は<script type="math/tex">Ο(V)</script></p>
+計算量は<script type="math/tex">Ο(V+E)</script></p>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/bipartite%20graph.cpp">github</a></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;int&gt; bipartite(std::vector&lt;std::pair&lt;int,int&gt;&gt; edge){
     /*
-    Copyright (c) 2020 0214sh7
+    Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
     int E = edge.size();
@@ -75,7 +75,7 @@
         V=std::max(V,edge[i].second+1);
     }
     std::vector&lt;int&gt; R(V,-1);
-    std::vector&lt;int&gt; S(0);
+    std::vector&lt;int&gt; S(V,0);
     std::vector&lt;std::vector&lt;int&gt;&gt; es(V,std::vector&lt;int&gt;(0));
     for(int i=0;i&lt;E;i++){
         es[edge[i].first].push_back(edge[i].second);
@@ -104,8 +104,78 @@
     }
     return R;
 }
-
 </code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+std::vector&lt;int&gt; bipartite(std::vector&lt;std::pair&lt;int,int&gt;&gt; edge){/*省略*/}
+
+int main(void){
+    
+    std::vector&lt;std::pair&lt;int,int&gt;&gt; E,F;
+    
+    E.push_back({0,1});
+    E.push_back({1,2});
+    E.push_back({2,3});
+    E.push_back({3,0});
+    E.push_back({0,4});
+    
+    F.push_back({0,1});
+    F.push_back({1,2});
+    F.push_back({2,3});
+    F.push_back({2,4});
+    F.push_back({3,4});
+    
+    std::vector&lt;int&gt; Es = bipartite(E), Fs = bipartite(F);
+    
+    for(int i=0;i&lt;Es.size();i++){
+        std::cout &lt;&lt; Es[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    for(int i=0;i&lt;Fs.size();i++){
+        std::cout &lt;&lt; Fs[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 0 1 1 
+0 0 0 0 0 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">使用例を追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">バグを修正/計算量表記を修正</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/02</td>
+      <td style="text-align: left">二部グラフ判定を追加</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>

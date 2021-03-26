@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/ntt" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-04T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"url":"http://localhost:4000/library/posts/ntt","headline":"数論変換","dateModified":"2020-04-04T00:00:00+09:00","datePublished":"2020-04-04T00:00:00+09:00","description":"整数環FFTとも","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"url":"http://localhost:4000/library/posts/ntt","headline":"数論変換","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"整数環FFTとも","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a></div>
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数論変換</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-04T00:00:00+09:00" itemprop="datePublished">Apr 4, 2020
+      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
       </time></p>
   </header>
 
@@ -68,7 +68,7 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class number_theoretic_transform{
     /*
-    Copyright (c) 2020 0214sh7
+    Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
     private:
@@ -91,10 +91,10 @@
         return r;
     }
     
-    vector&lt;long long&gt; DFT(vector&lt;long long&gt; A){
+    std::vector&lt;long long&gt; DFT(std::vector&lt;long long&gt; A){
         int N=A.size();
         if(N==1)return A;
-        vector&lt;long long&gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
+        std::vector&lt;long long&gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
         for(int i=0;i&lt;N;i++){
             if(i%2==0){
                 A0[i/2]=A[i];
@@ -114,10 +114,10 @@
         return iA;
     }
      
-    vector&lt;long long&gt; iDFT(vector&lt;long long&gt; iA){
+    std::vector&lt;long long&gt; iDFT(std::vector&lt;long long&gt; iA){
         int N=iA.size();
         long long N_inverse = BE(N,MOD-2);
-        vector&lt;long long&gt; A,dA,rA;
+        std::vector&lt;long long&gt; A,dA,rA;
         dA=DFT(iA);
         for(int i=0;i&lt;N;i++){
             rA.push_back(dA[(N-i)%N]);
@@ -129,7 +129,7 @@
     
     public:
     
-    vector&lt;long long&gt; convolution(vector&lt;long long&gt; A,vector&lt;long long&gt; B){
+    std::vector&lt;long long&gt; convolution(std::vector&lt;long long&gt; A,std::vector&lt;long long&gt; B){
         int deg = A.size() + B.size() -1;
         long long N=1;
         while(N&lt;deg){N&lt;&lt;=1;}
@@ -140,7 +140,7 @@
         for(int i=0;i&lt;B.size();i++){
             B[i]%=MOD;
         }
-        vector&lt;long long&gt; C(N),iC(N),iA,iB;
+        std::vector&lt;long long&gt; C(N),iC(N),iA,iB;
         iA=DFT(A);iB=DFT(B);
         for(int i=0;i&lt;N;i++){
             iC[i]=(iA[i]*iB[i])%MOD;
@@ -152,6 +152,55 @@
     
 };
 </code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class number_theoretic_transform{/*省略*/};
+
+int main(void){
+    
+    number_theoretic_transform NTT;
+    std::vector&lt;long long&gt; A={1,2,3},B={1,3,5},C;
+    
+    C = NTT.convolution(A,B);
+    for(int i=0;i&lt;C.size();i++){
+        std::cout &lt;&lt; C[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 5 14 19 15 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/25</td>
+      <td style="text-align: left">使用例を追加/vectorをstd::vectorに変更</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/04</td>
+      <td style="text-align: left">数論変換を追加</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>
