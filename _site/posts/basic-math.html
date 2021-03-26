@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/basic-math" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数学詰め合わせパック</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
+      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
       </time></p>
   </header>
 
@@ -60,26 +60,29 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/math/basic%20math%20assortment.cpp">github</a></p>
 
-<p>注記:ページ内のコードを使用する際は、以下の表記を同時に添付してください。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
-Copyright (c) 2020 0214sh7
-https://github.com/0214sh7/library/
-*/
-</code></pre></div></div>
+<h1 id="もくじ">もくじ</h1>
+<ul>
+  <li><a href="#小数点以下切り上げ天井関数">小数点以下切り上げ(天井関数)</a></li>
+  <li><a href="#階乗">階乗</a></li>
+  <li><a href="#最大公約数">最大公約数</a></li>
+  <li><a href="#最小公倍数">最小公倍数</a></li>
+  <li><a href="#素数判定">素数判定</a></li>
+  <li><a href="#素数列挙">素数列挙</a></li>
+  <li><a href="#素因数分解">素因数分解</a></li>
+  <li><a href="#累乗繰り返し二乗法">累乗(繰り返し二乗法)</a></li>
+  <li><a href="#逆元素数mod">逆元(素数MOD)</a></li>
+</ul>
 
-<p>小数点以下切り上げ(天井関数)</p>
+<hr />
 
-<details>
-<summary>クリックで開く</summary><div>
+<h2 id="小数点以下切り上げ天井関数">小数点以下切り上げ(天井関数)</h2>
 
----
-<br />
-小数点以下切り上げ
-- よくある天井関数
-- 計算量は$$Ο(1)$$
+<ul>
+  <li>よくある天井関数</li>
+  <li>計算量は<script type="math/tex">Ο(1)</script></li>
+</ul>
 
-```
-//小数点以下切り上げ
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//小数点以下切り上げ
 long long roundup(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
@@ -87,197 +90,466 @@ long long roundup(long long a,long long b){
     */
     return (a+b-1)/b;
 }
-```
----
-</div></details>
+</code></pre></div></div>
 
-<p>階乗</p>
+<h3 id="使用例">使用例</h3>
+
+<h4 id="実行コード">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="階乗">階乗</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">x</script>に対し<script type="math/tex">x!</script>を計算する</li>
   <li><script type="math/tex">MOD</script>も与えるとそれで割った余りをとる</li>
-  <li>計算量は<script type="math/tex">Ο(x)</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//階乗
-long long fact(long long x,long long MOD=INT_MAX){
-  long long k=1;
-  for(int i=1;i&lt;=x;i++){
-      k=(k*i)%MOD;
-  }
-  return k;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">Ο(x)</script></li>
 </ul>
 
-<p>最大公約数</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//階乗
+long long fact(long long x,long long MOD=LLONG_MAX){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    long long k=1;
+    for(int i=1;i&lt;=x;i++){
+        k=(k*i)%MOD;
+    }
+    return k;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-1">使用例</h3>
+
+<h4 id="実行コード-1">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-1">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="最大公約数">最大公約数</h2>
+
 <ul>
   <li>２つの引数のGCDを求める</li>
-  <li>計算量は<script type="math/tex">O(log(max(a,b)))</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最大公約数
-long long gcd(long long a,long long b){
-  a=std::abs(a);
-  b=std::abs(b);
-  if(a&gt;b)std::swap(a,b);
-  if(a==0){
-      return b;
-  }
-    
-  long long r=a%b;
-  while(r){
-      a=b;
-      b=r;
-      r=a%b;
-  }
-  return b;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">O(log(max(a,b)))</script></li>
 </ul>
 
-<p>最小公倍数</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最大公約数
+long long gcd(long long a,long long b){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    a=std::abs(a);
+    b=std::abs(b);
+    if(a&gt;b)std::swap(a,b);
+    if(a==0){
+        return b;
+    }
+    
+    long long r=a%b;
+    while(r){
+        a=b;
+        b=r;
+        r=a%b;
+    }
+    return b;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-2">使用例</h3>
+
+<h4 id="実行コード-2">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-2">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="最小公倍数">最小公倍数</h2>
+
 <ul>
   <li>２つの引数のLCMを求める</li>
-  <li>計算量は<script type="math/tex">O(log(max(a,b)))</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最小公倍数
-long long lcm(long long a,long long b){
-  if(std::abs(a)&gt;std::abs(b))std::swap(a,b);
-  if(a==0){
-      return b;
-  }
-    
-  long long s=a,t=b;
-  a=std::abs(a);
-  b=std::abs(b);
-  if(a&gt;b)std::swap(a,b);
-    
-  long long r=a%b;
-  while(r){
-      a=b;
-      b=r;
-      r=a%b;
-  }
-    
-  return s / b * t;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">O(log(max(a,b)))</script></li>
 </ul>
 
-<p>素数判定</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最小公倍数
+long long lcm(long long a,long long b){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    if(std::abs(a)&gt;std::abs(b))std::swap(a,b);
+    if(a==0){
+        return b;
+    }
+    
+    long long s=a,t=b;
+    a=std::abs(a);
+    b=std::abs(b);
+    if(a&gt;b)std::swap(a,b);
+    
+    long long r=a%b;
+    while(r){
+        a=b;
+        b=r;
+        r=a%b;
+    }
+    
+    return s / b * t;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-3">使用例</h3>
+
+<h4 id="実行コード-3">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-3">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="素数判定">素数判定</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">x</script>に対し、<script type="math/tex">x</script>が素数ならtrueを、そうでないならfalseを返す</li>
-  <li>計算量は<script type="math/tex">O(\sqrt{x})</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数判定
-bool prime(long long X){
-  if(X&lt;2)return false;
-  for(long long i=2;i*i&lt;=X;i++){
-      if(X%i==0){
-          return false;
-      }
-  }
-  return true;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">O(\sqrt{x})</script></li>
 </ul>
 
-<p>素数列挙</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数判定
+bool prime(long long X){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    if(X&lt;2)return false;
+    for(long long i=2;i*i&lt;=X;i++){
+        if(X%i==0){
+            return false;
+        }
+    }
+    return true;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-4">使用例</h3>
+
+<h4 id="実行コード-4">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-4">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="素数列挙">素数列挙</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">N</script>に対し、<script type="math/tex">N</script>以下の素数を列挙し、小さい順にvectorとして返す</li>
-  <li>計算量は<script type="math/tex">O(NloglogN)</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数列挙
-std::vector&lt;long long&gt; primearray(long long N){
-  std::vector&lt;long long&gt; R;
-  std::vector&lt;bool&gt; prime;
-  for(int i=0;i&lt;=N;i++){
-      prime.push_back(true);
-  }
-  if(N&lt;2){
-      return R;
-  }
-  prime[0]=false;
-  prime[1]=false;
-  for(long long i=2;i*i&lt;=N;i++){
-      if(!prime[i])continue;
-      for(int j=2*i;j&lt;=N;j+=i){
-          prime[j]=false;
-      }
-  }
-  for(long long i=0;i&lt;prime.size();i++){
-      if(prime[i]){
-          R.push_back(i);
-      }
-  }
-  return R;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">O(NloglogN)</script></li>
 </ul>
 
-<p>素因数分解</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数列挙
+std::vector&lt;long long&gt; primearray(long long N){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&lt;long long&gt; R;
+    std::vector&lt;bool&gt; prime;
+    for(int i=0;i&lt;=N;i++){
+        prime.push_back(true);
+    }
+    if(N&lt;2){
+        return R;
+    }
+    prime[0]=false;
+    prime[1]=false;
+    for(long long i=2;i*i&lt;=N;i++){
+        if(!prime[i])continue;
+        for(int j=2*i;j&lt;=N;j+=i){
+            prime[j]=false;
+        }
+    }
+    for(long long i=0;i&lt;prime.size();i++){
+        if(prime[i]){
+            R.push_back(i);
+        }
+    }
+    return R;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-5">使用例</h3>
+
+<h4 id="実行コード-5">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-5">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="素因数分解">素因数分解</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">N</script>に対し、<script type="math/tex">N</script>を素因数分解し、小さい順にvectorとして返す</li>
-  <li>計算量は<script type="math/tex">Ο(\sqrt{N})</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素因数分解
-std::vector&lt;long long&gt; prime_factorization(long long N){
-  std::vector&lt;long long&gt; R;
-  if(N&lt;2)return R;
-  for(long long i=2;i*i&lt;=N;i++){
-      while(N%i==0){
-          R.push_back(i);
-          N/=i;
-      }
-  }
-  if(N!=1){
-        R.push_back(N);
-  }
-  return R;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">Ο(\sqrt{N})</script></li>
 </ul>
 
-<p>累乗(繰り返し二乗法)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素因数分解
+std::vector&lt;long long&gt; prime_factorization(long long N){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&lt;long long&gt; R;
+    if(N&lt;2)return R;
+    for(long long i=2;i*i&lt;=N;i++){
+        while(N%i==0){
+            R.push_back(i);
+            N/=i;
+        }
+    }
+    if(N!=1){
+          R.push_back(N);
+    }
+    return R;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-6">使用例</h3>
+
+<h4 id="実行コード-6">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-6">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="累乗繰り返し二乗法">累乗(繰り返し二乗法)</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">b,e</script>に対し、<script type="math/tex">b^e</script>を返す</li>
   <li><script type="math/tex">MOD</script>も与えるとそれで割った余りをとる</li>
-  <li>計算量は<script type="math/tex">Ο(log(e))</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//累乗(繰り返し二乗法)
-long long power(long long b,long long e,long long MOD=INT_MAX){
-  long long r=1;
-  while(e){
-      if(e&amp;1){
-          r=(r*b)%MOD;
-      }
-      b=(b*b)%MOD;
-      e &gt;&gt;=1;
-  }
-  return r;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">Ο(log(e))</script></li>
 </ul>
 
-<p>逆元(素数MOD)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//累乗(繰り返し二乗法)
+long long power(long long b,long long e,long long MOD=LLONG_MAX){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    long long r=1;
+    while(e){
+        if(e&amp;1){
+            r=(r*b)%MOD;
+        }
+        b=(b*b)%MOD;
+        e &gt;&gt;=1;
+    }
+    return r;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-7">使用例</h3>
+
+<h4 id="実行コード-7">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-7">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="逆元素数mod">逆元(素数MOD)</h2>
+
 <ul>
   <li>与えられた<script type="math/tex">b,MOD</script>に対し、<script type="math/tex">MOD</script>を法とした整数環上での逆元(<script type="math/tex">bx=1</script>を満たす<script type="math/tex">x</script>)を返す</li>
   <li>MODが素数でない場合の動作は未確認</li>
-  <li>計算量は<script type="math/tex">Ο(log(MOD))</script>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//逆元(素数MOD)
-long long inverse(long long b,long long MOD){
-  long long r=1,e=MOD-2;
-  while(e){
-      if(e&amp;1){
-          r=(r*b)%MOD;
-      }
-      b=(b*b)%MOD;
-      e &gt;&gt;=1;
-  }
-  return r;
-}
-</code></pre></div>    </div>
-  </li>
+  <li>計算量は<script type="math/tex">Ο(log(MOD))</script></li>
 </ul>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//逆元(素数MOD)
+long long inverse(long long b,long long MOD){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    long long r=1,e=MOD-2;
+    while(e){
+        if(e&amp;1){
+            r=(r*b)%MOD;
+        }
+        b=(b*b)%MOD;
+        e &gt;&gt;=1;
+    }
+    return r;
+}
+</code></pre></div></div>
+
+<h3 id="使用例-8">使用例</h3>
+
+<h4 id="実行コード-8">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-8">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+</code></pre></div></div>
+
+<p><a href="#もくじ">もくじに戻る</a></p>
+
+<hr />
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">使用例を追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">軽微なバグを修正</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">アンカーリンクを追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2021/06/01</td>
+      <td style="text-align: left">素因数分解のバグを修正</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/03</td>
+      <td style="text-align: left">数学詰め合わせパック</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>

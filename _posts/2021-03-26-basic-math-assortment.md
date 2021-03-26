@@ -12,17 +12,17 @@ layout: library
 [github](https://github.com/0214sh7/procon-library/blob/master/math/basic%20math%20assortment.cpp)
 
 
-注記:ページ内のコードを使用する際は、以下の表記を同時に添付してください。
-~~~
-/*
-Copyright (c) 2021 0214sh7
-https://github.com/0214sh7/library/
-*/
-~~~
 
 # もくじ
-- [小数点以下切り上げ(天井関数)]( #小数点以下切り上げ(天井関数) )
+- [小数点以下切り上げ(天井関数)]( #小数点以下切り上げ天井関数 )
 - [階乗]( #階乗 )
+- [最大公約数]( #最大公約数 )
+- [最小公倍数]( #最小公倍数 )
+- [素数判定]( #素数判定 )
+- [素数列挙]( #素数列挙 )
+- [素因数分解]( #素因数分解 )
+- [累乗(繰り返し二乗法)]( #累乗繰り返し二乗法 )
+- [逆元(素数MOD)]( #逆元素数mod )
 
 
 ---
@@ -42,6 +42,27 @@ long long roundup(long long a,long long b){
     return (a+b-1)/b;
 }
 ```
+
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
 [もくじに戻る](#もくじ)
 
 ---
@@ -52,29 +73,57 @@ long long roundup(long long a,long long b){
 - $$MOD$$も与えるとそれで割った余りをとる
 - 計算量は$$Ο(x)$$
 
-~~~
+```
 //階乗
-long long fact(long long x,long long MOD=INT_MAX){
+long long fact(long long x,long long MOD=LLONG_MAX){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     long long k=1;
     for(int i=1;i<=x;i++){
         k=(k*i)%MOD;
     }
     return k;
 }
-~~~
+```
+
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
 
 [もくじに戻る](#もくじ)
 
 ---
 
+## 最大公約数
 
-
-最大公約数
 - ２つの引数のGCDを求める
 - 計算量は$$O(log(max(a,b)))$$
-~~~
+
+```
 //最大公約数
 long long gcd(long long a,long long b){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     a=std::abs(a);
     b=std::abs(b);
     if(a>b)std::swap(a,b);
@@ -90,14 +139,44 @@ long long gcd(long long a,long long b){
     }
     return b;
 }
-~~~
+```
 
-最小公倍数
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 最小公倍数
+
 - ２つの引数のLCMを求める
 - 計算量は$$O(log(max(a,b)))$$
-~~~
+
+```
 //最小公倍数
 long long lcm(long long a,long long b){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     if(std::abs(a)>std::abs(b))std::swap(a,b);
     if(a==0){
         return b;
@@ -117,14 +196,44 @@ long long lcm(long long a,long long b){
     
     return s / b * t;
 }
-~~~
+```
 
-素数判定
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 素数判定
+
 - 与えられた$$x$$に対し、$$x$$が素数ならtrueを、そうでないならfalseを返す
 - 計算量は$$O(\sqrt{x})$$
-~~~
+
+```
 //素数判定
 bool prime(long long X){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     if(X<2)return false;
     for(long long i=2;i*i<=X;i++){
         if(X%i==0){
@@ -133,14 +242,44 @@ bool prime(long long X){
     }
     return true;
 }
-~~~
+```
 
-素数列挙
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 素数列挙
+
 - 与えられた$$N$$に対し、$$N$$以下の素数を列挙し、小さい順にvectorとして返す
 - 計算量は$$O(NloglogN)$$
-~~~
+
+```
 //素数列挙
 std::vector<long long> primearray(long long N){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     std::vector<long long> R;
     std::vector<bool> prime;
     for(int i=0;i<=N;i++){
@@ -164,14 +303,44 @@ std::vector<long long> primearray(long long N){
     }
     return R;
 }
-~~~
+```
 
-素因数分解
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 素因数分解
+
 - 与えられた$$N$$に対し、$$N$$を素因数分解し、小さい順にvectorとして返す
 - 計算量は$$Ο(\sqrt{N})$$
-~~~
+
+```
 //素因数分解
 std::vector<long long> prime_factorization(long long N){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     std::vector<long long> R;
     if(N<2)return R;
     for(long long i=2;i*i<=N;i++){
@@ -185,15 +354,45 @@ std::vector<long long> prime_factorization(long long N){
     }
     return R;
 }
-~~~
+```
 
-累乗(繰り返し二乗法)
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 累乗(繰り返し二乗法)
+
 - 与えられた$$b,e$$に対し、$$b^e$$を返す
 - $$MOD$$も与えるとそれで割った余りをとる
 - 計算量は$$Ο(log(e))$$
-~~~
+
+```
 //累乗(繰り返し二乗法)
-long long power(long long b,long long e,long long MOD=INT_MAX){
+long long power(long long b,long long e,long long MOD=LLONG_MAX){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     long long r=1;
     while(e){
         if(e&1){
@@ -204,15 +403,45 @@ long long power(long long b,long long e,long long MOD=INT_MAX){
     }
     return r;
 }
-~~~
+```
 
-逆元(素数MOD)
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 逆元(素数MOD)
+
 - 与えられた$$b,MOD$$に対し、$$MOD$$を法とした整数環上での逆元($$bx=1$$を満たす$$x$$)を返す
 - MODが素数でない場合の動作は未確認
 - 計算量は$$Ο(log(MOD))$$
-~~~
+
+```
 //逆元(素数MOD)
 long long inverse(long long b,long long MOD){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
     long long r=1,e=MOD-2;
     while(e){
         if(e&1){
@@ -223,5 +452,39 @@ long long inverse(long long b,long long MOD){
     }
     return r;
 }
-~~~
+```
 
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+class draft{/*省略*/};
+
+int main(void){
+    
+    std::cout << "draft" << std::endl;
+    return 0;
+}
+```
+
+#### 出力
+```
+draft
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 更新履歴
+***
+
+| 日時 | 内容 |
+| :---: | :--- |
+| 2021/03/26 | 使用例を追加 |
+| 2021/03/26 | 軽微なバグを修正 |
+| 2021/03/26 | アンカーリンクを追加 |
+| 2021/06/01 | 素因数分解のバグを修正 |
+| 2020/04/03 | 数学詰め合わせパック |

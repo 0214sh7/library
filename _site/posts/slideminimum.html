@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/slideminimum" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-04-23T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/slideminimum"},"url":"http://localhost:4000/library/posts/slideminimum","headline":"スライド最小値","dateModified":"2020-04-23T00:00:00+09:00","datePublished":"2020-04-23T00:00:00+09:00","description":"数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/slideminimum"},"url":"http://localhost:4000/library/posts/slideminimum","headline":"スライド最小値","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">スライド最小値</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2020-04-23T00:00:00+09:00" itemprop="datePublished">Apr 23, 2020
+      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
       </time></p>
   </header>
 
@@ -64,7 +64,7 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; slide_minimum(std::vector&lt;long long&gt; A,int K){
     /*
-    Copyright (c) 2020 0214sh7
+    Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
     std::vector&lt;long long&gt; R;
@@ -83,6 +83,55 @@
     return R;
 }
 </code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+std::vector&lt;long long&gt; slide_minimum(std::vector&lt;long long&gt; A,int K){/*省略*/}
+
+int main(void){
+    
+    std::vector&lt;long long&gt; A = {3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3},B;
+    long long K = 3;
+    
+    B = slide_minimum(A,K);
+    for(int i=0;i&lt;B.size();i++){
+        std::cout &lt;&lt; B[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 1 1 1 2 2 2 3 3 3 5 7 7 3 2 2 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: left">使用例を追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2020/04/23</td>
+      <td style="text-align: left">スライド最小値を追加</td>
+    </tr>
+  </tbody>
+</table>
 
   </body>
 </html>
