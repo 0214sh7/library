@@ -13,9 +13,9 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/basic-math" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-03-27T00:00:00+09:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math","headline":"数学詰め合わせパック","dateModified":"2021-03-27T00:00:00+09:00","datePublished":"2021-03-27T00:00:00+09:00","description":"優柔不断なあなたに","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a></div>
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数学詰め合わせパック</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
+      <time class="dt-published" datetime="2021-03-27T00:00:00+09:00" itemprop="datePublished">Mar 27, 2021
       </time></p>
   </header>
 
@@ -82,8 +82,7 @@
   <li>計算量は<script type="math/tex">Ο(1)</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//小数点以下切り上げ
-long long roundup(long long a,long long b){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long roundup(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -97,17 +96,25 @@ long long roundup(long long a,long long b){
 <h4 id="実行コード">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long roundup(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; i &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; roundup(i,4) &lt;&lt; " ";
+    }
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 2 3 4 5 6 7 8 9 10 
+0 1 1 1 1 2 2 2 2 3 3 
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -122,8 +129,7 @@ int main(void){
   <li>計算量は<script type="math/tex">Ο(x)</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//階乗
-long long fact(long long x,long long MOD=LLONG_MAX){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long fact(long long x,long long MOD=LLONG_MAX){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -141,17 +147,20 @@ long long fact(long long x,long long MOD=LLONG_MAX){
 <h4 id="実行コード-1">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long fact(long long x,long long MOD=LLONG_MAX){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    for(int i=0;i&lt;=6;i++){
+        std::cout &lt;&lt; fact(i) &lt;&lt; " ";
+    }
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-1">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 1 2 6 24 120 720 
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -165,8 +174,7 @@ int main(void){
   <li>計算量は<script type="math/tex">O(log(max(a,b)))</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最大公約数
-long long gcd(long long a,long long b){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long gcd(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -193,17 +201,24 @@ long long gcd(long long a,long long b){
 <h4 id="実行コード-2">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long gcd(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::cout &lt;&lt; gcd(4,6) &lt;&lt; std::endl;
+    std::cout &lt;&lt; gcd(3,5) &lt;&lt; std::endl;
+    std::cout &lt;&lt; gcd(12,18) &lt;&lt; std::endl;
+    std::cout &lt;&lt; gcd(8,13) &lt;&lt; std::endl;
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-2">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+1
+6
+1
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -217,8 +232,7 @@ int main(void){
   <li>計算量は<script type="math/tex">O(log(max(a,b)))</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//最小公倍数
-long long lcm(long long a,long long b){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long lcm(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -249,17 +263,24 @@ long long lcm(long long a,long long b){
 <h4 id="実行コード-3">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long lcm(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::cout &lt;&lt; lcm(4,6) &lt;&lt; std::endl;
+    std::cout &lt;&lt; lcm(3,5) &lt;&lt; std::endl;
+    std::cout &lt;&lt; lcm(12,18) &lt;&lt; std::endl;
+    std::cout &lt;&lt; lcm(8,13) &lt;&lt; std::endl;
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-3">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12
+15
+36
+104
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -273,8 +294,7 @@ int main(void){
   <li>計算量は<script type="math/tex">O(\sqrt{x})</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数判定
-bool prime(long long X){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bool prime(long long X){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -294,17 +314,26 @@ bool prime(long long X){
 <h4 id="実行コード-4">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+bool prime(long long X){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; i &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; prime(i) &lt;&lt; " ";
+    }
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-4">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 2 3 4 5 6 7 8 9 10 
+0 0 1 1 0 1 0 1 0 0 0 
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -318,8 +347,7 @@ int main(void){
   <li>計算量は<script type="math/tex">O(NloglogN)</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素数列挙
-std::vector&lt;long long&gt; primearray(long long N){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; primearray(long long N){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -354,17 +382,22 @@ std::vector&lt;long long&gt; primearray(long long N){
 <h4 id="実行コード-5">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+std::vector&lt;long long&gt; primearray(long long N){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::vector&lt;long long&gt; P = primearray(100);
+    for(int i=0;i&lt;P.size();i++){
+        std::cout &lt;&lt; P[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-5">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -378,8 +411,7 @@ int main(void){
   <li>計算量は<script type="math/tex">Ο(\sqrt{N})</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//素因数分解
-std::vector&lt;long long&gt; prime_factorization(long long N){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; prime_factorization(long long N){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -404,17 +436,30 @@ std::vector&lt;long long&gt; prime_factorization(long long N){
 <h4 id="実行コード-6">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+std::vector&lt;long long&gt; prime_factorization(long long N){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::vector&lt;long long&gt; number={4,12,57,97,210};
+    for(int j=0;j&lt;5;j++){
+        std::cout &lt;&lt; number[j] &lt;&lt; "  ";
+        std::vector&lt;long long&gt; F = prime_factorization(number[j]);
+        for(int i=0;i&lt;F.size();i++){
+            std::cout &lt;&lt; F[i] &lt;&lt; " ";
+        }std::cout &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; std::endl;
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-6">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4  2 2 
+12  2 2 3 
+57  3 19 
+97  97 
+210  2 3 5 7 
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -429,8 +474,7 @@ int main(void){
   <li>計算量は<script type="math/tex">Ο(log(e))</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//累乗(繰り返し二乗法)
-long long power(long long b,long long e,long long MOD=LLONG_MAX){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long power(long long b,long long e,long long MOD=LLONG_MAX){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -452,17 +496,30 @@ long long power(long long b,long long e,long long MOD=LLONG_MAX){
 <h4 id="実行コード-7">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long power(long long b,long long e,long long MOD=LLONG_MAX){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "2のi乗"&lt;&lt; std::endl;
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; power(2,i) &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+    std::cout &lt;&lt; "2のi乗を100で割ったあまり"&lt;&lt; std::endl;
+    for(int i=0;i&lt;=10;i++){
+        std::cout &lt;&lt; power(2,i,100) &lt;&lt; " ";
+    }
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-7">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2のi乗
+1 2 4 8 16 32 64 128 256 512 1024 
+2のi乗を100で割ったあまり
+1 2 4 8 16 32 64 28 56 12 24
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -477,8 +534,7 @@ int main(void){
   <li>計算量は<script type="math/tex">Ο(log(MOD))</script></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//逆元(素数MOD)
-long long inverse(long long b,long long MOD){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long inverse(long long b,long long MOD){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
@@ -500,17 +556,27 @@ long long inverse(long long b,long long MOD){
 <h4 id="実行コード-8">実行コード</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class draft{/*省略*/};
+long long inverse(long long b,long long MOD){/*省略*/}
 
 int main(void){
     
-    std::cout &lt;&lt; "draft" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "mod 7でのiの逆元"&lt;&lt; std::endl;
+    for(int i=1;i&lt;7;i++){
+        std::cout &lt;&lt; i &lt;&lt; " " &lt;&lt; inverse(i,7) &lt;&lt; " " &lt;&lt; (i*inverse(i,7))%7 &lt;&lt; std::endl;
+    }
+    
     return 0;
 }
 </code></pre></div></div>
 
 <h4 id="出力-8">出力</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>draft
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mod 7でのiの逆元
+1 1 1
+2 4 1
+3 5 1
+4 2 1
+5 3 1
+6 6 1
 </code></pre></div></div>
 
 <p><a href="#もくじ">もくじに戻る</a></p>
@@ -529,7 +595,7 @@ int main(void){
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">2021/03/26</td>
+      <td style="text-align: center">2021/03/27</td>
       <td style="text-align: left">使用例を追加</td>
     </tr>
     <tr>

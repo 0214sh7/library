@@ -33,7 +33,6 @@ layout: library
 - 計算量は$$Ο(1)$$
 
 ```
-//小数点以下切り上げ
 long long roundup(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
@@ -49,18 +48,26 @@ long long roundup(long long a,long long b){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long roundup(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    for(int i=0;i<=10;i++){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    for(int i=0;i<=10;i++){
+        std::cout << roundup(i,4) << " ";
+    }
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+0 1 2 3 4 5 6 7 8 9 10 
+0 1 1 1 1 2 2 2 2 3 3 
 ```
 
 [もくじに戻る](#もくじ)
@@ -74,7 +81,6 @@ draft
 - 計算量は$$Ο(x)$$
 
 ```
-//階乗
 long long fact(long long x,long long MOD=LLONG_MAX){
     /*
     Copyright (c) 2021 0214sh7
@@ -94,18 +100,21 @@ long long fact(long long x,long long MOD=LLONG_MAX){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long fact(long long x,long long MOD=LLONG_MAX){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    for(int i=0;i<=6;i++){
+        std::cout << fact(i) << " ";
+    }
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+1 1 2 6 24 120 720 
 ```
 
 [もくじに戻る](#もくじ)
@@ -118,7 +127,6 @@ draft
 - 計算量は$$O(log(max(a,b)))$$
 
 ```
-//最大公約数
 long long gcd(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
@@ -147,18 +155,25 @@ long long gcd(long long a,long long b){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long gcd(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::cout << gcd(4,6) << std::endl;
+    std::cout << gcd(3,5) << std::endl;
+    std::cout << gcd(12,18) << std::endl;
+    std::cout << gcd(8,13) << std::endl;
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+2
+1
+6
+1
 ```
 
 [もくじに戻る](#もくじ)
@@ -171,7 +186,6 @@ draft
 - 計算量は$$O(log(max(a,b)))$$
 
 ```
-//最小公倍数
 long long lcm(long long a,long long b){
     /*
     Copyright (c) 2021 0214sh7
@@ -204,18 +218,25 @@ long long lcm(long long a,long long b){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long lcm(long long a,long long b){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::cout << lcm(4,6) << std::endl;
+    std::cout << lcm(3,5) << std::endl;
+    std::cout << lcm(12,18) << std::endl;
+    std::cout << lcm(8,13) << std::endl;
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+12
+15
+36
+104
 ```
 
 [もくじに戻る](#もくじ)
@@ -228,7 +249,6 @@ draft
 - 計算量は$$O(\sqrt{x})$$
 
 ```
-//素数判定
 bool prime(long long X){
     /*
     Copyright (c) 2021 0214sh7
@@ -250,18 +270,27 @@ bool prime(long long X){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+bool prime(long long X){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    for(int i=0;i<=10;i++){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    
+    for(int i=0;i<=10;i++){
+        std::cout << prime(i) << " ";
+    }
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+0 1 2 3 4 5 6 7 8 9 10 
+0 0 1 1 0 1 0 1 0 0 0 
 ```
 
 [もくじに戻る](#もくじ)
@@ -274,7 +303,6 @@ draft
 - 計算量は$$O(NloglogN)$$
 
 ```
-//素数列挙
 std::vector<long long> primearray(long long N){
     /*
     Copyright (c) 2021 0214sh7
@@ -311,18 +339,23 @@ std::vector<long long> primearray(long long N){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+std::vector<long long> primearray(long long N){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::vector<long long> P = primearray(100);
+    for(int i=0;i<P.size();i++){
+        std::cout << P[i] << " ";
+    }
+    std::cout << std::endl;
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
 ```
 
 [もくじに戻る](#もくじ)
@@ -335,7 +368,6 @@ draft
 - 計算量は$$Ο(\sqrt{N})$$
 
 ```
-//素因数分解
 std::vector<long long> prime_factorization(long long N){
     /*
     Copyright (c) 2021 0214sh7
@@ -362,18 +394,31 @@ std::vector<long long> prime_factorization(long long N){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+std::vector<long long> prime_factorization(long long N){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::vector<long long> number={4,12,57,97,210};
+    for(int j=0;j<5;j++){
+        std::cout << number[j] << "  ";
+        std::vector<long long> F = prime_factorization(number[j]);
+        for(int i=0;i<F.size();i++){
+            std::cout << F[i] << " ";
+        }std::cout << std::endl;
+    }
+    std::cout << std::endl;
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+4  2 2 
+12  2 2 3 
+57  3 19 
+97  97 
+210  2 3 5 7 
 ```
 
 [もくじに戻る](#もくじ)
@@ -387,7 +432,6 @@ draft
 - 計算量は$$Ο(log(e))$$
 
 ```
-//累乗(繰り返し二乗法)
 long long power(long long b,long long e,long long MOD=LLONG_MAX){
     /*
     Copyright (c) 2021 0214sh7
@@ -411,18 +455,31 @@ long long power(long long b,long long e,long long MOD=LLONG_MAX){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long power(long long b,long long e,long long MOD=LLONG_MAX){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::cout << "2のi乗"<< std::endl;
+    for(int i=0;i<=10;i++){
+        std::cout << power(2,i) << " ";
+    }
+    std::cout << std::endl;
+    
+    std::cout << "2のi乗を100で割ったあまり"<< std::endl;
+    for(int i=0;i<=10;i++){
+        std::cout << power(2,i,100) << " ";
+    }
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+2のi乗
+1 2 4 8 16 32 64 128 256 512 1024 
+2のi乗を100で割ったあまり
+1 2 4 8 16 32 64 28 56 12 24
 ```
 
 [もくじに戻る](#もくじ)
@@ -436,7 +493,6 @@ draft
 - 計算量は$$Ο(log(MOD))$$
 
 ```
-//逆元(素数MOD)
 long long inverse(long long b,long long MOD){
     /*
     Copyright (c) 2021 0214sh7
@@ -460,18 +516,28 @@ long long inverse(long long b,long long MOD){
 ```
 #include <bits/stdc++.h>
 
-class draft{/*省略*/};
+long long inverse(long long b,long long MOD){/*省略*/}
 
 int main(void){
     
-    std::cout << "draft" << std::endl;
+    std::cout << "mod 7でのiの逆元"<< std::endl;
+    for(int i=1;i<7;i++){
+        std::cout << i << " " << inverse(i,7) << " " << (i*inverse(i,7))%7 << std::endl;
+    }
+    
     return 0;
 }
 ```
 
 #### 出力
 ```
-draft
+mod 7でのiの逆元
+1 1 1
+2 4 1
+3 5 1
+4 2 1
+5 3 1
+6 6 1
 ```
 
 [もくじに戻る](#もくじ)
@@ -483,7 +549,7 @@ draft
 
 | 日時 | 内容 |
 | :---: | :--- |
-| 2021/03/26 | 使用例を追加 |
+| 2021/03/27 | 使用例を追加 |
 | 2021/03/26 | 軽微なバグを修正 |
 | 2021/03/26 | アンカーリンクを追加 |
 | 2021/06/01 | 素因数分解のバグを修正 |
