@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>ローリングハッシュ | すくライブラリ</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="ローリングハッシュ" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="MOD と基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？" />
+<meta property="og:description" content="MOD と基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？" />
+<link rel="canonical" href="http://localhost:4000/library/posts/rollinghash" />
+<meta property="og:url" content="http://localhost:4000/library/posts/rollinghash" />
+<meta property="og:site_name" content="すくライブラリ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-01T00:00:00+09:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/rollinghash"},"url":"http://localhost:4000/library/posts/rollinghash","headline":"ローリングハッシュ","dateModified":"2021-04-01T00:00:00+09:00","datePublished":"2021-04-01T00:00:00+09:00","description":"MOD と基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/library/">すくライブラリ</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ローリングハッシュ</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-04-01T00:00:00+09:00" itemprop="datePublished">Apr 1, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>ローリングハッシュ</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>MOD <script type="math/tex">2^{61}-1</script>と<script type="math/tex">2</script>基底を採用しています　<a href="https://trap.jp/post/900/">例の記事</a>はいったい･･･<br />
+基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？</p>
+
+<p>init</p>
+<ul>
+  <li>文字列<script type="math/tex">S</script>を与えると、前計算として<script type="math/tex">S</script>をハッシュする他、getの計算で使用する数値を計算する</li>
+  <li>計算量は基底の数を<script type="math/tex">b</script>として、<script type="math/tex">Ο(b\vert S \vert)</script></li>
+</ul>
+
+<p>rollinghash</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
+
+<p>get</p>
+<ul>
+  <li>半開区間<script type="math/tex">[l,r)</script>を与えると、<script type="math/tex">S</script>の<script type="math/tex">[l,r)</script>文字目のハッシュ値を返す</li>
+  <li>計算量は基底の数を<script type="math/tex">b</script>として、<script type="math/tex">Ο(b)</script></li>
+</ul>
+
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/rollinghash.cpp">github</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class rollinghash{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    const long long mod = (1LL &lt;&lt; 61)-1;
+    std::vector&lt;long long&gt; Base = {12345,10000000};
+    std::vector&lt;long long&gt; BaseInv;
+    std::vector&lt;std::vector&lt;long long&gt;&gt; BaseInvExp;
+    const long long h = 100;
+    
+    long long product(long long a,long long b){
+        const long long m = 1LL &lt;&lt; 31;
+        long long a1 = a/m,a2 = a%m;
+        long long b1 = b/m,b2 = b%m;
+        
+        long long r = 0 , s;
+        r = (r + 2*a1*b1) % mod;
+        s = (a1*b2 + b1*a2) % mod;
+        long long s1 = s/m,s2 = s%m;
+        s = (2*s1+m*s2) % mod;
+        r = (r + s) % mod;
+        r = (r + a2*b2) % mod;
+        
+        return r;
+    }
+    
+    long long power(long long b,long long e){
+        long long r=1;
+        while(e){
+            if(e&amp;1){
+                r=product(r,b)%mod;
+            }
+                b=product(b,b)%mod;
+                e &gt;&gt;=1;
+        }
+        return r;
+    }
+    
+    public:
+    std::string S;
+    std::vector&lt;std::vector&lt;long long&gt;&gt; H,Hsum;
+    
+    void init(std::string cs){
+        S=cs;
+        int n=S.size();
+        
+        BaseInv.resize(Base.size());
+        BaseInvExp.resize(Base.size());
+        H.resize(Base.size());
+        Hsum.resize(Base.size());
+        for(int i=0;i&lt;Base.size();i++){
+            BaseInvExp[i].assign(n+1,1);
+            H[i].assign(n+1,0);
+            Hsum[i].assign(n+1,0);
+        }
+        
+        //逆元
+        for(int i=0;i&lt;Base.size();i++){
+            BaseInv[i]=power(Base[i],mod-2);
+        }
+        for(int i=0;i&lt;Base.size();i++){
+            for(int j=0;j&lt;n;j++){
+                BaseInvExp[i][j+1] = product(BaseInvExp[i][j],BaseInv[i]);
+            }
+        }
+        
+        //本体
+        for(int i=0;i&lt;Base.size();i++){
+            long long b=1;
+            for(int j=0;j&lt;n;j++){
+                H[i][j]=product(b,S[j]+h);
+                b=product(b,Base[i]);
+            }
+        }
+        
+        //累積和
+        for(int i=0;i&lt;Base.size();i++){
+            for(int j=0;j&lt;n;j++){
+                Hsum[i][j+1]=(Hsum[i][j]+H[i][j])%mod;
+            }
+        }
+    }
+    
+    rollinghash(std::string S){
+        init(S);
+    }
+    
+    std::vector&lt;long long&gt; get(int l,int r){
+        std::vector&lt;long long&gt; R;
+        for(int i=0;i&lt;Base.size();i++){
+            long long g = (Hsum[i][r]-Hsum[i][l]+mod)%mod;
+            g=product(g,BaseInvExp[i][l]);
+            R.push_back(g);
+        }
+        return R;
+    }
+    
+};
+</code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class rollinghash{/*省略*/};
+
+signed main() {
+    
+    rollinghash rolihash("abcab");
+    
+    std::cout &lt;&lt; "\"abcab\"の[0,2)文字目、つまり\"ab\"のハッシュ値" &lt;&lt; std::endl;
+    std::vector&lt;long long&gt; a = rolihash.get(0,2);
+    for(int i=0;i&lt;a.size();i++){
+        std::cout &lt;&lt; a[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+    
+    std::cout &lt;&lt; "\"abcab\"の[1,4)文字目、つまり\"bca\"のハッシュ値" &lt;&lt; std::endl;
+    std::vector&lt;long long&gt; b = rolihash.get(1,4);
+    for(int i=0;i&lt;b.size();i++){
+        std::cout &lt;&lt; b[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+    
+    std::cout &lt;&lt; "\"abcab\"の[3,5)文字目、つまり\"ab\"のハッシュ値" &lt;&lt; std::endl;
+    std::vector&lt;long long&gt; c = rolihash.get(3,5);
+    for(int i=0;i&lt;c.size();i++){
+        std::cout &lt;&lt; c[i] &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"abcab"の[0,2)文字目、つまり"ab"のハッシュ値
+2444507 1980000197 
+
+"abcab"の[1,4)文字目、つまり"bca"のハッシュ値
+30025064778 19700001990000198 
+
+"abcab"の[3,5)文字目、つまり"ab"のハッシュ値
+2444507 1980000197 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/04/01</td>
+      <td style="text-align: left">ローリングハッシュを追加</td>
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
+  </div><a class="u-url" href="/library/posts/rollinghash" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/library/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">すくライブラリ</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">すくライブラリ</li><li><a class="u-email" href="mailto:0214sh7@gmail.com">0214sh7@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#github"></use></svg> <span class="username">0214sh7</span></a></li><li><a href="https://www.twitter.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">0214sh7</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>descriptionはない</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
