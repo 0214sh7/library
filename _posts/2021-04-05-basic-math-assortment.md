@@ -18,6 +18,7 @@ layout: library
 - [階乗]( #階乗 )
 - [最大公約数]( #最大公約数 )
 - [最小公倍数]( #最小公倍数 )
+- [約数列挙]( #約数列挙 )
 - [素数判定]( #素数判定 )
 - [素数列挙]( #素数列挙 )
 - [素因数分解]( #素因数分解 )
@@ -237,6 +238,75 @@ int main(void){
 15
 36
 104
+```
+
+[もくじに戻る](#もくじ)
+
+---
+
+## 約数列挙
+
+- 自然数$$N$$を与えると、$$N$$の正の約数を小さい順に並べたvectorを返す
+- 正でない数を与えると空のvectorを返す
+- 計算量は$$O(\sqrt{N})$$
+
+```
+std::vector<long long> divisor_enum(long long N){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector<long long> R;
+    if(N<=0)return R;
+    long long s=0;
+    for(long long i=1;i*i<=N;i++){
+        if(N%i==0){
+            R.push_back(i);
+            if(i*i!=N)s++;
+        }
+    }
+    for(long long i = s-1;i>=0;i--){
+        R.push_back(N/R[i]);
+    }
+    return R;
+}
+```
+
+### 使用例
+
+#### 実行コード
+```
+#include <bits/stdc++.h>
+
+std::vector<long long> divisor_enum(long long N){/*省略*/}
+
+signed main() {
+    
+    for(long long i=1;i<=10;i++){
+        std::cout << i << "  ";
+        std::vector<long long> K = divisor_enum(i);
+        for(long long j=0;j<K.size();j++){
+            std::cout << K[j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    
+    return 0;
+}
+```
+
+#### 出力
+```
+1  1 
+2  1 2 
+3  1 3 
+4  1 2 4 
+5  1 5 
+6  1 2 3 6 
+7  1 7 
+8  1 2 4 8 
+9  1 3 9 
+10  1 2 5 10 
 ```
 
 [もくじに戻る](#もくじ)
@@ -549,8 +619,9 @@ mod 7でのiの逆元
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2021/04/05 | 約数列挙を追加 |
 | 2021/03/27 | 使用例を追加 |
 | 2021/03/26 | 軽微なバグを修正 |
 | 2021/03/26 | アンカーリンクを追加 |
 | 2021/06/01 | 素因数分解のバグを修正 |
-| 2020/04/03 | 数学詰め合わせパック |
+| 2020/04/03 | 数学詰め合わせパックを追加 |

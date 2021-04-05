@@ -2,20 +2,22 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>オイラーのφ関数 | すくライブラリ</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="オイラーのφ関数" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="はトーシェントと読むらしい" />
-<meta property="og:description" content="はトーシェントと読むらしい" />
+<meta name="description" content="\(\varphi\)はトーシェントと読むらしい" />
+<meta property="og:description" content="\(\varphi\)はトーシェントと読むらしい" />
 <link rel="canonical" href="http://localhost:4000/library/posts/totient" />
 <meta property="og:url" content="http://localhost:4000/library/posts/totient" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="オイラーのφ関数" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/totient"},"url":"http://localhost:4000/library/posts/totient","headline":"オイラーのφ関数","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"はトーシェントと読むらしい","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/totient","headline":"オイラーのφ関数","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"\\(\\varphi\\)はトーシェントと読むらしい","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/totient"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -54,13 +56,13 @@
   </head>
   
   <body>
-    <p><script type="math/tex">\varphi</script>はトーシェントと読むらしい</p>
+    <p>\(\varphi\)はトーシェントと読むらしい</p>
 
-<p><script type="math/tex">\varphi(n)</script>とは、<script type="math/tex">1</script>から<script type="math/tex">n</script>までの整数で、<script type="math/tex">n</script>と互いに素であるものの個数</p>
+<p>\(\varphi(n)\)とは、\(1\)から\(n\)までの整数で、\(n\)と互いに素であるものの個数</p>
 
-<p>これは、<script type="math/tex">n</script>が相違な素因数<script type="math/tex">p_1,p_2,...,p_d</script>を含むとして</p>
+<p>これは、\(n\)が相違な素因数\(p_1,p_2,...,p_d\)を含むとして</p>
 
-<script type="math/tex; mode=display">\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})</script>
+\[\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})\]
 
 <p>と計算することができる</p>
 
@@ -68,8 +70,8 @@
 
 <p>単体</p>
 <ul>
-  <li>整数<script type="math/tex">N</script>を与えると、<script type="math/tex">\varphi(N)</script>を計算し整数で返す</li>
-  <li>計算量は<script type="math/tex">O(\sqrt{N})</script></li>
+  <li>整数\(N\)を与えると、\(\varphi(N)\)を計算し整数で返す</li>
+  <li>計算量は\(O(\sqrt{N})\)</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int totient(int N){
@@ -98,9 +100,9 @@
 
 <p>列挙</p>
 <ul>
-  <li>整数<script type="math/tex">N</script>を与えると、<script type="math/tex">0</script>から<script type="math/tex">N</script>までの<script type="math/tex">\varphi(i)</script>を計算し,要素数が<script type="math/tex">N+1</script>のvectorで返す</li>
-  <li>ここで、<script type="math/tex">\varphi(0)=0</script>としている</li>
-  <li>計算量は<script type="math/tex">O(NloglogN)</script></li>
+  <li>整数\(N\)を与えると、\(0\)から\(N\)までの\(\varphi(i)\)を計算し,要素数が\(N+1\)のvectorで返す</li>
+  <li>ここで、\(\varphi(0)=0\)としている</li>
+  <li>計算量は\(O(NloglogN)\)</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;int&gt; totient_array(int N){

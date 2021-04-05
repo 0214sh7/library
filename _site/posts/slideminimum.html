@@ -2,20 +2,22 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>スライド最小値 | すくライブラリ</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="スライド最小値" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す" />
-<meta property="og:description" content="数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す" />
+<meta name="description" content="数列\(A\)と整数\(K\)を与えると、以下の数式を満たす要素数が\(\vert A \vert -K+1\)の数列\(R\)を構成し、返す" />
+<meta property="og:description" content="数列\(A\)と整数\(K\)を与えると、以下の数式を満たす要素数が\(\vert A \vert -K+1\)の数列\(R\)を構成し、返す" />
 <link rel="canonical" href="http://localhost:4000/library/posts/slideminimum" />
 <meta property="og:url" content="http://localhost:4000/library/posts/slideminimum" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="スライド最小値" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/slideminimum"},"url":"http://localhost:4000/library/posts/slideminimum","headline":"スライド最小値","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"数列と整数を与えると、以下の数式を満たす要素数がの数列を構成し、返す","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/slideminimum","headline":"スライド最小値","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"数列\\(A\\)と整数\\(K\\)を与えると、以下の数式を満たす要素数が\\(\\vert A \\vert -K+1\\)の数列\\(R\\)を構成し、返す","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/slideminimum"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -54,11 +56,11 @@
   </head>
   
   <body>
-    <p>数列<script type="math/tex">A</script>と整数<script type="math/tex">K</script>を与えると、以下の数式を満たす要素数が<script type="math/tex">\vert A \vert -K+1</script>の数列<script type="math/tex">R</script>を構成し、返す</p>
+    <p>数列\(A\)と整数\(K\)を与えると、以下の数式を満たす要素数が\(\vert A \vert -K+1\)の数列\(R\)を構成し、返す</p>
 
-<script type="math/tex; mode=display">R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})</script>
+\[R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})\]
 
-<p>計算量は<script type="math/tex">O(\vert A \vert)</script></p>
+<p>計算量は\(O(\vert A \vert)\)</p>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/slide%20minimum.cpp">github</a></p>
 
