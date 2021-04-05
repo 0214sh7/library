@@ -2,20 +2,22 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>ベルマンフォード法 | すくライブラリ</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="ベルマンフォード法" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は" />
-<meta property="og:description" content="init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は" />
+<meta name="description" content="init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は\(1\)回でよい 計算量は\(Ο(max(E,V))\)" />
+<meta property="og:description" content="init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は\(1\)回でよい 計算量は\(Ο(max(E,V))\)" />
 <link rel="canonical" href="http://localhost:4000/library/posts/bellmanford" />
 <meta property="og:url" content="http://localhost:4000/library/posts/bellmanford" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ベルマンフォード法" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bellmanford"},"url":"http://localhost:4000/library/posts/bellmanford","headline":"ベルマンフォード法","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は回でよい 計算量は","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/bellmanford","headline":"ベルマンフォード法","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"init 無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。 すると、グラフをsolve()が扱えるようになる 多始点などで何回も回す場合、initの実行は\\(1\\)回でよい 計算量は\\(Ο(max(E,V))\\)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bellmanford"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -58,8 +60,8 @@
 <ul>
   <li>無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。</li>
   <li>すると、グラフをsolve()が扱えるようになる</li>
-  <li>多始点などで何回も回す場合、initの実行は<script type="math/tex">1</script>回でよい</li>
-  <li>計算量は<script type="math/tex">Ο(max(E,V))</script></li>
+  <li>多始点などで何回も回す場合、initの実行は\(1\)回でよい</li>
+  <li>計算量は\(Ο(max(E,V))\)</li>
 </ul>
 
 <p>BellmanFord</p>
@@ -69,10 +71,10 @@
 
 <p>solve</p>
 <ul>
-  <li>initでできたグラフに対し、与えられた<script type="math/tex">s</script>を始点としてベルマンフォード法を実行する</li>
-  <li>得られた最小コストを要素数が<script type="math/tex">V</script>のvectorとして返す</li>
+  <li>initでできたグラフに対し、与えられた\(s\)を始点としてベルマンフォード法を実行する</li>
+  <li>得られた最小コストを要素数が\(V\)のvectorとして返す</li>
   <li>vectorの要素はpair&lt;long long,bool&gt;である　firstは最小コストを表しており、secondがtrueの場合最小コストが存在せずfirstの値は適当</li>
-  <li>計算量は<script type="math/tex">Ο(VE)</script></li>
+  <li>計算量は\(Ο(VE)\)</li>
 </ul>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/BellmanFord.cpp">github</a></p>

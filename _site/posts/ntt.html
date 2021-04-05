@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>数論変換 | すくライブラリ</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="数論変換" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="整数環FFTとも" />
@@ -14,8 +14,10 @@
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数論変換" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"url":"http://localhost:4000/library/posts/ntt","headline":"数論変換","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"整数環FFTとも","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/ntt","headline":"数論変換","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"整数環FFTとも","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -58,11 +60,11 @@
 
 <p>基本的には<a href="./fft">FFT</a>と同じだが、あちらが実数を使って計算するのに対しこちらは有理数を素数で割った余りを使って計算する</p>
 
-<p>誤差がないというメリットがあるが、<script type="math/tex">MOD</script>素数より大きい整数を扱えないというデメリットがある</p>
+<p>誤差がないというメリットがあるが、\(MOD\)素数より大きい整数を扱えないというデメリットがある</p>
 
-<p>ここで用いる素数は、<script type="math/tex">P-1</script>が素因数に<script type="math/tex">2</script>を多く含むような<script type="math/tex">P</script>であることが望ましい(例えばNTTでよく使われる<script type="math/tex">998244353</script>は<script type="math/tex">119 \cdot 2^{23}+1</script>である)</p>
+<p>ここで用いる素数は、\(P-1\)が素因数に\(2\)を多く含むような\(P\)であることが望ましい(例えばNTTでよく使われる\(998244353\)は\(119 \cdot 2^{23}+1\)である)</p>
 
-<p>計算量は<script type="math/tex">N=max(\vert A \vert,\vert B \vert)</script>として、<script type="math/tex">Ο(NlogNlogMOD)</script></p>
+<p>計算量は\(N=max(\vert A \vert,\vert B \vert)\)として、\(Ο(NlogNlogMOD)\)</p>
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/math/number%20theoretic%20transform.cpp">github</a></p>
 

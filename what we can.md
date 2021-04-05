@@ -11,6 +11,7 @@ layout: page
 | 階乗を求めたい | [階乗](../posts/basic-math#階乗) |
 | GCD(最大公約数)を求めたい | [最大公約数](../posts/basic-math#最大公約数) |
 | LCM(最小公倍数)を求めたい | [最小公倍数](../posts/basic-math#最小公倍数) |
+| (正の)約数をすべて求めたい | [約数列挙](../posts/basic-math#約数列挙) |
 | ある数が素数かどうか判定したい | [素数判定](../posts/basic-math#素数判定) |
 | 素数を列挙したい | [素数列挙](../posts/basic-math#素数列挙) <br > [素因数分解(線形篩)](../posts/sieve)|
 | 素因数分解をしたい | [素因数分解](../posts/basic-math#素因数分解) <br > [素因数分解(線形篩)](../posts/sieve) |
