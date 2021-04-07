@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>拡張ユークリッドの互除法 | すくライブラリ</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="拡張ユークリッドの互除法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね" />
+<meta property="og:description" content="拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね" />
+<link rel="canonical" href="http://localhost:4000/library/posts/bezout-coef" />
+<meta property="og:url" content="http://localhost:4000/library/posts/bezout-coef" />
+<meta property="og:site_name" content="すくライブラリ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-08T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="拡張ユークリッドの互除法" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/library/posts/bezout-coef","headline":"拡張ユークリッドの互除法","dateModified":"2021-04-08T00:00:00+09:00","datePublished":"2021-04-08T00:00:00+09:00","description":"拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bezout-coef"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/library/">すくライブラリ</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">拡張ユークリッドの互除法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-04-08T00:00:00+09:00" itemprop="datePublished">Apr 8, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>拡張ユークリッドの互除法</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね</p>
+
+<p>整数\(a,b\)を与えると、\(g=gcd(a,b)\)とそれを用いて表される等式</p>
+
+\[ax+by=g\]
+
+<p>を満たす\((x,y)\)(ベズー係数)を一つ求め、\(g\)とともに返す</p>
+
+<p>ここで返り値はpair&lt;ll,pair&lt;ll,ll»となっているが、それぞれ\(\{g,\{x,y\}\}\)を表している</p>
+
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp">github</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; extgcd(long long a,long long b){
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&lt;long long&gt; q;
+    while(b!=0){
+        long long r = a%b;
+        r+=b;
+        r%=b;
+        long long q_ = (a-r)/b;
+        q.push_back(q_);
+        a = b;
+        b = r;
+    }
+    
+    long long g=a,x=1,y=0;
+    if(g&lt;0){
+        g*=-1;
+        x*=-1;
+    }
+    for(int i=-1+(int)q.size();i&gt;=0;i--){
+        long long tmp = y;
+        y = x-q[i]*y;
+        x = tmp;
+    }
+    
+    return {g,{x,y}};
+}
+</code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; extgcd(long long a,long long b){/*省略*/}
+
+signed main() {
+    
+    std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; R;
+    R = extgcd(111,30);
+    long long g = R.first, x = R.second.first, y = R.second.second;
+    
+    std::cout &lt;&lt; "111と30の最大公約数" &lt;&lt; std::endl;
+    std::cout &lt;&lt; g &lt;&lt; std::endl;
+    std::cout &lt;&lt; std::endl;
+    
+    
+    std::cout &lt;&lt; "111x+30y=3を満たすような(x,y)の一例" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "(" &lt;&lt; x &lt;&lt; "," &lt;&lt; y &lt;&lt; ")" &lt;&lt; std::endl;
+    std::cout &lt;&lt; std::endl;
+    
+    
+    std::cout &lt;&lt; "111x+30y" &lt;&lt; std::endl;
+    std::cout &lt;&lt; 111*x+30*y &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>111と30の最大公約数
+3
+
+111x+30y=3を満たすような(x,y)の一例
+(3,-11)
+
+111x+30y
+3
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2021/04/08</td>
+      <td style="text-align: left">拡張ユークリッドの互除法を追加</td>
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
+  </div><a class="u-url" href="/library/posts/bezout-coef" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/library/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">すくライブラリ</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">すくライブラリ</li><li><a class="u-email" href="mailto:0214sh7@gmail.com">0214sh7@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#github"></use></svg> <span class="username">0214sh7</span></a></li><li><a href="https://www.twitter.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">0214sh7</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>descriptionはない</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

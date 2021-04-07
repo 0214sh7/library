@@ -9,16 +9,17 @@ layout: page
 | :---: | :--- |
 | 小数点以下を切り上げたい | [小数点以下切り上げ(天井関数)](../posts/basic-math#小数点以下切り上げ天井関数) |
 | 階乗を求めたい | [階乗](../posts/basic-math#階乗) |
-| GCD(最大公約数)を求めたい | [最大公約数](../posts/basic-math#最大公約数) |
+| GCD(最大公約数)を求めたい | [最大公約数](../posts/basic-math#最大公約数) <br> [拡張ユークリッドの互除法](../posts/bezout-coef) |
 | LCM(最小公倍数)を求めたい | [最小公倍数](../posts/basic-math#最小公倍数) |
 | (正の)約数をすべて求めたい | [約数列挙](../posts/basic-math#約数列挙) |
 | ある数が素数かどうか判定したい | [素数判定](../posts/basic-math#素数判定) |
-| 素数を列挙したい | [素数列挙](../posts/basic-math#素数列挙) <br > [素因数分解(線形篩)](../posts/sieve)|
-| 素因数分解をしたい | [素因数分解](../posts/basic-math#素因数分解) <br > [素因数分解(線形篩)](../posts/sieve) |
+| 素数を列挙したい | [素数列挙](../posts/basic-math#素数列挙) <br> [素因数分解(線形篩)](../posts/sieve)|
+| 素因数分解をしたい | [素因数分解](../posts/basic-math#素因数分解) <br> [素因数分解(線形篩)](../posts/sieve) |
 | 累乗を求めたい | [累乗(繰り返し二乗法)](../posts/basic-math#累乗繰り返し二乗法) |
 | MOD逆元を求めたい | [逆元(素数MOD)](../posts/basic-math#逆元素数mod) |
 | nCr (二項係数)を求めたい | [二項係数](../posts/binomial-coefficient) |
 | 0^M , 1^M , ... , N^M を高速に求めたい | [素因数分解(線形篩)](../posts/sieve) |
+| ax+by=gcd(a,b)を満たす(x,y)を一つ求めたい | [拡張ユークリッドの互除法](../posts/bezout-coef) |
 | 二次元の点集合の凸包を求めたい | [凸包](../posts/convexhull) |
 | ある整数nについて、1~nのうちnと互いに素なものの数を求めたい | [オイラーのφ関数](../posts/totient) |
 | 浮動小数点数で数列の畳み込みをしたい | [高速フーリエ変換(FFT)](../posts/fft) |
