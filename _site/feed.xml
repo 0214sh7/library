@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-04-08T03:25:31+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">拡張ユークリッドの互除法</title><link href="http://localhost:4000/library/posts/bezout-coef" rel="alternate" type="text/html" title="拡張ユークリッドの互除法" /><published>2021-04-08T00:00:00+09:00</published><updated>2021-04-08T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/bezout-coef</id><content type="html" xml:base="http://localhost:4000/library/posts/bezout-coef">&lt;p&gt;拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-04-08T12:54:35+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">拡張ユークリッドの互除法</title><link href="http://localhost:4000/library/posts/bezout-coef" rel="alternate" type="text/html" title="拡張ユークリッドの互除法" /><published>2021-04-08T00:00:00+09:00</published><updated>2021-04-08T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/bezout-coef</id><content type="html" xml:base="http://localhost:4000/library/posts/bezout-coef">&lt;p&gt;拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね&lt;/p&gt;
 
 &lt;p&gt;整数\(a,b\)を与えると、\(g=gcd(a,b)\)とそれを用いて表される等式&lt;/p&gt;
 
 \[ax+by=g\]
 
 &lt;p&gt;を満たす\((x,y)\)(ベズー係数)を一つ求め、\(g\)とともに返す&lt;/p&gt;
+
+&lt;p&gt;計算量は\(O(log(max(a,b)))\)&lt;/p&gt;
 
 &lt;p&gt;ここで返り値はpair&amp;lt;ll,pair&amp;lt;ll,ll»となっているが、それぞれ\(\{g,\{x,y\}\}\)を表している&lt;/p&gt;
 
@@ -94,6 +96,10 @@ signed main() {
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/04/08&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;欠落していた計算量を追加&lt;/td&gt;
+    &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;2021/04/08&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;拡張ユークリッドの互除法を追加&lt;/td&gt;
