@@ -13,6 +13,8 @@ $$ax+by=g$$
 
 を満たす$$(x,y)$$(ベズー係数)を一つ求め、$$g$$とともに返す
 
+計算量は$$O(log(max(a,b)))$$
+
 ここで返り値はpair<ll,pair<ll,ll>>となっているが、それぞれ$$ \{g,\{x,y\}\} $$を表している
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp)
@@ -99,4 +101,5 @@ signed main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2021/04/08 | 欠落していた計算量を追加 |
 | 2021/04/08 | 拡張ユークリッドの互除法を追加 |
