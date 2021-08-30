@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-08-31T04:15:01+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2021-08-31T00:00:00+09:00</published><updated>2021-08-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-08-31T06:36:44+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2021-08-31T00:00:00+09:00</published><updated>2021-08-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？&lt;/p&gt;
 
 &lt;p&gt;init&lt;/p&gt;
@@ -220,7 +220,180 @@ int main() {
       &lt;td style=&quot;text-align: left&quot;&gt;ローリングハッシュを追加&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">MOD \(2^{61}-1\)と\(2\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？</summary></entry><entry><title type="html">拡張ユークリッドの互除法</title><link href="http://localhost:4000/library/posts/bezout-coef" rel="alternate" type="text/html" title="拡張ユークリッドの互除法" /><published>2021-04-08T00:00:00+09:00</published><updated>2021-04-08T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/bezout-coef</id><content type="html" xml:base="http://localhost:4000/library/posts/bezout-coef">&lt;p&gt;拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね&lt;/p&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">MOD \(2^{61}-1\)と\(2\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？</summary></entry><entry><title type="html">UnionFind</title><link href="http://localhost:4000/library/posts/unionfind" rel="alternate" type="text/html" title="UnionFind" /><published>2021-08-31T00:00:00+09:00</published><updated>2021-08-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/unionfind</id><content type="html" xml:base="http://localhost:4000/library/posts/unionfind">&lt;p&gt;DSU(disjoint set union)とも&lt;/p&gt;
+
+&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数\(N\)を与えると、頂点を\(N\)個生成し全てを独立にした上で全てのランクを\(0\)にする&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(N)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;unionfind&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;コンストラクタ。initを呼ぶ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;root&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(k\)のその時点での根を求める&lt;/li&gt;
+  &lt;li&gt;と同時に経路圧縮する&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(\alpha (N))\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;\(α(x)\)はアッカーマン関数\(Ack(x,x)\)の逆関数&lt;/p&gt;
+
+&lt;p&gt;\(Ack(4,4)=2^{2^{2^{65536}}}-3\)から伺えるように、\(\alpha (x)\)は実用上定数(\(4\))倍と見なせるほどに収束が遅い&lt;/p&gt;
+
+&lt;p&gt;same&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(p\)と頂点\(q\)がその時点で同じ集合に属しているか(=根が同一か)を調べ、同じならtrue、違うならfalseを返す&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(\alpha (N))\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;unite&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(p\)と頂点\(q\)が属してる集合を合併する&lt;/li&gt;
+  &lt;li&gt;すでに同じ集合に属している場合は無視する&lt;/li&gt;
+  &lt;li&gt;\(p\)の属する集合のランクが\(q\)のものと同じか大きいとき\(p\)側が根に、そうでないとき\(q\)側が根になる&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(\alpha (N))\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;size&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(k\)とその時点で同じ集合に属している頂点の数を返す&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(1)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/data%20structure/union%20find.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class unionfind{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; UF,rank,size_;
+    public:
+    
+    void init(int N){
+        UF.clear();
+        rank.clear();
+        size_.clear();
+        for(int i=0;i&amp;lt;N;i++){
+            UF.push_back(i);
+            rank.push_back(0);
+            size_.push_back(1);
+        }
+    }
+    
+    unionfind(int N){
+        init(N);
+    }
+    
+    int root(int k){
+        if(UF[k]==k){
+            return k;
+        }else{
+            UF[k]=root(UF[k]);
+            return UF[k];
+        }
+    }
+    
+    bool same(int p,int q){
+        return root(p)==root(q);
+    }
+    
+    void unite(int P,int Q){
+        int p=root(P);
+        int q=root(Q);
+        if(p==q)return;
+        if(rank[p]&amp;lt;rank[q])std::swap(p,q);
+        UF[q]=p;
+        if(rank[p]==rank[q])rank[p]++;
+        size_[p] += size_[q];
+        size_[q] = 0;
+    }
+    
+    int size(int k){
+        return size_[root(k)];
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+class unionfind{/*省略*/};
+
+int main(void){
+    
+    unionfind UF(13);
+    UF.unite(1,3);
+    UF.unite(1,5);
+    UF.unite(1,7);
+    UF.unite(1,8);
+    UF.unite(1,10);
+    UF.unite(1,12);
+    UF.unite(4,6);
+    UF.unite(4,9);
+    UF.unite(4,11);
+    
+    for(int i=1;i&amp;lt;=12;i++){
+        std::cout &amp;lt;&amp;lt; UF.root(i) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+    //1と同じ集合に属しているなら1(true)、そうでないなら0(false)
+    for(int i=1;i&amp;lt;=12;i++){
+        std::cout &amp;lt;&amp;lt; UF.same(1,i) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+    //同じ集合に入っている頂点がいくつあるか
+    for(int i=1;i&amp;lt;=12;i++){
+        std::cout &amp;lt;&amp;lt; UF.size(i) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 2 1 4 1 4 1 1 4 1 4 1 
+1 0 1 0 1 0 1 1 0 1 0 1 
+7 1 7 4 7 4 7 7 4 7 4 7 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/08/31&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;sizeを追加&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/26&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;使用例、コンストラクタを追加&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/06&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;UnionFindを追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">DSU(disjoint set union)とも</summary></entry><entry><title type="html">拡張ユークリッドの互除法</title><link href="http://localhost:4000/library/posts/bezout-coef" rel="alternate" type="text/html" title="拡張ユークリッドの互除法" /><published>2021-04-08T00:00:00+09:00</published><updated>2021-04-08T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/bezout-coef</id><content type="html" xml:base="http://localhost:4000/library/posts/bezout-coef">&lt;p&gt;拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね&lt;/p&gt;
 
 &lt;p&gt;整数\(a,b\)を与えると、\(g=gcd(a,b)\)とそれを用いて表される等式&lt;/p&gt;
 
@@ -1763,81 +1936,4 @@ int main(void){
       &lt;td style=&quot;text-align: left&quot;&gt;セグメント木を追加&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">単にセグ木と言えばこれを指す、最も単純なセグ木</summary></entry><entry><title type="html">スライド最小値</title><link href="http://localhost:4000/library/posts/slideminimum" rel="alternate" type="text/html" title="スライド最小値" /><published>2021-03-26T00:00:00+09:00</published><updated>2021-03-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/slide-minimum</id><content type="html" xml:base="http://localhost:4000/library/posts/slideminimum">&lt;p&gt;数列\(A\)と整数\(K\)を与えると、以下の数式を満たす要素数が\(\vert A \vert -K+1\)の数列\(R\)を構成し、返す&lt;/p&gt;
-
-\[R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})\]
-
-&lt;p&gt;計算量は\(O(\vert A \vert)\)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/slide%20minimum.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;long long&amp;gt; slide_minimum(std::vector&amp;lt;long long&amp;gt; A,int K){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;long long&amp;gt; R;
-    int N = A.size();
-    std::deque&amp;lt;int&amp;gt; D;
-    for(int i=0;i&amp;lt;N;i++){
-        while(!D.empty() &amp;amp;&amp;amp; A[D.back()]&amp;gt;=A[i]){D.pop_back();}
-        D.push_back(i);
-        if(i-K+1&amp;gt;=0){
-            R.push_back(A[D.front()]);
-            if(D.front()==i-K+1){
-                D.pop_front();
-            }
-        }
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-std::vector&amp;lt;long long&amp;gt; slide_minimum(std::vector&amp;lt;long long&amp;gt; A,int K){/*省略*/}
-
-int main(void){
-    
-    std::vector&amp;lt;long long&amp;gt; A = {3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3},B;
-    long long K = 3;
-    
-    B = slide_minimum(A,K);
-    for(int i=0;i&amp;lt;B.size();i++){
-        std::cout &amp;lt;&amp;lt; B[i] &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 1 1 1 2 2 2 3 3 3 5 7 7 3 2 2 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/26&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;使用例を追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/23&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;スライド最小値を追加&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">数列\(A\)と整数\(K\)を与えると、以下の数式を満たす要素数が\(\vert A \vert -K+1\)の数列\(R\)を構成し、返す</summary></entry></feed>
+&lt;/table&gt;</content><author><name></name></author><summary type="html">単にセグ木と言えばこれを指す、最も単純なセグ木</summary></entry></feed>
