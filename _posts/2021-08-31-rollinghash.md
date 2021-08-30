@@ -20,6 +20,11 @@ get
 - 半開区間$$[l,r)$$を与えると、$$S$$の$$[l,r)$$文字目のハッシュ値を返す
 - 計算量は基底の数を$$b$$として、$$Ο(b)$$
 
+instant
+- 文字列$$P$$を与えると、initに与えた$$S$$とは関係なく$$P$$のハッシュ値を計算し返す
+- ただ返すだけで、initで揃えた情報を変更することはない
+- 計算量は基底の数を$$b$$として、$$Ο(b\vert P \vert)$$
+
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/rollinghash.cpp)
 
@@ -123,6 +128,19 @@ class rollinghash{
         return R;
     }
     
+    std::vector<long long> instant(std::string P){
+        std::vector<long long> R;
+        for(int i=0;i<Base.size();i++){
+            long long r = 0, b = 1;
+            for(int j=0;j<P.size();j++){
+                r = (r+product(b,P[j]+h))%mod;
+                b = product(b,Base[i]);
+            }
+            R.push_back(r);
+        }
+        return R;
+    }
+    
 };
 ```
 
@@ -135,7 +153,7 @@ class rollinghash{
 
 class rollinghash{/*省略*/};
 
-signed main() {
+int main() {
     
     rollinghash rolihash("abcab");
     
@@ -160,6 +178,13 @@ signed main() {
     }
     std::cout << std::endl << std::endl;
     
+    std::cout << "\"bca\"のハッシュ値" << std::endl;
+    std::vector<long long> d = rolihash.instant("bca");
+    for(int i=0;i<d.size();i++){
+        std::cout << d[i] << " ";
+    }
+    std::cout << std::endl << std::endl;
+    
     return 0;
 }
 ```
@@ -174,6 +199,9 @@ signed main() {
 
 "abcab"の[3,5)文字目、つまり"ab"のハッシュ値
 2444507 1980000197 
+
+"bca"のハッシュ値
+30025064778 19700001990000198 
 ```
 
 ## 更新履歴
@@ -181,4 +209,5 @@ signed main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2021/08/31 | instantを追加 |
 | 2021/04/01 | ローリングハッシュを追加 |
