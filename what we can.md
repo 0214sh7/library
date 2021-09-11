@@ -25,6 +25,7 @@ layout: page
 | 浮動小数点数で数列の畳み込みをしたい | [高速フーリエ変換(FFT)](../posts/fft) |
 | 整数環で数列の畳み込みをしたい | [数論変換(NTT)](../posts/ntt) |
 |  |  |
+| 二次元配列を(反)時計回りに回転させたい | [二次元配列の回転](../posts/vector2d-rotate) |
 | (負閉路がないとき)最短経路を求めたい | [ダイクストラ法](../posts/dijkstra) |
 | (負閉路があるとき)最短経路を求めたい | [ベルマンフォード法](../posts/bellmanford) |
 | 最小全域木を一つ求めたい | [クラスカル法](../posts/kruskal) |
@@ -35,7 +36,7 @@ layout: page
 | 文字列の連続部分列どうしの一致判定を高速にしたい | [ローリングハッシュ](../posts/rollinghash) |
 |  |  |
 | 数列の区間(和/max/minなど)を高速に求めたい | [セグメント木](../posts/segmenttree) |
-| 数列の区間和を高速に求めたい | [フェニック木](../posts/fenwicktree) |
+| 数列の区間和を高速に求めたい <br> 数列の転倒数を求めたい | [フェニック木](../posts/fenwicktree) |
 | 素集合を高速に求めたい | [UnionFind](../posts/unionfind) |
 | 辺に重みがついた素集合を高速に求めたい | [ポテンシャル付きUnionFind](../posts/pot-unionfind) |
 

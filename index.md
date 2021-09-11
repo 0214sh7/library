@@ -15,6 +15,7 @@ layout: page
 - [数論変換(NTT)](./posts/ntt)
 
 <h2>アルゴリズム</h2>
+- [二次元配列の回転](./posts/vector2d-rotate)
 - [ダイクストラ法](./posts/dijkstra)
 - [ベルマンフォード法](./posts/bellmanford)
 - [クラスカル法](./posts/kruskal)
