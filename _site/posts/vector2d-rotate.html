@@ -3,21 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>オイラーのφ関数 | すくライブラリ</title>
+<title>二次元配列の回転 | すくライブラリ</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="オイラーのφ関数" />
+<meta property="og:title" content="二次元配列の回転" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="\(\varphi\)はトーシェントと読むらしい" />
-<meta property="og:description" content="\(\varphi\)はトーシェントと読むらしい" />
-<link rel="canonical" href="http://localhost:4000/library/posts/totient" />
-<meta property="og:url" content="http://localhost:4000/library/posts/totient" />
+<meta name="description" content="二次元配列\(A\)を与えると、\(A\)を反時計回りに回転させ返す" />
+<meta property="og:description" content="二次元配列\(A\)を与えると、\(A\)を反時計回りに回転させ返す" />
+<link rel="canonical" href="http://localhost:4000/library/posts/vector2d-rotate" />
+<meta property="og:url" content="http://localhost:4000/library/posts/vector2d-rotate" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-09-12T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="オイラーのφ関数" />
+<meta property="twitter:title" content="二次元配列の回転" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"オイラーのφ関数","url":"http://localhost:4000/library/posts/totient","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/totient"},"description":"\\(\\varphi\\)はトーシェントと読むらしい","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"二次元配列の回転","url":"http://localhost:4000/library/posts/vector2d-rotate","dateModified":"2021-09-12T00:00:00+09:00","datePublished":"2021-09-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/vector2d-rotate"},"description":"二次元配列\\(A\\)を与えると、\\(A\\)を反時計回りに回転させ返す","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -40,9 +40,9 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">オイラーのφ関数</h1>
+    <h1 class="post-title p-name" itemprop="name headline">二次元配列の回転</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
+      <time class="dt-published" datetime="2021-09-12T00:00:00+09:00" itemprop="datePublished">Sep 12, 2021
       </time></p>
   </header>
 
@@ -51,76 +51,47 @@
 <html lang='ja'>
   <head>
     <meta charset="utf-8">
-    <title>オイラーのφ関数</title>
+    <title>二次元配列の回転</title>
     <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </head>
   
   <body>
-    <p>\(\varphi\)はトーシェントと読むらしい</p>
+    <p>二次元配列\(A\)を与えると、\(A\)を反時計回りに回転させ返す</p>
 
-<p>\(\varphi(n)\)とは、\(1\)から\(n\)までの整数で、\(n\)と互いに素であるものの個数</p>
+<p>第二変数を\(true\)にすると時計回りに回転させる</p>
 
-<p>これは、\(n\)が相違な素因数\(p_1,p_2,...,p_d\)を含むとして</p>
+<p>もし\(A[i]\)の長さが揃っていない場合は最も長いものに合わせ、足りない部分は第三変数の値(デフォルトは\(0\))で埋める</p>
 
-\[\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})\]
+<p>計算量は配列を\(N\)行\(M\)列として\(Ο(NM)\)</p>
 
-<p>と計算することができる</p>
+<p><a href="">github</a></p>
 
-<p><a href="https://github.com/0214sh7/procon-library/blob/master/math/Euler's%20totient%20function.cpp">github</a></p>
-
-<p>単体</p>
-<ul>
-  <li>整数\(N\)を与えると、\(\varphi(N)\)を計算し整数で返す</li>
-  <li>計算量は\(O(\sqrt{N})\)</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int totient(int N){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::vector&lt;char&gt;&gt; vector2D_rotate(std::vector&lt;std::vector&lt;char&gt;&gt; A,bool clockwise=false,char leading = 0){
     /*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
     */
-    if(N&lt;0){
-        return 0;
+    int N = A.size();
+    if(N==0)return A;
+    
+    int M = 0;
+    for(int i=0;i&lt;N;i++){
+        M = std::max(M,(int)A[i].size());
     }
-    int R = N;
-    for(int i=2;i*i&lt;=N;i++){
-        if(N%i==0){
-            R -= R/i;
-            while(N%i==0){
-                N/=i;
+    
+    std::vector&lt;std::vector&lt;char&gt;&gt; B(M,std::vector&lt;char&gt;(N,leading));
+    
+    for(int i=0;i&lt;N;i++){
+        for(int j=0;j&lt;A[i].size();j++){
+            if(clockwise){
+                B[j][N-1-i]=A[i][j];
+            }else{
+                B[M-1-j][i]=A[i][j];
             }
         }
     }
-    if(N&gt;1){
-        R -= R/N;
-    }
-    return R;
-}
-</code></pre></div></div>
-
-<p>列挙</p>
-<ul>
-  <li>整数\(N\)を与えると、\(0\)から\(N\)までの\(\varphi(i)\)を計算し,要素数が\(N+1\)のvectorで返す</li>
-  <li>ここで、\(\varphi(0)=0\)としている</li>
-  <li>計算量は\(O(NloglogN)\)</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;int&gt; totient_array(int N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;int&gt; R(N+1);
-    for(int i=0;i&lt;=N;i++){
-        R[i]=i;
-    }
-    for(int i=2;i&lt;=N;i++){
-        if(R[i]!=i)continue;
-        for(int j=i;j&lt;=N;j+=i){
-            R[j]-=(R[j]/i);
-        }
-    }
-    return R;
+    
+    return B;
 }
 </code></pre></div></div>
 
@@ -130,29 +101,65 @@
 <h3 id="実行コード">実行コード</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-int totient(int N){/*省略*/}
-std::vector&lt;int&gt; totient_array(int N){/*省略*/}
+std::vector&lt;std::vector&lt;char&gt;&gt; vector2D_rotate(std::vector&lt;std::vector&lt;char&gt;&gt; A,bool clockwise=false,char leading = 0){/*省略*/}
 
-int main(void){
+int main(){
     
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; totient(i) &lt;&lt; " ";
+    std::vector&lt;std::vector&lt;char&gt;&gt; A ={
+        {'a','b','c'},
+        {'d','e','f'},
+        {'g','h','i'}
+    };
+    
+    std::cout &lt;&lt; "回転なし" &lt;&lt; std::endl;
+    for(int i=0;i&lt;A.size();i++){
+        for(int j=0;j&lt;A[i].size();j++){
+            std::cout &lt;&lt; A[i][j] &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
     }
     std::cout &lt;&lt; std::endl;
     
-    std::vector&lt;int&gt; T = totient_array(10);
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; T[i] &lt;&lt; " ";
+    std::vector&lt;std::vector&lt;char&gt;&gt; counter = vector2D_rotate(A);
+    
+    std::cout &lt;&lt; "反時計回り" &lt;&lt; std::endl;
+    for(int i=0;i&lt;counter.size();i++){
+        for(int j=0;j&lt;counter[i].size();j++){
+            std::cout &lt;&lt; counter[i][j] &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
     }
     std::cout &lt;&lt; std::endl;
+    
+    std::vector&lt;std::vector&lt;char&gt;&gt; clockwise = vector2D_rotate(A,true);
+    
+    std::cout &lt;&lt; "時計回り" &lt;&lt; std::endl;
+    for(int i=0;i&lt;clockwise.size();i++){
+        for(int j=0;j&lt;clockwise[i].size();j++){
+            std::cout &lt;&lt; clockwise[i][j] &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
+    }
     
     return 0;
 }
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 1 2 2 4 2 6 4 6 4 
-0 1 1 2 2 4 2 6 4 6 4 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>回転なし
+a b c 
+d e f 
+g h i 
+
+反時計回り
+c f i 
+b e h 
+a d g 
+
+時計回り
+g d a 
+h e b 
+i f c
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>
@@ -167,19 +174,15 @@ int main(void){
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">2021/03/25</td>
-      <td style="text-align: left">使用例を追加</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">2020/04/16</td>
-      <td style="text-align: left">オイラーのφ関数を追加</td>
+      <td style="text-align: center">2021/09/12</td>
+      <td style="text-align: left">二次元配列の回転を追加</td>
     </tr>
   </tbody>
 </table>
 
   </body>
 </html>
-  </div><a class="u-url" href="/library/posts/totient" hidden></a>
+  </div><a class="u-url" href="/library/posts/vector2d-rotate" hidden></a>
 </article>
 
       </div>
