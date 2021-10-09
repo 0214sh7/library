@@ -24,6 +24,7 @@ layout: page
 - [二部グラフ判定](./posts/bipartite)
 - [最長増加部分列](./posts/lis)
 - [ローリングハッシュ](./posts/rollinghash)
+- [最小共通祖先](./posts/lowest-common-ancestor)
 
 <h2>データ構造</h2>
 - [セグメント木](./posts/segmenttree)
