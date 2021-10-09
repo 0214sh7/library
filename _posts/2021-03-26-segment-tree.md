@@ -69,7 +69,7 @@ class segmenttree{
     long long query(long long a,long long b){
         a+=n;
         b+=n;
-        long long R=0;
+        long long R = identity;
         while(a < b){
             if(a % 2 == 1){
                 R = calc(R, dat[a - 1]);
@@ -145,5 +145,6 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2021/10/10 | バグを修正 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | セグメント木を追加 |

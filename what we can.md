@@ -34,6 +34,7 @@ layout: page
 | グラフが二部グラフか判定したい | [二部グラフ判定](../posts/bipartite) |
 | 最長増加部分列の長さを求めたい | [最長増加部分列](../posts/lis) |
 | 文字列の連続部分列どうしの一致判定を高速にしたい | [ローリングハッシュ](../posts/rollinghash) |
+| 根付き木の親頂点を求めたい <br> 根付き木の最小共通祖先を求めたい | [最小共通祖先](../posts/lowest-common-ancestor) |
 |  |  |
 | 数列の区間(和/max/minなど)を高速に求めたい | [セグメント木](../posts/segmenttree) |
 | 数列の区間和を高速に求めたい <br> 数列の転倒数を求めたい | [フェニック木](../posts/fenwicktree) |
