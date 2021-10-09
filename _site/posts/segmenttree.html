@@ -129,7 +129,7 @@
     long long query(long long a,long long b){
         a+=n;
         b+=n;
-        long long R=0;
+        long long R = identity;
         while(a &lt; b){
             if(a % 2 == 1){
                 R = calc(R, dat[a - 1]);
@@ -208,6 +208,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2021/10/10</td>
+      <td style="text-align: left">バグを修正</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/03/26</td>
       <td style="text-align: left">使用例、コンストラクタを追加</td>
