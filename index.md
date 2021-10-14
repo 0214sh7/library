@@ -22,6 +22,7 @@ layout: page
 - [スライド最小値](./posts/slideminimum)
 - [座標圧縮](./posts/compress)
 - [二部グラフ判定](./posts/bipartite)
+- [木の直径](./posts/double-sweep)
 - [最長増加部分列](./posts/lis)
 - [ローリングハッシュ](./posts/rollinghash)
 - [最小共通祖先](./posts/lowest-common-ancestor)

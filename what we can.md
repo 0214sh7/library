@@ -32,6 +32,7 @@ layout: page
 | 数列の連続するK個の要素の最小値を求めたい | [スライド最小値](../posts/slideminimum) |
 | 数列を大小関係を保ってコンパクトにしたい | [座標圧縮](../posts/compress) |
 | グラフが二部グラフか判定したい | [二部グラフ判定](../posts/bipartite) |
+| 木の直径を求めたい | [木の直径](../posts/double-sweep) |
 | 最長増加部分列の長さを求めたい | [最長増加部分列](../posts/lis) |
 | 文字列の連続部分列どうしの一致判定を高速にしたい | [ローリングハッシュ](../posts/rollinghash) |
 | 根付き木の親頂点を求めたい <br> 根付き木の最小共通祖先を求めたい | [最小共通祖先](../posts/lowest-common-ancestor) |
