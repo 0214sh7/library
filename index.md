@@ -16,15 +16,18 @@ layout: page
 
 <h2>アルゴリズム</h2>
 - [二次元配列の回転](./posts/vector2d-rotate)
+- [偏角ソート](./posts/arg-sort)
+- [スライド最小値](./posts/slideminimum)
+- [座標圧縮](./posts/compress)
+- [最長増加部分列](./posts/lis)
+- [ローリングハッシュ](./posts/rollinghash)
+
+<h2>グラフ</h2>
 - [ダイクストラ法](./posts/dijkstra)
 - [ベルマンフォード法](./posts/bellmanford)
 - [クラスカル法](./posts/kruskal)
-- [スライド最小値](./posts/slideminimum)
-- [座標圧縮](./posts/compress)
 - [二部グラフ判定](./posts/bipartite)
 - [木の直径](./posts/double-sweep)
-- [最長増加部分列](./posts/lis)
-- [ローリングハッシュ](./posts/rollinghash)
 - [最小共通祖先](./posts/lowest-common-ancestor)
 
 <h2>データ構造</h2>
