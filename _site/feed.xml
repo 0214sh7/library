@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-10-31T03:16:50+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">偏角ソート</title><link href="http://localhost:4000/library/posts/arg-sort" rel="alternate" type="text/html" title="偏角ソート" /><published>2021-10-31T00:00:00+09:00</published><updated>2021-10-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/arg-sort</id><content type="html" xml:base="http://localhost:4000/library/posts/arg-sort">&lt;p&gt;数列\(A\)を与えると、以下の並べ方で\(A\)をソートして返す
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-11-01T03:05:41+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">偏角ソート</title><link href="http://localhost:4000/library/posts/arg-sort" rel="alternate" type="text/html" title="偏角ソート" /><published>2021-10-31T00:00:00+09:00</published><updated>2021-10-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/arg-sort</id><content type="html" xml:base="http://localhost:4000/library/posts/arg-sort">&lt;p&gt;数列\(A\)を与えると、以下の並べ方で\(A\)をソートして返す
 基準を第二変数\(d\)(デフォルトでは\((1,0)\))で定めることもできる&lt;/p&gt;
 
 &lt;ul&gt;
@@ -17,6 +17,9 @@
     https://github.com/0214sh7/library/
     */
     long long N = A.size();
+    assert(d.first != 0 || d.second != 0);
+    long long g = std::gcd(d.first,d.second);
+    d.first/=g;d.second/=g;
     A.push_back(d);
     std::sort(A.begin(),A.end(),[&amp;amp;](std::pair&amp;lt;long long,long long&amp;gt; x, std::pair&amp;lt;long long,long long&amp;gt; y){
         assert(x.first != 0 || x.second != 0);
@@ -155,6 +158,10 @@ int main(void){
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/11/01&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;バグを修正&lt;/td&gt;
+    &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;2021/10/31&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;偏角ソートを追加&lt;/td&gt;
