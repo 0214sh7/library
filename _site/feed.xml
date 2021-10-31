@@ -1,4 +1,172 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-11-01T03:05:41+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">偏角ソート</title><link href="http://localhost:4000/library/posts/arg-sort" rel="alternate" type="text/html" title="偏角ソート" /><published>2021-10-31T00:00:00+09:00</published><updated>2021-10-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/arg-sort</id><content type="html" xml:base="http://localhost:4000/library/posts/arg-sort">&lt;p&gt;数列\(A\)を与えると、以下の並べ方で\(A\)をソートして返す
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2021-11-01T03:47:52+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">ディニッツ法</title><link href="http://localhost:4000/library/posts/dinic" rel="alternate" type="text/html" title="ディニッツ法" /><published>2021-11-01T00:00:00+09:00</published><updated>2021-11-01T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/dinic</id><content type="html" xml:base="http://localhost:4000/library/posts/dinic">&lt;p&gt;Dinicの読み方これでいいのかな&lt;/p&gt;
+
+&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;整数\(N\)を与えると、頂点を\(N\)個生成しフローの計算に必要なメモリを確保する&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(N)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dinic&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;コンストラクタ。initを呼ぶ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;add&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(from\)から\(end\)にかけて容量\(cap\)の有向辺を張る&lt;/li&gt;
+  &lt;li&gt;計算量は\(O(1)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;solve&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;頂点\(s\)を始点、頂点\(t\)を終点としてフローの最大値を求める&lt;/li&gt;
+  &lt;li&gt;計算量はinitで与えた頂点の数を\(V\)、addで与えた辺の数を\(E\)として\(Ο(E V^2)\)&lt;/li&gt;
+  &lt;li&gt;実際はこれよりも高速に動作する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Dinic{
+    /*
+    Copyright (c) 2021 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    struct edge{
+        int end;
+        long long cap,rev;
+        
+    };
+    
+    const long long INF = (1LL&amp;lt;&amp;lt;61);
+    int V;
+    std::vector&amp;lt;std::vector&amp;lt;edge&amp;gt;&amp;gt; G;
+    std::vector&amp;lt;long long&amp;gt; level;
+    std::vector&amp;lt;int&amp;gt; iter;
+    
+    void Dinic_bfs(int s){
+        for(int i=0;i&amp;lt;V;i++){
+            level[i]=-1;
+        }
+        std::queue&amp;lt;int&amp;gt; que;
+        level[s]=0;
+        que.push(s);
+        while(!que.empty()){
+            int v=que.front();
+            que.pop();
+            for(unsigned int i=0;i&amp;lt;G[v].size();i++){
+                edge &amp;amp;e = G[v][i];
+                if(e.cap&amp;gt;0 &amp;amp;&amp;amp; level[e.end]&amp;lt;0){
+                    level[e.end]=level[v]+1;
+                    que.push(e.end);
+                }
+            }
+        }
+    }
+    
+    long long Dinic_dfs(int v,int t,long long f){
+        if(v==t)return f;
+        for(int &amp;amp;i=iter[v];i&amp;lt;G[v].size();i++){
+            edge &amp;amp;e = G[v][i];
+            if(e.cap&amp;gt;0 &amp;amp;&amp;amp; level[v]&amp;lt;level[e.end]){
+                long long d = Dinic_dfs(e.end,t,std::min(f,e.cap));
+                if(d&amp;gt;0){
+                    e.cap -= d;
+                    G[e.end][e.rev].cap+=d;
+                    return d;
+                }
+            }
+        }
+        return 0;
+    }
+    
+    public:
+    
+    void init(int N){
+        V = N;
+        G.clear();
+        G.resize(V);
+        level.resize(V);
+        iter.resize(V);
+    }
+    
+    Dinic(int N){
+        init(N);
+    }
+    
+    void add(int from,int end,long long cap){
+        G[from].push_back((edge){end,cap,(long long)G[end].size()});
+        G[end].push_back((edge){from,0,(long long)G[from].size()-1});
+    }
+    
+    long long solve(int s,int t){
+        long long flow=0;
+        while(1){
+            Dinic_bfs(s);
+            if(level[t]&amp;lt;0){return flow;}
+            for(int i=0;i&amp;lt;V;i++){
+                iter[i]=0;
+            }
+            long long f;
+            while((f=Dinic_dfs(s,t,INF))&amp;gt;0){
+                flow+=f;
+            }
+        }
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+class Dinic{/*省略*/};
+
+int main(void){
+    
+    Dinic dinitz(5);
+    dinitz.add(0,1,4);
+    dinitz.add(0,2,2);
+    dinitz.add(1,2,1);
+    dinitz.add(1,3,2);
+    dinitz.add(2,3,4);
+    dinitz.add(2,4,2);
+    dinitz.add(3,4,4);
+    
+    //このグラフでは頂点0から頂点4へは最大で5つ流れる
+    //例えば0-&amp;gt;2-&amp;gt;4に2つ、0-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4に1つ、0-&amp;gt;1-&amp;gt;3-&amp;gt;4に2つなどが考えられる
+    long long R = dinitz.solve(0,4);
+    std::cout &amp;lt;&amp;lt; R &amp;lt;&amp;lt; std::endl;
+    
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2021/11/01&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ディニッツ法を追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">Dinicの読み方これでいいのかな</summary></entry><entry><title type="html">偏角ソート</title><link href="http://localhost:4000/library/posts/arg-sort" rel="alternate" type="text/html" title="偏角ソート" /><published>2021-10-31T00:00:00+09:00</published><updated>2021-10-31T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/arg-sort</id><content type="html" xml:base="http://localhost:4000/library/posts/arg-sort">&lt;p&gt;数列\(A\)を与えると、以下の並べ方で\(A\)をソートして返す
 基準を第二変数\(d\)(デフォルトでは\((1,0)\))で定めることもできる&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1923,149 +2091,4 @@ int main(void){
       &lt;td style=&quot;text-align: left&quot;&gt;二部グラフ判定を追加&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点を表現したpair&amp;lt;int,int&amp;gt;のvectorとして与える。 すると、sizeが\(max(点の番号)+1\)のvectorが返ってくる。すべての要素は\(0\)または\(1\)である。 これは、与えられたグラフを二部グラフとして表現するとき\(i\)番目の要素は\(0\)と\(1\)どちらに属するかを表している。 また二部グラフでないとき全ての要素は\(0\)である。 計算量は\(Ο(V+E)\)</summary></entry><entry><title type="html">座標圧縮</title><link href="http://localhost:4000/library/posts/compress" rel="alternate" type="text/html" title="座標圧縮" /><published>2021-03-26T00:00:00+09:00</published><updated>2021-03-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/compress</id><content type="html" xml:base="http://localhost:4000/library/posts/compress">&lt;p&gt;init&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;数列\(A\)を与えると、クラスを\(A\)で初期化する&lt;/li&gt;
-  &lt;li&gt;このとき、\(A\)の全ての\(2\)つの要素について大小関係が維持され、かつindexの最大値が最小になるように\(A\)の各要素にindexという非負整数が割り振られる&lt;/li&gt;
-  &lt;li&gt;計算量は\(N=\vert A \vert\)とし、\(Ο(NlogN)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;compress&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;コンストラクタ。initを呼ぶ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;size&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;initで与えられた数列の中に含まれる値の種類数を返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(1)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;index&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;値を与えると、その値に対応するindexを返す&lt;/li&gt;
-  &lt;li&gt;もし数列に存在しない値が与えられたら、数列に存在する値の中で、与えられた値より小さい最大の値についてのindexを返す(つまり、小さい値に寄せる)&lt;/li&gt;
-  &lt;li&gt;もし列のいかなる値よりも小さければ\(-1\)を返す&lt;/li&gt;
-  &lt;li&gt;計算量はinitの\(N\)を用いて、\(Ο(logN)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;value&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;indexを与えると値を返す&lt;/li&gt;
-  &lt;li&gt;範囲外なら\(0\)を返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(1)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/coordinate%20compression.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class compress{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    std::vector&amp;lt;int&amp;gt; E;
-    
-    public:
-    void init(std::vector&amp;lt;long long&amp;gt; A){
-        E.clear();
-        sort(A.begin(),A.end());
-        for(int i=0;i&amp;lt;A.size();i++){
-            if(i==0 || A[i]!=A[i-1]){
-                E.push_back(A[i]);
-            }
-        }
-    }
-    
-    compress(std::vector&amp;lt;long long&amp;gt; A){
-        init(A);
-    }
-    
-    int size(){
-        return (int)E.size();
-    }
-    
-    int value(int x){
-        if(0&amp;lt;=x &amp;amp;&amp;amp; x&amp;lt;(int)E.size()){
-            return E[x];
-        }else{
-            return 0;
-        }
-    }
-    
-    int index(int X){
-        return (upper_bound(E.begin(),E.end(),X))-E.begin()-1;
-    }
-    
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-class compress{/*省略*/};
-
-int main(void){
-    
-    std::vector&amp;lt;long long&amp;gt; A={1,2,4,8,16,32,64,128};
-    compress zaatsu(A);
-    
-    std::cout &amp;lt;&amp;lt; &quot;uniqueな要素の個数&quot; &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; zaatsu.size() &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    std::cout &amp;lt;&amp;lt; &quot;Aの各要素に対応する数&quot; &amp;lt;&amp;lt; std::endl;
-    for(int i=0;i&amp;lt;A.size();i++){
-        std::cout &amp;lt;&amp;lt; zaatsu.index(A[i]) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl &amp;lt;&amp;lt; std::endl;
-    
-    std::cout &amp;lt;&amp;lt; &quot;0~7に対応する要素&quot; &amp;lt;&amp;lt; std::endl;
-    for(int i=0;i&amp;lt;zaatsu.size();i++){
-        std::cout &amp;lt;&amp;lt; zaatsu.value(i) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;uniqueな要素の個数
-8
-
-Aの各要素に対応する数
-0 1 2 3 4 5 6 7 
-
-0~7に対応する要素
-1 2 4 8 16 32 64 128 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/26&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;使用例、コンストラクタを追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2020/05/20&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;mapで処理しvectorで返す形式から、class化し二分探索を行う形式に変更&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/05&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;座標圧縮を追加&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">init 数列\(A\)を与えると、クラスを\(A\)で初期化する このとき、\(A\)の全ての\(2\)つの要素について大小関係が維持され、かつindexの最大値が最小になるように\(A\)の各要素にindexという非負整数が割り振られる 計算量は\(N=\vert A \vert\)とし、\(Ο(NlogN)\)</summary></entry></feed>
+&lt;/table&gt;</content><author><name></name></author><summary type="html">無向グラフを、辺の始点と終点を表現したpair&amp;lt;int,int&amp;gt;のvectorとして与える。 すると、sizeが\(max(点の番号)+1\)のvectorが返ってくる。すべての要素は\(0\)または\(1\)である。 これは、与えられたグラフを二部グラフとして表現するとき\(i\)番目の要素は\(0\)と\(1\)どちらに属するかを表している。 また二部グラフでないとき全ての要素は\(0\)である。 計算量は\(Ο(V+E)\)</summary></entry></feed>
