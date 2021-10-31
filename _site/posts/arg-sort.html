@@ -75,6 +75,9 @@
     https://github.com/0214sh7/library/
     */
     long long N = A.size();
+    assert(d.first != 0 || d.second != 0);
+    long long g = std::gcd(d.first,d.second);
+    d.first/=g;d.second/=g;
     A.push_back(d);
     std::sort(A.begin(),A.end(),[&amp;](std::pair&lt;long long,long long&gt; x, std::pair&lt;long long,long long&gt; y){
         assert(x.first != 0 || x.second != 0);
@@ -213,6 +216,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2021/11/01</td>
+      <td style="text-align: left">バグを修正</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/10/31</td>
       <td style="text-align: left">偏角ソートを追加</td>

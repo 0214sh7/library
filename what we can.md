@@ -38,6 +38,7 @@ layout: page
 | グラフが二部グラフか判定したい | [二部グラフ判定](../posts/bipartite) |
 | 木の直径を求めたい | [木の直径](../posts/double-sweep) |
 | 根付き木の親頂点を求めたい <br> 根付き木の最小共通祖先を求めたい | [最小共通祖先](../posts/lowest-common-ancestor) |
+| フローの最大値を求めたい | [ディニッツ法](../posts/dinic) |
 |  |  |
 | 数列の区間(和/max/minなど)を高速に求めたい | [セグメント木](../posts/segmenttree) |
 | 数列の区間和を高速に求めたい <br> 数列の転倒数を求めたい | [フェニック木](../posts/fenwicktree) |

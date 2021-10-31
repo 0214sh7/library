@@ -29,6 +29,7 @@ layout: page
 - [二部グラフ判定](./posts/bipartite)
 - [木の直径](./posts/double-sweep)
 - [最小共通祖先](./posts/lowest-common-ancestor)
+- [ディニッツ法](./posts/dinic)
 
 <h2>データ構造</h2>
 - [セグメント木](./posts/segmenttree)
