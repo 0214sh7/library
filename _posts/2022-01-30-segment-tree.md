@@ -44,9 +44,9 @@ class segmenttree{
     void init(int N,std::function<T(T,T)> func,T Identity){
         n=1;
         while(n<N)n*=2;
-        dat.clear();
+        dat.resize(2*n-1);
         for(int i=0;i<2*n-1;++i){
-            dat.push_back(identity);
+            dat[i]=Identity;
         }
         calc = func;
         identity = Identity;
@@ -55,7 +55,6 @@ class segmenttree{
     segmenttree(int N,std::function<T(T,T)> func,T Identity){
         init(N,func,Identity);
     }
-
     
     void update(int k,T a){
         k+=n-1;
@@ -67,21 +66,22 @@ class segmenttree{
     }
     
     T query(int a,int b){
-        a+=n;
-        b+=n;
-        T R = identity;
+        a+=n-1;
+        b+=n-1;
+        T L= identity,R = identity;
         while(a < b){
-            if(a % 2 == 1){
-                R = calc(R, dat[a - 1]);
-                a += 1;
+            if(a % 2 == 0){
+                L = calc(L,dat[a]);
+                a++;
             }
-            a /= 2;
-            if(b % 2 == 1){
-                b -= 1;
-                R = calc(dat[b - 1],R);
+            a = (a-1)/2;
+            if(b % 2 == 0){
+                R = calc(dat[b-1],R);
+                b--;
             }
-            b /= 2;
+            b = (b-1)/2;
         }
+        R = calc(L,R);
         return R;
     }
     
@@ -95,6 +95,7 @@ class segmenttree{
 ```
 #include <bits/stdc++.h>
 
+template<typename T>
 class segmenttree{/*省略*/};
 
 int main(void){
@@ -135,6 +136,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2022/01/30 | バグを修正 |
 | 2022/01/30 | 任意の型に対応 |
 | 2021/10/10 | バグを修正 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |

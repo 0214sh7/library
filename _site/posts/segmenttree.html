@@ -102,9 +102,9 @@ class segmenttree{
     void init(int N,std::function&lt;T(T,T)&gt; func,T Identity){
         n=1;
         while(n&lt;N)n*=2;
-        dat.clear();
+        dat.resize(2*n-1);
         for(int i=0;i&lt;2*n-1;++i){
-            dat.push_back(identity);
+            dat[i]=Identity;
         }
         calc = func;
         identity = Identity;
@@ -113,7 +113,6 @@ class segmenttree{
     segmenttree(int N,std::function&lt;T(T,T)&gt; func,T Identity){
         init(N,func,Identity);
     }
-
     
     void update(int k,T a){
         k+=n-1;
@@ -125,21 +124,22 @@ class segmenttree{
     }
     
     T query(int a,int b){
-        a+=n;
-        b+=n;
-        T R = identity;
+        a+=n-1;
+        b+=n-1;
+        T L= identity,R = identity;
         while(a &lt; b){
-            if(a % 2 == 1){
-                R = calc(R, dat[a - 1]);
-                a += 1;
+            if(a % 2 == 0){
+                L = calc(L,dat[a]);
+                a++;
             }
-            a /= 2;
-            if(b % 2 == 1){
-                b -= 1;
-                R = calc(dat[b - 1],R);
+            a = (a-1)/2;
+            if(b % 2 == 0){
+                R = calc(dat[b-1],R);
+                b--;
             }
-            b /= 2;
+            b = (b-1)/2;
         }
+        R = calc(L,R);
         return R;
     }
     
@@ -152,6 +152,7 @@ class segmenttree{
 <h3 id="実行コード">実行コード</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
+template&lt;typename T&gt;
 class segmenttree{/*省略*/};
 
 int main(void){
@@ -196,6 +197,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2022/01/30</td>
+      <td style="text-align: left">バグを修正</td>
+    </tr>
     <tr>
       <td style="text-align: center">2022/01/30</td>
       <td style="text-align: left">任意の型に対応</td>
