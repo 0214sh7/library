@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/segmenttree" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
+<meta property="article:published_time" content="2022-01-30T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="セグメント木" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"セグメント木","url":"http://localhost:4000/library/posts/segmenttree","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/segmenttree"},"description":"単にセグ木と言えばこれを指す、最も単純なセグ木","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"セグメント木","url":"http://localhost:4000/library/posts/segmenttree","dateModified":"2022-01-30T00:00:00+09:00","datePublished":"2022-01-30T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/segmenttree"},"description":"単にセグ木と言えばこれを指す、最も単純なセグ木","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">セグメント木</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
+      <time class="dt-published" datetime="2022-01-30T00:00:00+09:00" itemprop="datePublished">Jan 30, 2022
       </time></p>
   </header>
 
@@ -60,21 +60,15 @@
 
 <p>init</p>
 <ul>
-  <li>整数\(N\)を与えると、要素が\(N\)個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する</li>
+  <li>第一引数で整数\(N\)を与えると、要素が\(N\)個入る最小サイズの完全二分木を構成し、すべての要素を単位元で初期化する</li>
+  <li>また第二･第三引数でセグ木に乗せる演算とその単位元を与えるとその演算を乗せる</li>
+  <li>演算がモノイドでない場合の動作は保証しない</li>
   <li>計算量は\(Ο(N)\)</li>
 </ul>
 
 <p>segmenttree</p>
 <ul>
   <li>コンストラクタ。initを呼ぶ</li>
-</ul>
-
-<p>calc</p>
-<ul>
-  <li>セグ木に乗せる演算を書く</li>
-  <li>場合によって使いたい演算を書き換える</li>
-  <li>演算はモノイドである必要がある</li>
-  <li>long long×long long→long longにしか対応してない　は？</li>
 </ul>
 
 <p>update</p>
@@ -91,33 +85,36 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/data%20structure/segment%20tree.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class segmenttree{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>template&lt;typename T&gt;
+class segmenttree{
     /*
-    Copyright (c) 2021 0214sh7
+    Copyright (c) 2022 0214sh7
     https://github.com/0214sh7/library/
     */
     private:
     int n;
-    long long identity = 0;//単位元
-    std::vector&lt;long long&gt; dat;
+    
+    std::vector&lt;T&gt; dat;
+    std::function&lt;T(T,T)&gt; calc;
+    T identity;
     public:
     
-    void init(int N){
+    void init(int N,std::function&lt;T(T,T)&gt; func,T Identity){
         n=1;
         while(n&lt;N)n*=2;
-        dat.clear();
+        dat.resize(2*n-1);
         for(int i=0;i&lt;2*n-1;++i){
-            dat.push_back(identity);
+            dat[i]=Identity;
         }
+        calc = func;
+        identity = Identity;
     }
     
-    segmenttree(int N){
-        init(N);
+    segmenttree(int N,std::function&lt;T(T,T)&gt; func,T Identity){
+        init(N,func,Identity);
     }
-
-    long long calc();
     
-    void update(int k,long long a){
+    void update(int k,T a){
         k+=n-1;
         dat[k]=a;
         while(k&gt;0){
@@ -126,28 +123,24 @@
         }
     }
     
-    long long query(long long a,long long b){
-        a+=n;
-        b+=n;
-        long long R = identity;
+    T query(int a,int b){
+        a+=n-1;
+        b+=n-1;
+        T L= identity,R = identity;
         while(a &lt; b){
-            if(a % 2 == 1){
-                R = calc(R, dat[a - 1]);
-                a += 1;
+            if(a % 2 == 0){
+                L = calc(L,dat[a]);
+                a++;
             }
-            a /= 2;
-            if(b % 2 == 1){
-                b -= 1;
-                R = calc(R, dat[b - 1]);
+            a = (a-1)/2;
+            if(b % 2 == 0){
+                R = calc(dat[b-1],R);
+                b--;
             }
-            b /= 2;
+            b = (b-1)/2;
         }
+        R = calc(L,R);
         return R;
-    }
-    
-    long long calc(long long a,long long b){
-        //your monoid here
-        return a+b;
     }
     
 };
@@ -159,22 +152,18 @@
 <h3 id="実行コード">実行コード</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
 
-class segmenttree{
-    /*calcを除き省略*/
-
-    long long calc(long long a,long long b){
-        //your monoid here
-        return a+b;
-    }
-    
-};
+template&lt;typename T&gt;
+class segmenttree{/*省略*/};
 
 int main(void){
     
     long long N = 6;
     std::vector&lt;long long&gt; A = {100000,20000,3000,400,50,6};
+    std::function&lt;long long(long long,long long)&gt; func = [](long long a,long long b){
+        return a+b;
+    };
     
-    segmenttree segtree(N);
+    segmenttree&lt;long long&gt; segtree(N,func,0);
     for(int i=0;i&lt;N;i++){
         segtree.update(i,A[i]);
     }
@@ -208,6 +197,14 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2022/01/30</td>
+      <td style="text-align: left">バグを修正</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2022/01/30</td>
+      <td style="text-align: left">任意の型に対応</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/10/10</td>
       <td style="text-align: left">バグを修正</td>
