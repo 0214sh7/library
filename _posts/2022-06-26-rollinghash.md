@@ -31,18 +31,18 @@ instant
 ```
 class rollinghash{
     /*
-    Copyright (c) 2021 0214sh7
+    Copyright (c) 2022 0214sh7
     https://github.com/0214sh7/library/
     */
     private:
-    const long long mod = (1LL << 61)-1;
+    static constexpr long long mod = (1LL << 61)-1;
     std::vector<long long> Base = {12345,10000000};
     std::vector<long long> BaseInv;
     std::vector<std::vector<long long>> BaseInvExp;
-    const long long h = 100;
+    static constexpr long long h = 100;
     
     long long product(long long a,long long b){
-        const long long m = 1LL << 31;
+        static constexpr long long m = 1LL << 31;
         long long a1 = a/m,a2 = a%m;
         long long b1 = b/m,b2 = b%m;
         
@@ -119,11 +119,11 @@ class rollinghash{
     }
     
     std::vector<long long> get(int l,int r){
-        std::vector<long long> R;
+        std::vector<long long> R(Base.size());
         for(int i=0;i<Base.size();i++){
             long long g = (Hsum[i][r]-Hsum[i][l]+mod)%mod;
             g=product(g,BaseInvExp[i][l]);
-            R.push_back(g);
+            R[i] = g;
         }
         return R;
     }
@@ -209,5 +209,6 @@ int main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2022/06/26 | constexprによる最適化を実行 |
 | 2021/08/31 | instantを追加 |
 | 2021/04/01 | ローリングハッシュを追加 |
