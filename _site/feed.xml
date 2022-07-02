@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T04:29:32+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T04:34:41+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する&lt;/li&gt;
   &lt;li&gt;計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)&lt;/li&gt;
@@ -111,8 +111,25 @@ int main() {
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/05&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2022/07/03&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;反復写像を追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;確認した提出&quot;&gt;確認した提出&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;問題&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;提出&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ABC167-D&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;https://atcoder.jp/contests/abc167/submissions/32945330&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</content><author><name></name></author><summary type="html">init 数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する 計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)</summary></entry><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2022-06-26T00:00:00+09:00</published><updated>2022-06-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
