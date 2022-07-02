@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T05:34:14+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T06:05:09+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する&lt;/li&gt;
   &lt;li&gt;計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)&lt;/li&gt;
@@ -11,8 +11,8 @@
 
 &lt;p&gt;solve&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;\(0 \leq x &amp;lt; N\) を満たすような整数 \(x\) と非負整数 \(k\) を与えると、\(\overbrace{f(f(\cdots f}^{k}(x)))\) を求め、返す&lt;/li&gt;
-  &lt;li&gt;\(k = 0\)なら\(x\)そのものを返す&lt;/li&gt;
+  &lt;li&gt;整数 \(x\) であって\(0 \leq x &amp;lt; N\) を満たすようなものと非負整数 \(k\) を与えると、\(\overbrace{f(f(\cdots f}^{k}(x)))\) を求め、返す&lt;/li&gt;
+  &lt;li&gt;もし\(k = 0\)なら\(x\)そのものを返す&lt;/li&gt;
   &lt;li&gt;範囲外なら\(-1\)を返す&lt;/li&gt;
   &lt;li&gt;計算量は\(Ο(N \log k)\)&lt;/li&gt;
 &lt;/ul&gt;
@@ -128,8 +128,8 @@ int main() {
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;ABC167-D&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;https://atcoder.jp/contests/abc167/submissions/32945330&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc167/tasks/abc167_d&quot;&gt;ABC167-D&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc167/submissions/32945330&quot;&gt;提出&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</content><author><name></name></author><summary type="html">init 数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する 計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)</summary></entry><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2022-06-26T00:00:00+09:00</published><updated>2022-06-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
