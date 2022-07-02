@@ -13,8 +13,8 @@ iterated_function
 - コンストラクタ。initを呼ぶ
 
 solve
-- $$0 \leq x < N$$ を満たすような整数 $$x$$ と非負整数 $$ k $$ を与えると、$$\overbrace{f(f(\cdots f}^{k}(x)))$$ を求め、返す
-- $$k = 0$$なら$$x$$そのものを返す
+- 整数 $$x$$ であって$$0 \leq x < N$$ を満たすようなものと非負整数 $$ k $$ を与えると、$$\overbrace{f(f(\cdots f}^{k}(x)))$$ を求め、返す
+- もし$$k = 0$$なら$$x$$そのものを返す
 - 範囲外なら$$-1$$を返す
 - 計算量は$$Ο(N \log k)$$
 
@@ -115,4 +115,4 @@ int main() {
 
 | 問題 | 提出 |
 | :---: | :--- |
-| ABC167-D | https://atcoder.jp/contests/abc167/submissions/32945330 |
+| [ABC167-D](https://atcoder.jp/contests/abc167/tasks/abc167_d) | [提出](https://atcoder.jp/contests/abc167/submissions/32945330) |
