@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>反復写像 | すくライブラリ</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="反復写像" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="init 数列\(F\)を与えると、すべての整数 \(x (0 \leq x &lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する 計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)" />
+<meta property="og:description" content="init 数列\(F\)を与えると、すべての整数 \(x (0 \leq x &lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する 計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)" />
+<link rel="canonical" href="http://localhost:4000/library/posts/iterated-function" />
+<meta property="og:url" content="http://localhost:4000/library/posts/iterated-function" />
+<meta property="og:site_name" content="すくライブラリ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-03T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="反復写像" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"反復写像","url":"http://localhost:4000/library/posts/iterated-function","dateModified":"2022-07-03T00:00:00+09:00","datePublished":"2022-07-03T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/iterated-function"},"description":"init 数列\\(F\\)を与えると、すべての整数 \\(x (0 \\leq x &lt; \\vert F \\vert)\\) について \\(f(x) = F[x]\\) となるように関数 \\(f\\) を設定する 計算量は\\(N=\\vert F \\vert\\)とし、\\(Ο(N)\\)","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/library/">すくライブラリ</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">反復写像</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-07-03T00:00:00+09:00" itemprop="datePublished">Jul 3, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>反復写像</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>init</p>
+<ul>
+  <li>数列\(F\)を与えると、すべての整数 \(x (0 \leq x &lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する</li>
+  <li>計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)</li>
+</ul>
+
+<p>iterated_function</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
+
+<p>solve</p>
+<ul>
+  <li>\(0 \leq x &lt; N\) を満たすような整数 \(x\) と非負整数 \(k\) を与えると、\(\overbrace{f(f(\cdots f}^{k}(x)))\) を求め、返す</li>
+  <li>\(k = 0\)なら\(x\)そのものを返す</li>
+  <li>範囲外なら\(-1\)を返す</li>
+  <li>計算量は\(Ο(N \log k)\)</li>
+</ul>
+
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/iterated%20function.cpp">github</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class iterated_function{
+    /*
+    Copyright (c) 2022 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&lt;int&gt; T[64];
+    int N;
+    
+    public:
+    void init(std::vector&lt;int&gt; F){
+        N = F.size();
+        T[0] = F;
+        for(int j=1;j&lt;64;j++){
+            T[j].resize(N);
+            for(int i=0;i&lt;N;i++){
+                T[j][i] = T[j-1][T[j-1][i]];
+            }
+        }
+        
+    }
+
+    iterated_function(std::vector&lt;int&gt; F){
+        init(F);
+    }
+
+    int solve(int x,long long k){
+        if(!(0&lt;=x &amp;&amp; x&lt;N) || k&lt;0){
+            return -1;
+        }
+
+        int y = x;
+        for(int i=0;(k&gt;&gt;i)&gt;0;i++){
+            if((k&gt;&gt;i)%2==1){
+                y = T[i][y];
+            }
+        }
+
+        return y;
+    }
+    
+};
+</code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class iterated_function{/*省略*/};
+
+int main() {
+    
+    std::vector&lt;int&gt; F = {1,2,3,4,5,2};
+    iterated_function func(F);
+
+    std::cout &lt;&lt; "0からk回辿ったときの頂点" &lt;&lt; std::endl;
+    for(int k=0;k&lt;=15;k++){
+        std::cout &lt;&lt; func.solve(0,k) &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; "各頂点から3回辿ったときの頂点" &lt;&lt; std::endl;
+    for(int i=0;i&lt;6;i++){
+        std::cout &lt;&lt; func.solve(i,3) &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0からk回辿ったときの頂点
+0 1 2 3 4 5 2 3 4 5 2 3 4 5 2 3 
+
+各頂点から3回辿ったときの頂点
+3 4 5 2 3 4 
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2020/04/05</td>
+      <td style="text-align: left">反復写像を追加</td>
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
+  </div><a class="u-url" href="/library/posts/iterated-function" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/library/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">すくライブラリ</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">すくライブラリ</li><li><a class="u-email" href="mailto:0214sh7@gmail.com">0214sh7@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#github"></use></svg> <span class="username">0214sh7</span></a></li><li><a href="https://www.twitter.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">0214sh7</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>descriptionはない</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,4 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-06-27T22:09:21+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2022-06-26T00:00:00+09:00</published><updated>2022-06-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T04:29:32+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する&lt;/li&gt;
+  &lt;li&gt;計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;iterated_function&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;コンストラクタ。initを呼ぶ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;solve&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(0 \leq x &amp;lt; N\) を満たすような整数 \(x\) と非負整数 \(k\) を与えると、\(\overbrace{f(f(\cdots f}^{k}(x)))\) を求め、返す&lt;/li&gt;
+  &lt;li&gt;\(k = 0\)なら\(x\)そのものを返す&lt;/li&gt;
+  &lt;li&gt;範囲外なら\(-1\)を返す&lt;/li&gt;
+  &lt;li&gt;計算量は\(Ο(N \log k)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/iterated%20function.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class iterated_function{
+    /*
+    Copyright (c) 2022 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    std::vector&amp;lt;int&amp;gt; T[64];
+    int N;
+    
+    public:
+    void init(std::vector&amp;lt;int&amp;gt; F){
+        N = F.size();
+        T[0] = F;
+        for(int j=1;j&amp;lt;64;j++){
+            T[j].resize(N);
+            for(int i=0;i&amp;lt;N;i++){
+                T[j][i] = T[j-1][T[j-1][i]];
+            }
+        }
+        
+    }
+
+    iterated_function(std::vector&amp;lt;int&amp;gt; F){
+        init(F);
+    }
+
+    int solve(int x,long long k){
+        if(!(0&amp;lt;=x &amp;amp;&amp;amp; x&amp;lt;N) || k&amp;lt;0){
+            return -1;
+        }
+
+        int y = x;
+        for(int i=0;(k&amp;gt;&amp;gt;i)&amp;gt;0;i++){
+            if((k&amp;gt;&amp;gt;i)%2==1){
+                y = T[i][y];
+            }
+        }
+
+        return y;
+    }
+    
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+class iterated_function{/*省略*/};
+
+int main() {
+    
+    std::vector&amp;lt;int&amp;gt; F = {1,2,3,4,5,2};
+    iterated_function func(F);
+
+    std::cout &amp;lt;&amp;lt; &quot;0からk回辿ったときの頂点&quot; &amp;lt;&amp;lt; std::endl;
+    for(int k=0;k&amp;lt;=15;k++){
+        std::cout &amp;lt;&amp;lt; func.solve(0,k) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl &amp;lt;&amp;lt; std::endl;
+
+    std::cout &amp;lt;&amp;lt; &quot;各頂点から3回辿ったときの頂点&quot; &amp;lt;&amp;lt; std::endl;
+    for(int i=0;i&amp;lt;6;i++){
+        std::cout &amp;lt;&amp;lt; func.solve(i,3) &amp;lt;&amp;lt; &quot; &quot;;
+    }
+    std::cout &amp;lt;&amp;lt; std::endl;
+    
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0からk回辿ったときの頂点
+0 1 2 3 4 5 2 3 4 5 2 3 4 5 2 3 
+
+各頂点から3回辿ったときの頂点
+3 4 5 2 3 4 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/05&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;反復写像を追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">init 数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する 計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)</summary></entry><entry><title type="html">ローリングハッシュ</title><link href="http://localhost:4000/library/posts/rollinghash" rel="alternate" type="text/html" title="ローリングハッシュ" /><published>2022-06-26T00:00:00+09:00</published><updated>2022-06-26T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/rollinghash</id><content type="html" xml:base="http://localhost:4000/library/posts/rollinghash">&lt;p&gt;MOD \(2^{61}-1\)と\(2\)基底を採用しています　&lt;a href=&quot;https://trap.jp/post/900/&quot;&gt;例の記事&lt;/a&gt;はいったい･･･&lt;br /&gt;
 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？&lt;/p&gt;
 
 &lt;p&gt;init&lt;/p&gt;
@@ -1507,638 +1624,4 @@ signed main() {
       &lt;td style=&quot;text-align: left&quot;&gt;拡張ユークリッドの互除法を追加&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね</summary></entry><entry><title type="html">数学詰め合わせパック</title><link href="http://localhost:4000/library/posts/basic-math" rel="alternate" type="text/html" title="数学詰め合わせパック" /><published>2021-04-05T00:00:00+09:00</published><updated>2021-04-05T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/basic-math-assortment</id><content type="html" xml:base="http://localhost:4000/library/posts/basic-math">&lt;p&gt;優柔不断なあなたに&lt;/p&gt;
-
-&lt;p&gt;というのは建前で、それぞれ独立して扱うほどではないが重要なものを一箇所に集めた&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/basic%20math%20assortment.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;もくじ&quot;&gt;もくじ&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#小数点以下切り上げ天井関数&quot;&gt;小数点以下切り上げ(天井関数)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#階乗&quot;&gt;階乗&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#最大公約数&quot;&gt;最大公約数&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#最小公倍数&quot;&gt;最小公倍数&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#約数列挙&quot;&gt;約数列挙&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#素数判定&quot;&gt;素数判定&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#素数列挙&quot;&gt;素数列挙&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#素因数分解&quot;&gt;素因数分解&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#累乗繰り返し二乗法&quot;&gt;累乗(繰り返し二乗法)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#逆元素数mod&quot;&gt;逆元(素数MOD)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;小数点以下切り上げ天井関数&quot;&gt;小数点以下切り上げ(天井関数)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;よくある天井関数&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(1)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long roundup(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    return (a+b-1)/b;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long roundup(long long a,long long b){/*省略*/}
-
-int main(void){
-    
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; roundup(i,4) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 1 2 3 4 5 6 7 8 9 10 
-0 1 1 1 1 2 2 2 2 3 3 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;階乗&quot;&gt;階乗&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(x\)に対し\(x!\)を計算する&lt;/li&gt;
-  &lt;li&gt;\(MOD\)も与えるとそれで割った余りをとる&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(x)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long fact(long long x,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long k=1;
-    for(int i=1;i&amp;lt;=x;i++){
-        k=(k*i)%MOD;
-    }
-    return k;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-1&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-1&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long fact(long long x,long long MOD=LLONG_MAX){/*省略*/}
-
-int main(void){
-    
-    for(int i=0;i&amp;lt;=6;i++){
-        std::cout &amp;lt;&amp;lt; fact(i) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-1&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 1 2 6 24 120 720 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;最大公約数&quot;&gt;最大公約数&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;２つの引数のGCDを求める&lt;/li&gt;
-  &lt;li&gt;計算量は\(O(log(max(a,b)))\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long gcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    a=std::abs(a);
-    b=std::abs(b);
-    if(a&amp;gt;b)std::swap(a,b);
-    if(a==0){
-        return b;
-    }
-    
-    long long r=a%b;
-    while(r){
-        a=b;
-        b=r;
-        r=a%b;
-    }
-    return b;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-2&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-2&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long gcd(long long a,long long b){/*省略*/}
-
-int main(void){
-    
-    std::cout &amp;lt;&amp;lt; gcd(4,6) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; gcd(3,5) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; gcd(12,18) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; gcd(8,13) &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-2&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2
-1
-6
-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;最小公倍数&quot;&gt;最小公倍数&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;２つの引数のLCMを求める&lt;/li&gt;
-  &lt;li&gt;計算量は\(O(log(max(a,b)))\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long lcm(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(std::abs(a)&amp;gt;std::abs(b))std::swap(a,b);
-    if(a==0){
-        return b;
-    }
-    
-    long long s=a,t=b;
-    a=std::abs(a);
-    b=std::abs(b);
-    if(a&amp;gt;b)std::swap(a,b);
-    
-    long long r=a%b;
-    while(r){
-        a=b;
-        b=r;
-        r=a%b;
-    }
-    
-    return s / b * t;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-3&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-3&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long lcm(long long a,long long b){/*省略*/}
-
-int main(void){
-    
-    std::cout &amp;lt;&amp;lt; lcm(4,6) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; lcm(3,5) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; lcm(12,18) &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; lcm(8,13) &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-3&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;12
-15
-36
-104
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;約数列挙&quot;&gt;約数列挙&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;自然数\(N\)を与えると、\(N\)の正の約数を小さい順に並べたvectorを返す&lt;/li&gt;
-  &lt;li&gt;正でない数を与えると空のvectorを返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(O(\sqrt{N})\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;long long&amp;gt; divisor_enum(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;long long&amp;gt; R;
-    if(N&amp;lt;=0)return R;
-    long long s=0;
-    for(long long i=1;i*i&amp;lt;=N;i++){
-        if(N%i==0){
-            R.push_back(i);
-            if(i*i!=N)s++;
-        }
-    }
-    for(long long i = s-1;i&amp;gt;=0;i--){
-        R.push_back(N/R[i]);
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-4&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-4&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-std::vector&amp;lt;long long&amp;gt; divisor_enum(long long N){/*省略*/}
-
-signed main() {
-    
-    for(long long i=1;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &quot;  &quot;;
-        std::vector&amp;lt;long long&amp;gt; K = divisor_enum(i);
-        for(long long j=0;j&amp;lt;K.size();j++){
-            std::cout &amp;lt;&amp;lt; K[j] &amp;lt;&amp;lt; &quot; &quot;;
-        }
-        std::cout &amp;lt;&amp;lt; std::endl;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-4&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1  1 
-2  1 2 
-3  1 3 
-4  1 2 4 
-5  1 5 
-6  1 2 3 6 
-7  1 7 
-8  1 2 4 8 
-9  1 3 9 
-10  1 2 5 10 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;素数判定&quot;&gt;素数判定&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(x\)に対し、\(x\)が素数ならtrueを、そうでないならfalseを返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(O(\sqrt{x})\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bool prime(long long X){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(X&amp;lt;2)return false;
-    for(long long i=2;i*i&amp;lt;=X;i++){
-        if(X%i==0){
-            return false;
-        }
-    }
-    return true;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-5&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-5&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-bool prime(long long X){/*省略*/}
-
-int main(void){
-    
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; prime(i) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-5&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 1 2 3 4 5 6 7 8 9 10 
-0 0 1 1 0 1 0 1 0 0 0 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;素数列挙&quot;&gt;素数列挙&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(N\)に対し、\(N\)以下の素数を列挙し、小さい順にvectorとして返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(O(NloglogN)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;long long&amp;gt; primearray(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;long long&amp;gt; R;
-    std::vector&amp;lt;bool&amp;gt; prime;
-    for(int i=0;i&amp;lt;=N;i++){
-        prime.push_back(true);
-    }
-    if(N&amp;lt;2){
-        return R;
-    }
-    prime[0]=false;
-    prime[1]=false;
-    for(long long i=2;i*i&amp;lt;=N;i++){
-        if(!prime[i])continue;
-        for(int j=2*i;j&amp;lt;=N;j+=i){
-            prime[j]=false;
-        }
-    }
-    for(long long i=0;i&amp;lt;prime.size();i++){
-        if(prime[i]){
-            R.push_back(i);
-        }
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-6&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-6&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-std::vector&amp;lt;long long&amp;gt; primearray(long long N){/*省略*/}
-
-int main(void){
-    
-    std::vector&amp;lt;long long&amp;gt; P = primearray(100);
-    for(int i=0;i&amp;lt;P.size();i++){
-        std::cout &amp;lt;&amp;lt; P[i] &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-6&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;素因数分解&quot;&gt;素因数分解&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(N\)に対し、\(N\)を素因数分解し、小さい順にvectorとして返す&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(\sqrt{N})\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;long long&amp;gt; prime_factorization(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;long long&amp;gt; R;
-    if(N&amp;lt;2)return R;
-    for(long long i=2;i*i&amp;lt;=N;i++){
-        while(N%i==0){
-            R.push_back(i);
-            N/=i;
-        }
-    }
-    if(N!=1){
-          R.push_back(N);
-    }
-    return R;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-7&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-7&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-std::vector&amp;lt;long long&amp;gt; prime_factorization(long long N){/*省略*/}
-
-int main(void){
-    
-    std::vector&amp;lt;long long&amp;gt; number={4,12,57,97,210};
-    for(int j=0;j&amp;lt;5;j++){
-        std::cout &amp;lt;&amp;lt; number[j] &amp;lt;&amp;lt; &quot;  &quot;;
-        std::vector&amp;lt;long long&amp;gt; F = prime_factorization(number[j]);
-        for(int i=0;i&amp;lt;F.size();i++){
-            std::cout &amp;lt;&amp;lt; F[i] &amp;lt;&amp;lt; &quot; &quot;;
-        }std::cout &amp;lt;&amp;lt; std::endl;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-7&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;4  2 2 
-12  2 2 3 
-57  3 19 
-97  97 
-210  2 3 5 7 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;累乗繰り返し二乗法&quot;&gt;累乗(繰り返し二乗法)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(b,e\)に対し、\(b^e\)を返す&lt;/li&gt;
-  &lt;li&gt;\(MOD\)も与えるとそれで割った余りをとる&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(log(e))\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long power(long long b,long long e,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long r=1;
-    while(e){
-        if(e&amp;amp;1){
-            r=(r*b)%MOD;
-        }
-        b=(b*b)%MOD;
-        e &amp;gt;&amp;gt;=1;
-    }
-    return r;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-8&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-8&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long power(long long b,long long e,long long MOD=LLONG_MAX){/*省略*/}
-
-int main(void){
-    
-    std::cout &amp;lt;&amp;lt; &quot;2のi乗&quot;&amp;lt;&amp;lt; std::endl;
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; power(2,i) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    std::cout &amp;lt;&amp;lt; &quot;2のi乗を100で割ったあまり&quot;&amp;lt;&amp;lt; std::endl;
-    for(int i=0;i&amp;lt;=10;i++){
-        std::cout &amp;lt;&amp;lt; power(2,i,100) &amp;lt;&amp;lt; &quot; &quot;;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-8&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2のi乗
-1 2 4 8 16 32 64 128 256 512 1024 
-2のi乗を100で割ったあまり
-1 2 4 8 16 32 64 28 56 12 24
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;逆元素数mod&quot;&gt;逆元(素数MOD)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;与えられた\(b,MOD\)に対し、\(MOD\)を法とした整数環上での逆元(\(bx=1\)を満たす\(x\))を返す&lt;/li&gt;
-  &lt;li&gt;MODが素数でない場合の動作は未確認&lt;/li&gt;
-  &lt;li&gt;計算量は\(Ο(log(MOD))\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;long long inverse(long long b,long long MOD){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long r=1,e=MOD-2;
-    while(e){
-        if(e&amp;amp;1){
-            r=(r*b)%MOD;
-        }
-        b=(b*b)%MOD;
-        e &amp;gt;&amp;gt;=1;
-    }
-    return r;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用例-9&quot;&gt;使用例&lt;/h3&gt;
-
-&lt;h4 id=&quot;実行コード-9&quot;&gt;実行コード&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-long long inverse(long long b,long long MOD){/*省略*/}
-
-int main(void){
-    
-    std::cout &amp;lt;&amp;lt; &quot;mod 7でのiの逆元&quot;&amp;lt;&amp;lt; std::endl;
-    for(int i=1;i&amp;lt;7;i++){
-        std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; inverse(i,7) &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; (i*inverse(i,7))%7 &amp;lt;&amp;lt; std::endl;
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;出力-9&quot;&gt;出力&lt;/h4&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mod 7でのiの逆元
-1 1 1
-2 4 1
-3 5 1
-4 2 1
-5 3 1
-6 6 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;#もくじ&quot;&gt;もくじに戻る&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/04/05&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;約数列挙を追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/27&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;使用例を追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/26&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;軽微なバグを修正&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/03/26&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;アンカーリンクを追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/06/01&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;素因数分解のバグを修正&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2020/04/03&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;数学詰め合わせパックを追加&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">優柔不断なあなたに</summary></entry></feed>
+&lt;/table&gt;</content><author><name></name></author><summary type="html">拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね</summary></entry></feed>
