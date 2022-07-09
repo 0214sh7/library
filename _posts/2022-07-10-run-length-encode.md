@@ -10,6 +10,8 @@ layout: library
 ランレングス圧縮とは、文字列を「文字と、それがいくつ続くか」の組に変換するものである
 ちなみに可逆変換
 
+計算量は$$Ο(\vert S \vert)$$
+
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/runlength%20encode.cpp)
 
 ```
