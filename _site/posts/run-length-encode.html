@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ランレングス圧縮 | すくライブラリ</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="ランレングス圧縮" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="文字列\(S\)を与えると、\(S\)をランレングス圧縮(連長圧縮)して返す" />
+<meta property="og:description" content="文字列\(S\)を与えると、\(S\)をランレングス圧縮(連長圧縮)して返す" />
+<link rel="canonical" href="http://localhost:4000/library/posts/run-length-encode" />
+<meta property="og:url" content="http://localhost:4000/library/posts/run-length-encode" />
+<meta property="og:site_name" content="すくライブラリ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ランレングス圧縮" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-07-10T00:00:00+09:00","datePublished":"2022-07-10T00:00:00+09:00","description":"文字列\\(S\\)を与えると、\\(S\\)をランレングス圧縮(連長圧縮)して返す","headline":"ランレングス圧縮","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/run-length-encode"},"url":"http://localhost:4000/library/posts/run-length-encode"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/library/">すくライブラリ</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ランレングス圧縮</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-07-10T00:00:00+09:00" itemprop="datePublished">Jul 10, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>ランレングス圧縮</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>文字列\(S\)を与えると、\(S\)をランレングス圧縮(連長圧縮)して返す</p>
+
+<p>ランレングス圧縮とは、文字列を「文字と、それがいくつ続くか」の組に変換するものである
+ちなみに可逆変換</p>
+
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/runlength%20encode.cpp">github</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::pair&lt;char,int&gt;&gt; runlength_encode(std::string S){
+    /*
+    Copyright (c) 2022 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&lt;std::pair&lt;char,int&gt;&gt; R;
+    for(int i=0;i&lt;(int)S.size();i++){
+        if(i==0 || S[i]!=S[i-1]){
+            R.push_back({S[i],1});
+        }else{
+            R.back().second++;
+        }
+    }
+    return R;
+}
+</code></pre></div></div>
+
+<h2 id="使用例">使用例</h2>
+<hr />
+
+<h3 id="実行コード">実行コード</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+std::vector&lt;std::pair&lt;char,int&gt;&gt; runlength_encode(std::string S){/*省略*/}
+
+int main(void){
+    
+    std::string S = "abbcccddeeeacddd";
+    std::vector&lt;std::pair&lt;char,int&gt;&gt; R = runlength_encode(S);
+    for(int i=0;i&lt;(int)R.size();i++){
+        std::cout &lt;&lt; R[i].first &lt;&lt; " " &lt;&lt; R[i].second &lt;&lt; std::endl;
+    }
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h3 id="出力">出力</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a 1
+b 2
+c 3
+d 2
+e 3
+a 1
+c 1
+d 3
+</code></pre></div></div>
+
+<h2 id="更新履歴">更新履歴</h2>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2022/07/10</td>
+      <td style="text-align: left">ランレングス圧縮を追加</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="確認した問題">確認した問題</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">問題</th>
+      <th style="text-align: left">提出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://atcoder.jp/contests/abc259/tasks/abc259_c">ABC259-C</a></td>
+      <td style="text-align: left"><a href="https://atcoder.jp/contests/abc259/submissions/33129519">提出</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
+  </div><a class="u-url" href="/library/posts/run-length-encode" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/library/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">すくライブラリ</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">すくライブラリ</li><li><a class="u-email" href="mailto:0214sh7@gmail.com">0214sh7@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#github"></use></svg> <span class="username">0214sh7</span></a></li><li><a href="https://www.twitter.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">0214sh7</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>descriptionはない</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -26,6 +26,7 @@ layout: page
 | 整数環で数列の畳み込みをしたい | [数論変換(NTT)](../posts/ntt) |
 |  |  |
 | 二次元配列を(反)時計回りに回転させたい | [二次元配列の回転](../posts/vector2d-rotate) |
+| 文字列をランレングス圧縮したい | [ランレングス圧縮](../posts/run-length-encode) |
 | 二次元上の点を偏角を基準にソートしたい | [偏角ソート](../posts/arg-sort) |
 | 頂点から辺をk回辿ったときの頂点を求めたい | [反復写像](../posts/iterated-function) |
 | 数列の連続するK個の要素の最小値を求めたい | [スライド最小値](../posts/slideminimum) |
