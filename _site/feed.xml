@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-03T06:05:09+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/library/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/library/" rel="alternate" type="text/html" /><updated>2022-07-10T00:12:57+09:00</updated><id>http://localhost:4000/library/feed.xml</id><title type="html">すくライブラリ</title><subtitle>descriptionはない</subtitle><entry><title type="html">ランレングス圧縮</title><link href="http://localhost:4000/library/posts/run-length-encode" rel="alternate" type="text/html" title="ランレングス圧縮" /><published>2022-07-10T00:00:00+09:00</published><updated>2022-07-10T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/run-length-encode</id><content type="html" xml:base="http://localhost:4000/library/posts/run-length-encode">&lt;p&gt;文字列\(S\)を与えると、\(S\)をランレングス圧縮(連長圧縮)して返す&lt;/p&gt;
+
+&lt;p&gt;ランレングス圧縮とは、文字列を「文字と、それがいくつ続くか」の組に変換するものである
+ちなみに可逆変換&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/algorithm/runlength%20encode.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::vector&amp;lt;std::pair&amp;lt;char,int&amp;gt;&amp;gt; runlength_encode(std::string S){
+    /*
+    Copyright (c) 2022 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    std::vector&amp;lt;std::pair&amp;lt;char,int&amp;gt;&amp;gt; R;
+    for(int i=0;i&amp;lt;(int)S.size();i++){
+        if(i==0 || S[i]!=S[i-1]){
+            R.push_back({S[i],1});
+        }else{
+            R.back().second++;
+        }
+    }
+    return R;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+std::vector&amp;lt;std::pair&amp;lt;char,int&amp;gt;&amp;gt; runlength_encode(std::string S){/*省略*/}
+
+int main(void){
+    
+    std::string S = &quot;abbcccddeeeacddd&quot;;
+    std::vector&amp;lt;std::pair&amp;lt;char,int&amp;gt;&amp;gt; R = runlength_encode(S);
+    for(int i=0;i&amp;lt;(int)R.size();i++){
+        std::cout &amp;lt;&amp;lt; R[i].first &amp;lt;&amp;lt; &quot; &quot; &amp;lt;&amp;lt; R[i].second &amp;lt;&amp;lt; std::endl;
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a 1
+b 2
+c 3
+d 2
+e 3
+a 1
+c 1
+d 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2022/07/10&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ランレングス圧縮を追加&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;確認した問題&quot;&gt;確認した問題&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;問題&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;提出&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc259/tasks/abc259_c&quot;&gt;ABC259-C&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc259/submissions/33129519&quot;&gt;提出&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">文字列\(S\)を与えると、\(S\)をランレングス圧縮(連長圧縮)して返す</summary></entry><entry><title type="html">反復写像</title><link href="http://localhost:4000/library/posts/iterated-function" rel="alternate" type="text/html" title="反復写像" /><published>2022-07-03T00:00:00+09:00</published><updated>2022-07-03T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/iterated-function</id><content type="html" xml:base="http://localhost:4000/library/posts/iterated-function">&lt;p&gt;init&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;数列\(F\)を与えると、すべての整数 \(x (0 \leq x &amp;lt; \vert F \vert)\) について \(f(x) = F[x]\) となるように関数 \(f\) を設定する&lt;/li&gt;
   &lt;li&gt;計算量は\(N=\vert F \vert\)とし、\(Ο(N)\)&lt;/li&gt;
@@ -1534,111 +1622,4 @@ int main(void){
       &lt;td style=&quot;text-align: left&quot;&gt;UnionFindを追加&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">DSU(disjoint set union)とも</summary></entry><entry><title type="html">拡張ユークリッドの互除法</title><link href="http://localhost:4000/library/posts/bezout-coef" rel="alternate" type="text/html" title="拡張ユークリッドの互除法" /><published>2021-04-08T00:00:00+09:00</published><updated>2021-04-08T00:00:00+09:00</updated><id>http://localhost:4000/library/posts/bezout-coef</id><content type="html" xml:base="http://localhost:4000/library/posts/bezout-coef">&lt;p&gt;拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね&lt;/p&gt;
-
-&lt;p&gt;整数\(a,b\)を与えると、\(g=gcd(a,b)\)とそれを用いて表される等式&lt;/p&gt;
-
-\[ax+by=g\]
-
-&lt;p&gt;を満たす\((x,y)\)(ベズー係数)を一つ求め、\(g\)とともに返す&lt;/p&gt;
-
-&lt;p&gt;計算量は\(O(log(max(a,b)))\)&lt;/p&gt;
-
-&lt;p&gt;ここで返り値はpair&amp;lt;ll,pair&amp;lt;ll,ll»となっているが、それぞれ\(\{g,\{x,y\}\}\)を表している&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;std::pair&amp;lt;long long,std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; extgcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&amp;lt;long long&amp;gt; q;
-    while(b!=0){
-        long long r = a%b;
-        r+=b;
-        r%=b;
-        long long q_ = (a-r)/b;
-        q.push_back(q_);
-        a = b;
-        b = r;
-    }
-    
-    long long g=a,x=1,y=0;
-    if(g&amp;lt;0){
-        g*=-1;
-        x*=-1;
-    }
-    for(int i=-1+(int)q.size();i&amp;gt;=0;i--){
-        long long tmp = y;
-        y = x-q[i]*y;
-        x = tmp;
-    }
-    
-    return {g,{x,y}};
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;使用例&quot;&gt;使用例&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;実行コード&quot;&gt;実行コード&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-
-std::pair&amp;lt;long long,std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; extgcd(long long a,long long b){/*省略*/}
-
-signed main() {
-    
-    std::pair&amp;lt;long long,std::pair&amp;lt;long long,long long&amp;gt;&amp;gt; R;
-    R = extgcd(111,30);
-    long long g = R.first, x = R.second.first, y = R.second.second;
-    
-    std::cout &amp;lt;&amp;lt; &quot;111と30の最大公約数&quot; &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; g &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    
-    std::cout &amp;lt;&amp;lt; &quot;111x+30y=3を満たすような(x,y)の一例&quot; &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; &quot;(&quot; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &quot;,&quot; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; &quot;)&quot; &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; std::endl;
-    
-    
-    std::cout &amp;lt;&amp;lt; &quot;111x+30y&quot; &amp;lt;&amp;lt; std::endl;
-    std::cout &amp;lt;&amp;lt; 111*x+30*y &amp;lt;&amp;lt; std::endl;
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;出力&quot;&gt;出力&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;111と30の最大公約数
-3
-
-111x+30y=3を満たすような(x,y)の一例
-(3,-11)
-
-111x+30y
-3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;更新履歴&quot;&gt;更新履歴&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;日時&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/04/08&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;欠落していた計算量を追加&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2021/04/08&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;拡張ユークリッドの互除法を追加&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね</summary></entry></feed>
+&lt;/table&gt;</content><author><name></name></author><summary type="html">DSU(disjoint set union)とも</summary></entry></feed>

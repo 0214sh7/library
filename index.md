@@ -16,6 +16,7 @@ layout: page
 
 <h2>アルゴリズム</h2>
 - [二次元配列の回転](./posts/vector2d-rotate)
+- [ランレングス圧縮](./posts/run-length-encode)
 - [偏角ソート](./posts/arg-sort)
 - [反復写像](./posts/iterated-function)
 - [スライド最小値](./posts/slideminimum)
