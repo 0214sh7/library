@@ -22,6 +22,7 @@ layout: page
 - [スライド最小値](./posts/slideminimum)
 - [座標圧縮](./posts/compress)
 - [最長増加部分列](./posts/lis)
+- [Moのアルゴリズム](./posts/mos-algorithm)
 - [ローリングハッシュ](./posts/rollinghash)
 
 <h2>グラフ</h2>
