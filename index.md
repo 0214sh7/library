@@ -6,13 +6,14 @@ layout: page
 
 <h2>数学</h2>
 - [数学詰め合わせパック](./posts/basic-math)
-- [二項係数](./posts/binomial-coefficient)
+- [素数mod二項係数](./posts/binomial-coefficient)
 - [素因数分解(線形篩)](./posts/sieve)
 - [拡張ユークリッドの互除法](./posts/bezout-coef)
 - [凸包](./posts/convexhull)
 - [オイラーのφ関数](./posts/totient)
 - [高速フーリエ変換(FFT)](./posts/fft)
 - [数論変換(NTT)](./posts/ntt)
+- [任意mod二項係数](./posts/composite-binomial-coefficient)
 
 <h2>アルゴリズム</h2>
 - [二次元配列の回転](./posts/vector2d-rotate)

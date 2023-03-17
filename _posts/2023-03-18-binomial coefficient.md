@@ -1,5 +1,5 @@
 ﻿---
-title: "二項係数"
+title: "素数mod二項係数"
 permalink: /posts/binomial-coefficient
 writer: 0214sh7
 layout: library
@@ -150,6 +150,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/03/18 | 名称を二項係数から素数mod二項係数に変更 |
 | 2021/03/25 | 使用例、コンストラクタを追加 |
 | 2021/02/18 | nを指定してvectorを返す形式からclass化しn,rからnCrを返す形式に変更 |
 | 2020/04/04 | 二項係数を追加 |
