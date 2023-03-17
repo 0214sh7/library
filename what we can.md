@@ -17,13 +17,14 @@ layout: page
 | 素因数分解をしたい | [素因数分解](../posts/basic-math#素因数分解) <br> [素因数分解(線形篩)](../posts/sieve) |
 | 累乗を求めたい | [累乗(繰り返し二乗法)](../posts/basic-math#累乗繰り返し二乗法) |
 | MOD逆元を求めたい | [逆元(素数MOD)](../posts/basic-math#逆元素数mod) |
-| nCr (二項係数)を求めたい | [二項係数](../posts/binomial-coefficient) |
+| 素数modでnCr (二項係数)を求めたい | [素数mod二項係数](../posts/binomial-coefficient) |
 | 0^M , 1^M , ... , N^M を高速に求めたい | [素因数分解(線形篩)](../posts/sieve) |
 | ax+by=gcd(a,b)を満たす(x,y)を一つ求めたい | [拡張ユークリッドの互除法](../posts/bezout-coef) |
 | 二次元の点集合の凸包を求めたい | [凸包](../posts/convexhull) |
 | ある整数nについて、1~nのうちnと互いに素なものの数を求めたい | [オイラーのφ関数](../posts/totient) |
 | 浮動小数点数で数列の畳み込みをしたい | [高速フーリエ変換(FFT)](../posts/fft) |
 | 整数環で数列の畳み込みをしたい | [数論変換(NTT)](../posts/ntt) |
+| 合成数を含む任意のmodでnCr (二項係数)を求めたい | [任意mod二項係数](../posts/binomial-coefficient) |
 |  |  |
 | 二次元配列を(反)時計回りに回転させたい | [二次元配列の回転](../posts/vector2d-rotate) |
 | 文字列をランレングス圧縮したい | [ランレングス圧縮](../posts/run-length-encode) |

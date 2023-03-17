@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>任意mod二項係数 | すくライブラリ</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="任意mod二項係数" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="計算量の異なる \(2\) つのコードがある" />
+<meta property="og:description" content="計算量の異なる \(2\) つのコードがある" />
+<link rel="canonical" href="http://localhost:4000/library/posts/composite-binomial-coefficient" />
+<meta property="og:url" content="http://localhost:4000/library/posts/composite-binomial-coefficient" />
+<meta property="og:site_name" content="すくライブラリ" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-18T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="任意mod二項係数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-18T00:00:00+09:00","datePublished":"2023-03-18T00:00:00+09:00","description":"計算量の異なる \\(2\\) つのコードがある","headline":"任意mod二項係数","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/composite-binomial-coefficient"},"url":"http://localhost:4000/library/posts/composite-binomial-coefficient"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/library/">すくライブラリ</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/library/about/">ABOUT</a><a class="page-link" href="/library/license/">LICENSE</a><a class="page-link" href="/library/whatwecan/">できること一覧</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">任意mod二項係数</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-03-18T00:00:00+09:00" itemprop="datePublished">Mar 18, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>任意mod二項係数</title>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  
+  <body>
+    <p>計算量の異なる \(2\) つのコードがある</p>
+
+<p><a href="https://github.com/0214sh7/procon-library/blob/master/math/composite%20binomial%20coefficient.cpp">github</a></p>
+
+<ul>
+  <li><a href="#その１">その１</a>
+    <ul>
+      <li>\(n,r \leq 10^{18}, mod \leq 10^6\) 程度の場合に計算できる</li>
+    </ul>
+  </li>
+  <li><a href="#その２">その２</a>
+    <ul>
+      <li>\(n,r \leq 10^6, mod \leq 10^9\) 程度の場合に計算できる</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="その１">その１</h2>
+
+<p>init</p>
+<ul>
+  <li>mod \(M\)を与えると、combを実行するのに必要な数値を前計算する</li>
+  <li>計算量は \(M\) の素因数分解を \(\prod_{i=1}^{\omega(M)}{ {p_i}^{e_i}}\) とすると \(Ο( \sum_{i=1}^{\omega(M)}{ {p_i}^{e_i}} + \sqrt{M})\)
+    <ul>
+      <li>\(\omega(m)\) は \(m\) の素因数の個数、\(m \leq 10^9\) のとき \(\omega(m) \leq 10\)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>composite_binomial_coefficient_1</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
+
+<p>comb</p>
+<ul>
+  <li>整数\(n,r\)を与えると、\(\frac{n!}{r!(n-r)!}\)を\(M\)で割った余りを返す</li>
+  <li>extensionはないため、\(n\) にinitで与えた \(N\) より大きい値を与えた場合の挙動は保証しない</li>
+  <li>計算量は\(Ο( (\log n + \log M) \omega(M) )\)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class composite_binomial_coefficient_1{
+    /*
+    Copyright (c) 2023 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    long long Mod;    
+    std::vector&lt;std::array&lt;long long,3&gt;&gt; P;
+    std::vector&lt;std::vector&lt;long long&gt;&gt; fact,factinv;
+
+    std::pair&lt;long long,long long&gt; bezout(long long a,long long b){
+        if(b==0){
+            return {1,0};
+        }
+        long long r = a%b, q = (a-r)/b;
+        std::pair&lt;long long,long long&gt; D = bezout(b,r);
+        return {D.second,D.first-q*D.second};
+    }
+
+    public:
+
+    void init(long long M){
+
+        if(M&lt;1){
+            return;
+        }
+
+        Mod = M;
+
+        //Mを素因数分解する
+        //Pは{素数,個数,素数^個数}
+        P.clear();
+        long long m = M;
+        for(int i=2;i*i&lt;=m;i++){
+            int v = 1;
+            int e = 0;
+            while(m%i==0){
+                e++;
+                m /= i;
+                v *= i;
+            }
+            if(e&gt;0){
+                P.push_back({i,e,v});
+            }
+        }
+        if(m!=1){
+            P.push_back({m,1,m});
+        }
+
+        //用いる素数pについて、(x!)_p := (1~xでpと互いに素なものの積)を求める
+        fact.clear();
+        fact.resize(P.size());
+        factinv.clear();
+        factinv.resize(P.size());
+
+        for(int i=0;i&lt;(int)P.size();i++){
+            fact[i].resize(P[i][2]);
+            fact[i][0] = 1;
+            for(int j=1;j&lt;P[i][2];j++){
+                if(j%P[i][0]==0){
+                    fact[i][j] = fact[i][j-1];
+                }else{
+                    fact[i][j] = (fact[i][j-1]*j)%P[i][2];
+                }
+            }
+
+            factinv[i].resize(P[i][2]);
+            factinv[i][P[i][2]-1] = bezout(fact[i][P[i][2]-1],P[i][2]).first;
+            if(factinv[i][P[i][2]-1]&lt;0)factinv[i][P[i][2]-1] += P[i][2];
+            
+            for(int j=P[i][2]-2;j&gt;=0;j--){
+                if((j+1)%P[i][0]==0){
+                    factinv[i][j] = factinv[i][j+1];
+                }else{
+                    factinv[i][j] = (factinv[i][j+1]*(j+1))%P[i][2];
+                }
+            }
+        }
+    }
+
+    composite_binomial_coefficient_1(long long mod){
+        init(mod);
+    }
+
+    long long comb(long long n,long long r){
+        
+        if(n&lt;0 || r&lt;0 || n&lt;r || Mod==1){
+            return 0;
+        }
+        long long k = n-r;
+
+        //各p^qについてnCr mod p^qを求めてLにまとめる
+        std::vector&lt;std::pair&lt;long long,long long&gt;&gt; L(P.size());
+
+        for(int i=0;i&lt;(int)P.size();i++){
+            long long p = P[i][0], q = P[i][1], pq = P[i][2];
+
+            std::vector&lt;long long&gt; N,K,R;
+            long long nown = n, nowk = k, nowr = r;
+            while(nown&gt;0){
+                N.push_back(nown%pq);
+                K.push_back(nowk%pq);
+                R.push_back(nowr%pq);
+                nown /= p;
+                nowk /= p;
+                nowr /= p;
+            }
+
+            long long e0 = 0, e1 = 0;
+            nown = n/p, nowk = k/p, nowr = r/p;
+            while(nown &gt; 0){
+                e0 += nown;
+                e0 -= nowk;
+                e0 -= nowr;
+                nown /= p;
+                nowk /= p;
+                nowr /= p;
+            }
+            nown = n/pq, nowk = k/pq, nowr = r/pq;
+            while(nown &gt; 0){
+                e1 += nown;
+                e1 -= nowk;
+                e1 -= nowr;
+                nown /= p;
+                nowk /= p;
+                nowr /= p;
+            }
+            
+            long long T = 1;
+            if((p!=2 || q&lt;3) &amp;&amp; e1%2 == 1){
+                T = pq-1;
+            }
+
+            for(int j=0;j&lt;(int)N.size();j++){
+                T = (T*fact[i][N[j]])%pq;
+                T = (T*factinv[i][K[j]])%pq;
+                T = (T*factinv[i][R[j]])%pq;
+            }
+
+            for(int j=0;j&lt;std::min(q,e0);j++){
+                T = (T*p)%pq;
+            }
+
+            L[i] = {T,pq};
+        }
+
+        //中国剰余定理を用いて復元する
+        std::pair&lt;long long,long long&gt; C = L[0];
+        for(int i=1;i&lt;(int)P.size();i++){
+            long long q = C.second*L[i].second;
+            std::pair&lt;long long,long long&gt; u = bezout(C.second,L[i].second);
+            long long c = (((C.first*L[i].second)%q)*u.second)%q;
+            long long d = (((L[i].first*C.second)%q)*u.first)%q;
+            C.first = (c+d+q)%q;
+            C.second = q;
+        }
+
+        return C.first;
+    }
+};
+</code></pre></div></div>
+
+<h3 id="使用例">使用例</h3>
+<hr />
+
+<h4 id="実行コード">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class composite_binomial_coefficient_1{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "10で割ったあまり" &lt;&lt; std::endl; 
+    composite_binomial_coefficient_1 CBC(10);
+    for(int i=0;i&lt;=8;i++){
+        for(int j=0;j&lt;=i;j++){
+            std::cout &lt;&lt; CBC.comb(i,j) &lt;&lt; " ";
+        }std::cout &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; "もとの値" &lt;&lt; std::endl;
+    composite_binomial_coefficient_1 CBC_origin(1000);
+    for(int i=0;i&lt;=8;i++){
+        for(int j=0;j&lt;=i;j++){
+            std::cout &lt;&lt; CBC_origin.comb(i,j) &lt;&lt; " ";
+        }std::cout &lt;&lt; std::endl;
+    }
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10で割ったあまり
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 0 0 5 1 
+1 6 5 0 5 6 1 
+1 7 1 5 5 1 7 1 
+1 8 8 6 0 6 8 8 1 
+
+もとの値
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+1 8 28 56 70 56 28 8 1 
+
+</code></pre></div></div>
+
+<h3 id="更新履歴">更新履歴</h3>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2023/03/18</td>
+      <td style="text-align: left">任意mod二項係数を追加</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="確認した問題">確認した問題</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">問題</th>
+      <th style="text-align: left">提出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://judge.yosupo.jp/problem/binomial_coefficient">Library Checker</a></td>
+      <td style="text-align: left"><a href="https://judge.yosupo.jp/submission/130133">提出</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="その２">その２</h2>
+
+<p>init</p>
+<ul>
+  <li>整数\(N\)とmod \(M\)を与えると、combを実行するのに必要な数値を前計算する</li>
+  <li>計算量は \(Ο(N \log N + N \omega(M) + \sqrt{M})\)
+    <ul>
+      <li>\(\omega(m)\) は \(m\) の素因数の個数、\(m \leq 10^9\) のとき \(\omega(m) \leq 10\)
+<!-- √M + Nω(M) + Ω(N!) , もっとタイトな評価ができそう --></li>
+    </ul>
+  </li>
+</ul>
+
+<p>composite_binomial_coefficient_2</p>
+<ul>
+  <li>コンストラクタ。initを呼ぶ</li>
+</ul>
+
+<p>comb</p>
+<ul>
+  <li>整数\(n,r\)を与えると、\(\frac{n!}{r!(n-r)!}\)を\(M\)で割った余りを返す</li>
+  <li>extensionはないため、\(n\) にinitで与えた \(N\) より大きい値を与えた場合の挙動は保証しない</li>
+  <li>計算量は\(Ο(\log M + \omega(M) )\)
+    <ul>
+      <li>特に、 \(n,r\) に依存しない</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class composite_binomial_coefficient_2{
+    /*
+    Copyright (c) 2023 0214sh7
+    https://github.com/0214sh7/library/
+    */
+    private:
+    int sze = 0;
+    long long Mod;
+    std::vector&lt;long long&gt; P;
+    std::vector&lt;long long&gt; d,prime;
+    std::vector&lt;int&gt; index;
+    std::vector&lt;long long&gt; factPri;
+    std::vector&lt;std::vector&lt;long long&gt;&gt; factRel;
+    std::vector&lt;std::vector&lt;long long&gt;&gt; power;
+
+    std::pair&lt;long long,long long&gt; bezout(long long a,long long b){
+        if(b==0){
+            return {1,0};
+        }
+        long long r = a%b, q = (a-r)/b;
+        std::pair&lt;long long,long long&gt; D = bezout(b,r);
+        return {D.second,D.first-q*D.second};
+    }
+
+    public:
+
+    void init(int N,long long M){
+
+        if(N&lt;0 || M&lt;1){
+            return;
+        }
+
+        if(M==1){
+            Mod = M;
+            return;
+        }
+
+        sze = N+1;
+        Mod = M;
+        
+        //1~Nの非自明な約数を求める
+        d.resize(N+1);
+        std::fill(d.begin(),d.end(),0);
+        prime.clear();
+        index.resize(N+1);
+        std::fill(index.begin(),index.end(),-1);
+
+        if(N&gt;0){
+            d[1] = 1;
+        }
+        for(long long i=2;i&lt;=N;i++){
+            if(d[i]==0){
+                d[i]=i;
+                prime.push_back(i);
+            }
+            for(int j=0;j&lt;(int)prime.size() &amp;&amp; prime[j]&lt;=d[i] &amp;&amp; i*prime[j]&lt;=N ;j++){
+                d[prime[j]*i]=prime[j];
+            }
+        }
+        
+        //法が含む素数のリストを求める
+        P.clear();
+        for(int i=2;i*i&lt;=M;i++){
+            int e = 0;
+            while(M%i==0){
+                e++;
+                M /= i;
+            }
+            if(e&gt;0){
+                if(i&lt;=N)index[i] = P.size();
+                P.push_back(i);
+            }
+        }
+        if(M!=1){
+            if(M&lt;=N)index[M] = P.size();
+            P.push_back(M);
+        }
+
+        //k!について、Mと互いに素である部分とそうでない部分に分けてそれぞれ求める
+        factPri.resize(N+1);
+        std::fill(factPri.begin(),factPri.end(),1);
+        factRel.resize(N+1);
+        for(int i=0;i&lt;=N;i++){
+            factRel[i].resize(P.size());
+            std::fill(factRel[i].begin(),factRel[i].end(),0);
+        }
+
+        for(int i=2;i&lt;=N;i++){
+
+            factPri[i] = factPri[i-1];
+            factRel[i] = factRel[i-1];
+
+            long long now = i;
+            while(now&gt;1){
+                long long p = d[now];
+                if(index[p]==-1){
+                    factPri[i] = (factPri[i]*p)%Mod;
+                }else{
+                    factRel[i][index[p]]++;
+                }
+                now /= p;
+            }
+        }
+
+        //p^0,p^1,...,p^(N/p)を前計算する
+        power.resize(P.size());
+        for(int i=0;i&lt;(int)P.size();i++){
+            power[i].resize(1+N/P[i]);
+            power[i][0] = 1;
+            for(int j=1;j&lt;1+N/P[i];j++){
+                power[i][j] = (power[i][j-1]*P[i])%Mod;
+            }
+        }
+
+    }
+
+    composite_binomial_coefficient_2(int N,long long M){
+        init(N,M);
+    }
+
+    long long comb(long long n,long long r){
+        if(Mod==1){
+            return 0;
+        }
+        if(n&lt;0 || r&lt;0 || n&lt;r){
+            return 0;
+        }
+
+        long long R = factPri[n];
+        long long m = bezout(factPri[r],Mod).first;
+        if(m&lt;0)m+=Mod;
+        R = (R*m)%Mod;
+        m = bezout(factPri[n-r],Mod).first;
+        if(m&lt;0)m+=Mod;
+        R = (R*m)%Mod;
+
+        for(int i=0;i&lt;(int)P.size();i++){
+            int e = factRel[n][i] - factRel[r][i] - factRel[n-r][i];
+            assert(e&gt;=0);
+            R = (R*power[i][e])%Mod;
+        }
+
+        return R;
+    }
+
+};
+</code></pre></div></div>
+
+<h3 id="使用例-1">使用例</h3>
+<hr />
+
+<h4 id="実行コード-1">実行コード</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+
+class composite_binomial_coefficient_2{/*省略*/};
+
+int main(void){
+    
+    std::cout &lt;&lt; "10で割ったあまり" &lt;&lt; std::endl; 
+    composite_binomial_coefficient_2 CBC(8,10);
+    for(int i=0;i&lt;=8;i++){
+        for(int j=0;j&lt;=i;j++){
+            std::cout &lt;&lt; CBC.comb(i,j) &lt;&lt; " ";
+        }std::cout &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; "もとの値" &lt;&lt; std::endl;
+    composite_binomial_coefficient_2 CBC_origin(8,1000);
+    for(int i=0;i&lt;=8;i++){
+        for(int j=0;j&lt;=i;j++){
+            std::cout &lt;&lt; CBC_origin.comb(i,j) &lt;&lt; " ";
+        }std::cout &lt;&lt; std::endl;
+    }
+    
+    return 0;
+}
+</code></pre></div></div>
+
+<h4 id="出力-1">出力</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10で割ったあまり
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 0 0 5 1 
+1 6 5 0 5 6 1 
+1 7 1 5 5 1 7 1 
+1 8 8 6 0 6 8 8 1 
+
+もとの値
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+1 8 28 56 70 56 28 8 1 
+
+</code></pre></div></div>
+
+<h3 id="更新履歴-1">更新履歴</h3>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">日時</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2023/03/18</td>
+      <td style="text-align: left">任意mod二項係数を追加</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="確認した問題-1">確認した問題</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">問題</th>
+      <th style="text-align: left">提出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://atcoder.jp/contests/arc012/tasks/arc012_4">ARC012-D</a></td>
+      <td style="text-align: left"><a href="https://atcoder.jp/contests/arc012/submissions/39798965">提出</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
+  </div><a class="u-url" href="/library/posts/composite-binomial-coefficient" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/library/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">すくライブラリ</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">すくライブラリ</li><li><a class="u-email" href="mailto:0214sh7@gmail.com">0214sh7@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#github"></use></svg> <span class="username">0214sh7</span></a></li><li><a href="https://www.twitter.com/0214sh7"><svg class="svg-icon"><use xlink:href="/library/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">0214sh7</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>descriptionはない</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
