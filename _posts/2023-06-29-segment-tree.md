@@ -26,7 +26,7 @@ query
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/segment%20tree.cpp)
 
-```
+```cpp
 template<typename T>
 class segmenttree{
     // Copyright (c) 2023 0214sh7
@@ -90,7 +90,7 @@ class segmenttree{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 template<typename T>

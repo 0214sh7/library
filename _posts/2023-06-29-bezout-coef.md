@@ -19,7 +19,7 @@ $$ax+by=g$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp)
 
-```
+```cpp
 std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long b){
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -53,7 +53,7 @@ std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long b){/*省略*/}

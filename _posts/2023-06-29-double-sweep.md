@@ -29,7 +29,7 @@ diameter
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/double%20sweep.cpp)
 
-```
+```cpp
 class double_sweep{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -133,7 +133,7 @@ class double_sweep{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class double_sweep{/*省略*/};

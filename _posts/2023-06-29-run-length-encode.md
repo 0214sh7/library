@@ -14,7 +14,7 @@ layout: library
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/runlength%20encode.cpp)
 
-```
+```cpp
 std::vector<std::pair<char,int>> runlength_encode(std::string S){
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -35,7 +35,7 @@ std::vector<std::pair<char,int>> runlength_encode(std::string S){
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<std::pair<char,int>> runlength_encode(std::string S){/*省略*/}

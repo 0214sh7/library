@@ -30,7 +30,7 @@ inversion
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp)
 
-```
+```cpp
 class Fenwick_tree{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -80,7 +80,7 @@ class Fenwick_tree{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class Fenwick_tree{/*省略*/};

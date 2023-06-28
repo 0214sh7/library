@@ -22,7 +22,7 @@ $$[l,r)$$ での答えがわかっているとき、隣接する区間 $$[l-1,r)
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/mos-algorithm.cpp)
 
-```
+```cpp
 std::vector<long long> Mo(int N,int Q,std::vector<std::pair<int,int>> X, 
 std::function<void(int,long long&)> lm, std::function<void(int,long long&)> lp, 
 std::function<void(int,long long&)> rm, std::function<void(int,long long&)> rp){
@@ -119,7 +119,7 @@ $$A = (1,2,3,4,5)$$ の $$[l,r)$$ の和を求める
 
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<long long> Mo(int N,int Q,std::vector<std::pair<int,int>> X, 

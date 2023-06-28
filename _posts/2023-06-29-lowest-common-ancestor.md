@@ -23,7 +23,7 @@ lca
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/lowest%20common%20ancestor.cpp)
 
-```
+```cpp
 class lowest_common_ancestor{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -109,7 +109,7 @@ class lowest_common_ancestor{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class lowest_common_ancestor{/*省略*/};

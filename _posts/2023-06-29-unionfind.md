@@ -39,7 +39,7 @@ size
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/union%20find.cpp)
 
-```
+```cpp
 class unionfind{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -98,7 +98,7 @@ class unionfind{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class unionfind{/*省略*/};

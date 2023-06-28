@@ -20,7 +20,7 @@ solve
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/iterated%20function.cpp)
 
-```
+```cpp
 class iterated_function{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -68,7 +68,7 @@ class iterated_function{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class iterated_function{/*省略*/};

@@ -26,7 +26,7 @@ comb
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/binomial%20coefficient.cpp)
 
-```
+```cpp
 class binomial_coefficient{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -114,7 +114,7 @@ class binomial_coefficient{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class binomial_coefficient{/*省略*/};

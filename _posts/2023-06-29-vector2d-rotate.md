@@ -15,7 +15,7 @@ layout: library
 
 [github]()
 
-```
+```cpp
 std::vector<std::vector<char>> vector2D_rotate(std::vector<std::vector<char>> A,bool clockwise=false,char leading = 0){
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -47,7 +47,7 @@ std::vector<std::vector<char>> vector2D_rotate(std::vector<std::vector<char>> A,
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<std::vector<char>> vector2D_rotate(std::vector<std::vector<char>> A,bool clockwise=false,char leading = 0){/*省略*/}

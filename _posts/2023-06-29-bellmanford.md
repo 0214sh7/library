@@ -22,7 +22,7 @@ solve
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/BellmanFord.cpp)
 
-```
+```cpp
 class BellmanFord{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -77,7 +77,7 @@ class BellmanFord{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class BellmanFord{/*省略*/};

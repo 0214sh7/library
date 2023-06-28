@@ -13,7 +13,7 @@ layout: library
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/bipartite%20graph.cpp)
 
-```
+```cpp
 std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -61,7 +61,7 @@ std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){/*省略*/}

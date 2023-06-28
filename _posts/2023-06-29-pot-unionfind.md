@@ -23,7 +23,7 @@ diff
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp)
 
-```
+```cpp
 class potentialized_unionfind{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -94,7 +94,7 @@ class potentialized_unionfind{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class potentialized_unionfind{/*省略*/};

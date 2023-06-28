@@ -33,7 +33,7 @@ connect
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/rollinghash.cpp)
 
-```
+```cpp
 class rollinghash{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -161,7 +161,7 @@ class rollinghash{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class rollinghash{/*省略*/};

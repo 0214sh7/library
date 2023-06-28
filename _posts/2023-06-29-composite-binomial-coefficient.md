@@ -33,7 +33,7 @@ comb
 - 計算量は$$Ο( (\log n + \log M) \omega(M) )$$
 
 
-```
+```cpp
 class composite_binomial_coefficient_1{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -199,7 +199,7 @@ class composite_binomial_coefficient_1{
 ***
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class composite_binomial_coefficient_1{/*省略*/};
@@ -288,7 +288,7 @@ comb
   - 特に、 $$n,r$$ に依存しない
 
 
-```
+```cpp
 class composite_binomial_coefficient_2{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
@@ -440,7 +440,7 @@ class composite_binomial_coefficient_2{
 ***
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class composite_binomial_coefficient_2{/*省略*/};
