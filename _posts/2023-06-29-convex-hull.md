@@ -17,10 +17,8 @@ layout: library
 
 ```
 std::vector<std::pair<long long,long long>> convex_hull(std::vector<std::pair<long long,long long>> P){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(P.size()<=2){
         return P;
     }
@@ -97,5 +95,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/25 | 使用例を追加 |
 | 2020/04/22 | 凸包を追加 |

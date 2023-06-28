@@ -17,10 +17,8 @@ layout: library
 
 ```
 std::vector<std::vector<char>> vector2D_rotate(std::vector<std::vector<char>> A,bool clockwise=false,char leading = 0){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     int N = A.size();
     if(N==0)return A;
     
@@ -120,4 +118,5 @@ i f c
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/09/12 | 二次元配列の回転を追加 |

@@ -16,10 +16,8 @@ $$R_i = min(A_i , A_{i+1} , ... , A_{i+K-1})$$
 
 ```
 std::vector<long long> slide_minimum(std::vector<long long> A,int K){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     int N = A.size();
     std::deque<int> D;
@@ -73,5 +71,6 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例を追加 |
 | 2020/04/23 | スライド最小値を追加 |

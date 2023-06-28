@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/rollinghash" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="ローリングハッシュ" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-25T00:00:00+09:00","datePublished":"2023-03-25T00:00:00+09:00","description":"MOD \\(2^{61}-1\\)と\\(2\\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？","headline":"ローリングハッシュ","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/rollinghash"},"url":"http://localhost:4000/library/posts/rollinghash"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"MOD \\(2^{61}-1\\)と\\(2\\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？","headline":"ローリングハッシュ","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/rollinghash"},"url":"http://localhost:4000/library/posts/rollinghash"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">ローリングハッシュ</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2023-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2023
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -93,10 +93,8 @@
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/rollinghash.cpp">github</a></p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rollinghash</span><span class="p">{</span>
-    <span class="cm">/*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
     <span class="nl">private:</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span> <span class="o">&lt;&lt;</span> <span class="mi">61</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Base</span> <span class="o">=</span> <span class="p">{</span><span class="mi">12345</span><span class="p">,</span><span class="mi">10000000</span><span class="p">};</span>
@@ -306,6 +304,10 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/03/25</td>
       <td style="text-align: left">connectを追加</td>

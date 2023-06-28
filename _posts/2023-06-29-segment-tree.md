@@ -29,10 +29,8 @@ query
 ```
 template<typename T>
 class segmenttree{
-    /*
-    Copyright (c) 2022 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     int n;
     
@@ -136,6 +134,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2022/01/30 | バグを修正 |
 | 2022/01/30 | 任意の型に対応 |
 | 2021/10/10 | バグを修正 |

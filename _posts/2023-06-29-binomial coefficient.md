@@ -28,10 +28,8 @@ comb
 
 ```
 class binomial_coefficient{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     const long long MOD = 998244353;
     int sze = 0;
@@ -150,6 +148,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2023/03/18 | 名称を二項係数から素数mod二項係数に変更 |
 | 2021/03/25 | 使用例、コンストラクタを追加 |
 | 2021/02/18 | nを指定してvectorを返す形式からclass化しn,rからnCrを返す形式に変更 |

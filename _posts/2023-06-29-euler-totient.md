@@ -24,10 +24,8 @@ $$\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})$$
 
 ```
 int totient(int N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(N<0){
         return 0;
     }
@@ -113,5 +111,6 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/25 | 使用例を追加 |
 | 2020/04/16 | オイラーのφ関数を追加 |

@@ -22,10 +22,8 @@ solve
 
 ```
 class iterated_function{
-    /*
-    Copyright (c) 2022 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     std::vector<int> T[64];
     int N;
@@ -109,6 +107,7 @@ int main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2022/07/03 | 反復写像を追加 |
 
 ## 確認した問題

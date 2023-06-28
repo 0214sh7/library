@@ -31,10 +31,8 @@ diameter
 
 ```
 class double_sweep{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     const long long INF = (1LL<<61);
     int V,V1,V2;
@@ -189,4 +187,5 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2020/10/15 | 木の直径を追加 |

@@ -35,10 +35,8 @@ layout: library
 
 ```
 long long roundup(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     return (a+b-1)/b;
 }
 ```
@@ -83,10 +81,8 @@ int main(void){
 
 ```
 long long fact(long long x,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long k=1;
     for(int i=1;i<=x;i++){
         k=(k*i)%MOD;
@@ -129,10 +125,8 @@ int main(void){
 
 ```
 long long gcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     a=std::abs(a);
     b=std::abs(b);
     if(a>b)std::swap(a,b);
@@ -188,10 +182,8 @@ int main(void){
 
 ```
 long long lcm(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(std::abs(a)>std::abs(b))std::swap(a,b);
     if(a==0){
         return b;
@@ -252,10 +244,8 @@ int main(void){
 
 ```
 std::vector<long long> divisor_enum(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     if(N<=0)return R;
     long long s=0;
@@ -320,10 +310,8 @@ signed main() {
 
 ```
 bool prime(long long X){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(X<2)return false;
     for(long long i=2;i*i<=X;i++){
         if(X%i==0){
@@ -374,10 +362,8 @@ int main(void){
 
 ```
 std::vector<long long> primearray(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     std::vector<bool> prime;
     for(int i=0;i<=N;i++){
@@ -439,10 +425,8 @@ int main(void){
 
 ```
 std::vector<long long> prime_factorization(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     if(N<2)return R;
     for(long long i=2;i*i<=N;i++){
@@ -503,10 +487,8 @@ int main(void){
 
 ```
 long long power(long long b,long long e,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long r=1;
     while(e){
         if(e&1){
@@ -564,10 +546,8 @@ int main(void){
 
 ```
 long long inverse(long long b,long long MOD){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long r=1,e=MOD-2;
     while(e){
         if(e&1){
@@ -619,6 +599,7 @@ mod 7でのiの逆元
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/04/05 | 約数列挙を追加 |
 | 2021/03/27 | 使用例を追加 |
 | 2021/03/26 | 軽微なバグを修正 |

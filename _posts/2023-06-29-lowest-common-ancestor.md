@@ -25,10 +25,8 @@ lca
 
 ```
 class lowest_common_ancestor{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     int V,LOG;
     std::vector<std::vector<long long>> G,table;
@@ -166,4 +164,5 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2020/10/10 | 最小共通祖先を追加 |

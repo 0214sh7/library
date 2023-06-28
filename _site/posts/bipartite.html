@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/bipartite" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-26T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="二部グラフ判定" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-26T00:00:00+09:00","datePublished":"2021-03-26T00:00:00+09:00","description":"無向グラフを、辺の始点と終点を表現したpair&lt;int,int&gt;のvectorとして与える。 すると、sizeが\\(max(点の番号)+1\\)のvectorが返ってくる。すべての要素は\\(0\\)または\\(1\\)である。 これは、与えられたグラフを二部グラフとして表現するとき\\(i\\)番目の要素は\\(0\\)と\\(1\\)どちらに属するかを表している。 また二部グラフでないとき全ての要素は\\(0\\)である。 計算量は\\(Ο(V+E)\\)","headline":"二部グラフ判定","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bipartite"},"url":"http://localhost:4000/library/posts/bipartite"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"無向グラフを、辺の始点と終点を表現したpair&lt;int,int&gt;のvectorとして与える。 すると、sizeが\\(max(点の番号)+1\\)のvectorが返ってくる。すべての要素は\\(0\\)または\\(1\\)である。 これは、与えられたグラフを二部グラフとして表現するとき\\(i\\)番目の要素は\\(0\\)と\\(1\\)どちらに属するかを表している。 また二部グラフでないとき全ての要素は\\(0\\)である。 計算量は\\(Ο(V+E)\\)","headline":"二部グラフ判定","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bipartite"},"url":"http://localhost:4000/library/posts/bipartite"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">二部グラフ判定</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-26T00:00:00+09:00" itemprop="datePublished">Mar 26, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -65,10 +65,8 @@
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/bipartite%20graph.cpp">github</a></p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bipartite</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">){</span>
-    <span class="cm">/*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
     <span class="kt">int</span> <span class="n">E</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="n">E</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="p">{};</span>
     <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -164,6 +162,10 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/03/26</td>
       <td style="text-align: left">使用例を追加</td>

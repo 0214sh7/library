@@ -24,10 +24,8 @@ solve
 
 ```
 class BellmanFord{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     typedef std::pair<std::pair<int,int>,long long> P;
     int V,E;
@@ -133,6 +131,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/25 | 使用例、コンストラクタを追加 |
 | 2021/03/25 | バグを修正/コメントを削除 |
 | 2020/04/04 | ベルマンフォード法を追加 |

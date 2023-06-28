@@ -35,10 +35,8 @@ connect
 
 ```
 class rollinghash{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     static constexpr long long mod = (1LL << 61)-1;
     std::vector<long long> Base = {12345,10000000};
@@ -244,6 +242,7 @@ int main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2023/03/25 | connectを追加 |
 | 2023/03/25 | ハッシュ対象をstringからvector<long long>に変更 |
 | 2022/06/26 | constexprによる最適化を実行 |

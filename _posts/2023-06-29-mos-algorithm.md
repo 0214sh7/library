@@ -26,10 +26,8 @@ $$[l,r)$$ での答えがわかっているとき、隣接する区間 $$[l-1,r)
 std::vector<long long> Mo(int N,int Q,std::vector<std::pair<int,int>> X, 
 std::function<void(int,long long&)> lm, std::function<void(int,long long&)> lp, 
 std::function<void(int,long long&)> rm, std::function<void(int,long long&)> rp){
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     int rQ;
     std::map<std::pair<int,int>,std::vector<int>> index;
     std::vector<int> block(N,0);
@@ -202,6 +200,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2023/03/13 | Moのアルゴリズムを追加 |
 
 ## 確認した問題

@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/vector2d-rotate" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-09-12T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="二次元配列の回転" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-09-12T00:00:00+09:00","datePublished":"2021-09-12T00:00:00+09:00","description":"二次元配列\\(A\\)を与えると、\\(A\\)を反時計回りに回転させ返す","headline":"二次元配列の回転","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/vector2d-rotate"},"url":"http://localhost:4000/library/posts/vector2d-rotate"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"二次元配列\\(A\\)を与えると、\\(A\\)を反時計回りに回転させ返す","headline":"二次元配列の回転","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/vector2d-rotate"},"url":"http://localhost:4000/library/posts/vector2d-rotate"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">二次元配列の回転</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-09-12T00:00:00+09:00" itemprop="datePublished">Sep 12, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -67,10 +67,8 @@
 <p><a href="">github</a></p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">vector2D_rotate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">,</span><span class="kt">bool</span> <span class="n">clockwise</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="kt">char</span> <span class="n">leading</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span>
-    <span class="cm">/*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
     <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">A</span><span class="p">;</span>
     
@@ -173,6 +171,10 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/09/12</td>
       <td style="text-align: left">二次元配列の回転を追加</td>

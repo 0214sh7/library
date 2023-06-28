@@ -41,10 +41,8 @@ size
 
 ```
 class unionfind{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     std::vector<int> UF,rank,size_;
     public:
@@ -152,6 +150,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/08/31 | sizeを追加 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | UnionFindを追加 |

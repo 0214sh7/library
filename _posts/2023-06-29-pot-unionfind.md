@@ -25,10 +25,8 @@ diff
 
 ```
 class potentialized_unionfind{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     std::vector<int> UF,rank,pot;
     public:
@@ -153,5 +151,6 @@ false
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | ポテンシャル付きUnionFindを追加 |
