@@ -79,105 +79,105 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/BellmanFord.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class BellmanFord{
-    /*
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BellmanFord</span><span class="p">{</span>
+    <span class="cm">/*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
-    */
-    private:
-    typedef std::pair&lt;std::pair&lt;int,int&gt;,long long&gt; P;
-    int V,E;
-    long long INF = (1LL&lt;&lt;61);
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; es;
+    */</span>
+    <span class="nl">private:</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">INF</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span><span class="o">&lt;&lt;</span><span class="mi">61</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">es</span><span class="p">;</span>
     
-    public:
-    void init(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
-        //辺数をもとめる　
-        E=edge.size();
-        //頂点数を決定する
-        V=N;
-        es=edge;
-    }
+    <span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">){</span>
+        <span class="c1">//辺数をもとめる　</span>
+        <span class="n">E</span><span class="o">=</span><span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="c1">//頂点数を決定する</span>
+        <span class="n">V</span><span class="o">=</span><span class="n">N</span><span class="p">;</span>
+        <span class="n">es</span><span class="o">=</span><span class="n">edge</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    BellmanFord(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
-        init(N,edge);
-    }
+    <span class="n">BellmanFord</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">edge</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    std::vector&lt;std::pair&lt;long long,bool&gt;&gt; solve(int s){
-        std::vector&lt;std::pair&lt;long long,bool&gt;&gt; d;
-        //INFで初期化する
-        for(int i=0;i&lt;V;i++){
-            d.push_back({INF,false});
-        }
-        d[s].first=0;
-        for(int j=0;j&lt;2*V;j++){
-             bool update=false;
-            for(int i=0;i&lt;E;i++){
-                P k=es[i];
-                if(d[k.first.first].first!=INF &amp;&amp; d[k.first.second].first&gt;d[k.first.first].first+k.second){
-                    d[k.first.second].first=d[k.first.first].first+k.second;
-                    if(j&gt;=V){
-                        d[k.first.second].second=true;
-                    }
-                    update=true;
-                }
-            }
-            if(!update)break;
-        }
-        return d;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">solve</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="p">;</span>
+        <span class="c1">//INFで初期化する</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">d</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">INF</span><span class="p">,</span><span class="nb">false</span><span class="p">});</span>
+        <span class="p">}</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">].</span><span class="n">first</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">V</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+             <span class="kt">bool</span> <span class="n">update</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">E</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">P</span> <span class="n">k</span><span class="o">=</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">first</span><span class="o">!=</span><span class="n">INF</span> <span class="o">&amp;&amp;</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">first</span><span class="o">&gt;</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">first</span><span class="o">+</span><span class="n">k</span><span class="p">.</span><span class="n">second</span><span class="p">){</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">first</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">first</span><span class="o">+</span><span class="n">k</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">V</span><span class="p">){</span>
+                        <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">second</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="n">update</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">update</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+    <span class="p">}</span>
     
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">BellmanFord</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class BellmanFord{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; E;
-    int N = 5;
-    E.push_back({ {0,1},1});
-    E.push_back({ {1,2},2});
-    E.push_back({ {2,3},4});
-    E.push_back({ {2,4},8});
-    E.push_back({ {3,4},10000});
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">E</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="mi">1</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="mi">2</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span><span class="mi">4</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span><span class="mi">8</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span><span class="mi">10000</span><span class="p">});</span>
     
-    BellmanFord bellmanford(N,E);
-    std::vector&lt;std::pair&lt;long long,bool&gt;&gt; B = bellmanford.solve(0);
+    <span class="n">BellmanFord</span> <span class="n">bellmanford</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">E</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">B</span> <span class="o">=</span> <span class="n">bellmanford</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
     
-    for(int i=0;i&lt;N;i++){
-        if(B[i].second==true){
-            std::cout &lt;&lt; "-INF" &lt;&lt; " ";
-        }else{
-            std::cout &lt;&lt; B[i].first &lt;&lt; " ";
-        }
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="o">==</span><span class="nb">true</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"-INF"</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    std::vector&lt;std::pair&lt;long long,bool&gt;&gt; C = bellmanford.solve(1);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">C</span> <span class="o">=</span> <span class="n">bellmanford</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     
-    for(int i=0;i&lt;N;i++){
-        if(C[i].second==true){
-            std::cout &lt;&lt; "-INF" &lt;&lt; " ";
-        }else{
-            std::cout &lt;&lt; C[i].first &lt;&lt; " ";
-        }
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="o">==</span><span class="nb">true</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"-INF"</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 1 3 7 11 
-2305843009213693952 0 2 6 10 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">7</span> <span class="mi">11</span> 
+<span class="mi">2305843009213693952</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">6</span> <span class="mi">10</span> 
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>

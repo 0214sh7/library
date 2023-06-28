@@ -84,119 +84,119 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/math/binomial%20coefficient.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class binomial_coefficient{
-    /*
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">binomial_coefficient</span><span class="p">{</span>
+    <span class="cm">/*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
-    */
-    private:
-    const long long MOD = 998244353;
-    int sze = 0;
-    std::vector&lt;long long&gt; fact;
-    std::vector&lt;long long&gt; factinv;
+    */</span>
+    <span class="nl">private:</span>
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span> <span class="o">=</span> <span class="mi">998244353</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">sze</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">fact</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">factinv</span><span class="p">;</span>
     
-    long long Gfinv(long long b){
-        long long r=1;
-        long long e=MOD-2;
-        while(e){
-            if(e&amp;1){
-                r=(r*b)%MOD;
-            }
-                b=(b*b)%MOD;
-                e &gt;&gt;=1;
-        }
-        return r;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">Gfinv</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">e</span><span class="o">=</span><span class="n">MOD</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">r</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+            <span class="p">}</span>
+                <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+                <span class="n">e</span> <span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    public:
+    <span class="nl">public:</span>
     
-    void init(int N){
-        if(N&lt;0){
-            return ;
-        }
-        sze = N+1;
-        fact.resize(N+1);
-        factinv.resize(N+1);
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">sze</span> <span class="o">=</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">fact</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">factinv</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
         
-        fact[0]=1;
-        for(long long i=1;i&lt;=N;i++){
-            fact[i]=(fact[i-1]*i)%MOD;
-        }
-        factinv[N] = Gfinv(fact[N]);
-        for(long long i=N-1;i&gt;=0;i--){
-            factinv[i]=(factinv[i+1]*(i+1))%MOD;
-        }
-    }
+        <span class="n">fact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">factinv</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">Gfinv</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">N</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+            <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    binomial_coefficient(int N){
-        init(N);
-    }
+    <span class="n">binomial_coefficient</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    void extension(int N){
-        if(sze&gt;N &amp;&amp; sze!=0){
-            return ;
-        }
+    <span class="kt">void</span> <span class="n">extension</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">sze</span><span class="o">&gt;</span><span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">sze</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">;</span>
+        <span class="p">}</span>
         
-        fact.resize(N+1);
-        factinv.resize(N+1);
+        <span class="n">fact</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">factinv</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
         
-        fact[sze]=(sze==0)?1:(fact[sze-1]*sze)%MOD;
+        <span class="n">fact</span><span class="p">[</span><span class="n">sze</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">sze</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">sze</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">sze</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
         
-        for(long long i=sze+1;i&lt;=N;i++){
-            fact[i]=(fact[i-1]*i)%MOD;
-        }
-        factinv[N] = Gfinv(fact[N]);
-        for(long long i=N-1;i&gt;=sze;i--){
-            factinv[i]=(factinv[i+1]*(i+1))%MOD;
-        }
-        sze = N+1;
-    }
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="n">sze</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">factinv</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">Gfinv</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">N</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">sze</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+            <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">sze</span> <span class="o">=</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long comb(long long n,long long r){
-        if(n&lt;0 || r&lt;0 || n&lt;r){
-            return 0;
-        }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">comb</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">r</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
         
-        if(n&gt;=sze){
-            extension(n);
-        }
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="n">sze</span><span class="p">){</span>
+            <span class="n">extension</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="p">}</span>
         
-        long long R = fact[n];
-        R = (R*factinv[r])%MOD;
-        R = (R*factinv[n-r])%MOD;
-        return R;
-    }
-};
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">R</span> <span class="o">=</span> <span class="n">fact</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">factinv</span><span class="p">[</span><span class="n">r</span><span class="p">])</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">factinv</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">])</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">binomial_coefficient</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class binomial_coefficient{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    binomial_coefficient BC(10);
-    for(int i=0;i&lt;=5;i++){
-        for(int j=0;j&lt;=5;j++){
-            std::cout &lt;&lt; BC.comb(i,j) &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
+    <span class="n">binomial_coefficient</span> <span class="n">BC</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">BC</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 0 0 0 0 0 
-1 1 0 0 0 0 
-1 2 1 0 0 0 
-1 3 3 1 0 0 
-1 4 6 4 1 0 
-1 5 10 10 5 1 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">4</span> <span class="mi">1</span> <span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">10</span> <span class="mi">5</span> <span class="mi">1</span> 
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>

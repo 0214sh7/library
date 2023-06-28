@@ -66,100 +66,100 @@
 
 <p><a href="">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::vector&lt;char&gt;&gt; vector2D_rotate(std::vector&lt;std::vector&lt;char&gt;&gt; A,bool clockwise=false,char leading = 0){
-    /*
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">vector2D_rotate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">,</span><span class="kt">bool</span> <span class="n">clockwise</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="kt">char</span> <span class="n">leading</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="cm">/*
     Copyright (c) 2021 0214sh7
     https://github.com/0214sh7/library/
-    */
-    int N = A.size();
-    if(N==0)return A;
+    */</span>
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">A</span><span class="p">;</span>
     
-    int M = 0;
-    for(int i=0;i&lt;N;i++){
-        M = std::max(M,(int)A[i].size());
-    }
+    <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">M</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">());</span>
+    <span class="p">}</span>
     
-    std::vector&lt;std::vector&lt;char&gt;&gt; B(M,std::vector&lt;char&gt;(N,leading));
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">B</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">leading</span><span class="p">));</span>
     
-    for(int i=0;i&lt;N;i++){
-        for(int j=0;j&lt;A[i].size();j++){
-            if(clockwise){
-                B[j][N-1-i]=A[i][j];
-            }else{
-                B[M-1-j][i]=A[i][j];
-            }
-        }
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">clockwise</span><span class="p">){</span>
+                <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">B</span><span class="p">[</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    return B;
-}
+    <span class="k">return</span> <span class="n">B</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">vector2D_rotate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">,</span><span class="kt">bool</span> <span class="n">clockwise</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="kt">char</span> <span class="n">leading</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;std::vector&lt;char&gt;&gt; vector2D_rotate(std::vector&lt;std::vector&lt;char&gt;&gt; A,bool clockwise=false,char leading = 0){/*省略*/}
-
-int main(){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
     
-    std::vector&lt;std::vector&lt;char&gt;&gt; A ={
-        {'a','b','c'},
-        {'d','e','f'},
-        {'g','h','i'}
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">A</span> <span class="o">=</span><span class="p">{</span>
+        <span class="p">{</span><span class="sc">'a'</span><span class="p">,</span><span class="sc">'b'</span><span class="p">,</span><span class="sc">'c'</span><span class="p">},</span>
+        <span class="p">{</span><span class="sc">'d'</span><span class="p">,</span><span class="sc">'e'</span><span class="p">,</span><span class="sc">'f'</span><span class="p">},</span>
+        <span class="p">{</span><span class="sc">'g'</span><span class="p">,</span><span class="sc">'h'</span><span class="p">,</span><span class="sc">'i'</span><span class="p">}</span>
+    <span class="p">};</span>
     
-    std::cout &lt;&lt; "回転なし" &lt;&lt; std::endl;
-    for(int i=0;i&lt;A.size();i++){
-        for(int j=0;j&lt;A[i].size();j++){
-            std::cout &lt;&lt; A[i][j] &lt;&lt; " ";
-        }
-        std::cout &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"回転なし"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    std::vector&lt;std::vector&lt;char&gt;&gt; counter = vector2D_rotate(A);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">vector2D_rotate</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
     
-    std::cout &lt;&lt; "反時計回り" &lt;&lt; std::endl;
-    for(int i=0;i&lt;counter.size();i++){
-        for(int j=0;j&lt;counter[i].size();j++){
-            std::cout &lt;&lt; counter[i][j] &lt;&lt; " ";
-        }
-        std::cout &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"反時計回り"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">counter</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">counter</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">counter</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    std::vector&lt;std::vector&lt;char&gt;&gt; clockwise = vector2D_rotate(A,true);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">clockwise</span> <span class="o">=</span> <span class="n">vector2D_rotate</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
     
-    std::cout &lt;&lt; "時計回り" &lt;&lt; std::endl;
-    for(int i=0;i&lt;clockwise.size();i++){
-        for(int j=0;j&lt;clockwise[i].size();j++){
-            std::cout &lt;&lt; clockwise[i][j] &lt;&lt; " ";
-        }
-        std::cout &lt;&lt; std::endl;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"時計回り"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">clockwise</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">clockwise</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">clockwise</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>回転なし
-a b c 
-d e f 
-g h i 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">回転なし</span>
+<span class="n">a</span> <span class="n">b</span> <span class="n">c</span> 
+<span class="n">d</span> <span class="n">e</span> <span class="n">f</span> 
+<span class="n">g</span> <span class="n">h</span> <span class="n">i</span> 
 
-反時計回り
-c f i 
-b e h 
-a d g 
+<span class="err">反時計回り</span>
+<span class="n">c</span> <span class="n">f</span> <span class="n">i</span> 
+<span class="n">b</span> <span class="n">e</span> <span class="n">h</span> 
+<span class="n">a</span> <span class="n">d</span> <span class="n">g</span> 
 
-時計回り
-g d a 
-h e b 
-i f c
+<span class="err">時計回り</span>
+<span class="n">g</span> <span class="n">d</span> <span class="n">a</span> 
+<span class="n">h</span> <span class="n">e</span> <span class="n">b</span> 
+<span class="n">i</span> <span class="n">f</span> <span class="n">c</span>
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>
