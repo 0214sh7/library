@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/dinic" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-11-01T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="ディニッツ法" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-11-01T00:00:00+09:00","datePublished":"2021-11-01T00:00:00+09:00","description":"Dinicの読み方これでいいのかな","headline":"ディニッツ法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/dinic"},"url":"http://localhost:4000/library/posts/dinic"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"Dinicの読み方これでいいのかな","headline":"ディニッツ法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/dinic"},"url":"http://localhost:4000/library/posts/dinic"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">ディニッツ法</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-11-01T00:00:00+09:00" itemprop="datePublished">Nov 1, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -84,124 +84,122 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/dinic.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Dinic{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    struct edge{
-        int end;
-        long long cap,rev;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Dinic</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
+        <span class="kt">int</span> <span class="n">end</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">cap</span><span class="p">,</span><span class="n">rev</span><span class="p">;</span>
         
-    };
+    <span class="p">};</span>
     
-    const long long INF = (1LL&lt;&lt;61);
-    int V;
-    std::vector&lt;std::vector&lt;edge&gt;&gt; G;
-    std::vector&lt;long long&gt; level;
-    std::vector&lt;int&gt; iter;
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">INF</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span><span class="o">&lt;&lt;</span><span class="mi">61</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">V</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edge</span><span class="o">&gt;&gt;</span> <span class="n">G</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">level</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">iter</span><span class="p">;</span>
     
-    void Dinic_bfs(int s){
-        for(int i=0;i&lt;V;i++){
-            level[i]=-1;
-        }
-        std::queue&lt;int&gt; que;
-        level[s]=0;
-        que.push(s);
-        while(!que.empty()){
-            int v=que.front();
-            que.pop();
-            for(unsigned int i=0;i&lt;G[v].size();i++){
-                edge &amp;e = G[v][i];
-                if(e.cap&gt;0 &amp;&amp; level[e.end]&lt;0){
-                    level[e.end]=level[v]+1;
-                    que.push(e.end);
-                }
-            }
-        }
-    }
+    <span class="kt">void</span> <span class="n">Dinic_bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
+        <span class="n">level</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+            <span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+            <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">edge</span> <span class="o">&amp;</span><span class="n">e</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">cap</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">level</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+                    <span class="n">level</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">]</span><span class="o">=</span><span class="n">level</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    long long Dinic_dfs(int v,int t,long long f){
-        if(v==t)return f;
-        for(int &amp;i=iter[v];i&lt;G[v].size();i++){
-            edge &amp;e = G[v][i];
-            if(e.cap&gt;0 &amp;&amp; level[v]&lt;level[e.end]){
-                long long d = Dinic_dfs(e.end,t,std::min(f,e.cap));
-                if(d&gt;0){
-                    e.cap -= d;
-                    G[e.end][e.rev].cap+=d;
-                    return d;
-                }
-            }
-        }
-        return 0;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">Dinic_dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">f</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">==</span><span class="n">t</span><span class="p">)</span><span class="k">return</span> <span class="n">f</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="o">=</span><span class="n">iter</span><span class="p">[</span><span class="n">v</span><span class="p">];</span><span class="n">i</span><span class="o">&lt;</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">edge</span> <span class="o">&amp;</span><span class="n">e</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">cap</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">level</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&lt;</span><span class="n">level</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">]){</span>
+                <span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Dinic_dfs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">cap</span><span class="p">));</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                    <span class="n">e</span><span class="p">.</span><span class="n">cap</span> <span class="o">-=</span> <span class="n">d</span><span class="p">;</span>
+                    <span class="n">G</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">][</span><span class="n">e</span><span class="p">.</span><span class="n">rev</span><span class="p">].</span><span class="n">cap</span><span class="o">+=</span><span class="n">d</span><span class="p">;</span>
+                    <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    public:
+    <span class="nl">public:</span>
     
-    void init(int N){
-        V = N;
-        G.clear();
-        G.resize(V);
-        level.resize(V);
-        iter.resize(V);
-    }
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">G</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">G</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+        <span class="n">level</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+        <span class="n">iter</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    Dinic(int N){
-        init(N);
-    }
+    <span class="n">Dinic</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    void add(int from,int end,long long cap){
-        G[from].push_back((edge){end,cap,(long long)G[end].size()});
-        G[end].push_back((edge){from,0,(long long)G[from].size()-1});
-    }
+    <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">from</span><span class="p">,</span><span class="kt">int</span> <span class="n">end</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">cap</span><span class="p">){</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">push_back</span><span class="p">((</span><span class="n">edge</span><span class="p">){</span><span class="n">end</span><span class="p">,</span><span class="n">cap</span><span class="p">,(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">G</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="n">size</span><span class="p">()});</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="n">push_back</span><span class="p">((</span><span class="n">edge</span><span class="p">){</span><span class="n">from</span><span class="p">,</span><span class="mi">0</span><span class="p">,(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">G</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+    <span class="p">}</span>
     
-    long long solve(int s,int t){
-        long long flow=0;
-        while(1){
-            Dinic_bfs(s);
-            if(level[t]&lt;0){return flow;}
-            for(int i=0;i&lt;V;i++){
-                iter[i]=0;
-            }
-            long long f;
-            while((f=Dinic_dfs(s,t,INF))&gt;0){
-                flow+=f;
-            }
-        }
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">solve</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">flow</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">Dinic_bfs</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">level</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span><span class="k">return</span> <span class="n">flow</span><span class="p">;}</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">iter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">f</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">((</span><span class="n">f</span><span class="o">=</span><span class="n">Dinic_dfs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">INF</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">flow</span><span class="o">+=</span><span class="n">f</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">Dinic</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class Dinic{/*省略*/};
 
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    Dinic dinitz(5);
-    dinitz.add(0,1,4);
-    dinitz.add(0,2,2);
-    dinitz.add(1,2,1);
-    dinitz.add(1,3,2);
-    dinitz.add(2,3,4);
-    dinitz.add(2,4,2);
-    dinitz.add(3,4,4);
+    <span class="n">Dinic</span> <span class="n">dinitz</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">dinitz</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
     
-    //このグラフでは頂点0から頂点4へは最大で5つ流れる
-    //例えば0-&gt;2-&gt;4に2つ、0-&gt;1-&gt;2-&gt;3-&gt;4に1つ、0-&gt;1-&gt;3-&gt;4に2つなどが考えられる
-    long long R = dinitz.solve(0,4);
-    std::cout &lt;&lt; R &lt;&lt; std::endl;
+    <span class="c1">//このグラフでは頂点0から頂点4へは最大で5つ流れる</span>
+    <span class="c1">//例えば0-&gt;2-&gt;4に2つ、0-&gt;1-&gt;2-&gt;3-&gt;4に1つ、0-&gt;1-&gt;3-&gt;4に2つなどが考えられる</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">R</span> <span class="o">=</span> <span class="n">dinitz</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">R</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div></div>
 
@@ -220,6 +218,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/11/01</td>
       <td style="text-align: left">githubリンクを追加</td>

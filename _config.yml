@@ -15,4 +15,11 @@ timezone: Asia/Tokyo
 plugins:
   - jekyll-feed
 
+kramdown:
+  syntax_highlighter: coderay
+  syntax_highlighter_opts: 
+    block:
+      #line_numbers: true
+    #default_lang: cpp
+
 permalink: /:categories/:short_year-:month-:day/:title

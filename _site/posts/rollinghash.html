@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/rollinghash" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="ローリングハッシュ" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-25T00:00:00+09:00","datePublished":"2023-03-25T00:00:00+09:00","description":"MOD \\(2^{61}-1\\)と\\(2\\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？","headline":"ローリングハッシュ","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/rollinghash"},"url":"http://localhost:4000/library/posts/rollinghash"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"MOD \\(2^{61}-1\\)と\\(2\\)基底を採用しています　例の記事はいったい･･･ 基底はコード中のBaseを直にいじれば変更できます ここサポートした方がいいのかな？","headline":"ローリングハッシュ","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/rollinghash"},"url":"http://localhost:4000/library/posts/rollinghash"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">ローリングハッシュ</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2023-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2023
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -92,187 +92,185 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/rollinghash.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class rollinghash{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    static constexpr long long mod = (1LL &lt;&lt; 61)-1;
-    std::vector&lt;long long&gt; Base = {12345,10000000};
-    std::vector&lt;long long&gt; BaseInv;
-    std::vector&lt;std::vector&lt;long long&gt;&gt; BaseInvExp;
-    static constexpr long long h = 100;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rollinghash</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span> <span class="o">&lt;&lt;</span> <span class="mi">61</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Base</span> <span class="o">=</span> <span class="p">{</span><span class="mi">12345</span><span class="p">,</span><span class="mi">10000000</span><span class="p">};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">BaseInv</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">BaseInvExp</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
     
-    long long product(long long a,long long b){
-        static constexpr long long m = 1LL &lt;&lt; 31;
-        long long a1 = a/m,a2 = a%m;
-        long long b1 = b/m,b2 = b%m;
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">product</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1LL</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">m</span><span class="p">,</span><span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="o">%</span><span class="n">m</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">m</span><span class="p">,</span><span class="n">b2</span> <span class="o">=</span> <span class="n">b</span><span class="o">%</span><span class="n">m</span><span class="p">;</span>
         
-        long long r = 0 , s;
-        r = (r + 2*a1*b1) % mod;
-        s = (a1*b2 + b1*a2) % mod;
-        long long s1 = s/m,s2 = s%m;
-        s = (2*s1+m*s2) % mod;
-        r = (r + s) % mod;
-        r = (r + a2*b2) % mod;
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">a1</span><span class="o">*</span><span class="n">b1</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">a1</span><span class="o">*</span><span class="n">b2</span> <span class="o">+</span> <span class="n">b1</span><span class="o">*</span><span class="n">a2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">s</span><span class="o">/</span><span class="n">m</span><span class="p">,</span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">%</span><span class="n">m</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">s1</span><span class="o">+</span><span class="n">m</span><span class="o">*</span><span class="n">s2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">a2</span><span class="o">*</span><span class="n">b2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
         
-        return r;
-    }
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long power(long long b,long long e){
-        long long r=1;
-        while(e){
-            if(e&amp;1){
-                r=product(r,b)%mod;
-            }
-                b=product(b,b)%mod;
-                e &gt;&gt;=1;
-        }
-        return r;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">power</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">e</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">product</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+            <span class="p">}</span>
+                <span class="n">b</span><span class="o">=</span><span class="n">product</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+                <span class="n">e</span> <span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    public:
-    std::vector&lt;long long&gt; S;
-    std::vector&lt;std::vector&lt;long long&gt;&gt; H,Hsum;
+    <span class="nl">public:</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">S</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">H</span><span class="p">,</span><span class="n">Hsum</span><span class="p">;</span>
     
-    void init(std::vector&lt;long long&gt; cs){
-        S=cs;
-        int n=S.size();
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">cs</span><span class="p">){</span>
+        <span class="n">S</span><span class="o">=</span><span class="n">cs</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
         
-        BaseInv.resize(Base.size());
-        BaseInvExp.resize(Base.size());
-        H.resize(Base.size());
-        Hsum.resize(Base.size());
-        for(int i=0;i&lt;(int)Base.size();i++){
-            BaseInvExp[i].assign(n+1,1);
-            H[i].assign(n+1,0);
-            Hsum[i].assign(n+1,0);
-        }
+        <span class="n">BaseInv</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">BaseInvExp</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">H</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">Hsum</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">BaseInvExp</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">assign</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">assign</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+            <span class="n">Hsum</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">assign</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
         
-        //逆元
-        for(int i=0;i&lt;(int)Base.size();i++){
-            BaseInv[i]=power(Base[i],mod-2);
-        }
-        for(int i=0;i&lt;(int)Base.size();i++){
-            for(int j=0;j&lt;n;j++){
-                BaseInvExp[i][j+1] = product(BaseInvExp[i][j],BaseInv[i]);
-            }
-        }
+        <span class="c1">//逆元</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">BaseInv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">power</span><span class="p">(</span><span class="n">Base</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">BaseInvExp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="n">BaseInvExp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">BaseInv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
         
-        //本体
-        for(int i=0;i&lt;(int)Base.size();i++){
-            long long b=1;
-            for(int j=0;j&lt;n;j++){
-                H[i][j]=product(b,S[j]+h);
-                b=product(b,Base[i]);
-            }
-        }
+        <span class="c1">//本体</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">product</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="p">);</span>
+                <span class="n">b</span><span class="o">=</span><span class="n">product</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">Base</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
         
-        //累積和
-        for(int i=0;i&lt;(int)Base.size();i++){
-            for(int j=0;j&lt;n;j++){
-                Hsum[i][j+1]=(Hsum[i][j]+H[i][j])%mod;
-            }
-        }
-    }
+        <span class="c1">//累積和</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">Hsum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">Hsum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    rollinghash(std::vector&lt;long long&gt; C){
-        init(C);
-    }
+    <span class="n">rollinghash</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">C</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    std::vector&lt;long long&gt; get(int l,int r){
-        std::vector&lt;long long&gt; R(Base.size());
-        for(int i=0;i&lt;(int)Base.size();i++){
-            long long g = (Hsum[i][r]-Hsum[i][l]+mod)%mod;
-            g=product(g,BaseInvExp[i][l]);
-            R[i] = g;
-        }
-        return R;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">(</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">Hsum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">Hsum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+            <span class="n">g</span><span class="o">=</span><span class="n">product</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BaseInvExp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">l</span><span class="p">]);</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    std::vector&lt;long long&gt; instant(std::vector&lt;long long&gt; P){
-        std::vector&lt;long long&gt; R;
-        for(int i=0;i&lt;(int)Base.size();i++){
-            long long r = 0, b = 1;
-            for(int j=0;j&lt;(int)P.size();j++){
-                r = (r+product(b,P[j]+h))%mod;
-                b = product(b,Base[i]);
-            }
-            R.push_back(r);
-        }
-        return R;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">instant</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="n">product</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">Base</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    std::vector&lt;long long&gt; connect(std::vector&lt;long long&gt; P,long long ps,std::vector&lt;long long&gt; Q,long long qs){
-        std::vector&lt;long long&gt; R;
-        for(int i=0;i&lt;(int)Base.size();i++){
-            long long r = (product(Q[i],power(Base[i],ps))+P[i])%mod;
-            R.push_back(r);
-        }
-        return R;
-        assert(qs==qs);
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">connect</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">ps</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Q</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">qs</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">power</span><span class="p">(</span><span class="n">Base</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ps</span><span class="p">))</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+        <span class="n">assert</span><span class="p">(</span><span class="n">qs</span><span class="o">==</span><span class="n">qs</span><span class="p">);</span>
+    <span class="p">}</span>
     
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">rollinghash</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class rollinghash{/*省略*/};
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    
+    <span class="n">rollinghash</span> <span class="n">rolihash</span><span class="p">({</span><span class="sc">'a'</span><span class="p">,</span><span class="sc">'b'</span><span class="p">,</span><span class="sc">'c'</span><span class="p">,</span><span class="sc">'a'</span><span class="p">,</span><span class="sc">'b'</span><span class="p">});</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">abcab</span><span class="se">\"</span><span class="s">の[0,2)文字目、つまり</span><span class="se">\"</span><span class="s">ab</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">abcab</span><span class="se">\"</span><span class="s">の[1,4)文字目、つまり</span><span class="se">\"</span><span class="s">bca</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">abcab</span><span class="se">\"</span><span class="s">の[3,5)文字目、つまり</span><span class="se">\"</span><span class="s">ab</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">c</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">bc</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">instant</span><span class="p">({</span><span class="sc">'b'</span><span class="p">,</span><span class="sc">'c'</span><span class="p">});</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">d</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">a</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">instant</span><span class="p">({</span><span class="sc">'a'</span><span class="p">});</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">e</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-int main() {
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">bc</span><span class="se">\"</span><span class="s">と</span><span class="se">\"</span><span class="s">a</span><span class="se">\"</span><span class="s">の結合、つまり</span><span class="se">\"</span><span class="s">bca</span><span class="se">\"</span><span class="s">のハッシュ値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">rolihash</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">f</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    rollinghash rolihash({'a','b','c','a','b'});
-    
-    std::cout &lt;&lt; "\"abcab\"の[0,2)文字目、つまり\"ab\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; a = rolihash.get(0,2);
-    for(int i=0;i&lt;a.size();i++){
-        std::cout &lt;&lt; a[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-    
-    std::cout &lt;&lt; "\"abcab\"の[1,4)文字目、つまり\"bca\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; b = rolihash.get(1,4);
-    for(int i=0;i&lt;b.size();i++){
-        std::cout &lt;&lt; b[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-    
-    std::cout &lt;&lt; "\"abcab\"の[3,5)文字目、つまり\"ab\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; c = rolihash.get(3,5);
-    for(int i=0;i&lt;c.size();i++){
-        std::cout &lt;&lt; c[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-    
-    std::cout &lt;&lt; "\"bc\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; d = rolihash.instant({'b','c'});
-    for(int i=0;i&lt;d.size();i++){
-        std::cout &lt;&lt; d[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-    
-    std::cout &lt;&lt; "\"a\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; e = rolihash.instant({'a'});
-    for(int i=0;i&lt;e.size();i++){
-        std::cout &lt;&lt; e[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-
-    std::cout &lt;&lt; "\"bc\"と\"a\"の結合、つまり\"bca\"のハッシュ値" &lt;&lt; std::endl;
-    std::vector&lt;long long&gt; f = rolihash.connect(d,2,e,1);
-    for(int i=0;i&lt;f.size();i++){
-        std::cout &lt;&lt; f[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
-    
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -306,6 +304,10 @@ int main() {
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/03/25</td>
       <td style="text-align: left">connectを追加</td>

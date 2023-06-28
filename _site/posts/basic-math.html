@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/basic-math" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-04-05T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="数学詰め合わせパック" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-04-05T00:00:00+09:00","datePublished":"2021-04-05T00:00:00+09:00","description":"優柔不断なあなたに","headline":"数学詰め合わせパック","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"優柔不断なあなたに","headline":"数学詰め合わせパック","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/basic-math"},"url":"http://localhost:4000/library/posts/basic-math"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数学詰め合わせパック</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-04-05T00:00:00+09:00" itemprop="datePublished">Apr 5, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -85,34 +85,32 @@
   <li>計算量は\(Ο(1)\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long roundup(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    return (a+b-1)/b;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">roundup</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例">使用例</h3>
 
 <h4 id="実行コード">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">roundup</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long roundup(long long a,long long b){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; i &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; roundup(i,4) &lt;&lt; " ";
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roundup</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力">出力</h4>
@@ -132,34 +130,32 @@ int main(void){
   <li>計算量は\(Ο(x)\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long fact(long long x,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long k=1;
-    for(int i=1;i&lt;=x;i++){
-        k=(k*i)%MOD;
-    }
-    return k;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="o">=</span><span class="n">LLONG_MAX</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">k</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-1">使用例</h3>
 
 <h4 id="実行コード-1">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="o">=</span><span class="n">LLONG_MAX</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long fact(long long x,long long MOD=LLONG_MAX){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    for(int i=0;i&lt;=6;i++){
-        std::cout &lt;&lt; fact(i) &lt;&lt; " ";
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">6</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">fact</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-1">出力</h4>
@@ -177,44 +173,42 @@ int main(void){
   <li>計算量は\(O(log(max(a,b)))\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long gcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    a=std::abs(a);
-    b=std::abs(b);
-    if(a&gt;b)std::swap(a,b);
-    if(a==0){
-        return b;
-    }
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long r=a%b;
-    while(r){
-        a=b;
-        b=r;
-        r=a%b;
-    }
-    return b;
-}
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">r</span><span class="p">){</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-2">使用例</h3>
 
 <h4 id="実行コード-2">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long gcd(long long a,long long b){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; gcd(4,6) &lt;&lt; std::endl;
-    std::cout &lt;&lt; gcd(3,5) &lt;&lt; std::endl;
-    std::cout &lt;&lt; gcd(12,18) &lt;&lt; std::endl;
-    std::cout &lt;&lt; gcd(8,13) &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-2">出力</h4>
@@ -235,48 +229,46 @@ int main(void){
   <li>計算量は\(O(log(max(a,b)))\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long lcm(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(std::abs(a)&gt;std::abs(b))std::swap(a,b);
-    if(a==0){
-        return b;
-    }
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">lcm</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long s=a,t=b;
-    a=std::abs(a);
-    b=std::abs(b);
-    if(a&gt;b)std::swap(a,b);
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">s</span><span class="o">=</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
     
-    long long r=a%b;
-    while(r){
-        a=b;
-        b=r;
-        r=a%b;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">r</span><span class="p">){</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return s / b * t;
-}
+    <span class="k">return</span> <span class="n">s</span> <span class="o">/</span> <span class="n">b</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-3">使用例</h3>
 
 <h4 id="実行コード-3">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">lcm</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long lcm(long long a,long long b){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; lcm(4,6) &lt;&lt; std::endl;
-    std::cout &lt;&lt; lcm(3,5) &lt;&lt; std::endl;
-    std::cout &lt;&lt; lcm(12,18) &lt;&lt; std::endl;
-    std::cout &lt;&lt; lcm(8,13) &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lcm</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lcm</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lcm</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lcm</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-3">出力</h4>
@@ -298,47 +290,45 @@ int main(void){
   <li>計算量は\(O(\sqrt{N})\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; divisor_enum(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;long long&gt; R;
-    if(N&lt;=0)return R;
-    long long s=0;
-    for(long long i=1;i*i&lt;=N;i++){
-        if(N%i==0){
-            R.push_back(i);
-            if(i*i!=N)s++;
-        }
-    }
-    for(long long i = s-1;i&gt;=0;i--){
-        R.push_back(N/R[i]);
-    }
-    return R;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">divisor_enum</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">!=</span><span class="n">N</span><span class="p">)</span><span class="n">s</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-4">使用例</h3>
 
 <h4 id="実行コード-4">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">divisor_enum</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;long long&gt; divisor_enum(long long N){/*省略*/}
-
-signed main() {
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     
-    for(long long i=1;i&lt;=10;i++){
-        std::cout &lt;&lt; i &lt;&lt; "  ";
-        std::vector&lt;long long&gt; K = divisor_enum(i);
-        for(long long j=0;j&lt;K.size();j++){
-            std::cout &lt;&lt; K[j] &lt;&lt; " ";
-        }
-        std::cout &lt;&lt; std::endl;
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">"  "</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">K</span> <span class="o">=</span> <span class="n">divisor_enum</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">K</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">K</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-4">出力</h4>
@@ -365,41 +355,39 @@ signed main() {
   <li>計算量は\(O(\sqrt{x})\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bool prime(long long X){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    if(X&lt;2)return false;
-    for(long long i=2;i*i&lt;=X;i++){
-        if(X%i==0){
-            return false;
-        }
-    }
-    return true;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">prime</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">X</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">X</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">X</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">X</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-5">使用例</h3>
 
 <h4 id="実行コード-5">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">bool</span> <span class="nf">prime</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">X</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-bool prime(long long X){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; i &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; prime(i) &lt;&lt; " ";
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">prime</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-5">出力</h4>
@@ -418,53 +406,51 @@ int main(void){
   <li>計算量は\(O(NloglogN)\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; primearray(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;long long&gt; R;
-    std::vector&lt;bool&gt; prime;
-    for(int i=0;i&lt;=N;i++){
-        prime.push_back(true);
-    }
-    if(N&lt;2){
-        return R;
-    }
-    prime[0]=false;
-    prime[1]=false;
-    for(long long i=2;i*i&lt;=N;i++){
-        if(!prime[i])continue;
-        for(int j=2*i;j&lt;=N;j+=i){
-            prime[j]=false;
-        }
-    }
-    for(long long i=0;i&lt;prime.size();i++){
-        if(prime[i]){
-            R.push_back(i);
-        }
-    }
-    return R;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">primearray</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">prime</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">prime</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">prime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+    <span class="n">prime</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">j</span><span class="o">+=</span><span class="n">i</span><span class="p">){</span>
+            <span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">prime</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-6">使用例</h3>
 
 <h4 id="実行コード-6">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">primearray</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;long long&gt; primearray(long long N){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::vector&lt;long long&gt; P = primearray(100);
-    for(int i=0;i&lt;P.size();i++){
-        std::cout &lt;&lt; P[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span> <span class="o">=</span> <span class="n">primearray</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-6">出力</h4>
@@ -482,47 +468,45 @@ int main(void){
   <li>計算量は\(Ο(\sqrt{N})\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; prime_factorization(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;long long&gt; R;
-    if(N&lt;2)return R;
-    for(long long i=2;i*i&lt;=N;i++){
-        while(N%i==0){
-            R.push_back(i);
-            N/=i;
-        }
-    }
-    if(N!=1){
-          R.push_back(N);
-    }
-    return R;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">prime_factorization</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span><span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">N</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">N</span><span class="o">/=</span><span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">!=</span><span class="mi">1</span><span class="p">){</span>
+          <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-7">使用例</h3>
 
 <h4 id="実行コード-7">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">prime_factorization</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;long long&gt; prime_factorization(long long N){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::vector&lt;long long&gt; number={4,12,57,97,210};
-    for(int j=0;j&lt;5;j++){
-        std::cout &lt;&lt; number[j] &lt;&lt; "  ";
-        std::vector&lt;long long&gt; F = prime_factorization(number[j]);
-        for(int i=0;i&lt;F.size();i++){
-            std::cout &lt;&lt; F[i] &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">number</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">210</span><span class="p">};</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">number</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">"  "</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">F</span> <span class="o">=</span> <span class="n">prime_factorization</span><span class="p">(</span><span class="n">number</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">F</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-7">出力</h4>
@@ -545,45 +529,43 @@ int main(void){
   <li>計算量は\(Ο(log(e))\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long power(long long b,long long e,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long r=1;
-    while(e){
-        if(e&amp;1){
-            r=(r*b)%MOD;
-        }
-        b=(b*b)%MOD;
-        e &gt;&gt;=1;
-    }
-    return r;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">power</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">e</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="o">=</span><span class="n">LLONG_MAX</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">r</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="n">e</span> <span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-8">使用例</h3>
 
 <h4 id="実行コード-8">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">power</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">e</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="o">=</span><span class="n">LLONG_MAX</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long power(long long b,long long e,long long MOD=LLONG_MAX){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; "2のi乗"&lt;&lt; std::endl;
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; power(2,i) &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"2のi乗"</span><span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    std::cout &lt;&lt; "2のi乗を100で割ったあまり"&lt;&lt; std::endl;
-    for(int i=0;i&lt;=10;i++){
-        std::cout &lt;&lt; power(2,i,100) &lt;&lt; " ";
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"2のi乗を100で割ったあまり"</span><span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-8">出力</h4>
@@ -605,39 +587,37 @@ int main(void){
   <li>計算量は\(Ο(log(MOD))\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long long inverse(long long b,long long MOD){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    long long r=1,e=MOD-2;
-    while(e){
-        if(e&amp;1){
-            r=(r*b)%MOD;
-        }
-        b=(b*b)%MOD;
-        e &gt;&gt;=1;
-    }
-    return r;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="nf">inverse</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="n">MOD</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">r</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="n">e</span> <span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="使用例-9">使用例</h3>
 
 <h4 id="実行コード-9">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">inverse</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-long long inverse(long long b,long long MOD){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; "mod 7でのiの逆元"&lt;&lt; std::endl;
-    for(int i=1;i&lt;7;i++){
-        std::cout &lt;&lt; i &lt;&lt; " " &lt;&lt; inverse(i,7) &lt;&lt; " " &lt;&lt; (i*inverse(i,7))%7 &lt;&lt; std::endl;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"mod 7でのiの逆元"</span><span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">inverse</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">inverse</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span><span class="o">%</span><span class="mi">7</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-9">出力</h4>
@@ -665,6 +645,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/04/05</td>
       <td style="text-align: left">約数列挙を追加</td>

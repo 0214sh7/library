@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/composite-binomial-coefficient" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-03-18T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="任意mod二項係数" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-18T00:00:00+09:00","datePublished":"2023-03-18T00:00:00+09:00","description":"計算量の異なる \\(2\\) つのコードがある","headline":"任意mod二項係数","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/composite-binomial-coefficient"},"url":"http://localhost:4000/library/posts/composite-binomial-coefficient"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"計算量の異なる \\(2\\) つのコードがある","headline":"任意mod二項係数","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/composite-binomial-coefficient"},"url":"http://localhost:4000/library/posts/composite-binomial-coefficient"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">任意mod二項係数</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2023-03-18T00:00:00+09:00" itemprop="datePublished">Mar 18, 2023
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -99,197 +99,195 @@
   <li>計算量は\(Ο( (\log n + \log M) \omega(M) )\)</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class composite_binomial_coefficient_1{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    long long Mod;    
-    std::vector&lt;std::array&lt;long long,3&gt;&gt; P;
-    std::vector&lt;std::vector&lt;long long&gt;&gt; fact,factinv;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">composite_binomial_coefficient_1</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">Mod</span><span class="p">;</span>    
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;&gt;</span> <span class="n">P</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">fact</span><span class="p">,</span><span class="n">factinv</span><span class="p">;</span>
 
-    std::pair&lt;long long,long long&gt; bezout(long long a,long long b){
-        if(b==0){
-            return {1,0};
-        }
-        long long r = a%b, q = (a-r)/b;
-        std::pair&lt;long long,long long&gt; D = bezout(b,r);
-        return {D.second,D.first-q*D.second};
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">bezout</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+        <span class="p">}</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">D</span><span class="p">.</span><span class="n">second</span><span class="p">,</span><span class="n">D</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">D</span><span class="p">.</span><span class="n">second</span><span class="p">};</span>
+    <span class="p">}</span>
 
-    public:
+    <span class="nl">public:</span>
 
-    void init(long long M){
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">M</span><span class="p">){</span>
 
-        if(M&lt;1){
-            return;
-        }
+        <span class="k">if</span><span class="p">(</span><span class="n">M</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        Mod = M;
+        <span class="n">Mod</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span>
 
-        //Mを素因数分解する
-        //Pは{素数,個数,素数^個数}
-        P.clear();
-        long long m = M;
-        for(int i=2;i*i&lt;=m;i++){
-            int v = 1;
-            int e = 0;
-            while(m%i==0){
-                e++;
-                m /= i;
-                v *= i;
-            }
-            if(e&gt;0){
-                P.push_back({i,e,v});
-            }
-        }
-        if(m!=1){
-            P.push_back({m,1,m});
-        }
+        <span class="c1">//Mを素因数分解する</span>
+        <span class="c1">//Pは{素数,個数,素数^個数}</span>
+        <span class="n">P</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">e</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">m</span> <span class="o">/=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">v</span> <span class="o">*=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">P</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">i</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">});</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">!=</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">P</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">});</span>
+        <span class="p">}</span>
 
-        //用いる素数pについて、(x!)_p := (1~xでpと互いに素なものの積)を求める
-        fact.clear();
-        fact.resize(P.size());
-        factinv.clear();
-        factinv.resize(P.size());
+        <span class="c1">//用いる素数pについて、(x!)_p := (1~xでpと互いに素なものの積)を求める</span>
+        <span class="n">fact</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">fact</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">factinv</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">factinv</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
 
-        for(int i=0;i&lt;(int)P.size();i++){
-            fact[i].resize(P[i][2]);
-            fact[i][0] = 1;
-            for(int j=1;j&lt;P[i][2];j++){
-                if(j%P[i][0]==0){
-                    fact[i][j] = fact[i][j-1];
-                }else{
-                    fact[i][j] = (fact[i][j-1]*j)%P[i][2];
-                }
-            }
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]);</span>
+            <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">%</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                    <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                    <span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
 
-            factinv[i].resize(P[i][2]);
-            factinv[i][P[i][2]-1] = bezout(fact[i][P[i][2]-1],P[i][2]).first;
-            if(factinv[i][P[i][2]-1]&lt;0)factinv[i][P[i][2]-1] += P[i][2];
+            <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]);</span>
+            <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]).</span><span class="n">first</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
             
-            for(int j=P[i][2]-2;j&gt;=0;j--){
-                if((j+1)%P[i][0]==0){
-                    factinv[i][j] = factinv[i][j+1];
-                }else{
-                    factinv[i][j] = (factinv[i][j+1]*(j+1))%P[i][2];
-                }
-            }
-        }
-    }
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">((</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                    <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                    <span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    composite_binomial_coefficient_1(long long mod){
-        init(mod);
-    }
+    <span class="n">composite_binomial_coefficient_1</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">mod</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    long long comb(long long n,long long r){
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">comb</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="p">){</span>
         
-        if(n&lt;0 || r&lt;0 || n&lt;r || Mod==1){
-            return 0;
-        }
-        long long k = n-r;
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">r</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">r</span> <span class="o">||</span> <span class="n">Mod</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">;</span>
 
-        //各p^qについてnCr mod p^qを求めてLにまとめる
-        std::vector&lt;std::pair&lt;long long,long long&gt;&gt; L(P.size());
+        <span class="c1">//各p^qについてnCr mod p^qを求めてLにまとめる</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">L</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
 
-        for(int i=0;i&lt;(int)P.size();i++){
-            long long p = P[i][0], q = P[i][1], pq = P[i][2];
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">pq</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
 
-            std::vector&lt;long long&gt; N,K,R;
-            long long nown = n, nowk = k, nowr = r;
-            while(nown&gt;0){
-                N.push_back(nown%pq);
-                K.push_back(nowk%pq);
-                R.push_back(nowr%pq);
-                nown /= p;
-                nowk /= p;
-                nowr /= p;
-            }
+            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">N</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">R</span><span class="p">;</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">nown</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">nowk</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">nowr</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">nown</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">N</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nown</span><span class="o">%</span><span class="n">pq</span><span class="p">);</span>
+                <span class="n">K</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nowk</span><span class="o">%</span><span class="n">pq</span><span class="p">);</span>
+                <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nowr</span><span class="o">%</span><span class="n">pq</span><span class="p">);</span>
+                <span class="n">nown</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowk</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowr</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            long long e0 = 0, e1 = 0;
-            nown = n/p, nowk = k/p, nowr = r/p;
-            while(nown &gt; 0){
-                e0 += nown;
-                e0 -= nowk;
-                e0 -= nowr;
-                nown /= p;
-                nowk /= p;
-                nowr /= p;
-            }
-            nown = n/pq, nowk = k/pq, nowr = r/pq;
-            while(nown &gt; 0){
-                e1 += nown;
-                e1 -= nowk;
-                e1 -= nowr;
-                nown /= p;
-                nowk /= p;
-                nowr /= p;
-            }
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">e0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">e1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">nown</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">p</span><span class="p">,</span> <span class="n">nowk</span> <span class="o">=</span> <span class="n">k</span><span class="o">/</span><span class="n">p</span><span class="p">,</span> <span class="n">nowr</span> <span class="o">=</span> <span class="n">r</span><span class="o">/</span><span class="n">p</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">nown</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+                <span class="n">e0</span> <span class="o">+=</span> <span class="n">nown</span><span class="p">;</span>
+                <span class="n">e0</span> <span class="o">-=</span> <span class="n">nowk</span><span class="p">;</span>
+                <span class="n">e0</span> <span class="o">-=</span> <span class="n">nowr</span><span class="p">;</span>
+                <span class="n">nown</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowk</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowr</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">nown</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">pq</span><span class="p">,</span> <span class="n">nowk</span> <span class="o">=</span> <span class="n">k</span><span class="o">/</span><span class="n">pq</span><span class="p">,</span> <span class="n">nowr</span> <span class="o">=</span> <span class="n">r</span><span class="o">/</span><span class="n">pq</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">nown</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+                <span class="n">e1</span> <span class="o">+=</span> <span class="n">nown</span><span class="p">;</span>
+                <span class="n">e1</span> <span class="o">-=</span> <span class="n">nowk</span><span class="p">;</span>
+                <span class="n">e1</span> <span class="o">-=</span> <span class="n">nowr</span><span class="p">;</span>
+                <span class="n">nown</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowk</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+                <span class="n">nowr</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
             
-            long long T = 1;
-            if((p!=2 || q&lt;3) &amp;&amp; e1%2 == 1){
-                T = pq-1;
-            }
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">p</span><span class="o">!=</span><span class="mi">2</span> <span class="o">||</span> <span class="n">q</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">e1</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="n">pq</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            for(int j=0;j&lt;(int)N.size();j++){
-                T = (T*fact[i][N[j]])%pq;
-                T = (T*factinv[i][K[j]])%pq;
-                T = (T*factinv[i][R[j]])%pq;
-            }
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">N</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">N</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">%</span><span class="n">pq</span><span class="p">;</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">K</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">%</span><span class="n">pq</span><span class="p">;</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">factinv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span><span class="o">%</span><span class="n">pq</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            for(int j=0;j&lt;std::min(q,e0);j++){
-                T = (T*p)%pq;
-            }
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">e0</span><span class="p">);</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">%</span><span class="n">pq</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            L[i] = {T,pq};
-        }
+            <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">pq</span><span class="p">};</span>
+        <span class="p">}</span>
 
-        //中国剰余定理を用いて復元する
-        std::pair&lt;long long,long long&gt; C = L[0];
-        for(int i=1;i&lt;(int)P.size();i++){
-            long long q = C.second*L[i].second;
-            std::pair&lt;long long,long long&gt; u = bezout(C.second,L[i].second);
-            long long c = (((C.first*L[i].second)%q)*u.second)%q;
-            long long d = (((L[i].first*C.second)%q)*u.first)%q;
-            C.first = (c+d+q)%q;
-            C.second = q;
-        }
+        <span class="c1">//中国剰余定理を用いて復元する</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">C</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">q</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">second</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">u</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">second</span><span class="p">,</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(((</span><span class="n">C</span><span class="p">.</span><span class="n">first</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">)</span><span class="o">%</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">.</span><span class="n">second</span><span class="p">)</span><span class="o">%</span><span class="n">q</span><span class="p">;</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span> <span class="o">=</span> <span class="p">(((</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="o">*</span><span class="n">C</span><span class="p">.</span><span class="n">second</span><span class="p">)</span><span class="o">%</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">.</span><span class="n">first</span><span class="p">)</span><span class="o">%</span><span class="n">q</span><span class="p">;</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">first</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">%</span><span class="n">q</span><span class="p">;</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        return C.first;
-    }
-};
+        <span class="k">return</span> <span class="n">C</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h3 id="使用例">使用例</h3>
 <hr />
 
 <h4 id="実行コード">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">composite_binomial_coefficient_1</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class composite_binomial_coefficient_1{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; "10で割ったあまり" &lt;&lt; std::endl; 
-    composite_binomial_coefficient_1 CBC(10);
-    for(int i=0;i&lt;=8;i++){
-        for(int j=0;j&lt;=i;j++){
-            std::cout &lt;&lt; CBC.comb(i,j) &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"10で割ったあまり"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+    <span class="n">composite_binomial_coefficient_1</span> <span class="n">CBC</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">CBC</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-    std::cout &lt;&lt; "もとの値" &lt;&lt; std::endl;
-    composite_binomial_coefficient_1 CBC_origin(1000);
-    for(int i=0;i&lt;=8;i++){
-        for(int j=0;j&lt;=i;j++){
-            std::cout &lt;&lt; CBC_origin.comb(i,j) &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"もとの値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">composite_binomial_coefficient_1</span> <span class="n">CBC_origin</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">CBC_origin</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力">出力</h4>
@@ -328,6 +326,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/03/18</td>
       <td style="text-align: left">任意mod二項係数を追加</td>
@@ -383,183 +385,181 @@ int main(void){
   </li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class composite_binomial_coefficient_2{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    int sze = 0;
-    long long Mod;
-    std::vector&lt;long long&gt; P;
-    std::vector&lt;long long&gt; d,prime;
-    std::vector&lt;int&gt; index;
-    std::vector&lt;long long&gt; factPri;
-    std::vector&lt;std::vector&lt;long long&gt;&gt; factRel;
-    std::vector&lt;std::vector&lt;long long&gt;&gt; power;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">composite_binomial_coefficient_2</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">sze</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">Mod</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">,</span><span class="n">prime</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">index</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">factPri</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">factRel</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">power</span><span class="p">;</span>
 
-    std::pair&lt;long long,long long&gt; bezout(long long a,long long b){
-        if(b==0){
-            return {1,0};
-        }
-        long long r = a%b, q = (a-r)/b;
-        std::pair&lt;long long,long long&gt; D = bezout(b,r);
-        return {D.second,D.first-q*D.second};
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">bezout</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+        <span class="p">}</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">D</span><span class="p">.</span><span class="n">second</span><span class="p">,</span><span class="n">D</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">q</span><span class="o">*</span><span class="n">D</span><span class="p">.</span><span class="n">second</span><span class="p">};</span>
+    <span class="p">}</span>
 
-    public:
+    <span class="nl">public:</span>
 
-    void init(int N,long long M){
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">M</span><span class="p">){</span>
 
-        if(N&lt;0 || M&lt;1){
-            return;
-        }
+        <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">M</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        if(M==1){
-            Mod = M;
-            return;
-        }
+        <span class="k">if</span><span class="p">(</span><span class="n">M</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">Mod</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        sze = N+1;
-        Mod = M;
+        <span class="n">sze</span> <span class="o">=</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">Mod</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span>
         
-        //1~Nの非自明な約数を求める
-        d.resize(N+1);
-        std::fill(d.begin(),d.end(),0);
-        prime.clear();
-        index.resize(N+1);
-        std::fill(index.begin(),index.end(),-1);
+        <span class="c1">//1~Nの非自明な約数を求める</span>
+        <span class="n">d</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">d</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">prime</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">index</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">index</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">index</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 
-        if(N&gt;0){
-            d[1] = 1;
-        }
-        for(long long i=2;i&lt;=N;i++){
-            if(d[i]==0){
-                d[i]=i;
-                prime.push_back(i);
-            }
-            for(int j=0;j&lt;(int)prime.size() &amp;&amp; prime[j]&lt;=d[i] &amp;&amp; i*prime[j]&lt;=N ;j++){
-                d[prime[j]*i]=prime[j];
-            }
-        }
+        <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+                <span class="n">prime</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">prime</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">N</span> <span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
         
-        //法が含む素数のリストを求める
-        P.clear();
-        for(int i=2;i*i&lt;=M;i++){
-            int e = 0;
-            while(M%i==0){
-                e++;
-                M /= i;
-            }
-            if(e&gt;0){
-                if(i&lt;=N)index[i] = P.size();
-                P.push_back(i);
-            }
-        }
-        if(M!=1){
-            if(M&lt;=N)index[M] = P.size();
-            P.push_back(M);
-        }
+        <span class="c1">//法が含む素数のリストを求める</span>
+        <span class="n">P</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">M</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">e</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">M</span> <span class="o">/=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">)</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                <span class="n">P</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">M</span><span class="o">!=</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">M</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">)</span><span class="n">index</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="n">P</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        //k!について、Mと互いに素である部分とそうでない部分に分けてそれぞれ求める
-        factPri.resize(N+1);
-        std::fill(factPri.begin(),factPri.end(),1);
-        factRel.resize(N+1);
-        for(int i=0;i&lt;=N;i++){
-            factRel[i].resize(P.size());
-            std::fill(factRel[i].begin(),factRel[i].end(),0);
-        }
+        <span class="c1">//k!について、Mと互いに素である部分とそうでない部分に分けてそれぞれ求める</span>
+        <span class="n">factPri</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">factPri</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">factPri</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">factRel</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        for(int i=2;i&lt;=N;i++){
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 
-            factPri[i] = factPri[i-1];
-            factRel[i] = factRel[i-1];
+            <span class="n">factPri</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">factPri</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
 
-            long long now = i;
-            while(now&gt;1){
-                long long p = d[now];
-                if(index[p]==-1){
-                    factPri[i] = (factPri[i]*p)%Mod;
-                }else{
-                    factRel[i][index[p]]++;
-                }
-                now /= p;
-            }
-        }
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">now</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">){</span>
+                <span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">now</span><span class="p">];</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">){</span>
+                    <span class="n">factPri</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">factPri</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">%</span><span class="n">Mod</span><span class="p">;</span>
+                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                    <span class="n">factRel</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">index</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">now</span> <span class="o">/=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        //p^0,p^1,...,p^(N/p)を前計算する
-        power.resize(P.size());
-        for(int i=0;i&lt;(int)P.size();i++){
-            power[i].resize(1+N/P[i]);
-            power[i][0] = 1;
-            for(int j=1;j&lt;1+N/P[i];j++){
-                power[i][j] = (power[i][j-1]*P[i])%Mod;
-            }
-        }
+        <span class="c1">//p^0,p^1,...,p^(N/p)を前計算する</span>
+        <span class="n">power</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">power</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">N</span><span class="o">/</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">power</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">+</span><span class="n">N</span><span class="o">/</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">power</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="n">Mod</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-    }
+    <span class="p">}</span>
 
-    composite_binomial_coefficient_2(int N,long long M){
-        init(N,M);
-    }
+    <span class="n">composite_binomial_coefficient_2</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">M</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    long long comb(long long n,long long r){
-        if(Mod==1){
-            return 0;
-        }
-        if(n&lt;0 || r&lt;0 || n&lt;r){
-            return 0;
-        }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">comb</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">Mod</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">r</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        long long R = factPri[n];
-        long long m = bezout(factPri[r],Mod).first;
-        if(m&lt;0)m+=Mod;
-        R = (R*m)%Mod;
-        m = bezout(factPri[n-r],Mod).first;
-        if(m&lt;0)m+=Mod;
-        R = (R*m)%Mod;
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">R</span> <span class="o">=</span> <span class="n">factPri</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">factPri</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">Mod</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="n">m</span><span class="o">+=</span><span class="n">Mod</span><span class="p">;</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">m</span><span class="p">)</span><span class="o">%</span><span class="n">Mod</span><span class="p">;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">factPri</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">],</span><span class="n">Mod</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="n">m</span><span class="o">+=</span><span class="n">Mod</span><span class="p">;</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">m</span><span class="p">)</span><span class="o">%</span><span class="n">Mod</span><span class="p">;</span>
 
-        for(int i=0;i&lt;(int)P.size();i++){
-            int e = factRel[n][i] - factRel[r][i] - factRel[n-r][i];
-            assert(e&gt;=0);
-            R = (R*power[i][e])%Mod;
-        }
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="n">factRel</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">factRel</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">factRel</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">assert</span><span class="p">(</span><span class="n">e</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">);</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">power</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">e</span><span class="p">])</span><span class="o">%</span><span class="n">Mod</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        return R;
-    }
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
 
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h3 id="使用例-1">使用例</h3>
 <hr />
 
 <h4 id="実行コード-1">実行コード</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">composite_binomial_coefficient_2</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class composite_binomial_coefficient_2{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::cout &lt;&lt; "10で割ったあまり" &lt;&lt; std::endl; 
-    composite_binomial_coefficient_2 CBC(8,10);
-    for(int i=0;i&lt;=8;i++){
-        for(int j=0;j&lt;=i;j++){
-            std::cout &lt;&lt; CBC.comb(i,j) &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"10で割ったあまり"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+    <span class="n">composite_binomial_coefficient_2</span> <span class="n">CBC</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">CBC</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-    std::cout &lt;&lt; "もとの値" &lt;&lt; std::endl;
-    composite_binomial_coefficient_2 CBC_origin(8,1000);
-    for(int i=0;i&lt;=8;i++){
-        for(int j=0;j&lt;=i;j++){
-            std::cout &lt;&lt; CBC_origin.comb(i,j) &lt;&lt; " ";
-        }std::cout &lt;&lt; std::endl;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"もとの値"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">composite_binomial_coefficient_2</span> <span class="n">CBC_origin</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">CBC_origin</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="p">}</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="出力-1">出力</h4>
@@ -598,6 +598,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/03/18</td>
       <td style="text-align: left">任意mod二項係数を追加</td>

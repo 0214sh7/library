@@ -13,12 +13,10 @@ layout: library
 
 [github](https://github.com/0214sh7/procon-library/blob/master/algorithm/bipartite%20graph.cpp)
 
-```
+```cpp
 std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     int E = edge.size();
     if(E==0)return {};
     int V = 0;
@@ -63,7 +61,7 @@ std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<int> bipartite(std::vector<std::pair<int,int>> edge){/*省略*/}
@@ -112,6 +110,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例を追加 |
 | 2021/03/26 | バグを修正/計算量表記を修正 |
 | 2020/04/02 | 二部グラフ判定を追加 |

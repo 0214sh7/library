@@ -23,12 +23,10 @@ diff
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/potentialized%20unionfind.cpp)
 
-```
+```cpp
 class potentialized_unionfind{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     std::vector<int> UF,rank,pot;
     public:
@@ -96,7 +94,7 @@ class potentialized_unionfind{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class potentialized_unionfind{/*省略*/};
@@ -153,5 +151,6 @@ false
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | ポテンシャル付きUnionFindを追加 |

@@ -33,12 +33,10 @@ layout: library
 - よくある天井関数
 - 計算量は$$Ο(1)$$
 
-```
+```cpp
 long long roundup(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     return (a+b-1)/b;
 }
 ```
@@ -46,7 +44,7 @@ long long roundup(long long a,long long b){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long roundup(long long a,long long b){/*省略*/}
@@ -81,12 +79,10 @@ int main(void){
 - $$MOD$$も与えるとそれで割った余りをとる
 - 計算量は$$Ο(x)$$
 
-```
+```cpp
 long long fact(long long x,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long k=1;
     for(int i=1;i<=x;i++){
         k=(k*i)%MOD;
@@ -98,7 +94,7 @@ long long fact(long long x,long long MOD=LLONG_MAX){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long fact(long long x,long long MOD=LLONG_MAX){/*省略*/}
@@ -127,12 +123,10 @@ int main(void){
 - ２つの引数のGCDを求める
 - 計算量は$$O(log(max(a,b)))$$
 
-```
+```cpp
 long long gcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     a=std::abs(a);
     b=std::abs(b);
     if(a>b)std::swap(a,b);
@@ -153,7 +147,7 @@ long long gcd(long long a,long long b){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long gcd(long long a,long long b){/*省略*/}
@@ -186,12 +180,10 @@ int main(void){
 - ２つの引数のLCMを求める
 - 計算量は$$O(log(max(a,b)))$$
 
-```
+```cpp
 long long lcm(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(std::abs(a)>std::abs(b))std::swap(a,b);
     if(a==0){
         return b;
@@ -216,7 +208,7 @@ long long lcm(long long a,long long b){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long lcm(long long a,long long b){/*省略*/}
@@ -250,12 +242,10 @@ int main(void){
 - 正でない数を与えると空のvectorを返す
 - 計算量は$$O(\sqrt{N})$$
 
-```
+```cpp
 std::vector<long long> divisor_enum(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     if(N<=0)return R;
     long long s=0;
@@ -275,7 +265,7 @@ std::vector<long long> divisor_enum(long long N){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<long long> divisor_enum(long long N){/*省略*/}
@@ -318,12 +308,10 @@ signed main() {
 - 与えられた$$x$$に対し、$$x$$が素数ならtrueを、そうでないならfalseを返す
 - 計算量は$$O(\sqrt{x})$$
 
-```
+```cpp
 bool prime(long long X){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(X<2)return false;
     for(long long i=2;i*i<=X;i++){
         if(X%i==0){
@@ -337,7 +325,7 @@ bool prime(long long X){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 bool prime(long long X){/*省略*/}
@@ -372,12 +360,10 @@ int main(void){
 - 与えられた$$N$$に対し、$$N$$以下の素数を列挙し、小さい順にvectorとして返す
 - 計算量は$$O(NloglogN)$$
 
-```
+```cpp
 std::vector<long long> primearray(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     std::vector<bool> prime;
     for(int i=0;i<=N;i++){
@@ -406,7 +392,7 @@ std::vector<long long> primearray(long long N){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<long long> primearray(long long N){/*省略*/}
@@ -437,12 +423,10 @@ int main(void){
 - 与えられた$$N$$に対し、$$N$$を素因数分解し、小さい順にvectorとして返す
 - 計算量は$$Ο(\sqrt{N})$$
 
-```
+```cpp
 std::vector<long long> prime_factorization(long long N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> R;
     if(N<2)return R;
     for(long long i=2;i*i<=N;i++){
@@ -461,7 +445,7 @@ std::vector<long long> prime_factorization(long long N){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::vector<long long> prime_factorization(long long N){/*省略*/}
@@ -501,12 +485,10 @@ int main(void){
 - $$MOD$$も与えるとそれで割った余りをとる
 - 計算量は$$Ο(log(e))$$
 
-```
+```cpp
 long long power(long long b,long long e,long long MOD=LLONG_MAX){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long r=1;
     while(e){
         if(e&1){
@@ -522,7 +504,7 @@ long long power(long long b,long long e,long long MOD=LLONG_MAX){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long power(long long b,long long e,long long MOD=LLONG_MAX){/*省略*/}
@@ -562,12 +544,10 @@ int main(void){
 - MODが素数でない場合の動作は未確認
 - 計算量は$$Ο(log(MOD))$$
 
-```
+```cpp
 long long inverse(long long b,long long MOD){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     long long r=1,e=MOD-2;
     while(e){
         if(e&1){
@@ -583,7 +563,7 @@ long long inverse(long long b,long long MOD){
 ### 使用例
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 long long inverse(long long b,long long MOD){/*省略*/}
@@ -619,6 +599,7 @@ mod 7でのiの逆元
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/04/05 | 約数列挙を追加 |
 | 2021/03/27 | 使用例を追加 |
 | 2021/03/26 | 軽微なバグを修正 |

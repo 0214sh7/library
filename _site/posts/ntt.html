@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/ntt" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="数論変換" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"整数環FFTとも","headline":"数論変換","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"url":"http://localhost:4000/library/posts/ntt"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"整数環FFTとも","headline":"数論変換","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/ntt"},"url":"http://localhost:4000/library/posts/ntt"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">数論変換</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -68,114 +68,112 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/math/number%20theoretic%20transform.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class number_theoretic_transform{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">number_theoretic_transform</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
     
-    const long long MOD = 998244353;
-    const long long k = 119;
-    const long long n = 23;
-    const long long pri_root = 3;
-    //MOD=k*2^n+1
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">MOD</span> <span class="o">=</span> <span class="mi">998244353</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">119</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">pri_root</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="c1">//MOD=k*2^n+1</span>
     
-    long long BE(long long b,long long e){
-        long long r=1;
-        while(e){
-            if(e&amp;1){
-                r=(r*b)%MOD;
-            }
-            b=(b*b)%MOD;
-            e &gt;&gt;=1;
-        }
-        return r;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">BE</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">e</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">r</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+            <span class="n">e</span> <span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    std::vector&lt;long long&gt; DFT(std::vector&lt;long long&gt; A){
-        int N=A.size();
-        if(N==1)return A;
-        std::vector&lt;long long&gt; A0(N/2),A1(N/2),iA0,iA1,iA(N);
-        for(int i=0;i&lt;N;i++){
-            if(i%2==0){
-                A0[i/2]=A[i];
-            }else{
-                A1[i/2]=A[i];
-            }
-        }
-        iA0=DFT(A0);
-        iA1=DFT(A1);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">DFT</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">N</span><span class="o">=</span><span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">A</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A0</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">A1</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">iA0</span><span class="p">,</span><span class="n">iA1</span><span class="p">,</span><span class="n">iA</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">A0</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">A1</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">iA0</span><span class="o">=</span><span class="n">DFT</span><span class="p">(</span><span class="n">A0</span><span class="p">);</span>
+        <span class="n">iA1</span><span class="o">=</span><span class="n">DFT</span><span class="p">(</span><span class="n">A1</span><span class="p">);</span>
         
-        long long omega=BE(pri_root,k*(1&lt;&lt;n)/N);
-        long long ith_zeta = 1;
-        for(int i=0;i&lt;N;i++){
-            iA[i]=(iA0[i%(N/2)]+ ith_zeta*iA1[i%(N/2)])%MOD;
-            ith_zeta = (ith_zeta*omega)%MOD;
-        }
-        return iA;
-    }
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">omega</span><span class="o">=</span><span class="n">BE</span><span class="p">(</span><span class="n">pri_root</span><span class="p">,</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">);</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ith_zeta</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">iA</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">iA0</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span><span class="o">+</span> <span class="n">ith_zeta</span><span class="o">*</span><span class="n">iA1</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)])</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+            <span class="n">ith_zeta</span> <span class="o">=</span> <span class="p">(</span><span class="n">ith_zeta</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">iA</span><span class="p">;</span>
+    <span class="p">}</span>
      
-    std::vector&lt;long long&gt; iDFT(std::vector&lt;long long&gt; iA){
-        int N=iA.size();
-        long long N_inverse = BE(N,MOD-2);
-        std::vector&lt;long long&gt; A,dA,rA;
-        dA=DFT(iA);
-        for(int i=0;i&lt;N;i++){
-            rA.push_back(dA[(N-i)%N]);
-            A.push_back((rA[i]*N_inverse)%MOD);
-        }
-        return A;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">iDFT</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">iA</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">N</span><span class="o">=</span><span class="n">iA</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">N_inverse</span> <span class="o">=</span> <span class="n">BE</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">MOD</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">,</span><span class="n">dA</span><span class="p">,</span><span class="n">rA</span><span class="p">;</span>
+        <span class="n">dA</span><span class="o">=</span><span class="n">DFT</span><span class="p">(</span><span class="n">iA</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">rA</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">dA</span><span class="p">[(</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">]);</span>
+            <span class="n">A</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="n">rA</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">N_inverse</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">;</span>
+    <span class="p">}</span>
     
     
-    public:
+    <span class="nl">public:</span>
     
-    std::vector&lt;long long&gt; convolution(std::vector&lt;long long&gt; A,std::vector&lt;long long&gt; B){
-        int deg = A.size() + B.size() -1;
-        long long N=1;
-        while(N&lt;deg){N&lt;&lt;=1;}
-        A.resize(N);B.resize(N);
-        for(int i=0;i&lt;A.size();i++){
-            A[i]%=MOD;
-        }
-        for(int i=0;i&lt;B.size();i++){
-            B[i]%=MOD;
-        }
-        std::vector&lt;long long&gt; C(N),iC(N),iA,iB;
-        iA=DFT(A);iB=DFT(B);
-        for(int i=0;i&lt;N;i++){
-            iC[i]=(iA[i]*iB[i])%MOD;
-        }
-        C=iDFT(iC);
-        C.resize(deg);
-        return C;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">convolution</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">B</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">deg</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">B</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">N</span><span class="o">&lt;</span><span class="n">deg</span><span class="p">){</span><span class="n">N</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">;}</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span><span class="n">B</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%=</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">B</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%=</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">iC</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">iA</span><span class="p">,</span><span class="n">iB</span><span class="p">;</span>
+        <span class="n">iA</span><span class="o">=</span><span class="n">DFT</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="n">iB</span><span class="o">=</span><span class="n">DFT</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">iC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">iA</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">iB</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="n">MOD</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">iDFT</span><span class="p">(</span><span class="n">iC</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">deg</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">C</span><span class="p">;</span>
+    <span class="p">}</span>
     
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">number_theoretic_transform</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class number_theoretic_transform{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    number_theoretic_transform NTT;
-    std::vector&lt;long long&gt; A={1,2,3},B={1,3,5},C;
+    <span class="n">number_theoretic_transform</span> <span class="n">NTT</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span><span class="n">B</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="n">C</span><span class="p">;</span>
     
-    C = NTT.convolution(A,B);
-    for(int i=0;i&lt;C.size();i++){
-        std::cout &lt;&lt; C[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="n">C</span> <span class="o">=</span> <span class="n">NTT</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">C</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -193,6 +191,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/03/25</td>
       <td style="text-align: left">使用例を追加/vectorをstd::vectorに変更</td>

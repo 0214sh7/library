@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/bezout-coef" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-04-08T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="拡張ユークリッドの互除法" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-04-08T00:00:00+09:00","datePublished":"2021-04-08T00:00:00+09:00","description":"拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね","headline":"拡張ユークリッドの互除法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bezout-coef"},"url":"http://localhost:4000/library/posts/bezout-coef"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"拡張ユークリッドの互除法、extended Euclidean algorithmの対訳感がそんなにないね　どうでもいいね","headline":"拡張ユークリッドの互除法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/bezout-coef"},"url":"http://localhost:4000/library/posts/bezout-coef"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">拡張ユークリッドの互除法</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-04-08T00:00:00+09:00" itemprop="datePublished">Apr 8, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -70,66 +70,64 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; extgcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;long long&gt; q;
-    while(b!=0){
-        long long r = a%b;
-        r+=b;
-        r%=b;
-        long long q_ = (a-r)/b;
-        q.push_back(q_);
-        a = b;
-        b = r;
-    }
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">extgcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">b</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">r</span><span class="o">+=</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">r</span><span class="o">%=</span><span class="n">b</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">q_</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">b</span><span class="p">;</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">q_</span><span class="p">);</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long g=a,x=1,y=0;
-    if(g&lt;0){
-        g*=-1;
-        x*=-1;
-    }
-    for(int i=-1+(int)q.size();i&gt;=0;i--){
-        long long tmp = y;
-        y = x-q[i]*y;
-        x = tmp;
-    }
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">g</span><span class="o">=</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+        <span class="n">g</span><span class="o">*=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">x</span><span class="o">*=-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=-</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return {g,{x,y}};
-}
+    <span class="k">return</span> <span class="p">{</span><span class="n">g</span><span class="p">,{</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">}};</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">extgcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; extgcd(long long a,long long b){/*省略*/}
-
-signed main() {
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     
-    std::pair&lt;long long,std::pair&lt;long long,long long&gt;&gt; R;
-    R = extgcd(111,30);
-    long long g = R.first, x = R.second.first, y = R.second.second;
+    <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">extgcd</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">g</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
     
-    std::cout &lt;&lt; "111と30の最大公約数" &lt;&lt; std::endl;
-    std::cout &lt;&lt; g &lt;&lt; std::endl;
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"111と30の最大公約数"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">g</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
     
-    std::cout &lt;&lt; "111x+30y=3を満たすような(x,y)の一例" &lt;&lt; std::endl;
-    std::cout &lt;&lt; "(" &lt;&lt; x &lt;&lt; "," &lt;&lt; y &lt;&lt; ")" &lt;&lt; std::endl;
-    std::cout &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"111x+30y=3を満たすような(x,y)の一例"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">","</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
     
-    std::cout &lt;&lt; "111x+30y" &lt;&lt; std::endl;
-    std::cout &lt;&lt; 111*x+30*y &lt;&lt; std::endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"111x+30y"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">111</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">30</span><span class="o">*</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -154,6 +152,10 @@ signed main() {
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/04/08</td>
       <td style="text-align: left">欠落していた計算量を追加</td>

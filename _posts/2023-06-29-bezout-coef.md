@@ -19,12 +19,10 @@ $$ax+by=g$$
 
 [github](https://github.com/0214sh7/procon-library/blob/master/math/extended%20Euclidean%20algorithm.cpp)
 
-```
+```cpp
 std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long b){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<long long> q;
     while(b!=0){
         long long r = a%b;
@@ -55,7 +53,7 @@ std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 std::pair<long long,std::pair<long long,long long>> extgcd(long long a,long long b){/*省略*/}
@@ -101,5 +99,6 @@ signed main() {
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/04/08 | 欠落していた計算量を追加 |
 | 2021/04/08 | 拡張ユークリッドの互除法を追加 |

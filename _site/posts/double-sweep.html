@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/double-sweep" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-10-15T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="木の直径" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-15T00:00:00+09:00","datePublished":"2021-10-15T00:00:00+09:00","description":"木ではない一般的なグラフでも近似解が出るらしいけどチェックしてません(え？)","headline":"木の直径","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/double-sweep"},"url":"http://localhost:4000/library/posts/double-sweep"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"木ではない一般的なグラフでも近似解が出るらしいけどチェックしてません(え？)","headline":"木の直径","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/double-sweep"},"url":"http://localhost:4000/library/posts/double-sweep"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">木の直径</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-10-15T00:00:00+09:00" itemprop="datePublished">Oct 15, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -90,149 +90,147 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/double%20sweep.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class double_sweep{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    const long long INF = (1LL&lt;&lt;61);
-    int V,V1,V2;
-    std::vector&lt;std::vector&lt;std::pair&lt;int,long long&gt;&gt;&gt; G;
-    std::vector&lt;int&gt; parent;
-    std::vector&lt;long long&gt; parent_cost;
-    long long diam;
-    long long temp;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">double_sweep</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">INF</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span><span class="o">&lt;&lt;</span><span class="mi">61</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">V</span><span class="p">,</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;&gt;</span> <span class="n">G</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">parent</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">parent_cost</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">diam</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">temp</span><span class="p">;</span>
     
-    void dfs(int phase,int v,int p,long long d){
-        if(phase==1){
-            if(d&gt;temp){
-                V1 = v;
-                temp = d;
-            }
-        }
-        if(phase==2){
-            parent[v] = p;
-            if(d&gt;temp){
-                V2 = v;
-                temp = d;
-            }
-        }
-        for(std::pair&lt;int,long long&gt; E:G[v]){
-            int e = E.first;
-            long long f = E.second;
-            if(e!=p){
-                dfs(phase,e,v,d+f);
-                if(phase==2){
-                    parent_cost[e] = f;
-                }
-            }
-        }
-    }
+    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">phase</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">phase</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="n">temp</span><span class="p">){</span>
+                <span class="n">V1</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">phase</span><span class="o">==</span><span class="mi">2</span><span class="p">){</span>
+            <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="n">temp</span><span class="p">){</span>
+                <span class="n">V2</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">E</span><span class="o">:</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]){</span>
+            <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="n">E</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">f</span> <span class="o">=</span> <span class="n">E</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">!=</span><span class="n">p</span><span class="p">){</span>
+                <span class="n">dfs</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="n">f</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">phase</span><span class="o">==</span><span class="mi">2</span><span class="p">){</span>
+                    <span class="n">parent_cost</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    public:
+    <span class="nl">public:</span>
     
-    void init(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
-        V = N;
-        V1 = 0,V2 = 0;
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">){</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">V1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">V2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
         
-        G.clear();
-        G.resize(V);
-        for(int i=0;i&lt;edge.size();i++){
-            int from=edge[i].first.first,to=edge[i].first.second;
-            long long cost=edge[i].second;
-            G[from].push_back({to,cost});
-            G[to].push_back({from,cost});
-        }
+        <span class="n">G</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">G</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">from</span><span class="o">=</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">,</span><span class="n">to</span><span class="o">=</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">cost</span><span class="o">=</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+            <span class="n">G</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">to</span><span class="p">,</span><span class="n">cost</span><span class="p">});</span>
+            <span class="n">G</span><span class="p">[</span><span class="n">to</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">from</span><span class="p">,</span><span class="n">cost</span><span class="p">});</span>
+        <span class="p">}</span>
         
-        parent.resize(V);
-        for(int i=0;i&lt;V;i++){
-            parent[i] = -1;
-        }
-        parent_cost.resize(V);
-        for(int i=0;i&lt;V;i++){
-            parent_cost[i] = -1;
-        }
+        <span class="n">parent</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">parent_cost</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">parent_cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
         
-        temp = -INF;
-        dfs(1,0,-1,0);
-        temp = -INF;
-        dfs(2,V1,-1,0);
-        diam = -1;
-    }
+        <span class="n">temp</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">V1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    double_sweep(int N,std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge){
-        init(N,edge);
-    }
+    <span class="n">double_sweep</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">){</span>
+        <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">edge</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    std::pair&lt;int,int&gt; vertex(void){
-        return std::make_pair(V2,V1);
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vertex</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">V2</span><span class="p">,</span><span class="n">V1</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    std::vector&lt;int&gt; pass(void){
-        std::vector&lt;int&gt; R;
-        diam = 0;
-        int r = V2;
-        while(r!=V1){
-            R.push_back(r);
-            diam += parent_cost[r];
-            r = parent[r];
-        }
-        R.push_back(r);
-        return R;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pass</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">V2</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">r</span><span class="o">!=</span><span class="n">V1</span><span class="p">){</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+            <span class="n">diam</span> <span class="o">+=</span> <span class="n">parent_cost</span><span class="p">[</span><span class="n">r</span><span class="p">];</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">r</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    long long diameter(void){
-        if(diam==-1){
-            pass();
-        }
-        return diam;
-    }
-};
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">diameter</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">diam</span><span class="o">==-</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">pass</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">diam</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">double_sweep</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class double_sweep{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    int N = 8;
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; edge;
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">edge</span><span class="p">;</span>
     
-    edge.push_back({ {0,1},1});
-    edge.push_back({ {0,2},2});
-    edge.push_back({ {0,3},4});
-    edge.push_back({ {1,4},8});
-    edge.push_back({ {1,5},16});
-    edge.push_back({ {5,6},32});
-    edge.push_back({ {5,7},64});
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="mi">1</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="mi">2</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span><span class="mi">4</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span><span class="mi">8</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="mi">16</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">},</span><span class="mi">32</span><span class="p">});</span>
+    <span class="n">edge</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">},</span><span class="mi">64</span><span class="p">});</span>
     
-    double_sweep DS(N,edge);
+    <span class="n">double_sweep</span> <span class="n">DS</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">edge</span><span class="p">);</span>
     
     
-    //直径の端の頂点は6と7
-    std::pair&lt;int,int&gt; V = DS.vertex();
-    std::cout &lt;&lt; V.first &lt;&lt; " " &lt;&lt; V.second &lt;&lt; std::endl;
+    <span class="c1">//直径の端の頂点は6と7</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">V</span> <span class="o">=</span> <span class="n">DS</span><span class="p">.</span><span class="n">vertex</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">V</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">V</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    //そのパスは6-5-7
-    std::vector&lt;int&gt; P = DS.pass();
-    for(int i=0;i&lt;P.size();i++){
-        std::cout &lt;&lt; P[i] &lt;&lt; " ";
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="c1">//そのパスは6-5-7</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">P</span> <span class="o">=</span> <span class="n">DS</span><span class="p">.</span><span class="n">pass</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">P</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    //重さの和は96
-    long long D = DS.diameter();
-    std::cout &lt;&lt; D &lt;&lt; std::endl;
+    <span class="c1">//重さの和は96</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">D</span> <span class="o">=</span> <span class="n">DS</span><span class="p">.</span><span class="n">diameter</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -252,6 +250,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2020/10/15</td>
       <td style="text-align: left">木の直径を追加</td>

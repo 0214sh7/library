@@ -33,12 +33,10 @@ comb
 - 計算量は$$Ο( (\log n + \log M) \omega(M) )$$
 
 
-```
+```cpp
 class composite_binomial_coefficient_1{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     long long Mod;    
     std::vector<std::array<long long,3>> P;
@@ -201,7 +199,7 @@ class composite_binomial_coefficient_1{
 ***
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class composite_binomial_coefficient_1{/*省略*/};
@@ -260,6 +258,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2023/03/18 | 任意mod二項係数を追加 |
 
 ## 確認した問題
@@ -289,12 +288,10 @@ comb
   - 特に、 $$n,r$$ に依存しない
 
 
-```
+```cpp
 class composite_binomial_coefficient_2{
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     int sze = 0;
     long long Mod;
@@ -443,7 +440,7 @@ class composite_binomial_coefficient_2{
 ***
 
 #### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class composite_binomial_coefficient_2{/*省略*/};
@@ -502,6 +499,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2023/03/18 | 任意mod二項係数を追加 |
 
 ## 確認した問題

@@ -30,12 +30,10 @@ inversion
 
 [github](https://github.com/0214sh7/procon-library/blob/master/data%20structure/Fenwick%20tree.cpp)
 
-```
+```cpp
 class Fenwick_tree{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     private:
     std::vector<long long> BIT;
     
@@ -82,7 +80,7 @@ class Fenwick_tree{
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 class Fenwick_tree{/*省略*/};
@@ -128,5 +126,6 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | フェニック木を追加 |

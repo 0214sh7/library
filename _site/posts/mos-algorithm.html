@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/mos-algorithm" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-03-13T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Moのアルゴリズム" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-13T00:00:00+09:00","datePublished":"2023-03-13T00:00:00+09:00","description":"すもももももももものうち","headline":"Moのアルゴリズム","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/mos-algorithm"},"url":"http://localhost:4000/library/posts/mos-algorithm"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"すもももももももものうち","headline":"Moのアルゴリズム","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/mos-algorithm"},"url":"http://localhost:4000/library/posts/mos-algorithm"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Moのアルゴリズム</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2023-03-13T00:00:00+09:00" itemprop="datePublished">Mar 13, 2023
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -75,90 +75,88 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/mos-algorithm.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;long long&gt; Mo(int N,int Q,std::vector&lt;std::pair&lt;int,int&gt;&gt; X, 
-std::function&lt;void(int,long long&amp;)&gt; lm, std::function&lt;void(int,long long&amp;)&gt; lp, 
-std::function&lt;void(int,long long&amp;)&gt; rm, std::function&lt;void(int,long long&amp;)&gt; rp){
-    /*
-    Copyright (c) 2023 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    int rQ;
-    std::map&lt;std::pair&lt;int,int&gt;,std::vector&lt;int&gt;&gt; index;
-    std::vector&lt;int&gt; block(N,0);
-    std::vector&lt;long long&gt; Ans(Q);
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Mo</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">X</span><span class="p">,</span> 
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lm</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lp</span><span class="p">,</span> 
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rm</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rp</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="kt">int</span> <span class="n">rQ</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">index</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">block</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Ans</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>
 
-    std::function&lt;bool(std::pair&lt;int,int&gt;, std::pair&lt;int,int&gt;)&gt; comp = [&amp;](std::pair&lt;int,int&gt; A,std::pair&lt;int,int&gt; B){
-        if(block[A.first]!=block[B.first]){
-            return (block[A.first]&lt;block[B.first]);
-        }
-        if(A.second != B.second){
-            return (A.second &lt; B.second);
-        }
-        return (A.first &lt; B.first);
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">comp</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">B</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">block</span><span class="p">[</span><span class="n">A</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">!=</span><span class="n">block</span><span class="p">[</span><span class="n">B</span><span class="p">.</span><span class="n">first</span><span class="p">]){</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">block</span><span class="p">[</span><span class="n">A</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">&lt;</span><span class="n">block</span><span class="p">[</span><span class="n">B</span><span class="p">.</span><span class="n">first</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">second</span> <span class="o">!=</span> <span class="n">B</span><span class="p">.</span><span class="n">second</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+    <span class="p">};</span>
 
-    for(int i=0;i&lt;Q;i++){
-        index[X[i]].push_back(i+1);
-    }
-    int q = index.size();
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">Q</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">index</span><span class="p">[</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">index</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 
-    rQ = 1;
-    while((rQ+1)*(rQ+1)&lt;=q)rQ++;
+    <span class="n">rQ</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">((</span><span class="n">rQ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">rQ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">q</span><span class="p">)</span><span class="n">rQ</span><span class="o">++</span><span class="p">;</span>
 
-    int now = 0;
-    for(int i=0;i&lt;rQ-1;i++){
-        now += ((N+rQ-1-i)/rQ);
-        block[now]++;
-    }
-    for(int i=0;i&lt;N-1;i++){
-        block[i+1] += block[i];
-    }
+    <span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">rQ</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">now</span> <span class="o">+=</span> <span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="n">rQ</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="n">rQ</span><span class="p">);</span>
+        <span class="n">block</span><span class="p">[</span><span class="n">now</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">block</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">block</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
 
-    std::vector&lt;std::pair&lt;int,int&gt;&gt; Y(q);
-    now = 0;
-    for(auto e:index){
-        Y[now] = e.first;
-        now++;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">Y</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">e</span><span class="o">:</span><span class="n">index</span><span class="p">){</span>
+        <span class="n">Y</span><span class="p">[</span><span class="n">now</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="n">now</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    std::sort(Y.begin(),Y.end(),[&amp;](auto a, auto b){return comp(a, b);});
+    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">Y</span><span class="p">.</span><span class="n">end</span><span class="p">(),[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">comp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);});</span>
 
-    int L = 0,R = 0;
-    long long Result = 0;
+    <span class="kt">int</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">Result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    for(int i=0;i&lt;q;i++){
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">q</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         
-        while(Y[i].first &lt; L){
-            lm(L,Result);
-            L--;
-        }
-        while(R &lt; Y[i].second){
-            rp(R,Result);
-            R++;
-        }
-        while(L &lt; Y[i].first){
-            lp(L,Result);
-            L++;
-        }
-        while(Y[i].second &lt; R){
-            rm(R,Result);
-            R--;
-        }
+        <span class="k">while</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">){</span>
+            <span class="n">lm</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Result</span><span class="p">);</span>
+            <span class="n">L</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">R</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">){</span>
+            <span class="n">rp</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Result</span><span class="p">);</span>
+            <span class="n">R</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">L</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">){</span>
+            <span class="n">lp</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Result</span><span class="p">);</span>
+            <span class="n">L</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">){</span>
+            <span class="n">rm</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Result</span><span class="p">);</span>
+            <span class="n">R</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        for(int k:index[Y[i]]){
-            Ans[k-1] = Result;
-        }
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">:</span><span class="n">index</span><span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]]){</span>
+            <span class="n">Ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Result</span><span class="p">;</span>
+        <span class="p">}</span>
 
-    }
+    <span class="p">}</span>
 
-    return Ans;
+    <span class="k">return</span> <span class="n">Ans</span><span class="p">;</span>
 
-    //lm(i): [i,r)を[i-1,r)にする
-    //lp(i): [i,r)を[i+1,r)にする
-    //rm(i): [i,r)を[i,r-1)にする
-    //rp(i): [i,r)を[i,r+1)にする
+    <span class="c1">//lm(i): [i,r)を[i-1,r)にする</span>
+    <span class="c1">//lp(i): [i,r)を[i+1,r)にする</span>
+    <span class="c1">//rm(i): [i,r)を[i,r-1)にする</span>
+    <span class="c1">//rp(i): [i,r)を[i,r+1)にする</span>
 
-}
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
@@ -171,59 +169,59 @@ std::function&lt;void(int,long long&amp;)&gt; rm, std::function&lt;void(int,long
 例えば \([1,3)\) の和が \(A_1 + A_2 = 2 + 3 = 5\) であることがわかっていれば \([1,4)\) の和は \(5 + A_3 = 5 + 4 = 9\) であることがわかる</p>
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Mo</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">X</span><span class="p">,</span> 
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lm</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lp</span><span class="p">,</span> 
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rm</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rp</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;long long&gt; Mo(int N,int Q,std::vector&lt;std::pair&lt;int,int&gt;&gt; X, 
-std::function&lt;void(int,long long&amp;)&gt; lm, std::function&lt;void(int,long long&amp;)&gt; lp, 
-std::function&lt;void(int,long long&amp;)&gt; rm, std::function&lt;void(int,long long&amp;)&gt; rp){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    int N = 5, Q = 15;
-    std::vector&lt;long long&gt; A = {1,2,3,4,5};
-    std::vector&lt;std::pair&lt;int,int&gt;&gt; LR = {
-        {0,1},
-        {0,2},
-        {0,3},
-        {0,4},
-        {0,5},
-        {1,2},
-        {1,3},
-        {1,4},
-        {1,5},
-        {2,3},
-        {2,4},
-        {2,5},
-        {3,4},
-        {3,5},
-        {4,5},
-    };
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">LR</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span>
+    <span class="p">};</span>
     
-    std::function&lt;void(int,long long&amp;)&gt; lm = [&amp;](int i,long long&amp; res){
-        res += A[i-1];
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lm</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">){</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">};</span>
 
-    std::function&lt;void(int,long long&amp;)&gt; lp = [&amp;](int i,long long&amp; res){
-        res -= A[i];
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lp</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">){</span>
+        <span class="n">res</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">};</span>
 
-    std::function&lt;void(int,long long&amp;)&gt; rm = [&amp;](int i,long long&amp; res){
-        res -= A[i-1];
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rm</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">){</span>
+        <span class="n">res</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">};</span>
 
-    std::function&lt;void(int,long long&amp;)&gt; rp = [&amp;](int i,long long&amp; res){
-        res += A[i];
-    };
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">rp</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">){</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">};</span>
 
 
-    std::vector&lt;long long&gt; Ans = Mo(N,Q,LR,lm,lp,rm,rp);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">Ans</span> <span class="o">=</span> <span class="n">Mo</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">LR</span><span class="p">,</span><span class="n">lm</span><span class="p">,</span><span class="n">lp</span><span class="p">,</span><span class="n">rm</span><span class="p">,</span><span class="n">rp</span><span class="p">);</span>
 
-    for(int i=0;i&lt;(int)Ans.size();i++){
-        std::cout &lt;&lt; "[" &lt;&lt; LR[i].first &lt;&lt; "," &lt;&lt; LR[i].second &lt;&lt; ")  " &lt;&lt; Ans[i] &lt;&lt; std::endl;
-    }
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Ans</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"["</span> <span class="o">&lt;&lt;</span> <span class="n">LR</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">","</span> <span class="o">&lt;&lt;</span> <span class="n">LR</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">")  "</span> <span class="o">&lt;&lt;</span> <span class="n">Ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -256,6 +254,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/03/13</td>
       <td style="text-align: left">Moのアルゴリズムを追加</td>

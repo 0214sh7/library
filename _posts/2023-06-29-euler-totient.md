@@ -22,12 +22,10 @@ $$\varphi(n) = n\prod_{k=1}^d (1-\frac{1}{p_k})$$
 - 整数$$N$$を与えると、$$\varphi(N)$$を計算し整数で返す
 - 計算量は$$O(\sqrt{N})$$
 
-```
+```cpp
 int totient(int N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     if(N<0){
         return 0;
     }
@@ -53,12 +51,10 @@ int totient(int N){
 - ここで、$$\varphi(0)=0$$としている
 - 計算量は$$O(NloglogN)$$
 
-```
+```cpp
 std::vector<int> totient_array(int N){
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
+    // Copyright (c) 2023 0214sh7
+    // https://github.com/0214sh7/library/
     std::vector<int> R(N+1);
     for(int i=0;i<=N;i++){
         R[i]=i;
@@ -78,7 +74,7 @@ std::vector<int> totient_array(int N){
 ***
 
 ### 実行コード
-```
+```cpp
 #include <bits/stdc++.h>
 
 int totient(int N){/*省略*/}
@@ -113,5 +109,6 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/25 | 使用例を追加 |
 | 2020/04/16 | オイラーのφ関数を追加 |

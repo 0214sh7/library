@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/kruskal" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="クラスカル法" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-25T00:00:00+09:00","datePublished":"2021-03-25T00:00:00+09:00","description":"無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。","headline":"クラスカル法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/kruskal"},"url":"http://localhost:4000/library/posts/kruskal"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"無向グラフを、辺の始点と終点とコストを表現したpair&lt;pair&lt;int,int&gt;,long long&gt;のvectorとして与える。","headline":"クラスカル法","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/kruskal"},"url":"http://localhost:4000/library/posts/kruskal"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">クラスカル法</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-03-25T00:00:00+09:00" itemprop="datePublished">Mar 25, 2021
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -66,107 +66,105 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/Kruskal.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Kruskal{
-    /*
-    Copyright (c) 2021 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    private:
-    int V=0,E=0;
-    typedef std::pair&lt;std::pair&lt;int,int&gt;,long long&gt; P;
-    std::vector&lt;int&gt; UF,rank;
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; es;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Kruskal</span><span class="p">{</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">V</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">E</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">UF</span><span class="p">,</span><span class="n">rank</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">es</span><span class="p">;</span>
     
-    bool comp(P F,P G){
-        return F.second&lt;G.second;
-    }
+    <span class="kt">bool</span> <span class="n">comp</span><span class="p">(</span><span class="n">P</span> <span class="n">F</span><span class="p">,</span><span class="n">P</span> <span class="n">G</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">.</span><span class="n">second</span><span class="o">&lt;</span><span class="n">G</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    int root(int k){
-        if(UF[k]==k){
-            return k;
-        }else{
-            UF[k]=root(UF[k]);
-            return UF[k];
-        }
-    }
+    <span class="kt">int</span> <span class="n">root</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="n">k</span><span class="p">){</span>
+            <span class="k">return</span> <span class="n">k</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+            <span class="k">return</span> <span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    bool same(int p,int q){
-        return root(p)==root(q);
-    }
+    <span class="kt">bool</span> <span class="n">same</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">q</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==</span><span class="n">root</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    void unite(int P,int Q){
-        int p=root(P);
-        int q=root(Q);
-        if(p==q)return;
-        if(rank[p]&lt;rank[q])std::swap(p,q);
-        UF[q]=p;
-        if(rank[p]==rank[q])rank[p]++;
-    }
+    <span class="kt">void</span> <span class="n">unite</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">q</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="n">q</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">&lt;</span><span class="n">rank</span><span class="p">[</span><span class="n">q</span><span class="p">])</span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+        <span class="n">UF</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">==</span><span class="n">rank</span><span class="p">[</span><span class="n">q</span><span class="p">])</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    public:
+    <span class="nl">public:</span>
     
-    std::vector&lt;P&gt; solve(std::vector&lt;P&gt; edge){
-        //頂点数を決定する
-        V=0;
-        for(int i=0;i&lt;edge.size();i++){
-            V=std::max(V,edge[i].first.first+1);
-            V=std::max(V,edge[i].first.second+1);
-        }
-        //辺数をもとめる　
-        E=edge.size();
-        //unionfindを初期化する
-        UF.clear();
-        rank.clear();
-        for(int i=0;i&lt;V;i++){
-            UF.push_back(i);
-            rank.push_back(0);
-        }
-        //辺をソートして代入しておく
-        std::sort(edge.begin(),edge.end(),[&amp;](P x, P y){return comp(x, y);});
-        es=edge;
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">P</span><span class="o">&gt;</span> <span class="n">solve</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">P</span><span class="o">&gt;</span> <span class="n">edge</span><span class="p">){</span>
+        <span class="c1">//頂点数を決定する</span>
+        <span class="n">V</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">V</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">V</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//辺数をもとめる　</span>
+        <span class="n">E</span><span class="o">=</span><span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="c1">//unionfindを初期化する</span>
+        <span class="n">UF</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">rank</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">V</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">UF</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">rank</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//辺をソートして代入しておく</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">edge</span><span class="p">.</span><span class="n">end</span><span class="p">(),[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">P</span> <span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="n">comp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);});</span>
+        <span class="n">es</span><span class="o">=</span><span class="n">edge</span><span class="p">;</span>
         
-        std::vector&lt;P&gt; R;
-        for(int i=0;i&lt;E;i++){
-            if(!same(es[i].first.first,es[i].first.second)){
-                unite(es[i].first.first,es[i].first.second);
-                R.push_back(es[i]);
-            }
-        }
-        return R;
-    }
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">P</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">E</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">same</span><span class="p">(</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">,</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">)){</span>
+                <span class="n">unite</span><span class="p">(</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">,</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+                <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+    <span class="p">}</span>
     
-};
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="k">class</span> <span class="nc">Kruskal</span><span class="p">{</span><span class="cm">/*省略*/</span><span class="p">};</span>
 
-class Kruskal{/*省略*/};
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; E;
-    int N = 5;
-    E.push_back({ {0,1},1});
-    E.push_back({ {1,2},2});
-    E.push_back({ {2,3},4});
-    E.push_back({ {2,4},8});
-    E.push_back({ {3,4},10000});
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">E</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="mi">1</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="mi">2</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span><span class="mi">4</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span><span class="mi">8</span><span class="p">});</span>
+    <span class="n">E</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span><span class="mi">10000</span><span class="p">});</span>
     
-    Kruskal kruskal;
-    std::vector&lt;std::pair&lt;std::pair&lt;int,int&gt;,long long&gt;&gt; K = kruskal.solve(E);
+    <span class="n">Kruskal</span> <span class="n">kruskal</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">K</span> <span class="o">=</span> <span class="n">kruskal</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">E</span><span class="p">);</span>
     
-    for(int i=0;i&lt;K.size();i++){
-        std::cout &lt;&lt; K[i].first.first &lt;&lt; " " &lt;&lt; K[i].first.second;
-        std::cout &lt;&lt; "  " &lt;&lt; K[i].second &lt;&lt; std::endl;
-    }
-    std::cout &lt;&lt; std::endl;
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">K</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  "</span> <span class="o">&lt;&lt;</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -187,6 +185,10 @@ int main(void){
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2021/03/25</td>
       <td style="text-align: left">使用例を追加</td>

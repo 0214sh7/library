@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/run-length-encode" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-07-10T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="ランレングス圧縮" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-07-10T00:00:00+09:00","datePublished":"2022-07-10T00:00:00+09:00","description":"文字列\\(S\\)を与えると、\\(S\\)をランレングス圧縮(連長圧縮)して返す","headline":"ランレングス圧縮","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/run-length-encode"},"url":"http://localhost:4000/library/posts/run-length-encode"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"文字列\\(S\\)を与えると、\\(S\\)をランレングス圧縮(連長圧縮)して返す","headline":"ランレングス圧縮","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/run-length-encode"},"url":"http://localhost:4000/library/posts/run-length-encode"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">ランレングス圧縮</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2022-07-10T00:00:00+09:00" itemprop="datePublished">Jul 10, 2022
+      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
       </time></p>
   </header>
 
@@ -65,41 +65,39 @@
 
 <p><a href="https://github.com/0214sh7/procon-library/blob/master/algorithm/runlength%20encode.cpp">github</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::vector&lt;std::pair&lt;char,int&gt;&gt; runlength_encode(std::string S){
-    /*
-    Copyright (c) 2022 0214sh7
-    https://github.com/0214sh7/library/
-    */
-    std::vector&lt;std::pair&lt;char,int&gt;&gt; R;
-    for(int i=0;i&lt;(int)S.size();i++){
-        if(i==0 || S[i]!=S[i-1]){
-            R.push_back({S[i],1});
-        }else{
-            R.back().second++;
-        }
-    }
-    return R;
-}
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">runlength_encode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">S</span><span class="p">){</span>
+    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// https://github.com/0214sh7/library/</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">});</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">second</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="使用例">使用例</h2>
 <hr />
 
 <h3 id="実行コード">実行コード</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">runlength_encode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">S</span><span class="p">){</span><span class="cm">/*省略*/</span><span class="p">}</span>
 
-std::vector&lt;std::pair&lt;char,int&gt;&gt; runlength_encode(std::string S){/*省略*/}
-
-int main(void){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
-    std::string S = "abbcccddeeeacddd";
-    std::vector&lt;std::pair&lt;char,int&gt;&gt; R = runlength_encode(S);
-    for(int i=0;i&lt;(int)R.size();i++){
-        std::cout &lt;&lt; R[i].first &lt;&lt; " " &lt;&lt; R[i].second &lt;&lt; std::endl;
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">S</span> <span class="o">=</span> <span class="s">"abbcccddeeeacddd"</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">R</span> <span class="o">=</span> <span class="n">runlength_encode</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    return 0;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
@@ -124,6 +122,10 @@ d 3
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/06/29</td>
+      <td style="text-align: left">ライセンスのコメントアウトを変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2022/07/10</td>
       <td style="text-align: left">ランレングス圧縮を追加</td>
