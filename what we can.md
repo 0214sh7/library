@@ -20,15 +20,17 @@ layout: page
 | 素数modでnCr (二項係数)を求めたい | [素数mod二項係数](../posts/binomial-coefficient) |
 | 0^M , 1^M , ... , N^M を高速に求めたい | [素因数分解(線形篩)](../posts/sieve) |
 | ax+by=gcd(a,b)を満たす(x,y)を一つ求めたい | [拡張ユークリッドの互除法](../posts/bezout-coef) |
-| 二次元の点集合の凸包を求めたい | [凸包](../posts/convexhull) |
 | ある整数nについて、1~nのうちnと互いに素なものの数を求めたい | [オイラーのφ関数](../posts/totient) |
 | 浮動小数点数で数列の畳み込みをしたい | [高速フーリエ変換(FFT)](../posts/fft) |
 | 整数環で数列の畳み込みをしたい | [数論変換(NTT)](../posts/ntt) |
 | 合成数を含む任意のmodでnCr (二項係数)を求めたい | [任意mod二項係数](../posts/binomial-coefficient) |
 |  |  |
+| 二次元上の線分が共通部分を持つか判定したい | [線分当たり判定](../posts/segment-intersection) |
+| 二次元上の点を偏角を基準にソートしたい | [偏角ソート](../posts/arg-sort) |
+| 二次元の点集合の凸包を求めたい | [凸包](../posts/convexhull) |
+|  |  |
 | 二次元配列を(反)時計回りに回転させたい | [二次元配列の回転](../posts/vector2d-rotate) |
 | 文字列をランレングス圧縮したい | [ランレングス圧縮](../posts/run-length-encode) |
-| 二次元上の点を偏角を基準にソートしたい | [偏角ソート](../posts/arg-sort) |
 | 頂点から辺をk回辿ったときの頂点を求めたい | [反復写像](../posts/iterated-function) |
 | 数列の連続するK個の要素の最小値を求めたい | [スライド最小値](../posts/slideminimum) |
 | 数列を大小関係を保ってコンパクトにしたい | [座標圧縮](../posts/compress) |

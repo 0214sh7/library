@@ -9,16 +9,19 @@ layout: page
 - [素数mod二項係数](./posts/binomial-coefficient)
 - [素因数分解(線形篩)](./posts/sieve)
 - [拡張ユークリッドの互除法](./posts/bezout-coef)
-- [凸包](./posts/convexhull)
 - [オイラーのφ関数](./posts/totient)
 - [高速フーリエ変換(FFT)](./posts/fft)
 - [数論変換(NTT)](./posts/ntt)
 - [任意mod二項係数](./posts/composite-binomial-coefficient)
 
+<h2>幾何</h2>
+- [線分当たり判定](./posts/segment-intersection)
+- [偏角ソート](./posts/arg-sort)
+- [凸包](./posts/convexhull)
+
 <h2>アルゴリズム</h2>
 - [二次元配列の回転](./posts/vector2d-rotate)
 - [ランレングス圧縮](./posts/run-length-encode)
-- [偏角ソート](./posts/arg-sort)
 - [反復写像](./posts/iterated-function)
 - [スライド最小値](./posts/slideminimum)
 - [座標圧縮](./posts/compress)
