@@ -84,7 +84,8 @@
     <span class="c1">// Copyright (c) 2023 0214sh7</span>
     <span class="c1">// https://github.com/0214sh7/library/</span>
     <span class="nl">private:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">UF</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">pot</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">UF</span><span class="p">,</span><span class="n">rank</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">pot</span><span class="p">;</span>
     <span class="nl">public:</span>
     
     <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
@@ -112,7 +113,7 @@
         <span class="p">}</span>
     <span class="p">}</span>
     
-    <span class="kt">int</span> <span class="n">potential</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">potential</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
         <span class="n">root</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
         <span class="k">return</span> <span class="n">pot</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
     <span class="p">}</span>
@@ -121,7 +122,7 @@
         <span class="k">return</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==</span><span class="n">root</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
     <span class="p">}</span>
     
-    <span class="kt">bool</span> <span class="n">unite</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">,</span><span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
+    <span class="kt">bool</span> <span class="n">unite</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span><span class="p">){</span>
         <span class="c1">//pot(Q)-pot(P)=dを満たす</span>
         <span class="n">d</span><span class="o">+=</span><span class="n">potential</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
         <span class="n">d</span><span class="o">-=</span><span class="n">potential</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>
@@ -138,7 +139,7 @@
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">}</span>
     
-    <span class="kt">int</span> <span class="n">diff</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">diff</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">){</span>
         <span class="k">return</span> <span class="n">potential</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="o">-</span><span class="n">potential</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
     <span class="p">}</span>
     
@@ -209,6 +210,10 @@ false
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2023/11/11</td>
+      <td style="text-align: left">long longに対応</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/06/29</td>
       <td style="text-align: left">ライセンスのコメントアウトを変更</td>

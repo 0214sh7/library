@@ -28,7 +28,8 @@ class potentialized_unionfind{
     // Copyright (c) 2023 0214sh7
     // https://github.com/0214sh7/library/
     private:
-    std::vector<int> UF,rank,pot;
+    std::vector<int> UF,rank;
+    std::vector<long long> pot;
     public:
     
     void init(int N){
@@ -56,7 +57,7 @@ class potentialized_unionfind{
         }
     }
     
-    int potential(int k){
+    long long potential(int k){
         root(k);
         return pot[k];
     }
@@ -65,7 +66,7 @@ class potentialized_unionfind{
         return root(p)==root(q);
     }
     
-    bool unite(int P,int Q,int d){
+    bool unite(int P,int Q,long long d){
         //pot(Q)-pot(P)=dを満たす
         d+=potential(P);
         d-=potential(Q);
@@ -82,7 +83,7 @@ class potentialized_unionfind{
         return true;
     }
     
-    int diff(int P,int Q){
+    long long diff(int P,int Q){
         return potential(Q)-potential(P);
     }
     
@@ -151,6 +152,7 @@ false
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2023/11/11 | long longに対応 |
 | 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | ポテンシャル付きUnionFindを追加 |
