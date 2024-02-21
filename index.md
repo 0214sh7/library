@@ -41,6 +41,7 @@ layout: page
 <h2>データ構造</h2>
 - [セグメント木](./posts/segmenttree)
 - [フェニック木](./posts/fenwicktree)
+- [マージソート木](./posts/mergesorttree)
 - [UnionFind](./posts/unionfind)
 - [ポテンシャル付きUnionFind](./posts/pot-unionfind)
 
