@@ -47,6 +47,7 @@ layout: page
 | フローの最大値を求めたい | [ディニッツ法](../posts/dinic) |
 |  |  |
 | 数列の区間(和/max/minなど)を高速に求めたい | [セグメント木](../posts/segmenttree) |
+| 数列の区間演算の結果を高速に求めたい | [遅延セグ木](../posts/lazysegmenttree) |
 | 数列の区間和を高速に求めたい <br> 数列の転倒数を求めたい | [フェニック木](../posts/fenwicktree) |
 | ある区間の X 以下の要素の個数を求めたい | [マージソート木](../posts/mergesorttree) |
 | 素集合を高速に求めたい | [UnionFind](../posts/unionfind) |
