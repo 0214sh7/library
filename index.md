@@ -40,7 +40,9 @@ layout: page
 
 <h2>データ構造</h2>
 - [セグメント木](./posts/segmenttree)
+- [遅延セグ木](./posts/lazysegmenttree)
 - [フェニック木](./posts/fenwicktree)
+- [マージソート木](./posts/mergesorttree)
 - [UnionFind](./posts/unionfind)
 - [ポテンシャル付きUnionFind](./posts/pot-unionfind)
 
