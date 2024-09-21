@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/unionfind" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-09-22T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="UnionFind" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+09:00","datePublished":"2023-06-29T00:00:00+09:00","description":"DSU(disjoint set union)とも","headline":"UnionFind","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/unionfind"},"url":"http://localhost:4000/library/posts/unionfind"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-22T00:00:00+09:00","datePublished":"2024-09-22T00:00:00+09:00","description":"DSU(disjoint set union)とも","headline":"UnionFind","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/unionfind"},"url":"http://localhost:4000/library/posts/unionfind"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">UnionFind</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2023-06-29T00:00:00+09:00" itemprop="datePublished">Jun 29, 2023
+      <time class="dt-published" datetime="2024-09-22T00:00:00+09:00" itemprop="datePublished">Sep 22, 2024
       </time></p>
   </header>
 
@@ -60,8 +60,8 @@
 
 <p>init</p>
 <ul>
-  <li>整数\(N\)を与えると、頂点を\(N\)個生成し全てを独立にした上で全てのランクを\(0\)にする</li>
-  <li>計算量は\(Ο(N)\)</li>
+  <li>整数 \(N\) を与えると、頂点を\(N\)個生成し全て独立にする</li>
+  <li>計算量は \(Ο(N)\)</li>
 </ul>
 
 <p>unionfind</p>
@@ -69,89 +69,84 @@
   <li>コンストラクタ。initを呼ぶ</li>
 </ul>
 
-<p>root</p>
+<p>leader</p>
 <ul>
-  <li>頂点\(k\)のその時点での根を求める</li>
+  <li>頂点 \(k\) が所属する連結集合の代表元を返す</li>
   <li>と同時に経路圧縮する</li>
-  <li>計算量は\(Ο(\alpha (N))\)</li>
+  <li>計算量は \(Ο(\alpha (N))\)</li>
 </ul>
 
-<p>\(α(x)\)はアッカーマン関数\(Ack(x,x)\)の逆関数</p>
+<p>\(α(x)\) はアッカーマン関数 \(Ack(x,x)\) の逆関数</p>
 
-<p>\(Ack(4,4)=2^{2^{2^{65536}}}-3\)から伺えるように、\(\alpha (x)\)は実用上定数(\(4\))倍と見なせるほどに収束が遅い</p>
+<p>\(Ack(4,4) = 2^{2^{2^{65536}}}-3\) から伺えるように、 \(\alpha (x)\) は実用上定数( \(4\) )倍と見なせるほどに収束が遅い</p>
 
 <p>same</p>
 <ul>
-  <li>頂点\(p\)と頂点\(q\)がその時点で同じ集合に属しているか(=根が同一か)を調べ、同じならtrue、違うならfalseを返す</li>
-  <li>計算量は\(Ο(\alpha (N))\)</li>
-</ul>
-
-<p>unite</p>
-<ul>
-  <li>頂点\(p\)と頂点\(q\)が属してる集合を合併する</li>
-  <li>すでに同じ集合に属している場合は無視する</li>
-  <li>\(p\)の属する集合のランクが\(q\)のものと同じか大きいとき\(p\)側が根に、そうでないとき\(q\)側が根になる</li>
-  <li>計算量は\(Ο(\alpha (N))\)</li>
+  <li>頂点 \(p\) と頂点 \(q\) がその時点で同じ連結成分に属しているかを調べ、同じならtrue、違うならfalseを返す</li>
+  <li>計算量は \(Ο(\alpha (N))\)</li>
 </ul>
 
 <p>size</p>
 <ul>
-  <li>頂点\(k\)とその時点で同じ集合に属している頂点の数を返す</li>
-  <li>計算量は\(Ο(1)\)</li>
+  <li>頂点 \(k\) が所属する連結集合のサイズを返す</li>
+  <li>計算量は \(Ο(1)\)</li>
 </ul>
 
-<p><a href="https://github.com/0214sh7/procon-library/blob/master/data%20structure/union%20find.cpp">github</a></p>
+<p>merge</p>
+<ul>
+  <li>頂点 \(p\) と頂点 \(q\) の間に辺を張る(集合を合併する)</li>
+  <li>すでに同じ連結成分に属している場合は無視する</li>
+  <li>計算量は \(Ο(\alpha (N))\)</li>
+</ul>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">unionfind</span><span class="p">{</span>
-    <span class="c1">// Copyright (c) 2023 0214sh7</span>
+    <span class="c1">// Copyright (c) 2024 0214sh7</span>
     <span class="c1">// https://github.com/0214sh7/library/</span>
     <span class="nl">private:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">UF</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">size_</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">par</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">size_</span><span class="p">;</span>
+
     <span class="nl">public:</span>
-    
+
     <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
-        <span class="n">UF</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-        <span class="n">rank</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-        <span class="n">size_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">par</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">rank</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">size_</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">UF</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="n">rank</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="n">size_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">par</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    
+
     <span class="n">unionfind</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
         <span class="n">init</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
     <span class="p">}</span>
-    
-    <span class="kt">int</span> <span class="n">root</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="n">k</span><span class="p">){</span>
+
+    <span class="kt">int</span> <span class="n">leader</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="n">k</span><span class="p">){</span>
             <span class="k">return</span> <span class="n">k</span><span class="p">;</span>
-        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-            <span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-            <span class="k">return</span> <span class="n">UF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
         <span class="p">}</span>
+        <span class="n">par</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">leader</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="n">par</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
     <span class="p">}</span>
-    
+
     <span class="kt">bool</span> <span class="n">same</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">q</span><span class="p">){</span>
-        <span class="k">return</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==</span><span class="n">root</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">leader</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">==</span><span class="n">leader</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
     <span class="p">}</span>
-    
-    <span class="kt">void</span> <span class="n">unite</span><span class="p">(</span><span class="kt">int</span> <span class="n">P</span><span class="p">,</span><span class="kt">int</span> <span class="n">Q</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
-        <span class="kt">int</span> <span class="n">q</span><span class="o">=</span><span class="n">root</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">size</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">size_</span><span class="p">[</span><span class="n">leader</span><span class="p">(</span><span class="n">k</span><span class="p">)];</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">q</span><span class="p">){</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">leader</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">leader</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
         <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="n">q</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
         <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">&lt;</span><span class="n">rank</span><span class="p">[</span><span class="n">q</span><span class="p">])</span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
-        <span class="n">UF</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">par</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
         <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">==</span><span class="n">rank</span><span class="p">[</span><span class="n">q</span><span class="p">])</span><span class="n">rank</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
         <span class="n">size_</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="n">size_</span><span class="p">[</span><span class="n">q</span><span class="p">];</span>
         <span class="n">size_</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
-    
-    <span class="kt">int</span> <span class="n">size</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
-        <span class="k">return</span> <span class="n">size_</span><span class="p">[</span><span class="n">root</span><span class="p">(</span><span class="n">k</span><span class="p">)];</span>
-    <span class="p">}</span>
-    
+
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -166,28 +161,29 @@
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     
     <span class="n">unionfind</span> <span class="n">UF</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
-    <span class="n">UF</span><span class="p">.</span><span class="n">unite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">11</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
+    <span class="n">UF</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">11</span><span class="p">);</span>
     
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"それぞれが所属する連結成分の代表頂点</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">12</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">UF</span><span class="p">.</span><span class="n">root</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">UF</span><span class="p">.</span><span class="n">leader</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span><span class="p">;</span>
     
-    <span class="c1">//1と同じ集合に属しているなら1(true)、そうでないなら0(false)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"1と同じ連結成分に属しているならo、そうでないならx</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">12</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">UF</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">UF</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">?</span><span class="s">"o"</span><span class="o">:</span><span class="s">"x"</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span><span class="p">;</span>
     
-    <span class="c1">//同じ集合に入っている頂点がいくつあるか</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"同じ連結成分に入っている頂点がいくつあるか</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">12</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">UF</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
     <span class="p">}</span>
@@ -198,9 +194,15 @@
 </code></pre></div></div>
 
 <h3 id="出力">出力</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2 1 4 1 4 1 1 4 1 4 1 
-1 0 1 0 1 0 1 1 0 1 0 1 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>それぞれが所属する連結成分の代表頂点
+1 2 1 4 1 4 1 1 4 1 4 1 
+
+1と同じ連結成分に属しているならo、そうでないならx
+o x o x o x o o x o x o 
+
+同じ連結成分に入っている頂点がいくつあるか
 7 1 7 4 7 4 7 7 4 7 4 7 
+
 </code></pre></div></div>
 
 <h2 id="更新履歴">更新履歴</h2>
@@ -214,6 +216,14 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">2024/09/22</td>
+      <td style="text-align: left">微細な変更</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2024/09/18</td>
+      <td style="text-align: left">実装と一部機能の関数名を変更</td>
+    </tr>
     <tr>
       <td style="text-align: center">2023/06/29</td>
       <td style="text-align: left">ライセンスのコメントアウトを変更</td>
@@ -229,6 +239,27 @@
     <tr>
       <td style="text-align: center">2020/04/06</td>
       <td style="text-align: left">UnionFindを追加</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="確認した問題">確認した問題</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">問題</th>
+      <th style="text-align: left">提出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://atcoder.jp/contests/abc157/tasks/abc157_d">ABC157-D</a></td>
+      <td style="text-align: left"><a href="https://atcoder.jp/contests/abc157/submissions/58005509">提出</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://judge.yosupo.jp/problem/unionfind">Library Checker</a></td>
+      <td style="text-align: left"><a href="https://judge.yosupo.jp/submission/237109">提出</a></td>
     </tr>
   </tbody>
 </table>
@@ -256,7 +287,7 @@
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>descriptionはない</p>
+        <p></p>
       </div>
     </div>
 
