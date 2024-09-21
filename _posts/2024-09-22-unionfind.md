@@ -8,34 +8,34 @@ layout: library
 DSU(disjoint set union)とも
 
 init
-- 整数$$N$$を与えると、頂点を$$N$$個生成し全てを独立にした上で全てのランクを$$0$$にする
-- 計算量は$$Ο(N)$$
+- 整数 $$N$$ を与えると、頂点を$$N$$個生成し全て独立にする
+- 計算量は $$Ο(N)$$
 
 unionfind
 - コンストラクタ。initを呼ぶ
 
 leader
-- 頂点$$k$$のその時点での根を求める
+- 頂点 $$k$$ が所属する連結集合の代表元を返す
 - と同時に経路圧縮する
-- 計算量は$$Ο(\alpha (N))$$
+- 計算量は $$Ο(\alpha (N))$$
 
-$$α(x)$$はアッカーマン関数$$Ack(x,x)$$の逆関数
+$$α(x)$$ はアッカーマン関数 $$Ack(x,x)$$ の逆関数
 
-$$Ack(4,4)=2^{2^{2^{65536}}}-3$$から伺えるように、$$\alpha (x)$$は実用上定数($$4$$)倍と見なせるほどに収束が遅い
+$$Ack(4,4) = 2^{2^{2^{65536}}}-3$$ から伺えるように、 $$\alpha (x)$$ は実用上定数( $$4$$ )倍と見なせるほどに収束が遅い
 
 same
-- 頂点$$p$$と頂点$$q$$がその時点で同じ集合に属しているか(=根が同一か)を調べ、同じならtrue、違うならfalseを返す
-- 計算量は$$Ο(\alpha (N))$$
-
-merge
-- 頂点$$p$$と頂点$$q$$が属してる集合を合併する
-- すでに同じ集合に属している場合は無視する
-- $$p$$の属する集合のランクが$$q$$のものと同じか大きいとき$$p$$側が根に、そうでないとき$$q$$側が根になる
-- 計算量は$$Ο(\alpha (N))$$
+- 頂点 $$p$$ と頂点 $$q$$ がその時点で同じ連結成分に属しているかを調べ、同じならtrue、違うならfalseを返す
+- 計算量は $$Ο(\alpha (N))$$
 
 size
-- 頂点$$k$$とその時点で同じ集合に属している頂点の数を返す
-- 計算量は$$Ο(1)$$
+- 頂点 $$k$$ が所属する連結集合のサイズを返す
+- 計算量は $$Ο(1)$$
+
+merge
+- 頂点 $$p$$ と頂点 $$q$$ の間に辺を張る(集合を合併する)
+- すでに同じ連結成分に属している場合は無視する
+- 計算量は $$Ο(\alpha (N))$$
+
 
 ```cpp
 class unionfind{
@@ -43,6 +43,7 @@ class unionfind{
     // https://github.com/0214sh7/library/
     private:
     std::vector<int> par,rank,size_;
+
     public:
 
     void init(int N){
@@ -62,12 +63,16 @@ class unionfind{
         if(par[k]==k){
             return k;
         }
-        par[k]=leader(par[k]);
+        par[k] = leader(par[k]);
         return par[k];
     }
 
     bool same(int p,int q){
         return leader(p)==leader(q);
+    }
+
+    int size(int k){
+        return size_[leader(k)];
     }
 
     void merge(int p, int q){
@@ -81,9 +86,6 @@ class unionfind{
         size_[q] = 0;
     }
 
-    int size(int k){
-        return size_[leader(k)];
-    }
 };
 ```
 
@@ -110,19 +112,19 @@ int main(void){
     UF.merge(4,9);
     UF.merge(4,11);
     
-    std::cout << "それぞれが所属する集合の代表者\n";
+    std::cout << "それぞれが所属する連結成分の代表頂点\n";
     for(int i=1;i<=12;i++){
         std::cout << UF.leader(i) << " ";
     }
     std::cout << "\n\n";
     
-    std::cout << "1と同じ集合に属しているならo、そうでないならx\n";
+    std::cout << "1と同じ連結成分に属しているならo、そうでないならx\n";
     for(int i=1;i<=12;i++){
         std::cout << (UF.same(1,i)?"o":"x") << " ";
     }
     std::cout << "\n\n";
     
-    std::cout << "同じ集合に入っている頂点がいくつあるか\n";
+    std::cout << "同じ連結成分に入っている頂点がいくつあるか\n";
     for(int i=1;i<=12;i++){
         std::cout << UF.size(i) << " ";
     }
@@ -130,19 +132,17 @@ int main(void){
     
     return 0;
 }
-
-
 ```
 
 ### 出力
 ```
-それぞれが所属する集合の代表者
+それぞれが所属する連結成分の代表頂点
 1 2 1 4 1 4 1 1 4 1 4 1 
 
-1と同じ集合に属しているならo、そうでないならx
+1と同じ連結成分に属しているならo、そうでないならx
 o x o x o x o o x o x o 
 
-同じ集合に入っている頂点がいくつあるか
+同じ連結成分に入っている頂点がいくつあるか
 7 1 7 4 7 4 7 7 4 7 4 7 
 
 ```
@@ -153,13 +153,16 @@ o x o x o x o o x o x o
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2024/09/22 | 微細な変更 |
 | 2024/09/18 | 実装と一部機能の関数名を変更 |
 | 2023/06/29 | ライセンスのコメントアウトを変更 |
 | 2021/08/31 | sizeを追加 |
 | 2021/03/26 | 使用例、コンストラクタを追加 |
 | 2020/04/06 | UnionFindを追加 |
 
+## 確認した問題
+
 | 問題 | 提出 |
 | :---: | :--- |
-| [ABC157-D](https://atcoder.jp/contests/abc157/tasks/abc157_d) | [提出](https://atcoder.jp/contests/abc157/submissions/57873684) |
-| [Library Checker](https://judge.yosupo.jp/problem/unionfind) | [提出](https://judge.yosupo.jp/submission/236252) |
+| [ABC157-D](https://atcoder.jp/contests/abc157/tasks/abc157_d) | [提出](https://atcoder.jp/contests/abc157/submissions/58005509) |
+| [Library Checker](https://judge.yosupo.jp/problem/unionfind) | [提出](https://judge.yosupo.jp/submission/237109) |
