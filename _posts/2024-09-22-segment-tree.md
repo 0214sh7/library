@@ -23,14 +23,6 @@ set
 - また vector を与えることでセグメント木全体をその vector で上書きする
 - 計算量は $$ O(N \times \text{演算の計算量}) $$
 
-size
-- 計算に使われている vector のサイズ( init で与えたもの)を返す
-- 計算量は $$Ο(1)$$
-
-get
-- $$k$$ 番目( $$0$$ -indexed)の要素を返す
-- 計算量は $$Ο(1)$$
-
 prod
 - $$[a,b)$$の範囲内にある要素をcalcで計算した結果を返す
 - 計算量は $$Ο(log(b-a))$$
@@ -103,15 +95,6 @@ class segmenttree{
         for(int k=n-2;k>=0;k--){
             dat[k] = calc(dat[2*k+1],dat[2*k+2]);
         }
-    }
-
-    int size(void){
-        return size_;
-    }
-
-    T get(int k){
-        assert(0<=k && k<size_);
-        return dat[n+k-1];
     }
 
     T prod(int a,int b){
@@ -253,6 +236,7 @@ int main(void){
 
 | 日時 | 内容 |
 | :---: | :--- |
+| 2024/09/22 | 一部機能を削除 |
 | 2024/09/20 | 実装と一部機能の関数名を変更 |
 | 2024/09/20 | max_right, min_left を追加 |
 | 2023/06/29 | ライセンスのコメントアウトを変更 |
@@ -266,6 +250,6 @@ int main(void){
 
 | 問題 | 提出 |
 | :---: | :--- |
-| [DSL_2_B](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B) | [提出](https://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=9659716) |
-| [ALPC-J](https://atcoder.jp/contests/practice2/tasks/practice2_j) | [提出(max_right)](https://atcoder.jp/contests/practice2/submissions/57917910) |
-| [ALPC-J](https://atcoder.jp/contests/practice2/tasks/practice2_j) | [提出(min_left)](https://atcoder.jp/contests/practice2/submissions/57917919) |
+| [DSL_2_B](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja) | [提出](https://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=9666233) |
+| [ALPC-J](https://atcoder.jp/contests/practice2/tasks/practice2_j) | [提出(max_right)](https://atcoder.jp/contests/practice2/submissions/58005612) |
+| [ALPC-J](https://atcoder.jp/contests/practice2/tasks/practice2_j) | [提出(min_left)](https://atcoder.jp/contests/practice2/submissions/58005618) |

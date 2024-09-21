@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/library/posts/segmenttree" />
 <meta property="og:site_name" content="すくライブラリ" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-09-20T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-09-22T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="セグメント木" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-20T00:00:00+09:00","datePublished":"2024-09-20T00:00:00+09:00","description":"単にセグ木と言えばこれを指す、最も単純なセグ木","headline":"セグメント木","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/segmenttree"},"url":"http://localhost:4000/library/posts/segmenttree"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-22T00:00:00+09:00","datePublished":"2024-09-22T00:00:00+09:00","description":"単にセグ木と言えばこれを指す、最も単純なセグ木","headline":"セグメント木","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/library/posts/segmenttree"},"url":"http://localhost:4000/library/posts/segmenttree"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/library/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/library/feed.xml" title="すくライブラリ" /></head>
 <body><header class="site-header" role="banner">
@@ -42,7 +42,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">セグメント木</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2024-09-20T00:00:00+09:00" itemprop="datePublished">Sep 20, 2024
+      <time class="dt-published" datetime="2024-09-22T00:00:00+09:00" itemprop="datePublished">Sep 22, 2024
       </time></p>
   </header>
 
@@ -78,18 +78,6 @@
   <li>計算量は init の \(N\) を用いて、 \(Ο(\log N)\)</li>
   <li>また vector を与えることでセグメント木全体をその vector で上書きする</li>
   <li>計算量は \(O(N \times \text{演算の計算量})\)</li>
-</ul>
-
-<p>size</p>
-<ul>
-  <li>計算に使われている vector のサイズ( init で与えたもの)を返す</li>
-  <li>計算量は \(Ο(1)\)</li>
-</ul>
-
-<p>get</p>
-<ul>
-  <li>\(k\) 番目( \(0\) -indexed)の要素を返す</li>
-  <li>計算量は \(Ο(1)\)</li>
 </ul>
 
 <p>prod</p>
@@ -168,15 +156,6 @@
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">--</span><span class="p">){</span>
             <span class="n">dat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">dat</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">]);</span>
         <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kt">int</span> <span class="n">size</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-        <span class="k">return</span> <span class="n">size_</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">T</span> <span class="n">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
-        <span class="n">assert</span><span class="p">(</span><span class="mi">0</span><span class="o">&lt;=</span><span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">size_</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">dat</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
     <span class="p">}</span>
 
     <span class="n">T</span> <span class="n">prod</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
@@ -322,6 +301,10 @@
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center">2024/09/22</td>
+      <td style="text-align: left">一部機能を削除</td>
+    </tr>
+    <tr>
       <td style="text-align: center">2024/09/20</td>
       <td style="text-align: left">実装と一部機能の関数名を変更</td>
     </tr>
@@ -367,16 +350,16 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center"><a href="https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">DSL_2_B</a></td>
-      <td style="text-align: left"><a href="https://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=9659716">提出</a></td>
+      <td style="text-align: center"><a href="https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&amp;lang=ja">DSL_2_B</a></td>
+      <td style="text-align: left"><a href="https://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=9666233">提出</a></td>
     </tr>
     <tr>
       <td style="text-align: center"><a href="https://atcoder.jp/contests/practice2/tasks/practice2_j">ALPC-J</a></td>
-      <td style="text-align: left"><a href="https://atcoder.jp/contests/practice2/submissions/57917910">提出(max_right)</a></td>
+      <td style="text-align: left"><a href="https://atcoder.jp/contests/practice2/submissions/58005612">提出(max_right)</a></td>
     </tr>
     <tr>
       <td style="text-align: center"><a href="https://atcoder.jp/contests/practice2/tasks/practice2_j">ALPC-J</a></td>
-      <td style="text-align: left"><a href="https://atcoder.jp/contests/practice2/submissions/57917919">提出(min_left)</a></td>
+      <td style="text-align: left"><a href="https://atcoder.jp/contests/practice2/submissions/58005618">提出(min_left)</a></td>
     </tr>
   </tbody>
 </table>
